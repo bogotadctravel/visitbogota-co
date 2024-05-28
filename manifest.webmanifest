@@ -1,0 +1,62 @@
+{
+  "theme_color": "#273669",
+  "background_color": "#273669",
+  "display": "fullscreen",
+  "lang": "es",
+  "scope": "/",
+  "orientation": "portrait",
+  "start_url": "/es/",
+  "display_override": ["window-control-overlay", "standalone", "browser"],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "dir": "ltr",
+  "categories": ["Visita", "Bogotá", "Colombia"],
+  "iarc_rating_id": "e58c174a-81d2-5c3c-32cc-34b8de4a52e9",
+  "name": "bogotadc.travel",
+  "short_name": "bogotadc.travel",
+  "description": "Visita, conoce y explora la ciudad de Bogot\u00e1: que hacer, a donde ir, donde hospedarte en Bogot\u00e1 Colombia.",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [],
+  "screenshots": [
+    {
+      "src": "screenshots/screenshot1.png",
+      "type": "image/png",
+      "sizes": "808x1666"
+    },
+    {
+      "src": "screenshots/screenshot2.png",
+      "type": "image/png",
+      "sizes": "808x1666"
+    },
+    {
+      "src": "screenshots/screenshot3.png",
+      "type": "image/png",
+      "sizes": "808x1666"
+    }
+  ]
+}

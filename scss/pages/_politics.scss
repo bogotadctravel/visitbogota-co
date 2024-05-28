@@ -1,0 +1,277 @@
+.politics {
+  main {
+    background-color: #fff;
+    padding-top: 200px;
+    padding-bottom: 140px;
+    border-radius: 0 0 0 120px;
+    z-index: 2;
+    position: relative;
+    @media screen and (max-width: 1023px) {
+      border-radius: 0 0 25px 0;
+    }
+    &::after {
+      content: "";
+      background-size: contain;
+      background-position: center center;
+      background-repeat: no-repeat;
+      width: 132px;
+      position: absolute;
+      height: 113px;
+      right: -1px;
+      bottom: -113px;
+      background-image: url(../img/desk_curve.svg);
+      @media screen and (max-width: 1023px) {
+        width: 55px;
+        height: 55px;
+        left: -1px;
+        bottom: -55px;
+        background-image: url(../img/curve_down_filters.svg);
+      }
+    }
+    .fixed_filter {
+      align-items: center;
+      background-color: #46a6de;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      padding: 8px;
+      position: fixed;
+      width: 50px;
+      height: 50px;
+      right: 30px;
+      top: 150px;
+      z-index: 5;
+      &:hover {
+        opacity: 0.5;
+      }
+      @media screen and (max-width: 1023px) {
+        bottom: 0;
+        top: initial;
+        left: 0;
+        border-radius: 0 0 23px 23px;
+        width: 100%;
+        padding: 0;
+        &:hover {
+          opacity: 1;
+        }
+      }
+      img {
+        width: 30px;
+        height: 26px;
+        object-fit: contain;
+        @media screen and (max-width: 1023px) {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 20px;
+          z-index: 2;
+        }
+      }
+      span {
+        align-items: center;
+        background-color: #46a6de;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        font-family: "MuseoSans-900";
+        color: #fff;
+        text-align: center;
+        border-radius: 0 0 25px 25px;
+        font-size: 1.3rem;
+        z-index: 2;
+      }
+      .categories {
+        background-color: #e0eeff;
+        border-radius: 65px 65px 0 0;
+        border: 2px solid #c3c3c3;
+        display: flex;
+        flex-direction: column;
+        font-size: 1.4rem;
+        left: 0;
+        position: absolute;
+        text-align: center;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        width: 100%;
+        max-height: 320px;
+        overflow: auto;
+        a {
+          color: #7f7f7f;
+          text-decoration: underline;
+          padding: 15px;
+        }
+      }
+      &.active {
+        .categories {
+          bottom: 100% !important;
+        }
+        @media screen and (max-width: 1023px) {
+          img {
+            transform: translateY(-50%) rotate(180deg);
+          }
+        }
+      }
+    }
+    .container {
+      display: flex;
+      justify-content: space-between;
+      @media screen and (max-width: 1023px) {
+        padding: 0 30px;
+      }
+      .sections_list {
+        counter-reset: my-awesome-counter;
+        height: max-content;
+        max-width: 480px;
+        position: sticky;
+        top: 20px;
+        width: 100%;
+        @media screen and (max-width: 1023px) {
+          display: none;
+        }
+        li {
+          counter-increment: my-awesome-counter;
+          list-style: none;
+          margin-bottom: 5px;
+          position: relative;
+          &::before {
+            color: #fff;
+            content: counter(my-awesome-counter);
+            font-size: 2.2rem;
+            font-weight: bold;
+            left: 15px;
+            margin-right: 15px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+          }
+          a {
+            align-items: center;
+            background-color: #e5e5e5;
+            border-radius: 35px;
+            color: #474747;
+            display: flex;
+            font-family: "MuseoSans-700";
+            font-size: 1.1rem;
+            max-height: 37px;
+            padding: 15px 30px 15px 60px;
+            position: relative;
+            width: 100%;
+            img {
+              height: 16px;
+              object-fit: contain;
+              position: absolute;
+              right: 10px;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 16px;
+            }
+            &::before {
+              content: "";
+              background-repeat: no-repeat;
+              background-size: contain;
+              background-position: top;
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 60px;
+              height: 100%;
+              background-image: url(../img/pol_1.svg);
+            }
+          }
+          &:nth-of-type(2n) {
+            a {
+              &::before {
+                background-image: url(../img/pol_2.svg);
+              }
+            }
+          }
+          &:nth-of-type(3n) {
+            a {
+              &::before {
+                background-image: url(../img/pol_3.svg);
+              }
+            }
+          }
+          &:nth-of-type(4n) {
+            a {
+              &::before {
+                background-image: url(../img/pol_4.svg);
+              }
+            }
+          }
+          &:nth-of-type(5n) {
+            a {
+              &::before {
+                background-image: url(../img/pol_5.svg);
+              }
+            }
+          }
+          &:nth-of-type(6n) {
+            a {
+              &::before {
+                background-image: url(../img/pol_6.svg);
+              }
+            }
+          }
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+      .content {
+        max-width: 650px;
+        width: 100%;
+        h1 {
+          color: #808080;
+          font-family: "MuseoSans-900";
+          font-size: 3.2rem;
+          letter-spacing: 0.9rem;
+          margin-bottom: 50px;
+        }
+        h2 {
+          font-size: 2.2rem;
+          color: #666;
+          margin-bottom: 15px;
+          font-weight: bold;
+        }
+        h3 {
+          font-size: 2rem;
+          color: #666;
+          margin-bottom: 15px;
+          font-weight: bold;
+        }
+        h4 {
+          font-size: 1.6rem;
+          color: #666;
+          margin-bottom: 15px;
+          font-weight: bold;
+        }
+        p {
+          font-size: 1.4rem;
+          color: #666666;
+          text-align: justify;
+          padding-bottom: 30px;
+          line-height: 2.2rem;
+        }
+        ul {
+          list-style: disc;
+          padding-left: 25px;
+          li {
+            font-size: 1.4rem;
+            color: #666;
+            text-align: justify;
+            padding-bottom: 30px;
+            line-height: 2.2rem;
+          }
+        }
+        a {
+          text-decoration: underline;
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+  }
+}

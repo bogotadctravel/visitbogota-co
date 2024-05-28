@@ -1,0 +1,207 @@
+.closetome {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  .divider {
+    align-self: center;
+    background-color: #fff;
+    height: 35px;
+    margin: 0 30px;
+    width: 2px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.75);
+  }
+  &-banner {
+    background-image: linear-gradient(to left top, #1c5494, #2975d1);
+    display: flex;
+    padding: 20px 0;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+
+    img {
+      width: 100px;
+    }
+    &__content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &__text {
+      h3 {
+        font-size: 2.5rem;
+        text-shadow: 4px 4px 7px rgb(0 0 0 / 75%);
+        color: #fff;
+      }
+      h2 {
+        font-size: 2.2rem;
+        letter-spacing: 0.5rem;
+        font-family: "MuseoSans-900";
+        text-shadow: 4px 4px 7px rgb(0 0 0 / 75%);
+        color: #fff;
+        line-height: 3rem;
+      }
+    }
+  }
+  .places {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    height: 60vh;
+    position: relative;
+    .place-item {
+      overflow: hidden;
+      height: 100%;
+      position: relative;
+      .place-name {
+        position: absolute;
+        bottom: 0;
+        color: #fff;
+        font-size: 3rem;
+        background-image: linear-gradient(to top, black, transparent);
+        width: 100%;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0 30px;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  .qrImg {
+    height: 100%;
+    object-fit: contain;
+    margin: 0 10px;
+  }
+  .apps_closetome {
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    height: 30vh;
+    justify-content: center;
+    min-height: auto;
+    overflow: hidden;
+    padding: 10px 0;
+    position: relative;
+    width: 100%;
+    background-image: linear-gradient(
+      to left top,
+      #e1582f,
+      #e7732c,
+      #eb8c2c,
+      #eca533,
+      #ecbd40
+    );
+
+    &::before {
+      content: none;
+    }
+    .sliderPhone {
+      height: auto;
+    }
+    img.logoAppImg {
+      height: 100%;
+      object-fit: contain;
+      margin: 0 10px;
+    }
+    .sliderPhone {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      width: 100%;
+      height: 50%;
+      z-index: 2;
+      margin-bottom: 20px;
+
+      .phoneImg {
+        overflow: hidden;
+        height: 600px;
+        position: absolute;
+        z-index: 3;
+        pointer-events: none;
+      }
+      #slidePhone {
+        padding: 20px 20px 30px 20px;
+        position: relative;
+        width: 98%;
+        z-index: 2;
+        background-image: linear-gradient(
+          to top,
+          #e1582f,
+          #e7732c,
+          #eb8c2c,
+          #eca533,
+          #ecbd40
+        );
+        border-radius: 0 0 50px 50px;
+        margin-bottom: 12px;
+        h2,
+        p {
+          color: #fff;
+        }
+        h2 {
+          font-size: 3.5rem;
+          font-family: "MuseoSans-700";
+          margin-bottom: 10px;
+        }
+        p {
+          font-size: 1.4rem;
+          margin-bottom: 30px;
+        }
+        p.btn.phone-btn {
+          align-items: center;
+          background-color: #fff;
+          border-radius: 5px;
+          color: #e1582f;
+          display: flex;
+          font-family: "MuseoSans-900";
+          font-size: 1.5rem;
+          justify-content: center;
+          padding: 10px 30px;
+          &:hover {
+            color: #fff;
+            background-color: #e1582f;
+          }
+        }
+      }
+    }
+    .logoApp {
+      position: relative;
+      z-index: 2;
+      max-width: 380px;
+      text-align: center;
+      margin: 0 auto;
+      width: 100%;
+      .find_app {
+        h3 {
+          font-size: 1.5rem;
+          color: #fff;
+        }
+        .link_apps {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 10px;
+          transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+          div {
+            transition: all 0.3s ease-in-out;
+            img {
+              margin: 0 10px;
+              width: 30px;
+            }
+            &:hover {
+              opacity: 0.5;
+            }
+          }
+        }
+      }
+    }
+  }
+}

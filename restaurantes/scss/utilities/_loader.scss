@@ -1,0 +1,27 @@
+html {
+    scroll-behavior: smooth;
+  }
+.loader
+{
+    display:none;
+}
+.loading
+{
+    .loader
+    {
+        background:url(../img/miceloader.gif) no-repeat center center;
+        background-size:30px 30px;
+        display:block;
+        min-height:200px;
+        width:100%;
+        &.big
+        {
+            min-height:70vh;
+            background-size:40px;
+        }
+    }
+    .content
+    {
+        display:none;
+    }
+}

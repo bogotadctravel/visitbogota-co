@@ -1,0 +1,143 @@
+footer {
+  position: relative;
+  background-color: #f2f2f2;
+  .container {
+    padding: 60px 20px;
+    display: grid;
+    font-size: 16px;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 15px;
+    z-index: 10;
+    @media only screen and (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: auto;
+      gap: 30px;
+    }
+
+    .socials {
+      grid-column: span 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px auto;
+      a {
+        svg {
+          color: #fff;
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+    & > svg {
+      grid-column: span 4;
+      margin: 15px auto;
+      display: block;
+    }
+    .menus-footer {
+      grid-column: span 4;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      @media only screen and (max-width: 768px) {
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: auto;
+        gap: 10px;
+      }
+      nav {
+        padding: 25px 30px;
+        border-right: 1px solid rgba(193, 193, 193, 0.5);
+        &:last-of-type {
+          border: 0;
+        }
+        h6 {
+          color: #373737;
+          font-size: 22px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          margin-bottom: 10px;
+        }
+        ul {
+          li {
+            color: #373737;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            margin-bottom: 15px;
+            a {
+              color: #373737;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+              position: relative;
+              span {
+                position: absolute;
+                right: -20px;
+                top: 50%;
+                transform: translateY(-50%);
+              }
+              img {
+                width: 30px;
+                margin: 0;
+                height: 30px;
+              }
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .politics {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 10px 0;
+    z-index: 10;
+    gap: 30px;
+    background-color: #d9d9d9;
+    @media only screen and (max-width: 768px) {
+      gap: 10px;
+      padding: 20px;
+      flex-direction: column;
+    }
+    small {
+      color: #373737;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      text-align: center;
+      line-height: 14px;
+    }
+    .links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 10px 0;
+      z-index: 10;
+      gap: 30px;
+      @media only screen and (max-width: 768px) {
+        gap: 10px;
+        flex-direction: column;
+      }
+      a,
+      small {
+        color: #373737;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 14px;
+        &:hover {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}

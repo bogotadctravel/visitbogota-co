@@ -1,0 +1,56 @@
+:root{
+    --datamargin:20px;
+}
+.data
+{
+    justify-content: center;
+
+    .title
+    {
+        img
+        {
+            margin-right:30px;
+            width:150px;
+        }
+        span
+        {
+            border-left:1px solid #666;
+            display:inline-block;
+            padding-left:30px;
+        }
+    }
+    article
+    {
+        border-radius:20px;
+        box-shadow: inset #444 0 0 15px;
+        box-sizing: border-box;
+        color:#FFF;
+        margin:20px;
+        text-align:center;
+        padding:30px;
+        overflow: hidden;
+        width:calc(33.333% - var(--datamargin) * 2);
+        @media screen and (max-width:1024px)
+        {
+            width: 300px;
+        }
+    
+        img
+        {
+            display:block;
+            margin:10px auto;
+            width:50%;
+        }
+        h1
+        {
+            color:#6dca8d;
+            font-size:4.2rem;
+            margin:10px 0;
+        }
+        p
+        {
+            font-size:1.4em;
+        }
+        
+    }
+}

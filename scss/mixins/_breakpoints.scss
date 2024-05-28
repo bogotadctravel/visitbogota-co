@@ -1,0 +1,32 @@
+@media only screen and (max-width: 600px) {
+    @each $col in $cols {
+      .col-xs-#{$col} {
+        flex: #{$col} 0 calc(100% / 12 * #{$col});
+      }
+    }
+  }
+  
+  @media only screen and (min-width: 600px) {
+    @each $col in $cols {
+      .col-sm-#{$col} {
+        flex: #{$col} 0 calc(100% / 12 * #{$col});
+      }
+    }
+  }
+  
+  
+  @media only screen and (min-width: 768px) and (max-width: 1200px) {
+    @each $col in $cols {
+      .col-md-#{$col} {
+        flex: #{$col} 0 calc(100% / 12 * #{$col});
+      }
+    }
+  }
+  
+  @media only screen and (min-width: 1200px) {
+    @each $col in $cols {
+      .col-lg-#{$col} {
+        flex: #{$col} 0 calc(100% / 12 * #{$col});
+      }
+    }
+  }

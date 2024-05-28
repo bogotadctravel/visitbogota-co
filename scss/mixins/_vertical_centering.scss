@@ -1,0 +1,12 @@
+// Use vertical-center
+/*
+.vc-box {
+  @include center-vertically;
+}
+*/
+@mixin center-vertically {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include prefix(transform, translate(-50%, -50%), 'webkit' 'ms');
+  }

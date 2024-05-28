@@ -1,0 +1,39 @@
+.tooltip {
+  position: relative;
+}
+.tooltip:before,
+.tooltip:after {
+  display: block;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 10;
+}
+
+.tooltip:before {
+  background: rgba(0, 0, 0, 0.75);
+  background-size: contain;
+  border-radius: 2px;
+  color: #fff;
+  content: attr(data-title);
+  font-size: 14px;
+  height: 100px;
+  right: 0;
+  padding: 6px 10px;
+  pointer-events: none;
+  top: 0;
+  white-space: nowrap;
+  width: 100px;
+}
+
+/* fade */
+.tooltip.fade:after,
+.tooltip.fade:before {
+  transform: translate3d(0, -10px, 0);
+  transition: all 0.15s ease-in-out;
+}
+.tooltip.fade:hover:after,
+.tooltip.fade:hover:before {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}

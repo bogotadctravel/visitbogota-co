@@ -1,0 +1,49 @@
+.searchMobile {
+  align-items: center;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: -100vw;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 10;
+  &.active {
+    left: 0;
+  }
+  form {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    width: 80%;
+    img {
+      display: inline-block;
+      height: 30px;
+      margin: 0 17px;
+      object-fit: contain;
+      width: 30px;
+    }
+    label {
+      display: flex;
+    }
+    input[type="search"] {
+      border-bottom: 2px solid #fff;
+      color: #fff;
+      font-size: 1.3rem;
+      padding: 8px 0;
+      text-transform: uppercase;
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      width: 100%;
+      &::placeholder {
+        color: #fff;
+        font-size: 1.3rem;
+        text-transform: uppercase;
+      }
+      &:focus {
+        width: 250px;
+      }
+    }
+  }
+}

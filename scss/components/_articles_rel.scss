@@ -1,0 +1,75 @@
+.articles_rel {
+  background-color: #fff;
+  border-radius: 0 0 143px 143px;
+  padding: 120px 30px 240px;
+  position: relative;
+  z-index: 1;
+  @media screen and (max-width: 1023px) {
+    border-radius: 0;
+    padding: 80px 0;
+    &::before {
+      background-image: url(../img/curve_white_mob_2.svg);
+      background-position: top;
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: "";
+      height: 360px;
+      left: 0;
+      position: absolute;
+      top: -60px;
+      width: 100%;
+      z-index: 2;
+    }
+  }
+  h2 {
+    color: #5a85b0;
+  }
+  &_grid {
+    display: grid;
+    gap: 33px;
+    grid-auto-rows: calc(25vw - 90px);
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1200px;
+    @media screen and (max-width: 1023px) {
+      display: grid;
+      gap: 33px;
+      grid-auto-rows: calc(100vw / 16 * 9);
+      grid-template-columns: 1fr;
+      max-width: 1200px;
+      @media screen and (max-width: 1023px) {
+        gap: 50px;
+      }
+    }
+    .single_article {
+      display: block;
+      height: 100%;
+      width: 100%;
+      img {
+        border-radius: 21px;
+        height: 100%;
+        margin-bottom: 15px;
+        object-fit: cover;
+        overflow: hidden;
+        transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        width: 100%;
+        @media screen and (max-width: 1023px) {
+          margin-bottom: 0;
+        }
+      }
+      h3 {
+        color: #808080;
+        font-size: 1.6rem;
+        line-height: 2rem;
+        text-align: center;
+        @media screen and (max-width: 1023px) {
+          font-size: 1.5rem;
+        }
+      }
+      &:hover {
+        img {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}

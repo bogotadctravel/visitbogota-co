@@ -1,0 +1,106 @@
+
+<?php
+
+include "../includes/functions.php";
+//Client Message
+extract($_POST);
+
+$array = array();
+$cid = 0;
+$curl = curl_init();
+
+function get_rand_alphanumeric($length) {
+  $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+  $characters_length = strlen($characters);
+  $rand_id = '';
+  for ($i = 0; $i < $length; $i++) {
+    $rand_id .= $characters[rand(0, $characters_length - 1)];
+  }
+  return $rand_id;
+}
+
+$uid = "pb".get_rand_alphanumeric(6);
+
+$theprice = str_replace(".","",$_POST["uprice"]);
+$postfields = '{
+  "dataset":"books_pb",
+  "table":"bookings",
+  "row":{
+          "uniqid": '.$cid.',
+          "name":"'.$_POST["uname"].'",
+          "email":"'.$_POST["uemail"].'",
+          "serviceid":'.$_POST["uofertaid"].',
+          "service":"'.$_POST["uoferta"].'",
+          "phone":"'.$_POST["uphone"].'",
+          "companyid":'.$_POST["ucompanyid"].',
+          "company":"'.$_POST["ucompanyname"].'",
+          "datet":"'.date("Y-m-d").'T'.date("h:i:s").'",
+          "version":4,
+          "price":"'.$theprice.'",
+          "ocategoryid":'.$_POST["ocategoryid"].', 
+          "ocategory":"'.$_POST["ocategory"].'",
+          "ccategoryid":'.$_POST["ccategoryid"].',
+          "ccategory":"'.$_POST["ccategory"].'",
+          "guests":"'.$_POST["numberPersons"].'",
+          "bookid":"'.$uid.'"
+          }
+}';
+
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://cloud.bogotadc.travel/bigquery/feedtable/',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>$postfields,
+  CURLOPT_HTTPHEADER => array(
+    'auth: bogota-clean-emblem-367014-8028d5d34b0c',
+    'project: clean-emblem-367014',
+    'Content-Type: application/json'
+  ),
+));
+$responsebq = curl_exec($curl);
+curl_close($curl);
+
+if($responsebq != ""){
+  
+  $ID = $uid;
+  $date = new DateTime();
+  $date->setTimeZone(new DateTimeZone("America/Bogota"));
+  $thetime = $date->format('d/m/Y - H:i:s');
+
+
+  $emailSended = campaignMonitorEmail($uemail,"Tu reserva en VisitBogotá está esperándote", "ebb8f839-4a4b-481f-9e90-c1eee295c9f4", "{\"PBSERIAL\":\"$ID\",\"PBCOMPANY\":\"$ucompanyname\",\"PBOFFER\":\"$uoferta\",\"PBMAIL\":\"$ucompanyemail\",\"PBTEL\":\"$ucompanyphone\",\"PBLINK\":\"$ucompanylink\"}");
+  $emailSended2 = campaignMonitorEmail("experienciasturisticas@idt.gov.co","Tu reserva en VisitBogotá está esperándote.", "cb18deb2-13d7-42e5-a924-d03e2a63776e", "{\"PBSERIAL\":\"$ID\",\"PBPRICE\":\"$uprice\",\"PBOFFER\":\"$uoferta\",\"USERN\":\"$uname\",\"USERMAIL\":\"$uemail\",\"USERPHONE\":\"$ucompanyphone\"}");
+  $emailSended3 = campaignMonitorEmail($ucompanyemail,"", "01a8972d-c482-45c7-b1df-0102df04082e", "{\"PBSERIAL\":\"$ID\",\"USERN\":\"$uname\",\"USERPHONE\":\"$uphone\",\"USERMAIL\":\"$uemail\",\"PBOFFER\":\"$uoferta\"}");
+
+
+  $array['message'] = 1;
+  $array['serial'] = $ID;
+  $array['insertmessage'] =  $emailSended;
+  // $array['insertmessage'] =  $emailSended;
+  $array['emailSended3'] =  $emailSended3;
+  function wh_log($log_msg)
+  {
+      $log_filename = 'log';
+      if (!file_exists($log_filename)) 
+      {
+          // create directory/folder uploads.
+          mkdir($log_filename, 0777, true);
+      }
+      $log_file_data = $log_filename.'/log_' . date('d-M-Y') . '.log';
+      file_put_contents($log_file_data, $log_msg . ',', FILE_APPEND);
+  }
+   
+  wh_log($postfields);
+  
+}else{
+  $array['$_POST'] = $_POST;
+  $array['responsebq'] = $responsebq;
+  $array['message'] = 0;
+}
+echo json_encode($array);

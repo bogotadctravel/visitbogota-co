@@ -1,0 +1,55 @@
+body {
+  font-size: 10px;
+  font-family: var(--font-primary);
+  color: #000;
+}
+
+h1 {
+  letter-spacing: -0.02em;
+}
+
+h2 {
+
+  line-height: 30px;
+}
+
+h3 {
+  letter-spacing: -0.02em;
+  line-height: 30px;
+  margin-bottom: 8px;
+}
+
+h4 {
+
+  letter-spacing: -0.02em;
+  line-height: 30px;
+  margin-bottom: 8px;
+}
+h5 {
+
+  letter-spacing: -0.02em;
+  line-height: 30px;
+  margin-bottom: 8px;
+}
+h6 {
+
+  letter-spacing: -0.02em;
+  line-height: 30px;
+  margin-bottom: 8px;
+}
+
+p,
+li {
+
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: -0.02em;
+  line-height: 18px;
+}
+a {
+
+  color:inherit;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 18px;
+}

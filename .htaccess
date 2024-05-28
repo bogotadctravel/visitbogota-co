@@ -1,0 +1,154 @@
+
+RewriteOptions inherit
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^$ /es [R=301,L]
+
+# Redirección para rldvideos
+RewriteRule ^rldvideos/([^/]*)/$ rldvideos/$1.mp4 [L,QSA]
+# Redirección desde bogotadc.travel a visitbogota.co para rutas específicas
+RewriteCond %{HTTP_HOST} ^bogotadc\.travel$ [NC]
+RewriteRule ^ruta-leyenda-el-dorado/videos/([0-9]+)/?$ https://visitbogota.co/rldvideos/$1/ [R=301,L]
+
+RewriteRule ^([a-zA-Z0-9_-]+)/preguntas-frecuentes$ /$1/informacion-al-viajero [R=301,L]
+RewriteRule ^([a-zA-Z0-9_-]+)/restaurantes$ /$1/donde-comer [R=301,L]
+RewriteRule ^([a-zA-Z0-9_-]+)/hoteles$ /$1/donde-dormir [R=301,L]
+#ESPAÑOL
+RewriteRule ^s/([^/]*)/$ set/$1.php?lang=es [L,QSA]
+RewriteRule ^g/([^/]*)/$ get/$1.php?lang=es [L,QSA]
+RewriteRule ^ce/([^/]*)/$ customendpoints/$1.php?lang=es [L,QSA]
+RewriteRule ^vacacional/s/([^/]*)/$ vacacional/set/$1.php?lang=es [L,QSA]
+RewriteRule ^vacacional/g/([^/]*)/$ vacacional/get/$1.php?lang=es [L,QSA]
+RewriteRule ^experiencias-turisticas/s/([^/]*)/$ plan-bogota/set/$1.php?lang=es [L,QSA]
+RewriteRule ^experiencias-turisticas/g/([^/]*)/$ plan-bogota/get/$1.php?lang=es [L,QSA]
+RewriteRule ^experiencias-turisticas/b/([^/]*)/$ plan-bogota/boxes/$1.php?lang=es [L,QSA]
+RewriteRule ^tarjeta-ciudad/s/([^/]*)/$ tarjeta-ciudad/set/$1.php [L,QSA]
+RewriteRule ^tarjeta-ciudad/g/([^/]*)/$ tarjeta-ciudad/get/$1.php [L,QSA]
+RewriteRule ^tarjeta-ciudad/b/([^/]*)/$ tarjeta-ciudad/boxes/$1.php [L,QSA]
+RewriteRule ^planifica-tu-viaje/s/([^/]*)/$ disena-tu-viaje/set/$1.php [L,QSA]
+RewriteRule ^planifica-tu-viaje/g/([^/]*)/$ disena-tu-viaje/get/$1.php [L,QSA]
+RewriteRule ^planifica-tu-viaje/b/([^/]*)/$ disena-tu-viaje/boxes/$1.php [L,QSA]
+RewriteRule ^banco-imagenes/s/([^/]*)/$ banco-imagenes/set/$1.php [L,QSA]
+RewriteRule ^banco-imagenes/g/([^/]*)/$ banco-imagenes/get/$1.php [L,QSA]
+RewriteRule ^banco-imagenes/b/([^/]*)/$ banco-imagenes/boxes/$1.php [L,QSA]
+
+RewriteRule ^qrcordes/([^/]*)/$ qrcodes/$1.php [L,QSA]
+RewriteRule ^evento-promo/$ evento-promo/index.html [L,QSA]
+RewriteRule ^banco-imagenes/$ banco-imagenes/bi_index.php [L,QSA]
+RewriteRule ^es/s/([^/]*)/$ set/$1.php?lang=es [L,QSA]
+RewriteRule ^es/g/([^/]*)/$ get/$1.php?lang=es [L,QSA]
+RewriteRule ^en/s/([^/]*)/$ set/$1.php?lang=en [L,QSA]
+RewriteRule ^en/g/([^/]*)/$ get/$1.php?lang=en [L,QSA]
+RewriteRule ^pt/s/([^/]*)/$ set/$1.php?lang=pt [L,QSA]
+RewriteRule ^pt/g/([^/]*)/$ get/$1.php?lang=pt [L,QSA]
+RewriteRule ^b/([^/]*)/$ boxes/$1.php [L,QSA]
+
+# VACACIONAL
+RewriteRule ^([a-zA-Z0-9_-]+)$ vacacional/index.php?lang=$1&seo=4 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/$ vacacional/index.php?lang=$1&seo=4 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/eventos/([a-zA-Z0-9_-]+)-([0-9]+)$ vacacional/eventsnew.php?lang=$1&idAgenda=$3&seo=$3&seoType=1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/evento/([a-zA-Z0-9_-]+)-([0-9]+)$ vacacional/intern_eventnew.php?lang=$1&id=$3&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/explora/([a-zA-Z0-9_-]+)/([0-9]+)$ vacacional/portal.php?productID=$3&lang=$1&seo=$3&seoType=2 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/atractivo/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)$ vacacional/atractivo.php?productname=$2&productID=$4&placeID=$5&lang=$1&seo=$5 [L,QSA]
+
+RewriteRule ^([a-zA-Z0-9_-]+)/blog/$ vacacional/blog.php?lang=$1&seo=4 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/blog$ vacacional/blog.php?lang=$1&seo=4 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/blog/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)$ vacacional/intern_blog.php?lang=$1&productID=$4&blogID=$5&seo=$5 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/preguntas-frecuentes/$ vacacional/informacion_util.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/preguntas-frecuentes$ vacacional/informacion_util.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/informacion-al-viajero/$ vacacional/informacion_util.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/informacion-al-viajero$ vacacional/informacion_util.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/producto/([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)$ vacacional/producto.php?lang=$1&prodId=$3&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/descubre-bogota/([a-zA-Z0-9_-]+)/([0-9]+)$ vacacional/portal.php?planID=$3&lang=$1&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/zona/([a-zA-Z0-9_-]+)/([0-9]+)$ vacacional/portal.php?zoneID=$3&lang=$1&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/(alrededor/([a-zA-Z0-9_-]+)/([0-9]+))$ vacacional/alrededor.php?placeID=$3&lang=$1&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/(iniciativas/([a-zA-Z0-9_-]+)/([0-9]+))$ campaign.php?campaignID=$3&lang=$1&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/alrededores-de-bogota$ vacacional/mas_alla.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/politica-tratamiento-datos-personales$ vacacional/politics.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/buscador$ vacacional/search.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/cerca-de-mi$ vacacional/closetome.php?lang=$1&clean=1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/cerca-de-mi/([a-zA-Z0-9_-]+)/([0-9]+)$ vacacional/closetomeplace.php?lang=$1&placenearid=$3&clean=1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/vuelos$ vacacional/vuelos.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/rutas-turisticas$ vacacional/rutas.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/rutas-turisticas/([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)$ vacacional/ruta_intern.php?lang=$1&id=$3&seo=$3 [L,QSA]
+
+#RLD
+RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/videos/([a-zA-Z0-9_-]+)$ downloads/rld-videos/$1.mp4 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/intro$ rld/rld_index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/inicio$ rld/rld_home.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/ruta/([a-zA-Z0-9_-]+)-([0-9]+)$ rld/rld_route.php?lang=$1&row=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/aprende/$ rld/rld_blog.php?lang=$1&type=aprende [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/imperdibles/$ rld/rld_blog.php?lang=es&type=imperdibles [L,QSA]
+
+#BANCO IMAGENES
+RewriteRule ^([a-zA-Z0-9_-]+)/banco-imagenes/$ banco-imagenes/bi_index.php?lang=es [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/banco-imagenes/resultados/$ banco-imagenes/bi_search.php?lang=es [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/banco-imagenes/descarga-([0-9]+)$ banco-imagenes/firstdownload.php?lang=es&id=$2 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/banco-imagenes/interna-([0-9]+)$ banco-imagenes/bi_intern.php?lang=es&id=$2 [L,QSA]
+RewriteRule ^banco-imagenes/$ banco-imagenes/bi_index.php?lang=es [L,QSA]
+RewriteRule ^banco-imagenes/resultados/$ banco-imagenes/bi_search.php?lang=es [L,QSA]
+RewriteRule ^banco-imagenes/descarga-([0-9]+)$ banco-imagenes/firstdownload.php?lang=es&id=$2 [L,QSA]
+RewriteRule ^banco-imagenes/interna-([0-9]+)$ banco-imagenes/bi_intern.php?lang=es&id=$2 [L,QSA]
+
+# MICE URL's
+RewriteRule ^([a-zA-Z0-9_-]+)/mice/$ mice/index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/mice$ mice/index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/mice/locaciones$ mice/category-venues.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/mice/proveedores$ mice/category-providers.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/mice/locacion/([a-zA-Z0-9_-]+)-([0-9]+)$ mice/single-venue.php?lang=$1&venueid=$3&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/mice/proveedor/([a-zA-Z0-9_-]+)-([0-9]+)$ mice/single-provider.php?lang=$1&providerid=$3&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/mice/por-que-bogota$ mice/data.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/mice/aeropuerto-([0-9]+)$ mice/landing.php?lang=$1&id=$2 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/mice/bioseguridad-([0-9]+)$ mice/landing.php?lang=$1&id=$2 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/mice/movilidad-([0-9]+)$ mice/landing.php?lang=$1&id=$2 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/mice/emergencias-([0-9]+)$ mice/landing.php?lang=$1&id=$2 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/mice/seguridad-([0-9]+)$ mice/landing.php?lang=$1&id=$2 [L,QSA]
+
+# HOTELES
+RewriteRule ^([a-zA-Z0-9_-]+)/hoteles$ hoteles/index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/hoteles/$ hoteles/index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/hoteles/ver/([a-zA-Z0-9_-]+)-([0-9]+)$ hoteles/single-hotelnew.php?lang=$1&hotelid=$3&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/donde-dormir$ hoteles/index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/donde-dormir/$ hoteles/index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/donde-dormir/ver/([a-zA-Z0-9_-]+)-([0-9]+)$ hoteles/single-hotelnew.php?lang=$1&hotelid=$3&seo=$3 [L,QSA]
+
+# RESTAURANTES URL's
+RewriteRule ^([a-zA-Z0-9_-]+)/restaurantes/$ restaurantes/index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/restaurantes$ restaurantes/index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/restaurantes/ver/([a-zA-Z0-9_-]+)-([0-9]+)$ restaurantes/single-restaurant.php?lang=$1&restaurantid=$3&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/donde-comer/$ restaurantes/index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/donde-comer$ restaurantes/index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/donde-comer/ver/([a-zA-Z0-9_-]+)-([0-9]+)$ restaurantes/single-restaurant.php?lang=$1&restaurantid=$3&seo=$3 [L,QSA]
+RewriteRule ^eventosidt$ /eventosidt/index.php[L,QSA]
+
+# TARJETA CIUDAD URL's
+RewriteRule ^([a-zA-Z0-9_-]+)/tarjeta-ciudad$ tarjeta-ciudad/index.php?lang=es [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/tarjeta-ciudad/([0-9]+)$ tarjeta-ciudad/intern.php?lang=es&id=$2 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/tarjeta-ciudad/checkout$ tarjeta-ciudad/checkout.php?lang=es&id=$2 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/tarjeta-ciudad/finalizar-compra$ tarjeta-ciudad/compra.php?lang=es [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/tarjeta-ciudad/compra-aprobada$ tarjeta-ciudad/aprobada.php?lang=es [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/tarjeta-ciudad/qrs$ tarjeta-ciudad/qrs.php?lang=es [L,QSA]
+
+# DISEÑA TU VIAJE URL's
+RewriteRule ^([a-zA-Z0-9_-]+)/planifica-tu-viaje$ disena-tu-viaje/index.php?lang=$1 [L,QSA]
+
+# PLAN BOGOTA URL's
+RewriteRule ^([a-zA-Z0-9_-]+)/experiencias-turisticas$ plan-bogota/index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/experiencias-turisticas/$ plan-bogota/index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/experiencias-turisticas/encuentra-tu-plan$ plan-bogota/find_plan.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/experiencias-turisticas/plan/([a-zA-Z0-9_-]+)-([0-9]+)$ plan-bogota/intern.php?lang=$1&planid=$3&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/experiencias-turisticas/preguntas-frecuentes$ plan-bogota/faq.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/experiencias-turisticas/politica-tratamiento-datos-personales$ plan-bogota/politics.php?lang=$1 [L,QSA]
+
+RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/s/([^/]+)/?$ vacacional/set/$2.php?lang=$1 [L,QSA]
+RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/g/([^/]+)/?$ vacacional/get/$2.php?lang=$1 [L,QSA]
+RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/b/([^/]+)/?$ vacacional/boxes/$2.php?lang=$1 [L,QSA]
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php73” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php73 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
+

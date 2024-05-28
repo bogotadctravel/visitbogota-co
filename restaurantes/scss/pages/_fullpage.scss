@@ -1,0 +1,79 @@
+#mobile
+{
+  @media screen and (orientation:portrait)
+  {
+    color:#000;
+    position:fixed;
+    height:100vh;
+    width:100%;
+  }
+}
+
+.fullpage {
+  main {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    padding: 0 0 0 50px;
+    justify-content: space-between;
+    .txt {
+      align-self: flex-end;
+      padding-bottom: 0;
+      padding-right: 30px;
+    }
+    h1 {
+      font-size: 8rem;
+      color: #fff;
+      font-family: "MuseoSans-900";
+      position:fixed;
+      bottom:60px;
+      text-align: left;
+      line-height:1em;
+      text-shadow:#000 4px 4px 4px;
+      width:50%;
+    }
+    h2 {
+      font-size: 4.6rem;
+      color: #fff;
+      font-family: "MuseoSans-900";
+    }
+    @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+      .description{
+        -webkit-backdrop-filter:  grayscale(1);
+        backdrop-filter:  grayscale(1);
+      }
+    }
+    .description {
+      background-color: rgba($color: #000000, $alpha: 0.5);
+      color:#FFF;
+
+      min-height: 100vh;
+      width: 50%;
+      max-width: 450px;
+      padding: 100px 30px 150px 30px;
+      display: flex;
+      justify-content:center;
+      flex-direction: column;
+      img {
+        width: 60%;
+        object-fit: contain;
+        margin: 0 auto 30px;
+        display: block;
+      }
+      p, ul {
+        color: #fff;
+        font-size: 1.5rem;
+        font-family: "MuseoSans-500";
+        text-align: justify;
+        margin-bottom: 10px;
+      }
+      li
+      {
+        margin:15px 0;
+       /* padding-left:10px;*/
+      }
+    }
+  }
+}

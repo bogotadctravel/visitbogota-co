@@ -1,0 +1,1755 @@
+.principal-banner {
+  align-items: center;
+  display: flex;
+  height: 95vh;
+  justify-content: center;
+  min-height: 450px;
+  max-width: 1920px;
+  position: relative;
+  overflow: hidden;
+  @media screen and (max-width: 1023px) {
+    position: relative;
+    display: block;
+    min-height: 100vh;
+    width: 100%;
+  }
+  .media {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    overflow: hidden;
+    img,
+    video {
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+  & > h2 {
+    color: #fff;
+    font-family: "MuseoSans-700";
+    font-size: 10rem;
+    letter-spacing: 40px;
+    position: relative;
+    z-index: 2;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: absolute;
+    top: 50%;
+    text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.75);
+    transform: translateY(calc(-50% - 35px));
+    @media screen and (max-width: 1023px) {
+      display: none;
+    }
+  }
+  .helps {
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    position: absolute;
+    bottom: 130px;
+    right: 50px;
+    z-index: 3;
+    @media screen and (max-width: 1023px) {
+      position: absolute;
+      margin-right: 20px;
+      right: 0;
+      bottom: 40px;
+    }
+    .arrow {
+      position: absolute;
+      cursor: pointer;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 80px;
+      bottom: 0;
+      right: -70px;
+      transform: translateX(0);
+      &.active {
+        transform: translateX(130%);
+      }
+      @media screen and (max-width: 1023px) {
+        display: none;
+      }
+      &:hover {
+        right: -55px;
+      }
+    }
+    #widget {
+      position: relative;
+      transform: translateX(130%);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      &.active {
+        transform: translateX(0);
+      }
+      @media screen and (max-width: 1023px) {
+        transform: translateX(0);
+      }
+      button {
+        width: 20px;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+        &:hover {
+          opacity: 0.5;
+        }
+        @media screen and (max-width: 1023px) {
+          display: none;
+        }
+      }
+      .info {
+        color: #fff;
+        text-align: right;
+        border-bottom: 2px solid #fff;
+        margin-bottom: 12px;
+        @media screen and (max-width: 1023px) {
+          opacity: 1;
+        }
+        & > h2 {
+          font-size: 5.7rem;
+          font-family: "MuseoSans-900";
+          @media screen and (max-width: 1023px) {
+            font-size: 4rem;
+          }
+        }
+        & > h3 {
+          font-size: 2.9rem;
+        }
+        & > p {
+          font-family: "MuseoSans-700";
+          font-size: 1.8rem;
+          display: inline-block;
+          padding: 0 0 10px 20px;
+        }
+      }
+      .cards-banner {
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        align-items: center;
+        display: flex;
+        justify-content: flex-end;
+        @media screen and (max-width: 1023px) {
+          opacity: 1;
+        }
+        .card-info,
+        .card-change {
+          border-radius: 5px;
+          display: flex;
+          flex-direction: column;
+          height: 100px;
+          justify-content: space-between;
+          margin: 0 0 0 25px;
+          padding: 11px 5px 5px;
+          position: relative;
+          width: 100px;
+          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.75);
+          @media screen and (max-width: 1023px) {
+            width: 90px;
+            height: 120px;
+          }
+          &:hover {
+            transform: scale(1.05);
+          }
+          .txt {
+            p {
+              color: #fff;
+              font-size: 1rem;
+              text-align: center;
+              margin: 5px 0 0;
+              @media screen and (max-width: 1023px) {
+                font-size: 1rem;
+              }
+            }
+          }
+          .icon {
+            width: 100%;
+            img.curveBox {
+              height: 52%;
+              left: 0;
+              position: absolute;
+              top: 0;
+              width: 100%;
+              z-index: 0;
+              @media screen and (max-width: 1023px) {
+                top: -8px;
+              }
+            }
+            img {
+              width: 30px;
+              height: 30px;
+              position: relative;
+              z-index: 3;
+              margin: 0 auto;
+              display: block;
+              object-fit: contain;
+              @media screen and (max-width: 1023px) {
+                width: 22px;
+                height: 22px;
+              }
+            }
+          }
+        }
+        .card-info {
+          background-image: linear-gradient(
+            to right,
+            #ecbd40,
+            #eca533,
+            #eb8c2c,
+            #e7732c,
+            #e1582f
+          );
+          .txt {
+            p {
+              @media screen and (max-width: 1023px) {
+                font-size: 1.1rem;
+              }
+            }
+          }
+        }
+        .card-change {
+          pointer-events: none;
+          background-image: linear-gradient(
+            to right,
+            #35498e,
+            #00a7ce,
+            #00b0bc,
+            #16b6a2,
+            #5bb985
+          );
+        }
+      }
+    }
+  }
+  &::after {
+    background-image: url(../img/ab-curve.svg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: -1px;
+    content: "";
+    height: 254px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+  }
+  .logoMobile {
+    left: 50%;
+    position: absolute;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    @media screen and (min-width: 1025px) {
+      display: none;
+    }
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    img {
+      max-width: 170px;
+      width: 100%;
+    }
+    small {
+      color: #fff;
+      font-size: 1.6rem;
+      text-align: center;
+    }
+  }
+}
+
+.descubre_bogota {
+  padding: 30px 90px 130px 0;
+  @media screen and (max-width: 1023px) {
+    padding: 50px 0 50px 0;
+  }
+  h2.title {
+    padding-left: 90px;
+    margin-bottom: 130px;
+    @media screen and (max-width: 1023px) {
+      padding: 0;
+      font-family: "MuseoSans-900";
+    }
+  }
+
+  .bogota_para {
+    border-radius: 0 40px 40px 0;
+    display: flex;
+    overflow: hidden;
+    margin: 0;
+    width: 100%;
+    &_item {
+      flex: 1;
+      height: 550px;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      transform: skewX(-20deg);
+      margin-left: -110px;
+      box-shadow: -6px 0px 19px 5px rgba($color: #000000, $alpha: 0.5);
+      transition: 0.3s ease-in-out;
+      .content {
+        align-items: flex-end;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        overflow: hidden;
+        padding: 0;
+        transform: skewX(20deg);
+        margin-left: -110px;
+        width: 300%;
+      }
+      &_img {
+        height: 100%;
+        left: 0;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        transition: all 0.6s cubic-bezier(0, 0.55, 0.45, 1);
+      }
+      &_title {
+        bottom: 40px;
+        color: #fff;
+        font-family: "MuseoSans-900";
+        font-size: 2rem;
+        left: 10%;
+        letter-spacing: 0.4rem;
+        position: absolute;
+        z-index: 2;
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.75);
+      }
+      &.last_item {
+        margin-left: -220px;
+        width: 50%;
+        transform: translateX(94px) skewX(-20deg);
+        .content {
+          .bogota_para_item_title {
+            left: 15%;
+          }
+        }
+      }
+      &:hover,
+      &:nth-of-type(1) {
+        flex-grow: 2;
+        .bogota_para_item_title {
+          left: 15%;
+        }
+      }
+      &:hover {
+        .bogota_para_item_img {
+          transform: scale(1.1);
+        }
+      }
+      &:nth-of-type(1) {
+        transform: skewX(0);
+        .content {
+          transform: skewX(0);
+          width: 150%;
+          .bogota_para_item_title {
+            left: 40%;
+          }
+        }
+      }
+    }
+  }
+}
+
+.bogota_para_isMobile {
+  ul {
+    li {
+      position: relative;
+      margin-top: -95px;
+      &:first-of-type {
+        margin-top: 0;
+      }
+      a {
+        position: relative;
+        height: 173px;
+        width: 268px;
+        color: #007bff;
+        text-decoration: underline;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          height: 100%;
+          width: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          object-fit: fill;
+        }
+        span {
+          font-size: 2.2rem;
+          font-family: "MuseoSans-900";
+          text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.75);
+          color: #fff;
+          position: absolute;
+          top: 60px;
+          right: 20px;
+        }
+      }
+    }
+  }
+}
+
+.explora_bogota {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 230px 70px 345px;
+  position: relative;
+  @media screen and (max-width: 1023px) {
+    padding: 60px 20px 150px;
+  }
+  &::before {
+    background-image: url(../img/ba-curve.svg);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: "";
+    height: 254px;
+    left: 0;
+    position: absolute;
+    top: -1px;
+    width: 101%;
+    pointer-events: none;
+  }
+  &::after {
+    background-image: url(../img/ab-curve.svg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: -1px;
+    content: "";
+    height: 254px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    pointer-events: none;
+  }
+  & > h3,
+  & > h2 {
+    color: #fff;
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+  h2 {
+    font-size: 5.3rem;
+    margin-bottom: 80px;
+    letter-spacing: 0.5rem;
+    font-family: "MuseoSans-900";
+    text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.75);
+  }
+  & > h3 {
+    font-size: 3.5rem;
+    text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.75);
+  }
+  .slide_explora {
+    margin-bottom: 80px;
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+    @media screen and (max-width: 1023px) {
+      margin-bottom: 80px;
+      margin: 0 auto;
+      max-width: 1400px;
+      padding: 0;
+      width: 100%;
+    }
+    .bx-wrapper .bx-pager.bx-default-pager a {
+      background-color: #fff;
+    }
+    .slick-prev.slick-arrow {
+      left: 76px;
+      @media screen and (max-width: 1023px) {
+        left: 0;
+      }
+    }
+    .slick-next.slick-arrow {
+      right: 76px;
+      @media screen and (max-width: 1023px) {
+        right: 0;
+      }
+    }
+    .slick-prev.slick-arrow,
+    .slick-next.slick-arrow {
+      background: transparent;
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.75);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      border-radius: 50%;
+      overflow: hidden;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      img {
+        height: 50px;
+        width: 50px;
+        @media screen and (max-width: 1023px) {
+          height: 30px;
+          width: 30px;
+        }
+      }
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+    .slick-dots {
+      align-items: center;
+      bottom: -80px;
+      z-index: 2;
+      display: flex !important;
+      justify-content: center;
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+      li {
+        border-radius: 50%;
+        border: 2px solid #fff;
+        cursor: pointer;
+        height: 25px;
+        margin: 0 10px;
+        position: relative;
+        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.75);
+        width: 25px;
+        z-index: 2;
+        &.slick-active,
+        &:hover {
+          background-color: #fff;
+        }
+        button {
+          opacity: 0;
+        }
+      }
+    }
+    &_item {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px 0;
+      justify-content: center;
+      padding: 20px 0;
+      max-width: 1360px;
+      margin: 0 auto;
+      @media screen and (max-width: 1023px) {
+        align-items: center;
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr;
+        justify-content: center;
+      }
+      .mini_item {
+        box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.75);
+        overflow: hidden;
+        align-items: center;
+        border-radius: 57px;
+        display: flex;
+        height: 80px;
+        justify-content: space-between;
+        margin: 0 auto;
+        max-width: 200px;
+        position: relative;
+        width: 100%;
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        padding-right: 20px;
+        @media screen and (max-width: 1023px) {
+          max-width: 250px;
+        }
+        &:nth-of-type(1n) {
+          background-image: linear-gradient(
+            to right top,
+            #e1582f,
+            #e96135,
+            #f06a3b,
+            #f87341,
+            #ff7c47
+          );
+        }
+        &:nth-of-type(2n) {
+          background-image: linear-gradient(
+            to right top,
+            #ff7c47,
+            #fd8d40,
+            #f99d3c,
+            #f3ad3c,
+            #ecbd40
+          );
+        }
+        &:nth-of-type(3n) {
+          background-image: linear-gradient(
+            to right top,
+            #ecbd40,
+            #c4c148,
+            #9dc15a,
+            #7abe70,
+            #5bb985
+          );
+        }
+        &:nth-of-type(4n) {
+          background-image: linear-gradient(
+            to right top,
+            #5bb985,
+            #16b6a2,
+            #00b0bc,
+            #00a7ce,
+            #35498e
+          );
+        }
+        &:nth-of-type(5n) {
+          background-image: linear-gradient(
+            to right top,
+            #2060a4,
+            #276fb0,
+            #307dbc,
+            #3a8cc8,
+            #35498e
+          );
+        }
+        &:nth-of-type(6n) {
+          background-image: linear-gradient(
+            to right top,
+            #2874c9,
+            #2369b7,
+            #1e5fa6,
+            #195595,
+            #154b84
+          );
+        }
+        img.curve_mini {
+          height: 100%;
+          position: absolute;
+          width: 80%;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          @media screen and (max-width: 1023px) {
+            right: -5px;
+          }
+        }
+        .icon {
+          position: relative;
+          width: 45%;
+          height: 100%;
+          img {
+            height: 60%;
+            left: 50%;
+            object-fit: contain;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+          }
+        }
+        h3 {
+          color: #333333;
+          font-family: "MuseoSans-700";
+          font-size: 1.4rem;
+          text-align: center;
+          width: 50%;
+          position: relative;
+          z-index: 2;
+        }
+        &:hover {
+          transform: scale(1.1);
+        }
+        &:active {
+          transform: scale(0.9);
+        }
+      }
+    }
+  }
+}
+
+.bogota_zonas {
+  padding: 0 70px 30px;
+  width: 100%;
+  background: #fff;
+  @media screen and (max-width: 1023px) {
+    padding: 50px 20px 100px;
+    h2.title {
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+  }
+  // SLIDER MOBILE
+  #zone_mobile_slider {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+    @media screen and (max-width: 1023px) {
+      max-width: 300px;
+    }
+    .bx-wrapper .bx-pager.bx-default-pager a {
+      background-color: #35498e;
+    }
+    .slick-prev.slick-arrow {
+      left: -35px;
+    }
+    .slick-next.slick-arrow {
+      right: -35px;
+    }
+    .slick-prev.slick-arrow,
+    .slick-next.slick-arrow {
+      background: transparent;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      overflow: hidden;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      img {
+        height: 30px;
+        width: 30px;
+      }
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+    .slick-dots {
+      align-items: center;
+      bottom: -80px;
+      z-index: 2;
+      display: flex !important;
+      justify-content: center;
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+      li {
+        border-radius: 50%;
+        border: 2px solid #35498e;
+        cursor: pointer;
+        height: 20px;
+        margin: 0 10px;
+        position: relative;
+        width: 20px;
+        z-index: 2;
+        &.slick-active,
+        &:hover {
+          background-color: #35498e;
+        }
+        button {
+          opacity: 0;
+        }
+      }
+    }
+    .zone_cards_item {
+      align-items: flex-end;
+      border-radius: 26px;
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.75);
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      margin: 0;
+      overflow: hidden;
+      padding: 23px;
+      position: relative;
+      width: 100%;
+      &:hover {
+        .zone_img {
+          transform: scale(1.1);
+        }
+        .zone_cards_name {
+          transform: translateY(-10px);
+        }
+      }
+      @media screen and (max-width: 1023px) {
+        padding: 0;
+      }
+    }
+    .zone_img {
+      transition: all 0.3s cubic-bezier(0, 0.55, 0.45, 1);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .zone_cards_name {
+      color: #fff;
+      font-family: "MuseoSans-900";
+      transition: all 0.3s cubic-bezier(0, 0.55, 0.45, 1);
+      font-size: 2.2rem;
+      letter-spacing: 0.2rem;
+      position: absolute;
+      bottom: 30px;
+      text-align: center;
+      text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.75);
+      z-index: 2;
+      @media screen and (max-width: 1023px) {
+        font-size: 1.4rem;
+      }
+    }
+  }
+  .zone_cards {
+    display: none;
+    gap: 27px 37px;
+    grid-auto-rows: 305px;
+    grid-template-columns: repeat(5, 1fr);
+    margin: 50px auto;
+    max-width: 1200px;
+    width: 100%;
+    &.active {
+      display: grid;
+    }
+    @media screen and (max-width: 1023px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 200px;
+      margin: 10px;
+      gap: 30px 20px;
+    }
+    &_item {
+      box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.75);
+      position: relative;
+      align-items: flex-end;
+      border-radius: 26px;
+      display: flex;
+      height: 50vw;
+      justify-content: center;
+      overflow: hidden;
+      padding: 23px;
+      width: 100%;
+      &:hover {
+        .zone_img {
+          transform: scale(1.1);
+        }
+        .zone_cards_name {
+          transform: translateY(-10px);
+        }
+      }
+      @media screen and (max-width: 1023px) {
+        padding: 0;
+      }
+    }
+    .zone_img {
+      transition: all 0.3s cubic-bezier(0, 0.55, 0.45, 1);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    &_name {
+      color: #fff;
+      font-family: "MuseoSans-900";
+      transition: all 0.3s cubic-bezier(0, 0.55, 0.45, 1);
+      font-size: 2.2rem;
+      letter-spacing: 0.2rem;
+      position: relative;
+      text-align: center;
+      text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.75);
+      z-index: 2;
+      @media screen and (max-width: 1023px) {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
+
+.campaign {
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 1020px;
+  padding: 230px 0 108px;
+  position: relative;
+  @media screen and (max-width: 1023px) {
+    padding: 100px 0;
+    background-attachment: fixed;
+  }
+  &::before {
+    background-image: url(../img/ba-curve.svg);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: "";
+    height: 254px;
+    left: 0;
+    position: absolute;
+    top: -1px;
+    width: 101%;
+    pointer-events: none;
+  }
+  &::after {
+    background-image: url(../img/ab-curve.svg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: -1px;
+    content: "";
+    height: 254px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    pointer-events: none;
+  }
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    @media screen and (max-width: 1023px) {
+      padding: 0;
+    }
+    .message_campaign {
+      height: 100%;
+      margin-right: 30px;
+      max-width: 400px;
+      min-height: 460px;
+      min-width: 400px;
+      position: relative;
+      @media screen and (max-width: 1023px) {
+        min-height: 470px;
+        min-width: 100%;
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+      }
+      &::before {
+        align-items: center;
+        background-color: #dd4d22;
+        border-radius: 10px 9px 0 0;
+        color: #fff;
+        content: "Nuestras campañas";
+        display: flex;
+        font-size: 1.3rem;
+        height: 30px;
+        justify-content: center;
+        left: 0;
+        letter-spacing: 0.2rem;
+        padding: 0 25px;
+        position: absolute;
+        text-transform: uppercase;
+        top: -30px;
+      }
+      &_container {
+        border-radius: 0 24px 24px 24px;
+        display: flex;
+        flex-direction: column;
+        min-height: 343px;
+        overflow: hidden;
+        padding: 25px;
+        position: relative;
+        width: 100%;
+        @media screen and (max-width: 1023px) {
+          border-radius: 0;
+          height: auto;
+        }
+        iframe {
+          position: relative;
+          z-index: 3;
+          margin-bottom: 10px;
+          border: 0;
+          height: 220px;
+          @media screen and (max-width: 1023px) {
+            position: relative;
+            z-index: 3;
+            margin-bottom: 10px;
+            height: calc(100vw / 16 * 9);
+          }
+        }
+        .blur_image {
+          border-radius: 0 24px 24px 24px;
+          filter: blur(10px);
+          height: 100%;
+          left: 0;
+          overflow: hidden;
+          position: absolute;
+          top: 0;
+          width: 100%;
+          @media screen and (max-width: 1023px) {
+            border-radius: 0;
+          }
+        }
+        h2 {
+          color: #fff;
+          font-family: "MuseoSans-900";
+          font-size: 3.3rem;
+          margin-bottom: 15px;
+          position: relative;
+          z-index: 2;
+          @media screen and (max-width: 1023px) {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+          }
+        }
+        p {
+          color: #fff;
+          font-size: 1.4rem;
+          margin-bottom: 50px;
+          position: relative;
+          width: 90%;
+          z-index: 2;
+          p {
+            margin-bottom: 22px;
+          }
+          @media screen and (max-width: 1023px) {
+            margin: 0 auto 30px;
+          }
+        }
+        a.campaign_btn {
+          align-items: center;
+          background-color: #fff;
+          border-radius: 6px;
+          color: #333333;
+          display: inline-flex;
+          font-family: "MuseoSans-900";
+          font-size: 2rem;
+          height: 40px;
+          justify-content: center;
+          margin-bottom: 20px;
+          padding: 15px;
+          position: relative;
+          width: max-content;
+          z-index: 2;
+          &:hover {
+            background-color: #333;
+            color: #fff;
+          }
+          @media screen and (max-width: 1023px) {
+            width: 100%;
+            border-radius: 25px;
+          }
+        }
+        small {
+          color: #fff;
+          font-size: 1.4rem;
+          position: relative;
+          z-index: 2;
+        }
+      }
+    }
+    .video_campaign {
+      align-items: flex-end;
+      display: inline-flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: flex-end;
+      margin-left: 30px;
+      max-height: 410px;
+      max-width: 590px;
+      min-height: 410px;
+      min-width: 590px;
+      position: relative;
+      z-index: 2;
+      @media screen and (max-width: 1023px) {
+        min-height: auto;
+        min-width: auto;
+        align-items: center;
+        justify-content: center;
+      }
+      iframe,
+      img {
+        width: 100%;
+        height: 343px;
+        border: 0;
+      }
+      @media screen and (max-width: 1023px) {
+        margin-left: 0;
+        width: 90%;
+      }
+    }
+    .dots_campaign {
+      display: flex;
+      margin-top: 10px;
+      @media screen and (max-width: 1023px) {
+        flex-direction: column;
+        width: 100%;
+      }
+      li {
+        position: relative;
+        flex: 1;
+        a,
+        button {
+          align-items: center;
+          color: #fff;
+          display: flex;
+          font-family: "MuseoSans-900";
+          font-size: 1.3rem;
+          height: 50px;
+          justify-content: center;
+          background: transparent;
+          width: 100%;
+          padding: 0 30px;
+          position: relative;
+          background-size: 400% 400%;
+          text-align: center;
+          @media screen and (max-width: 1023px) {
+            align-items: center;
+            color: #fff;
+            display: flex;
+            font-family: "MuseoSans-900";
+            font-size: 1.2rem;
+            height: 30px;
+            text-align: center;
+            justify-content: center;
+            padding: 0 30px;
+            position: relative;
+            background-size: 400% 400%;
+          }
+        }
+        &::after {
+          background-color: #fff;
+          bottom: -10px;
+          content: "";
+          height: 2px;
+          left: 50%;
+          position: absolute;
+          transform: translateX(-50%);
+          width: 0;
+          transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        &.active,
+        &:hover {
+          &::after {
+            width: 90%;
+          }
+        }
+        &:nth-child(1) {
+          background-image: linear-gradient(
+            to right,
+            #e1582f,
+            #e7732c,
+            #eb8c2c,
+            #eca533,
+            #ecbd40
+          );
+          border-radius: 25px 0 0 25px;
+          @media screen and (max-width: 1023px) {
+            border-radius: 25px;
+            margin: 10px 0;
+          }
+        }
+        &:nth-child(2) {
+          background-image: linear-gradient(
+            to right,
+            #5bb985,
+            #7abe70,
+            #9dc15a,
+            #c4c148,
+            #ecbd40
+          );
+          @media screen and (max-width: 1023px) {
+            border-radius: 25px;
+            margin: 10px 0;
+          }
+        }
+        &:nth-child(3) {
+          background-image: linear-gradient(
+            to right,
+            #1c548e,
+            #1e5c9d,
+            #2164ac,
+            #256dbb,
+            #2975cb
+          );
+          border-radius: 0 25px 25px 0;
+          @media screen and (max-width: 1023px) {
+            border-radius: 25px;
+            margin: 10px 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.mas_alla_bogota_title {
+  position: relative;
+  z-index: 3;
+  background: #fff;
+  margin-bottom: 120px;
+  @media screen and (max-width: 1023px) {
+    position: relative;
+    z-index: 3;
+    background: #fff;
+    padding: 40px 0 10px;
+  }
+  h3 {
+    color: #35498e;
+    font-family: "MuseoSans-900";
+    font-size: 2.1rem;
+    letter-spacing: 0.18em;
+    margin-bottom: 10px;
+    text-align: center;
+    @media screen and (max-width: 1023px) {
+      font-size: 1.6rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+  }
+  h2 {
+    font-family: "MuseoSans-900";
+    margin-bottom: 0;
+    font-size: 4.6rem;
+    @media screen and (max-width: 1023px) {
+      font-size: 3rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.mas_alla_bogota {
+  position: relative;
+  margin-top: -50px;
+  @media screen and (max-width: 1023px) {
+    margin-top: 0;
+  }
+  &::before {
+    background-image: url(../img/ba-curve.svg);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: "";
+    height: 254px;
+    left: 0;
+    position: absolute;
+    top: -1px;
+    width: 101%;
+    pointer-events: none;
+  }
+  &::after {
+    background-image: url(../img/ab-curve_color.svg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+    bottom: -1px;
+    content: "";
+    height: 254px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    pointer-events: none;
+    @media screen and (max-width: 1023px) {
+      background-image: url(../img/ab-curve.svg);
+    }
+  }
+  .mas_alla_bogota_slider {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1000px;
+    min-height: 320px;
+    width: 100%;
+    flex-wrap: wrap;
+    @media screen and (max-width: 1023px) {
+      padding: 0 30px;
+      height: auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    @media screen and (max-width: 480px) {
+      padding: 0 30px;
+      height: auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      justify-items: center;
+    }
+    &_container {
+      padding: 220px 0;
+      width: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      @media screen and (max-width: 1023px) {
+        padding: 120px 0;
+        width: 100%;
+      }
+    }
+    &_item {
+      margin: 15px;
+      max-width: 303px;
+      width: 100%;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      @media only screen and (max-width: 768px) {
+        margin: 0;
+        max-width: 303px;
+        width: 100%;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+      }
+      .content {
+        align-items: flex-end;
+        border-radius: 22px;
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        padding: 23px 14px;
+        background-size: 150% 150%;
+        height: 298px;
+        width: 298px;
+        top: 0;
+        top: 50px;
+        -webkit-animation: GradientAnimation 2s ease infinite;
+        -moz-animation: GradientAnimation 2s ease infinite;
+        animation: GradientAnimation 2s ease infinite;
+        @media only screen and (max-width: 768px) {
+          width: 100%;
+          height: initial;
+          padding: 73px 14px 23px;
+        }
+        h3 {
+          color: #fff;
+          transition: all 0.6s cubic-bezier(0, 0.55, 0.45, 1);
+          font-family: "MuseoSans-900";
+          letter-spacing: 0.18em;
+          text-align: left;
+          font-size: 2.3rem;
+          max-width: 188px;
+          @media only screen and (max-width: 768px) {
+            font-size: 1.7rem;
+          }
+        }
+      }
+      &:nth-child(1n) {
+        .content {
+          background-image: linear-gradient(
+            to right top,
+            #e1582f,
+            #e7732c,
+            #eb8c2c,
+            #eca533,
+            #ecbd40
+          );
+        }
+      }
+      &:nth-child(2n) {
+        .content {
+          background-image: linear-gradient(
+            to top left,
+            #5bb985,
+            #7abe70,
+            #9dc15a,
+            #c4c148,
+            #ecbd40
+          );
+        }
+      }
+      &:nth-child(3n) {
+        .content {
+          background-image: linear-gradient(
+            to right top,
+            #5bb985,
+            #16b6a2,
+            #00b0bc,
+            #00a7ce,
+            #35498e
+          );
+        }
+      }
+      &:hover {
+        .content {
+          h3 {
+            transform: translateY(-10px);
+          }
+        }
+      }
+    }
+    .six {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 140px;
+      gap: 30px;
+      width: 100%;
+      @media screen and (max-width: 320px) {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-auto-rows: 120px;
+        gap: 10px;
+        width: 100%;
+      }
+      .mas_alla_bogota_slider_item {
+        width: 100%;
+        position: static;
+        margin: 0;
+        height: 100%;
+        background-size: cover;
+
+        align-items: flex-end;
+        border-radius: 22px;
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        display: flex;
+        padding: 23px 14px;
+        h3 {
+          color: #fff;
+          transition: all 0.6s cubic-bezier(0, 0.55, 0.45, 1);
+          font-family: "MuseoSans-900";
+          letter-spacing: 0.18em;
+          text-align: left;
+          font-size: 1.5rem;
+        }
+        &:nth-child(1) {
+          background-image: linear-gradient(to right top, #e1582f, #ff7c47);
+        }
+        &:nth-child(2) {
+          background-image: linear-gradient(to right top, #e1582f, #ecbd40);
+        }
+        &:nth-child(3) {
+          background-image: linear-gradient(to right top, #1c548e, #2975cb);
+        }
+        &:nth-child(4) {
+          background-image: linear-gradient(to right top, #35498e, #5bb985);
+        }
+        &:nth-child(5) {
+          background-image: linear-gradient(to right top, #35498e, #2060a4);
+        }
+        &:nth-child(6) {
+          background-image: linear-gradient(to right top, #1c548e, #2975cb);
+        }
+      }
+    }
+  }
+  a.btn.ver_mas {
+    height: 40px;
+    font-size: 2.3rem;
+    color: #fff;
+    background-color: #dd4d22;
+    padding: 0 80px;
+    display: flex;
+    font-family: "MuseoSans-900";
+    align-items: center;
+    justify-content: center;
+    margin: 90px auto 0;
+    max-width: max-content;
+    position: relative;
+    z-index: 2;
+    border-radius: 25px;
+    &:hover {
+      background-color: lighten($color: #dd4d22, $amount: 5);
+    }
+    @media screen and (max-width: 1023px) {
+      background-color: #fff;
+      color: #333;
+      border-radius: 25px;
+      font-size: 1.8rem;
+    }
+  }
+}
+
+.instagram {
+  background-color: #aec3c7;
+  padding: 0 0 80px 0;
+  @media screen and (max-width: 1023px) {
+    background-color: #fff;
+    padding: 0;
+    height: 70vh;
+  }
+  &_title_txt {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 20px;
+    @media screen and (max-width: 1023px) {
+      z-index: 2;
+      &::after {
+        background-image: url(../img/ba-curve.svg);
+        background-repeat: no-repeat;
+        background-size: contain;
+        content: "";
+        height: 254px;
+        left: 0;
+        position: absolute;
+        bottom: -250px;
+        width: 101%;
+      }
+    }
+    & > h3 {
+      color: #1c548e;
+      display: block;
+      font-size: 1.3rem;
+
+      max-width: 460px;
+      width: 100%;
+      margin: 0 auto;
+      text-align-last: center;
+      @media screen and (max-width: 1023px) {
+        font-size: 1.5rem;
+        display: none;
+      }
+    }
+  }
+  h2 {
+    color: #35498e;
+    font-family: "MuseoSans-700";
+    font-size: 4rem;
+    margin-bottom: 20px;
+    @media screen and (max-width: 1023px) {
+      color: #35498e;
+      font-family: "MuseoSans-700";
+      font-size: 2rem;
+      margin: 30px 0;
+    }
+  }
+  & > h4 {
+    color: #1c548e;
+    display: block;
+    font-size: 2rem;
+    text-align: center;
+  }
+  &_grid {
+    border-radius: 0 97px 97px 0;
+    display: grid;
+    grid-template-rows: repeat(5, minmax(100px, 250px));
+    grid-template-columns: repeat(5, minmax(100px, 1fr));
+    margin: 80px 0 0;
+    overflow: hidden;
+    margin-right: 160px;
+    &_item {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      &.photo:nth-of-type(2) {
+        grid-column: span 2;
+      }
+      &.photo:nth-of-type(3) {
+        grid-row: span 2;
+      }
+      &.photo:nth-of-type(8) {
+        grid-row: span 2;
+        grid-column: span 2;
+      }
+      &.photo:nth-of-type(10) {
+        grid-row: 4 / span 2;
+        grid-column: 4 / span 2;
+      }
+      img {
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+        transition: all 0.6s cubic-bezier(0, 0.55, 0.45, 1);
+      }
+      &.photo {
+        &:hover {
+          img {
+            transform: scale(1.2);
+            transform-origin: center;
+          }
+        }
+      }
+      &.color1 {
+        background-image: linear-gradient(
+          to right top,
+          #d64d24,
+          #e05a30,
+          #eb673c,
+          #f57348,
+          #ff8054
+        );
+        grid-column: 2;
+        grid-row: 1;
+      }
+      &.color2 {
+        background-image: linear-gradient(
+          to left top,
+          #e1582f,
+          #e7732c,
+          #eb8c2c,
+          #eca533,
+          #ecbd40
+        );
+        grid-row: 3;
+        grid-column: 4;
+      }
+      &.color3 {
+        background-image: linear-gradient(
+          to right top,
+          #35498e,
+          #00a7ce,
+          #00b0bc,
+          #16b6a2,
+          #5bb985
+        );
+        grid-row: 3;
+        grid-column: 5;
+      }
+      &.color4 {
+        background-image: linear-gradient(
+          to left bottom,
+          #1c548e,
+          #1e5c9d,
+          #2164ac,
+          #256dbb,
+          #2975cb
+        );
+        grid-column: 3;
+        grid-row: 5;
+      }
+      &.color1,
+      &.color2,
+      &.color3,
+      &.color4 {
+        background-size: 200% 200%;
+        -webkit-animation: GradientAnimation 2s ease infinite;
+        -moz-animation: GradientAnimation 2s ease infinite;
+        animation: GradientAnimation 2s ease infinite;
+        &:hover {
+          img {
+            transform: translateY(-10px);
+            transform-origin: center;
+          }
+        }
+        a {
+          align-items: flex-start;
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          justify-content: flex-end;
+          padding: 30px;
+          img.icons_bogota {
+            height: 60px;
+            object-fit: contain;
+            width: 60px;
+          }
+          h4 {
+            color: #fff;
+            font-size: 2rem;
+            text-transform: capitalize;
+            max-width: 150px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.instagram_slider {
+  @media screen and (max-width: 1023px) {
+    height: 70vh;
+  }
+  li {
+    width: 100%;
+    height: 100vh;
+    img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+      @media screen and (max-width: 1023px) {
+        height: 70vh;
+      }
+    }
+  }
+  .bx-wrapper .bx-pager.bx-default-pager a {
+    background-color: #fff;
+  }
+  .slick-prev.slick-arrow {
+    left: 80px;
+    @media screen and (max-width: 1023px) {
+      left: 20px;
+    }
+  }
+  .slick-next.slick-arrow {
+    right: 80px;
+    @media screen and (max-width: 1023px) {
+      right: 20px;
+    }
+  }
+  .slick-prev.slick-arrow,
+  .slick-next.slick-arrow {
+    background: transparent;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    box-shadow: 10px 3px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    @media screen and (max-width: 1023px) {
+      top: 40%;
+    }
+    img {
+      height: 50px;
+      width: 50px;
+      @media screen and (max-width: 1023px) {
+        height: 30px;
+        width: 30px;
+      }
+    }
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
+
+.bannerinformation {
+  margin-bottom: 50px;
+  a {
+    display: block;
+    border-radius: 0 80px 80px 0;
+    overflow: hidden;
+    @media only screen and (max-width: 768px) {
+      display: block;
+      border-radius: 30px;
+      overflow: hidden;
+      height: 410px;
+      max-width: 340px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      object-fit: cover;
+    }
+    &:hover {
+      img {
+        transform: scale(1.05);
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+.zoneTax_cards {
+  display: grid;
+  gap: 27px 37px;
+  grid-auto-rows: 180px;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 100%;
+  @media only screen and (max-width: 1023px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  button {
+    align-items: flex-end;
+    border-radius: 26px;
+    box-shadow: 3px 3px 5px rgb(0 0 0 / 75%);
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+    padding: 23px;
+    position: relative;
+    width: 100%;
+  }
+  &.selected {
+    button {
+      opacity: 0.5;
+      &.noOpac {
+        opacity: 1;
+      }
+    }
+  }
+}
+@media screen and (max-width: 1023px) {
+  .explora_bogota .slide_explora_item {
+    display: grid;
+    grid-template-columns: repeat(9, 200px);
+    width: 100vw;
+    overflow: auto;
+    padding: 0 50px 0 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+}

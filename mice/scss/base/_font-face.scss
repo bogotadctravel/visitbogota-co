@@ -1,0 +1,37 @@
+@use "../abstracts/" as *;
+
+@include font-face(
+  "MuseoSans Condensed",
+  museo-sans-condensed-700-webfont,
+  "normal",
+  "normal",
+  "MuseoSansCond"
+);
+@include font-face(
+  "MuseoSans-100",
+  MuseoSans-100,
+  "100",
+  "normal",
+  "MuseoSans"
+);
+@include font-face(
+  "MuseoSans-500",
+  MuseoSans-500,
+  "500",
+  "normal",
+  "MuseoSans"
+);
+@include font-face(
+  "MuseoSans-700",
+  MuseoSans-700,
+  "700",
+  "normal",
+  "MuseoSans"
+);
+@include font-face(
+  "MuseoSans-900",
+  MuseoSans-900,
+  "900",
+  "normal",
+  "MuseoSans"
+);
