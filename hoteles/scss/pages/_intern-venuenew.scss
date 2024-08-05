@@ -10,7 +10,7 @@
     background-repeat: no-repeat;
     background-position: bottom;
     position: relative;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       min-height: 70vh;
     }
   }
@@ -23,7 +23,7 @@
       max-width: 900px;
       padding: 0 20px;
       margin: 0 auto;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
       }
       p {
         text-align: justify;
@@ -155,7 +155,7 @@
               object-fit: cover;
               overflow: hidden;
               width: 100%;
-              @media only screen and (max-width: 768px) {
+              @media only screen and (max-width: 1023px) {
                 height: calc(100vw / 16 * 9);
               }
             }

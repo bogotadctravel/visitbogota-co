@@ -1,20 +1,18 @@
 .rutas {
   main {
-    padding-top: 180px;
-    @media only screen and (max-width: 768px) {
-      padding-top: 0;
-    }
+    padding-top: 50px;
+
     .container {
       h2 {
-        font-size: calc(60px - var(--fontSizeReal));
-        font-style: normal;
+        font-size: clamp(32px, 3vw, 50px);
         color: var(--gris-oscuro, #373737);
+        line-height: clamp(32px, 3vw, 50px);
+        font-style: normal;
         font-weight: 700;
-        line-height: 60px;
         position: relative;
         max-width: 1600px;
         display: flex;
-        margin: 0 auto 60px;
+        margin: 30px auto;
         align-items: flex-end;
         gap: 20px;
         &::after {
@@ -24,12 +22,14 @@
           width: 100%;
           height: 2px;
           background-color: var(--Rojo, #35498e);
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             content: none;
           }
         }
         img {
-          width: 63px;
+          width: 50px;
+          height: 50px;
+          object-fit: contain;
         }
         &::after {
           flex: 1;
@@ -47,7 +47,7 @@
         &::after {
           content: none;
         }
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           grid-column: span 1;
         }
       }

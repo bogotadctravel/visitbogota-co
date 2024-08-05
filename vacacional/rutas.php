@@ -4,7 +4,7 @@ include "includes/head.php";
 ?>
 <main>
     <div class="container">
-        <h2 class="uppercase"><img src="images/rutaicon.svg" alt="RT"><?=$pi_bogota[103]?></h2>
+        <h2 class=""><img src="images/rutas.svg" alt="RT"><?=$pi_bogota[103]?></h2>
         <section class="listRT">
         </section>
     </div>

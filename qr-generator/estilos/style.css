@@ -1,0 +1,212 @@
+@import url("https://use.typekit.net/hbd2rkx.css");
+ *{
+ 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "museo-sans", sans-serif;
+  }
+  .contenedor{
+    display: flex;
+    justify-content: center;
+    padding: 60px;
+  }
+
+  body{
+    min-height: 100vh;
+    align-items: center;
+    background-image: linear-gradient(to right, #ecf3f5);
+    justify-content: center;
+  }
+  .titulo{
+    display: flex;
+    flex-direction: column;
+    height: 265px;
+    max-width: 410px;
+    background: #ffffff;
+    padding: 20px 25px 0;
+    transition: height 0.2s ease;
+    box-shadow: 0px 4px 20px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 25px;
+    
+  }
+
+  .titulo.active{
+    height: 600px;
+  }
+  header{
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    background: #215d9c;
+    margin: 0 0;
+    align-items: center;
+    padding-left: 60px;
+  }
+
+ .logo{
+    height: 60px;
+  }
+
+  .icono{
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+    object-fit: contain;
+    margin: 0 10px;
+  }
+
+  header p{
+    text-align: center;
+    font-weight: 700;
+    display: flex;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 60px 10px 0px;
+    cursor: pointer;
+  }
+  /* .logo{
+    width: 10px;
+    height: 50px;
+  } */
+
+  .titulo h1{
+    text-align: center;
+    padding: 10px 0 20px;
+    font-size: 21px;
+  font-weight: 700;
+  }
+
+  .titulo p{
+    font-style: normal;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+    color:#20212F;
+    padding: 10px 35px 0;
+  }
+
+  .titulo .form{
+    margin: 20px 0 25px;
+    text-align: center;
+  }
+  .form input{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    color: #9B9B9B;
+    width: 80%;
+    height: 35px;
+    text-align: center;
+    margin: 0 0 20px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    text-align: left;
+    padding: 0 10px;
+
+  }
+  .form input::placeholder{
+    color: #999;
+  }
+
+  .form button{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 1px;
+    cursor: pointer;
+    width: 70%;
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 50px;
+    transition: 0.1s ease;
+    color: #ffffff;
+    background: linear-gradient(180deg, #FF8033 0%, #EDB352 100%);
+    
+  }
+  .qr-code{
+    opacity: 0;
+    display: flex;
+    padding: 16px 0;
+    border-radius: 5px;
+    align-items: center;
+    pointer-events: none;
+    justify-content: center;
+    border: 1px solid #ccc;
+    flex-direction: column;
+  }
+
+  .qr-code .botones{
+    display: flex;
+    padding: 25px;
+  }
+  .descarga{
+    width: 50%;
+    padding: 0 20px;
+    color: #FFAC22;
+    ;
+    border: none;
+    background: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    padding-top: 12px;
+    margin: 10px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  
+  .descarga:hover{
+    color: #fff;
+    cursor: pointer;
+    width: 50%;
+    border-radius: 50px;
+    padding: 10px 20px;
+    padding-top: 12px;
+    margin: 10px;
+    background: linear-gradient(180deg, #FF8033 0%, #EDB352 100%);
+    border: none;
+    /* outline: none; */
+    transition: 0.4s ease;
+      
+  }
+  #reiniciar{
+    background: none;
+    padding: 10px 20px;
+    color: orange;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    padding-top: 12px;
+    margin: 10px 10px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  #reiniciar:hover{
+    color: #fff;
+    cursor: pointer;
+    border-radius: 50px;
+    padding: 10px 20px;
+    padding-top: 12px;
+    margin: 10px 10px;
+    background: linear-gradient(rgb(229, 123, 24),rgb(241, 211, 78));
+    border: none;
+    /* outline: none; */
+    transition: 0.4s ease;
+  }
+
+  .titulo.active .qr-code{
+    border: none;
+    padding: 50px 0 50px;
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.5s 0.05s ease;
+}
+.qr-code img{
+  margin: 0 90px;
+    width: 160px;
+  }
+  

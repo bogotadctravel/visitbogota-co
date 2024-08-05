@@ -77,10 +77,11 @@ async function getRecentBlogs() {
           <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
         </div>
         <div class="desc">
-        <small class="tag">
+        ${blog.field_nueva_categorizacion1 != "" ? ` <small class="tag">
         <img src="images/mdi_tag.svg" alt="tag"/>
-        ${blog.field_prod_rel_1}
-        </small>
+        ${blog.field_nueva_categorizacion1}
+        </small>`:``}
+       
           <h2>${blog.title}</h2>
         </div>
       </a>`;
@@ -96,40 +97,77 @@ async function getRecentEventos() {
 
   const response = await fetch(`/vacacional/g/lastEvents/?lang=${actualLang}`);
   const data = await response.json();
-  // Función para comparar fechas
-  function compareDates(a, b) {
-    const dateA = new Date(a.field_date);
-    const dateB = new Date(b.field_date);
-    return dateA - dateB;
+  function setMidnight(dateString) {
+    const date = new Date(dateString);
+    date.setHours(0, 0, 0, 0);
+    return date;
   }
 
-  // Ordenar el arreglo por la fecha inicial
-  data.sort(compareDates);
+  function compararFechas(a, b) {
+    // Si el evento no tiene fecha de finalización, usar la fecha de inicio
+    const endDateA = a.field_end_date
+      ? a.field_end_date.length === 10
+        ? setMidnight(a.field_end_date)
+        : new Date(a.field_end_date)
+      : setMidnight(a.field_date);
+    const endDateB = b.field_end_date
+      ? b.field_end_date.length === 10
+        ? setMidnight(b.field_end_date)
+        : new Date(b.field_end_date)
+      : setMidnight(b.field_date);
+
+    return endDateA - endDateB;
+  }
+  // Ordenar el arreglo por fecha de finalización
+  data.sort(compararFechas);
 
   const promises = data.map(async (evento) => {
-    const dateStart = new Date(evento.field_date);
-    const optionsdateStart = {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    };
-    const dateFormatteddateStart = dateStart.toLocaleDateString(
-      "es-ES",
-      optionsdateStart
-    );
-    const dateEnd = new Date(evento.field_end_date);
-    const optionsdateEnd = {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    };
-    const dateFormatteddateEnd = dateEnd.toLocaleDateString(
-      "es-ES",
-      optionsdateEnd
-    );
     let urlImg = await getImageFromCacheOrFetch(
       "https://files.visitbogota.co" + evento.field_cover_image
-    );
+    ); // Asegurarse de que las fechas se interpretan correctamente
+    const dateStart = setMidnight(evento.field_date);
+
+    // Manejar la fecha de fin de manera diferente si no incluye una hora
+    let dateEnd;
+    if (evento.field_end_date.length === 10) {
+      // Verificar si el formato es solo de fecha (YYYY-MM-DD)
+      dateEnd = setMidnight(evento.field_end_date);
+      dateEnd.setDate(dateEnd.getDate() + 1); // Mover la fecha de fin al día siguiente
+    } else {
+      dateEnd = setMidnight(evento.field_end_date);
+    }
+
+    const options = {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    };
+
+    const dateFormattedStart = dateStart.toLocaleDateString("es-ES", options);
+    const dateFormattedEnd = dateEnd.toLocaleDateString("es-ES", options);
+    const alText = actualLang === "es" ? "al" : "to";
+    const hastaElText = actualLang === "es" ? "Hasta el" : "Until";
+
+    // Obtener la fecha actual
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let dateText = "";
+
+    // Condicionales
+    if (!evento.field_end_date) {
+      // 1. No tiene fecha final -> Tomar la fecha de inicio.
+      dateText = dateFormattedStart;
+    } else if (dateStart.getTime() === dateEnd.getTime()) {
+      // 2. Fecha de inicio es igual a la fecha final, solo mostrar la fecha final.
+      dateText = dateFormattedEnd;
+    } else if (dateStart < today) {
+      // 3. Si la fecha de inicio es menor a la fecha actual, quitar la fecha de inicio y colocar al principio "Hasta el".
+      dateText = `${hastaElText} ${dateFormattedEnd}`;
+    } else {
+      // 4. Si la fecha de inicio es superior a la fecha actual, colocar así Fecha 1 al Fecha 2
+      dateText = `${dateFormattedStart} ${alText} ${dateFormattedEnd}`;
+    }
     let template = `<a href="/${actualLang}/evento/${get_alias(evento.title)}-${
       evento.nid
     }" data-aos="flip-left blog_item" data-productid="88">
@@ -140,7 +178,7 @@ async function getRecentEventos() {
         <h2>${evento.title}</h2>
         <small class="tag">
         <img src="images/eventosIcono.svg" alt="tag"/>
-        ${dateFormatteddateStart} -  ${dateFormatteddateEnd}
+        ${dateText}
         </small>
         </div>
       </a>`;
@@ -164,8 +202,8 @@ async function getZonesHome() {
           <div class="zone-card">
             <img src="https://files.visitbogota.co${zona.field_imagen_zona}" alt="zona"${zona.name} />
             <div class="info">
-              <h1 class="uppercase ms900">${zona.name}</h1>
-              <a href="/${actualLang}/alrededores-de-bogota" class="uppercase ms900 btn wait">VISITAR</a>
+              <h1 class=" ms900">${zona.name}</h1>
+              <a href="/${actualLang}/alrededores-de-bogota" class=" ms900 btn wait">VISITAR</a>
             </div>
           </div>
         </li>`;
@@ -177,7 +215,7 @@ async function getZonesHome() {
           <div class="zone-card">
             <img src="https://files.visitbogota.co${zona.field_imagen_zona}" alt="zona"${zona.name} />
             <div class="info">
-              <h2 class="uppercase ms900">${zona.name}</h2>
+              <h2 class=" ms900">${zona.name}</h2>
               <ul class="localidades">
                 ${localidadesText}
               </ul>
@@ -260,7 +298,7 @@ async function getBannersCuadrados() {
         let urlImg = await getImageFromCacheOrFetch(
           `https://files.visitbogota.co${banner.field_image}`
         );
-        let template = `<a href="${banner.field_link}" target="_blank" class="city-card"><img src="${urlImg}" alt="${banner.title}" /><span class="uppercase ms700">${banner.title}</span></a>`;
+        let template = `<a href="${banner.field_link}" target="_blank" class="city-card"><img src="${urlImg}" alt="${banner.title}" /><span class=" ms700">${banner.title}</span></a>`;
         document.querySelector(".cards").innerHTML += template;
       }
     });
@@ -518,7 +556,8 @@ async function getHomeRT() {
   if (document.querySelector(".grid-rutas")) {
     const resp = await fetch(`${actualLang}/g/getRT/`);
     const rutas = await resp.json();
-    rutas.forEach((ruta) => {
+    for (let index = 0; index < 6; index++) {
+      const ruta = rutas[index];
       let {
         nid,
         title,
@@ -538,7 +577,7 @@ async function getHomeRT() {
         pi_bogota[44]
       }</span></div></a></article>`;
       document.querySelector(".grid-rutas").innerHTML += template;
-    });
+    }
   }
 }
 document.addEventListener("DOMContentLoaded", async () => {
@@ -592,40 +631,40 @@ if (document.querySelector("body.portal")) {
   }
 }
 
-if (
-  document.querySelectorAll(".interna_atractivo .gallery-grid li img").length >
-  0
-) {
-  // Get all images
-  const images = document.querySelectorAll(
-    ".interna_atractivo .gallery-grid li img"
-  );
-  // Loop through each image
-  images.forEach((image) => {
-    // Create a new element for displaying alt text
-    const altElement = document.createElement("span");
-    altElement.classList.add("alt-text");
-    // Set the text content of the alt element to the alt attribute of the image
-    altElement.textContent = image.alt;
-    // Insert the new element after the image
-    image.parentNode.insertBefore(altElement, image.nextSibling);
-  });
-}
+// if (
+//   document.querySelectorAll(".interna_atractivo .gallery-grid li img").length >
+//   0
+// ) {
+//   // Get all images
+//   const images = document.querySelectorAll(
+//     ".interna_atractivo .gallery-grid li img"
+//   );
+//   // Loop through each image
+//   images.forEach((image) => {
+//     // Create a new element for displaying alt text
+//     const altElement = document.createElement("span");
+//     altElement.classList.add("alt-text");
+//     // Set the text content of the alt element to the alt attribute of the image
+//     altElement.textContent = image.alt;
+//     // Insert the new element after the image
+//     image.parentNode.insertBefore(altElement, image.nextSibling);
+//   });
+// }
 
-if (document.querySelectorAll(".ruta_intern .gallery-grid li img").length > 0) {
-  // Get all images
-  const images = document.querySelectorAll(".ruta_intern .gallery-grid li img");
-  // Loop through each image
-  images.forEach((image) => {
-    // Create a new element for displaying alt text
-    const altElement = document.createElement("span");
-    altElement.classList.add("alt-text");
-    // Set the text content of the alt element to the alt attribute of the image
-    altElement.textContent = image.alt;
-    // Insert the new element after the image
-    image.parentNode.insertBefore(altElement, image.nextSibling);
-  });
-}
+// if (document.querySelectorAll(".ruta_intern .gallery-grid li img").length > 0) {
+//   // Get all images
+//   const images = document.querySelectorAll(".ruta_intern .gallery-grid li img");
+//   // Loop through each image
+//   images.forEach((image) => {
+//     // Create a new element for displaying alt text
+//     const altElement = document.createElement("span");
+//     altElement.classList.add("alt-text");
+//     // Set the text content of the alt element to the alt attribute of the image
+//     altElement.textContent = image.alt;
+//     // Insert the new element after the image
+//     image.parentNode.insertBefore(altElement, image.nextSibling);
+//   });
+// }
 if (document.querySelector(".blog_content")) {
   // Obtén todas las imágenes dentro del contenedor .blog_content
   var images = document.querySelectorAll(".blog_content img");

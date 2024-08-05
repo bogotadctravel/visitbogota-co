@@ -7,7 +7,7 @@ $ruta = $ruta[0];
 ?>
 <main data-cat="<?=$ruta->field_categor?>" data-rutaid="<?=$ID?>">
     <div class="container">
-    <h1 class="uppercase"><img src="images/rutaicon.svg" alt="descubre"><?=$ruta->title?></h1>
+    <h1 class=""><img src="images/rutas.svg" alt="descubre"><?=$ruta->title?></h1>
     <h2 class="subtitle"><?=$ruta->field_subtitle?></h2>
     <div class="intro">
     <svg width="14" height="14" viewBox="0 0 14 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 18.94V2.84C0 0.310003 3.05 -0.949997 4.83 0.830003L12.88 8.88C13.99 9.99 13.99 11.78 12.88 12.88L4.83 20.93C3.05 22.71 0 21.45 0 18.93V18.94Z" fill="#35498e"/></svg> <?=$ruta->field_intro_blog?>

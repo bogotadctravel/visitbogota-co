@@ -25,13 +25,13 @@ if ($_GET['zoneID']) {
         <div class="intro-txt">
             <?php
             if ($_GET['productID']) {
-                echo '<h2 class="uppercase"><img src="images/bog_natural.svg" alt="nature" />' . $product->name . '</h2>';
+                echo '<h2 class=""><img src="https://files.visitbogota.co'.$product->field_icono_claro.'" alt="nature" />' . $product->name . '</h2>';
             } else if ($_GET['zoneID']) {
-                echo '<h3 class="uppercase">' . $b->generalInfo->field_titulo_bogota_por_zonas . '</h3>';
-                echo '<h2 class="uppercase"><img  src="images/bog_natural.svg" alt="nature"/>' . $singleZone->title . '</h2>';
+                echo '<h3 class="">' . $b->generalInfo->field_titulo_bogota_por_zonas . '</h3>';
+                echo '<h2 class=""><img  src="https://files.visitbogota.co'.$product->field_icono_claro.'" alt="nature"/>' . $singleZone->title . '</h2>';
             } else if ($_GET['planID']) {
-                echo '<h3 class="uppercase">' . $singlePara->title . '</h3>';
-                echo '<h2 class="uppercase">' . $b->generalInfo->field_dlaciudad . '</h2>';
+                echo '<h3 class="">' . $singlePara->title . '</h3>';
+                echo '<h2 class="">' . $b->generalInfo->field_dlaciudad . '</h2>';
             }
             ?>
             <?php
@@ -52,7 +52,7 @@ if ($_GET['zoneID']) {
     <section class="grid-atractivos">
     </section>
     <section class="descubre container">
-      <h2><img src="images/descubre_icon.svg" alt="descubre"><?=$descubre_bogota?></h2>
+      <h2><img src="images/descubre_bogotaic.svg" alt="descubre"><?=$descubre_bogota?></h2>
       <section class="splide" id="bogota-natural" aria-label="Basic Structure Example">
         <div class="splide__arrows">
           <button class="splide__arrow splide__arrow--prev">

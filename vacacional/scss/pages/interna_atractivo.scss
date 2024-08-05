@@ -1,6 +1,6 @@
 .interna_atractivo {
   main {
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 50px 20px;
   }
@@ -8,18 +8,22 @@
     position: static;
   }
   h1 {
-    color: var(--gris, #626262);
-    font-size: calc(60px - var(--fontSizeReal));
+    color: var(--gris, #373737);
+    font-size: clamp(22px, 4vw, 35px);
     font-style: normal;
     font-weight: 700;
-    line-height: 60px;
+    line-height: clamp(22px, 4vw, 35px);
     position: relative;
     display: flex;
     margin-bottom: 60px;
     align-items: flex-end;
     gap: 20px;
-    @media only screen and (max-width: 768px) {
-      font-size: calc(32px - var(--fontSizeReal));
+    img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+    @media only screen and (max-width: 1023px) {
       display: flex;
       align-items: center;
       img {
@@ -40,7 +44,7 @@
     display: grid;
     gap: 20px;
     grid-template-columns: 1fr 380px;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       grid-template-columns: 1fr;
     }
     section {
@@ -64,15 +68,15 @@
         }
       }
       h3.llegar {
-        color: #fff;
+        color: #35498e;
         position: relative;
-        padding-left: 40px;
         display: flex;
         align-items: center;
         margin: 30px 0;
         svg {
           position: absolute;
           left: -40px;
+          display: none;
         }
         span {
           position: relative;
@@ -168,11 +172,11 @@
   }
   .container.intro {
     padding-top: 200px;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       padding-top: 0;
     }
     h1 {
-      color: var(--gris, #626262);
+      color: var(--gris, #373737);
       font-size: 52px;
       margin-bottom: 15px;
       font-style: normal;
@@ -193,7 +197,6 @@
       }
     }
   }
-
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -203,7 +206,7 @@
     margin: 30px auto;
     margin-bottom: 15px;
 
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       grid-template-columns: 1fr 1fr;
     }
     li {
@@ -227,7 +230,7 @@
       &:nth-of-type(1n) {
         grid-row: span 1;
         grid-column: 1;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           grid-column: span 1;
           grid-row: span 1;
         }
@@ -235,7 +238,7 @@
       &:nth-of-type(2n) {
         grid-row: span 1;
         grid-column: 1;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           grid-column: span 1;
           grid-row: span 1;
         }
@@ -243,7 +246,7 @@
       &:nth-of-type(3n) {
         grid-row: span 1;
         grid-column: 1;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           grid-column: span 1;
           grid-row: span 1;
         }
@@ -251,7 +254,7 @@
       &:nth-of-type(4n) {
         grid-row: 1 / span 1;
         grid-column: 2;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           grid-column: span 1;
           grid-row: span 1;
         }
@@ -259,7 +262,7 @@
       &:nth-of-type(5n) {
         grid-row: 2 / span 2;
         grid-column: 2;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           grid-column: span 1;
           grid-row: span 1;
         }
@@ -268,7 +271,7 @@
       &:last-of-type {
         grid-row: 1 / span 3;
         grid-column: 3;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           grid-column: span 1;
           grid-row: span 1;
         }
@@ -428,16 +431,19 @@
     }
   }
   .blog {
-    padding: 60px 0;
-    @media only screen and (max-width: 768px) {
+    padding: 60px 20px;
+    @media only screen and (max-width: 1023px) {
       padding: 20px;
+    }
+    h3 {
+      color: #35498e;
     }
     .grid-blogs {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 50px;
       margin-bottom: 50px;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         gap: 15px;
         grid-template-columns: repeat(1, calc(100vw - 80px));
       }
@@ -534,6 +540,43 @@
           object-fit: cover;
         }
       }
+    }
+  }
+  .gallery-grid-slick {
+    margin-bottom: 30px;
+  }
+  .slick-dots {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    gap: 10px;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .slick-dots li {
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .slick-dots li.slick-active {
+    background-color: #fff;
+  }
+  .slick-dots li button {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gallery-grid-slick img {
+    border-radius: 20px;
+    height: 700px;
+    object-fit: cover;
+    @media only screen and (max-width: 1023px) {
+      height: calc(100vw - 40px);
     }
   }
 }

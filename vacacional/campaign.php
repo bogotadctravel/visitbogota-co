@@ -8,7 +8,7 @@
     <div class="container">
         <!-- <img src="img/logo_campaign.svg" alt="campaña 1" id="logoCampaign"> -->
         <h1><?=$campaign->title?></h1>
-        <h2 class="uppercase"><?=$campaign->field_subtitle?></h2>
+        <h2 class=""><?=$campaign->field_subtitle?></h2>
         <section>
         <?php
             if($campaign->field_video){

@@ -18,7 +18,7 @@
     <div class="container">
         <?php if($isMobile){ ?>
             <div class="fixed_filter" id="openFiltersBlog" onclick="upFilterBlog()">
-                <span class="uppercase">Todos</span>
+                <span class="">Todos</span>
                 <img src="../img/arrow_up_w.svg" alt="filter_blog">
                 <div class="categories">
                     <a href="#introduccion">Introducción </a>

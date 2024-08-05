@@ -32,7 +32,7 @@
         style="background-image:url(https://files.visitbogota.co<?= isset($agenda->field_banner_principal_agenda) && $agenda->field_banner_principal_agenda != "" ? $agenda->field_banner_principal_agenda : "
         https://images.pexels.com/photos/2897462/pexels-photo-2897462.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"?>
         );">
-        <?= isset($agenda->field_banner_principal_agenda) && $agenda->field_banner_principal_agenda != "" ? "" : "<h1 class='uppercase'>Eventos</h1>"?>
+        <?= isset($agenda->field_banner_principal_agenda) && $agenda->field_banner_principal_agenda != "" ? "" : "<h1 class=''>Eventos</h1>"?>
         <aside class="filters">
             <h2 class="ms900">
                 <?=$lang == "es" ? "Prográmate con los eventos más destacados":"Find your favorite events"?>

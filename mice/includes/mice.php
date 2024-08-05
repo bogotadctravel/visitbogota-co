@@ -98,18 +98,9 @@ class mice extends bogota
     }
     public function getfilters($filter)
     {
-
         $querystr = "micefilters?filter=".$filter;
-        
-        if (isset($_SESSION['micefilters'][$this->language][$filter])) {
-            $result = $_SESSION['micefilters'][$this->language][$filter];
-        }else
-        {
             $result = $this->query($querystr);
-            $_SESSION['micefilters'][$this->language][$filter] = $result;
-
-        }
-        
+      
         return $result;
     }
     public function getData()

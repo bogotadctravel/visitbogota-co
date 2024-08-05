@@ -1,16 +1,16 @@
 .home {
   h2 {
-    color: var(--gris, #626262);
+    color: var(--gris, #373737);
     font-size: calc(60px - var(--fontSizeReal));
     font-style: normal;
     font-weight: 700;
-    line-height: 60px;
+    line-height: 40px;
     position: relative;
     display: flex;
     margin-bottom: 60px;
     align-items: flex-end;
     gap: 20px;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       align-items: center;
       margin-bottom: 15px;
     }
@@ -21,16 +21,24 @@
       width: 100%;
       height: 2px;
       background-color: var(--Rojo, #35498e);
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         content: none;
       }
     }
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       font-size: calc(30px - var(--fontSizeReal));
     }
     img {
-      @media only screen and (max-width: 768px) {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      @media only screen and (max-width: 1023px) {
         width: 40px;
+      }
+    }
+    a {
+      @media only screen and (max-width: 1023px) {
+        display: none;
       }
     }
   }
@@ -45,7 +53,7 @@
     position: relative;
     margin-bottom: 25px;
     gap: 20px;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       font-size: calc(25px - var(--fontSizeReal));
       position: relative;
     }
@@ -56,10 +64,15 @@
       width: 100%;
       height: 2px;
       background-color: var(--Rojo, #35498e);
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         position: absolute;
         bottom: 0;
         left: 0;
+      }
+    }
+    a {
+      @media only screen and (max-width: 1023px) {
+        display: none;
       }
     }
   }
@@ -74,7 +87,7 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       font-size: calc(30px - var(--fontSizeReal));
     }
     &::after {
@@ -84,7 +97,7 @@
       width: 100%;
       height: 2px;
       background-color: var(--Rojo, #35498e);
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         content: none;
       }
     }
@@ -106,6 +119,32 @@
       height: 100%;
     }
   }
+  .banners_home {
+    padding: 50px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    a {
+      display: block;
+      overflow: hidden;
+      border-radius: 8px;
+      margin: 0 auto;
+      max-width: 1600px;
+      width: 100%;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      img {
+        transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      &:hover {
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
   main {
     .bg-noche {
       background-position: bottom;
@@ -123,7 +162,7 @@
         &.splide {
           padding: 0;
         }
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           padding: 20px;
         }
         &.descubre {
@@ -131,7 +170,7 @@
           #bogota-cultural {
             margin-bottom: 30px;
             padding: 20px 0;
-            @media only screen and (max-width: 768px) {
+            @media only screen and (max-width: 1023px) {
               padding: 0;
             }
             li {
@@ -169,7 +208,7 @@
             border-bottom: 2px solid #35498e;
             border-bottom-left-radius: 18px;
             border-bottom-right-radius: 18px;
-            @media only screen and (max-width: 768px) {
+            @media only screen and (max-width: 1023px) {
               padding: 10px;
               flex-direction: column;
             }
@@ -223,7 +262,7 @@
                 align-items: center;
                 justify-content: center;
                 line-height: normal;
-                @media only screen and (max-width: 768px) {
+                @media only screen and (max-width: 1023px) {
                   font-size: calc(25px - var(--fontSizeReal));
                 }
 
@@ -231,7 +270,7 @@
                   display: block;
                   margin-bottom: 10px;
                   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-                  @media only screen and (max-width: 768px) {
+                  @media only screen and (max-width: 1023px) {
                     width: 70px;
                   }
                 }
@@ -253,7 +292,7 @@
             padding: 30px;
             justify-content: center;
             gap: 30px;
-            @media only screen and (max-width: 768px) {
+            @media only screen and (max-width: 1023px) {
               flex-direction: column;
             }
             article {
@@ -301,7 +340,7 @@
                       height: 755px;
                       border-radius: 0px 20px 20px 0px;
                       box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-                      @media only screen and (max-width: 768px) {
+                      @media only screen and (max-width: 1023px) {
                         border-radius: 20px;
                         height: calc(100vw - 80px);
                       }
@@ -331,7 +370,7 @@
                         padding: 30px;
                         position: absolute;
                         transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-                        @media only screen and (max-width: 768px) {
+                        @media only screen and (max-width: 1023px) {
                           height: 80px;
                         }
                       }
@@ -351,7 +390,7 @@
                       li.splide__slide {
                         border-radius: 20px 0px 0px 20px;
                         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-                        @media only screen and (max-width: 768px) {
+                        @media only screen and (max-width: 1023px) {
                           border-radius: 20px;
                         }
                       }
@@ -371,7 +410,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
-            @media only screen and (max-width: 768px) {
+            @media only screen and (max-width: 1023px) {
               grid-template-columns: repeat(1, calc(100vw - 100px));
             }
             article {
@@ -379,7 +418,7 @@
               height: 493px;
               overflow: hidden;
               width: 100%;
-              @media only screen and (max-width: 768px) {
+              @media only screen and (max-width: 1023px) {
                 height: calc(100vw - 100px);
               }
               img {
@@ -407,7 +446,7 @@
                 padding: 30px;
                 position: absolute;
                 background-color: rgba($color: #000000, $alpha: 0.8);
-                @media only screen and (max-width: 768px) {
+                @media only screen and (max-width: 1023px) {
                   font-size: calc(25px - var(--fontSizeReal));
                 }
               }
@@ -418,16 +457,15 @@
     }
     section {
       &.rutas {
-        padding: 60px 0 0;
-        @media only screen and (max-width: 768px) {
+        padding: 60px 20px 0;
+        @media only screen and (max-width: 1023px) {
           padding: 20px;
         }
         h2 {
           display: flex;
-          align-items: center;
           img {
             width: 63px;
-            @media only screen and (max-width: 768px) {
+            @media only screen and (max-width: 1023px) {
               width: 40px;
             }
           }
@@ -471,6 +509,9 @@
               font-size: 20px;
               font-weight: bold;
               margin-bottom: 15px;
+              &::after {
+                content: none;
+              }
             }
             span.btn {
               background-color: #35498e;
@@ -522,17 +563,16 @@
         }
       }
       &.evento {
-        padding: 60px 0 0;
-        @media only screen and (max-width: 768px) {
+        padding: 60px 20px 0;
+        @media only screen and (max-width: 1023px) {
           padding: 20px;
         }
         h2 {
           display: flex;
-          align-items: center;
           color: #fff;
           img {
             width: 63px;
-            @media only screen and (max-width: 768px) {
+            @media only screen and (max-width: 1023px) {
               width: 40px;
             }
           }
@@ -541,7 +581,7 @@
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 50px;
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             gap: 15px;
             grid-template-columns: repeat(1, calc(100vw - 80px));
           }
@@ -591,7 +631,7 @@
               }
               h2 {
                 color: #fff;
-                font-size: calc(25px - var(--fontSizeReal));
+                font-size: 16px;
                 font-style: normal;
                 font-weight: 600;
                 padding: 5px 10px;
@@ -643,16 +683,15 @@
         }
       }
       &.blog {
-        padding: 60px 0;
-        @media only screen and (max-width: 768px) {
+        padding: 60px 20px;
+        @media only screen and (max-width: 1023px) {
           padding: 20px;
         }
         .grid-blogs {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 50px;
-          margin-bottom: 50px;
-          @media only screen and (max-width: 768px) {
+          gap: 0 20px;
+          @media only screen and (max-width: 1023px) {
             gap: 15px;
             grid-template-columns: repeat(1, calc(100vw - 80px));
           }
@@ -660,6 +699,7 @@
             display: block;
             width: 100%;
             overflow: hidden;
+            height: 410px;
             @media screen and (max-width: 1024px) {
               max-width: 100%;
             }
@@ -768,15 +808,17 @@ h3 {
     color: #fff;
     font-size: 18px;
     position: absolute;
-    right: 0;
-    bottom: 0;
+    right: -5px;
+    bottom: -20px;
     padding: 0 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 30px;
-    transform: translateY(-50%);
     height: 40px;
+    @media only screen and (max-width: 1023px) {
+      display: none;
+    }
     &:hover {
       background-color: darken($color: #35498e, $amount: 10);
     }

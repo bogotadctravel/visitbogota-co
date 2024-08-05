@@ -9,7 +9,7 @@
     justify-content: flex-end;
     position: relative;
     padding: 300px 20px 30px;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       padding: 50px 20px 10px;
     }
     &::after {
@@ -141,16 +141,16 @@
     h3 {
       color: #777777;
       font-family: "MuseoSans-900";
-      font-size: 1.6rem;
-      line-height: 3rem;
+      font-size: 1.4rem;
+      line-height: 2.2rem;
       max-width: 768px;
       margin: 0 auto 30px;
     }
     .blog_content {
       background-color: #fff;
       color: #777777;
-      font-size: 1.6rem;
-      line-height: 3rem;
+      font-size: 1.4rem;
+      line-height: 2.2rem;
       margin-top: 60px;
       margin: 0 auto;
       max-width: 768px;
@@ -167,7 +167,7 @@
       }
       .image {
         position: relative;
-        margin: 50px 0;
+        margin: 15px 0;
         @media screen and (max-width: 1023px) {
           margin: 30px 0;
         }
@@ -188,18 +188,13 @@
         color: #46a4dc;
         text-decoration: underline;
       }
-      &::first-letter {
-        font-family: "MuseoSans-900";
-        font-size: 6.6rem;
-        margin-left: -2px;
-        @media screen and (max-width: 1023px) {
-          font-size: 3.9rem;
-        }
-      }
 
       p,
       ul {
-        margin-bottom: 30px;
+        margin-bottom: 15px;
+      }
+      iframe {
+        width: 100% !important;
       }
     }
   }
@@ -223,7 +218,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 50px;
       margin-bottom: 50px;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         gap: 15px;
         grid-template-columns: repeat(1, calc(100vw - 45px));
       }

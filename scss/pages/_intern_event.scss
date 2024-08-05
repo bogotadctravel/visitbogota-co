@@ -23,6 +23,9 @@
     opacity: 1;
     background: transparent;
   }
+  section {
+    padding: 0;
+  }
   main {
     background-repeat: no-repeat;
     background-size: cover;
@@ -103,7 +106,7 @@
       text-align: justify;
       width: 100%;
       word-wrap: break-word;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         font-size: 1.5rem;
         line-height: 1.8rem;
       }
@@ -210,7 +213,7 @@
       display: flex;
       height: 590px;
       justify-content: center;
-      margin: 50px auto 0;
+      margin: 0 auto;
       overflow: hidden;
       position: relative;
       width: 590px;
@@ -576,6 +579,8 @@
     text-align: center;
     background: #fff;
     padding: 20px 80px;
+    margin: 50px auto 0;
     border-radius: 15px;
+    max-width: 580px;
   }
 }

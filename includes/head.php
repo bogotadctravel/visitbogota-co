@@ -1,4 +1,34 @@
+
 <?php
+function getOperatingSystem() {
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+    // Android
+    if (preg_match('/android/i', $userAgent)) {
+        return "Android";
+    }
+
+    // iOS
+    if (preg_match('/ipad|iphone|ipod/i', $userAgent)) {
+        return "iOS";
+    }
+
+    return "unknown";
+}
+
+function getBrowser() {
+    $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
+
+    if (strpos($userAgent, 'chrome') !== false && strpos($userAgent, 'safari') !== false) {
+        return "Chrome";
+    } elseif (strpos($userAgent, 'safari') !== false && strpos($userAgent, 'chrome') === false) {
+        return "Safari";
+    }
+
+    return "unknown";
+}
+$os = getOperatingSystem();
+$browser = getBrowser();
 $urlGlobal = 'https://files.visitbogota.co';
 
 if(!isset($include_level)){
@@ -33,8 +63,7 @@ $isMobile = $detect->isMobile();
         var aforoMax = "<?= $b->MICEgeneralInfo->field_maxaforo ?>";
       
     </script>
-
-    <body class="<?= $bodyClass ?>" style="display:none;">
+    <body class="<?= $bodyClass ?>" style="display:none;" data-os="<?=$os?>" data-browser="<?=$browser?>">
     <?php } else { ?>
         <!DOCTYPE html>
         <html lang="<?= $_GET['lang'] ? $_GET['lang'] : 'es' ?>">
@@ -47,7 +76,7 @@ $isMobile = $detect->isMobile();
             <base href="<?=$project_base?>">
             <?= $b->create_metas($_GET['seo'],$_GET['seoType']) ?>
             <!-- STYLES -->
-            <link rel="icon" href="<?=$include_level?>favicon.png" type="image/png">
+            <link rel="icon" href="<?=$include_level?>favicon.ico" type="image/x-icon">
             <link rel="stylesheet" href="<?=$include_level?>css/slick.min.css">
             <link rel="preload" href="<?=$include_level?>css/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
             <link rel="stylesheet" href="<?=$include_level?>css/jquery.fancybox.min.css">
@@ -184,7 +213,7 @@ window.interdeal = {
         </style>
         </head>
 
-        <body class="<?= $bodyClass ?>" style="display:none;">
+        <body class="<?= $bodyClass ?>" style="display:none;" data-os="<?=$os?>" data-browser="<?=$browser?>">
         <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=425688815109094&ev=PageView&noscript=1" alt="facebook" />
             <!-- End Facebook Pixel Code -->
             <!-- Google Tag Manager (noscript) -->
@@ -224,3 +253,9 @@ window.interdeal = {
         <script>
             let pi_bogota = <?=json_encode($pi_bogota)?>;
         </script>
+
+        <style>
+            :root{
+                --linkcolor: <?=$b->generalInfo->field_coverdesktopweb == "" && $b->generalInfo->field_headercolor == "" ? "#fff":$b->generalInfo->field_headercolor?>
+            }
+        </style>

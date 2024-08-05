@@ -144,6 +144,7 @@ RewriteRule ^([a-zA-Z0-9_-]+)/experiencias-turisticas/politica-tratamiento-datos
 RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/s/([^/]+)/?$ vacacional/set/$2.php?lang=$1 [L,QSA]
 RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/g/([^/]+)/?$ vacacional/get/$2.php?lang=$1 [L,QSA]
 RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/b/([^/]+)/?$ vacacional/boxes/$2.php?lang=$1 [L,QSA]
+RewriteRule ^chatbot$ chatbot/index.html?lang=$1 [L,QSA]
 
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the “ea-php73” package as the default “PHP” programming language.
@@ -151,4 +152,3 @@ RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/b/([^/]+)/?$ vacacional/boxes/$2.php?la
   AddHandler application/x-httpd-ea-php73 .php .php7 .phtml
 </IfModule>
 # php -- END cPanel-generated handler, do not edit
-

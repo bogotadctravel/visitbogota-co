@@ -2,44 +2,70 @@
     $bodyClass = 'intern_event';
     include 'includes/head.php';
     $event = $b->events($_GET["id"] , "all", "all", "all");
+    function setMidnight($dateString) {
+        $date = new DateTime($dateString);
+        $date->setTime(0, 0, 0);
+        return $date;
+    }
+    
+    function formatDate($date, $lang = 'es') {
+        $months = [
+            'es' => [
+                1 => 'enero', 2 => 'febrero', 3 => 'marzo', 4 => 'abril', 
+                5 => 'mayo', 6 => 'junio', 7 => 'julio', 8 => 'agosto', 
+                9 => 'septiembre', 10 => 'octubre', 11 => 'noviembre', 12 => 'diciembre'
+            ]
+        ];
+    
+        $month = $months[$lang][intval($date->format('n'))];
+        return $date->format('j') . ' de ' . $month . ' de ' . $date->format('Y');
+    }
+    
+    function formatEventDate($evento, $actualLang) {
+        $dateStart = setMidnight($evento->field_date);
+    
+        // Manejar la fecha de fin de manera diferente si no incluye una hora
+        $dateEnd = null;
+        if (strlen($evento->field_end_date) === 10) {
+            // Verificar si el formato es solo de fecha (YYYY-MM-DD)
+            $dateEnd = setMidnight($evento->field_end_date);
+        } else {
+            $dateEnd = setMidnight($evento->field_end_date);
+        }
+    
+        $dateFormattedStart = formatDate($dateStart, $actualLang);
+        $dateFormattedEnd = formatDate($dateEnd, $actualLang);
+        $alText = $actualLang === 'es' ? 'al' : 'to';
+        $hastaElText = $actualLang === 'es' ? 'Hasta el' : 'Until';
+    
+        // Obtener la fecha actual
+        $today = new DateTime();
+        $today->setTime(0, 0, 0);
+    
+        $dateText = '';
+    
+        // Condicionales
+        if (empty($evento->field_end_date)) {
+            // 1. No tiene fecha final -> Tomar la fecha de inicio.
+            $dateText = $dateFormattedStart;
+        } elseif ($dateStart == $dateEnd) {
+            // 2. Fecha de inicio es igual a la fecha final, solo mostrar la fecha final.
+            $dateText = $dateFormattedEnd;
+        } elseif ($dateStart < $today) {
+            // 3. Si la fecha de inicio es menor a la fecha actual, quitar la fecha de inicio y colocar al principio "Hasta el".
+            $dateText = "$hastaElText $dateFormattedEnd";
+        } else {
+            // 4. Si la fecha de inicio es superior a la fecha actual, colocar así Fecha 1 al Fecha 2
+            $dateText = "$dateFormattedStart $alText $dateFormattedEnd";
+        }
+    
+        return $dateText;
+    }
 ?>
 <main style="background-image: url(https://files.visitbogota.co<?=$event->field_cover_image?>);" data-eventid="<?=$_GET[" id"]?>">
     <div class="container">
-        <h1 class="uppercase"><?=$event->title?></h1>
-        <?php 
-        switch ($lang) {
-            case 'es':
-                // Set the locale to Spanish (ES)
-                setlocale(LC_TIME, 'es_ES');
-                
-                break;
-            case 'pt':
-                // Set the locale to Portuguese (PT)
-                setlocale(LC_TIME, 'pt_PT');
-                
-                break;
-            case 'fr':
-                // Set the locale to French (FR)
-                setlocale(LC_TIME, 'fr_FR');
-                
-                break;
-            
-            default:
-                
-                break;
-        }
-        $date = new DateTime($event->field_date);
-        $dateString = strftime('%B %d DE %Y', $date->getTimestamp());
-        if(!$event->field_end_date){
-            echo '<h2 class="uppercase">' . $dateString . '</h2>'; // JULIO
-        }else{
-            $dateEnd = new DateTime($event->field_end_date);
-            $dateStringEnd = strftime('%B %d DE %Y', $dateEnd->getTimestamp());
-            echo '<h2 class="uppercase">Desde ' . $dateString . ' - '.$dateStringEnd.'</h2>'; // JULIO
-
-        }
-        ?>
-
+        <h1 class=""><?=$event->title?></h1>
+        <h2><?=formatEventDate($event, $lang)?></h2>
         <section>
             <?php
             if($event->field_videoyt != ""){
@@ -70,9 +96,7 @@
                 }
                 ?>
             </div>
-            <div class="disclaimer">
-                <p><?=$pi_bogota[99]?></p>
-            </div>
+           
         </section>
         <?php if($venue->field_galery != ""){ ?>
             <div class="gallery">
@@ -109,6 +133,11 @@
             <img src="/img/map.jpg" alt="map">
         </a>
     </div>
+    <section class="container">
+    <div class="disclaimer">
+                <p><?=$pi_bogota[99]?></p>
+            </div>
+    </section>
 </main>
 <?php include 'includes/imports.php'; ?>
 <script src="

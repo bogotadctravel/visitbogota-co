@@ -24,7 +24,7 @@
       gap: 12px;
       max-width: 1200px;
       margin: 0 auto;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         display: flex;
         flex-direction: column;
       }
@@ -33,7 +33,7 @@
         gap: 12px;
         grid-template-rows: 200px;
         grid-template-columns: 490px 691px;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           display: flex;
           flex-direction: column;
         }
@@ -42,14 +42,14 @@
         display: grid;
         gap: 12px;
         grid-template-columns: 790px 390px;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           display: flex;
           flex-direction: column;
         }
         .col-1 {
           gap: 12px;
           display: grid;
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             display: flex;
             flex-direction: column;
           }
@@ -58,7 +58,7 @@
             grid-template-columns: 330px 450px;
             gap: 12px;
             grid-auto-rows: 270px;
-            @media only screen and (max-width: 768px) {
+            @media only screen and (max-width: 1023px) {
               display: flex;
               flex-direction: column;
             }
@@ -68,7 +68,7 @@
             grid-template-columns: 390px 390px;
             gap: 12px;
             grid-auto-rows: 244px;
-            @media only screen and (max-width: 768px) {
+            @media only screen and (max-width: 1023px) {
               display: flex;
               flex-direction: column;
             }
@@ -77,7 +77,7 @@
         .col-2 {
           display: grid;
           gap: 12px;
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             display: flex;
             flex-direction: column;
           }
@@ -89,33 +89,33 @@
         align-items: center;
         justify-content: center;
         position: relative;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           padding: 10px;
           height: 50vw;
         }
         &.size1 {
           height: 200px;
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             height: 50vw;
           }
         }
         &.size2 {
           height: 410px;
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             height: 50vw;
           }
         }
         &.size3 {
           height: 552px;
           grid-row: span 2;
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             height: 50vw;
             grid-row: span 1;
           }
         }
         &.size4 {
           height: 270px;
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             height: 50vw;
           }
         }
@@ -140,7 +140,7 @@
           text-shadow: 4px 4px 7px rgb(0 0 0 / 75%);
           transition: all 0.3s cubic-bezier(0, 0.55, 0.45, 1);
           z-index: 2;
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             font-size: 20px;
           }
         }
@@ -177,7 +177,7 @@
       grid-auto-rows: calc(1200px / 3 - 8px);
       gap: 8px;
       margin: 0 auto;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         display: flex;
         flex-direction: column;
       }
@@ -191,7 +191,7 @@
         position: relative;
         overflow: hidden;
 
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           height: 50vw;
         }
         &::after {

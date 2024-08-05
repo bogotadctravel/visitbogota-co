@@ -86,6 +86,8 @@ window.onload = function () {
   // }
 };
 const getBogotaData = async (containerId, data) => {
+  console.log(data);
+  console.log(containerId);
   const bogotaContainer = document.querySelector(`#${containerId} ul`);
   bogotaContainer.innerHTML = "";
   const promises = data.map(async (item) => {
@@ -102,7 +104,9 @@ const getBogotaData = async (containerId, data) => {
           <span>${item.name}</span>
         </a>
       </li>`;
-    bogotaContainer.innerHTML += template;
+    if (item.field_categor == "1") {
+      bogotaContainer.innerHTML += template;
+    }
   });
 
   await Promise.all(promises);
@@ -131,21 +135,24 @@ const getExploraBogota = async () => {
     id: prod.tid,
     title: prod.name,
     url: `/${actualLang}/explora/${get_alias(prod.name)}/${prod.tid}`,
+    field_categor: prod.field_categor,
   }));
   bogotaContainerFooter.innerHTML = "";
   bogotaContainerMenuMobile.innerHTML = "";
   document.querySelector("nav li.explora ul").innerHTML = "";
 
   productos.forEach((producto) => {
-    document.querySelector(
-      "nav li.explora ul"
-    ).innerHTML += `<li><a href="${producto.url}" class="wait ms700">${producto.title}</a></li>`;
-    bogotaContainerFooter.innerHTML += `<li><a href="${producto.url}" class="wait">${producto.title}</a></li>`;
-    bogotaContainerMenuMobile.innerHTML += `<li><a href="${producto.url}" class="wait">${producto.title}</a></li>`;
-    if (document.querySelector("#categorias_blog select")) {
+    if (producto.field_categor == "1") {
       document.querySelector(
-        "#categorias_blog select"
-      ).innerHTML += `<option value="${producto.id}">${producto.title}</option>`;
+        "nav li.explora ul"
+      ).innerHTML += `<li><a href="${producto.url}" class="wait ms700">${producto.title}</a></li>`;
+      bogotaContainerFooter.innerHTML += `<li><a href="${producto.url}" class="wait">${producto.title}</a></li>`;
+      bogotaContainerMenuMobile.innerHTML += `<li><a href="${producto.url}" class="wait">${producto.title}</a></li>`;
+      if (document.querySelector("#categorias_blog select")) {
+        document.querySelector(
+          "#categorias_blog select"
+        ).innerHTML += `<option value="${producto.id}">${producto.title}</option>`;
+      }
     }
   });
 
@@ -189,7 +196,83 @@ const getExploraBogota = async () => {
                     <img src="images/mdi_tag.svg" alt="tag"/>
                     ${blog.field_prod_rel_1}
                     </small>
-                      <h2 class="uppercase">${blog.title}</h2>
+                      <h2 class="">${blog.title}</h2>
+                      <small class="date">${blog.field_date}</small>
+                    </div>
+                  </a>
+                  `;
+                document.querySelector(".blog_list .repeater").innerHTML +=
+                  template;
+              });
+            })
+            .finally(() => {
+              lazyImages();
+              document
+                .querySelector(".blog_list .repeater")
+                .classList.remove("loading");
+            });
+        });
+      });
+  }
+};
+const getAgendaEventos = async () => {
+  const bogotaContainerMenuMobile = document.querySelector(`.explora`);
+  const response = await fetch(`/g/getAgendaTax/?lang=${actualLang}`);
+  const data = await response.json();
+  let agendas = data.map((prod) => ({
+    id: prod.tid,
+    title: prod.name,
+    url: `/${actualLang}/eventos/${get_alias(prod.name)}-${prod.tid}`,
+  }));
+  document.querySelector("nav li.eventosList ul").innerHTML = "";
+  document.querySelector("ul.eventosList").innerHTML = "";
+  
+  agendas.forEach((agenda) => {
+    document.querySelector(
+      "nav li.eventosList ul"
+    ).innerHTML += `<li><a href="${agenda.url}" class="wait ms700">${agenda.title}</a></li>`;
+    document.querySelector("ul.eventosList").innerHTML += `<li><a href="${agenda.url}" class="wait ms700">${agenda.title}</a></li>`;
+    // agendaEventos.innerHTML += `<li><a href="${agenda.url}" class="wait">${agenda.title}</a></li>`;
+  });
+
+  if (document.querySelectorAll("#categorias_blog").length > 0) {
+    customSelect();
+  }
+  if (
+    document.querySelectorAll("#categorias_blog .select-items div").length > 0
+  ) {
+    document
+      .querySelectorAll("#categorias_blog .select-items div")
+      .forEach((el) => {
+        el.addEventListener("click", async () => {
+          await fetch(
+            `/g/allBlogs/?productID=${
+              document.querySelector("#categorias_blog select").value
+            }`
+          )
+            .then((res) => res.json())
+            .then((data) => {
+              document
+                .querySelector(".blog_list .repeater")
+                .classList.add("loading");
+              document.querySelector(".blog_list .repeater").innerHTML = "";
+              data.forEach(async (blog) => {
+                let urlImg = await getImageFromCacheOrFetch(
+                  "https://files.visitbogota.co" + blog.field_image
+                );
+                let template = `
+                <a href="/${actualLang}/blog/all/${get_alias(blog.title)}-all-${
+                  blog.nid
+                }" data-aos="flip-left blog_item" data-productid="88">
+                    <div class="img">
+                      <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
+                    </div>
+                    <div class="desc">
+                    <small class="tag">
+                    <img src="images/mdi_tag.svg" alt="tag"/>
+                    ${blog.field_prod_rel_1}
+                    </small>
+                      <h2 class="">${blog.title}</h2>
                       <small class="date">${blog.field_date}</small>
                     </div>
                   </a>
@@ -213,6 +296,9 @@ const getExploraBogota = async () => {
 document.addEventListener("DOMContentLoaded", async function () {
   if (document.querySelector("nav li.explora")) {
     await getExploraBogota();
+  }
+  if (document.querySelector("nav li.eventosList")) {
+    await getAgendaEventos();
   }
   if (window.location.hash) {
     // Obtén el ID del fragmento de la URL (el valor después de '#')
@@ -309,7 +395,7 @@ if (document.querySelector(".slide_explora_item")) {
           product.nid
         }" class="mini_item wait ${exploraCount}"><div class="icon"><img loading="lazy" class="lazyload" data-src="${icon}" src="https://picsum.photos/20/20" alt="${
           product.title
-        }"></div> <h3 class="uppercase">${
+        }"></div> <h3 class="">${
           product.title
         }</h3><img src="img/curve_mini.png" alt="curve_mini" class="curve_mini"></a>`;
         container.innerHTML += template;
@@ -1278,7 +1364,7 @@ function createNearbyHome(nearbyData) {
         get_alias(nearbyTitle) +
         "/" +
         nearbyPlace.nid +
-        '" class="content wait"><h3 class="uppercase">' +
+        '" class="content wait"><h3 class="">' +
         nearbyTitle +
         "</h3></a></div>";
       nearbyPlacesContainer.innerHTML += template;
@@ -1851,7 +1937,7 @@ if (document.querySelector("body.mas_alla")) {
           nearbyPlace.field_cover_image
             ? nearbyPlace.field_cover_image
             : "/img/noimg.png"
-        }" src="https://picsum.photos/20/20" alt="Bogotá"></div><h2 class="name uppercase">${nearbyTitle}</h2></a></li>`;
+        }" src="https://picsum.photos/20/20" alt="Bogotá"></div><h2 class="name ">${nearbyTitle}</h2></a></li>`;
         nearbyPlacesContainer.innerHTML += template;
       }
     })
@@ -1884,7 +1970,7 @@ if (document.querySelector("body.informacion_util")) {
               if (document.querySelector(".faqs-container .faq")) {
                 document.querySelector(
                   ".faqs-container .faq"
-                ).innerHTML += `<h3 class="uppercase cat-${cat.tid}">${cat.name}</h3>`;
+                ).innerHTML += `<h3 class=" cat-${cat.tid}">${cat.name}</h3>`;
                 var accorddion = document.createElement("div");
                 accorddion.classList.add("accordion");
                 accorddion.classList.add(classColor[i]);
@@ -1892,7 +1978,7 @@ if (document.querySelector("body.informacion_util")) {
                   document
                     .querySelector(".faqs-container .faq")
                     .appendChild(accorddion);
-                  var templateCat = `<h4 class="uppercase">${qa.title}</h4><div>${qa.body}</div>`;
+                  var templateCat = `<h4 class="">${qa.title}</h4><div>${qa.body}</div>`;
                   accorddion.innerHTML += templateCat;
                 });
               }
@@ -1998,7 +2084,7 @@ function getMoreReadBlogs() {
             } else {
               title = el.title;
             }
-            var template = `<li class="uppercase"><a href="${el.url}">${title}</a></li>`;
+            var template = `<li class=""><a href="${el.url}">${title}</a></li>`;
             document.querySelector(".lomasleido ol").innerHTML += template;
           }
         });
@@ -2417,43 +2503,129 @@ function useFilters(cattype) {
   } else {
     urlPost = `/g/${cattype}/?lang=${actualLang}`;
   }
+
   $.post(urlPost, { filters: completefilters }, function (data) {
-    // Función de comparación para ordenar por fecha
-    function compararFechas(a, b) {
-      return new Date(a.field_date) - new Date(b.field_date);
+    function setMidnight(dateString) {
+      const date = new Date(dateString);
+      date.setHours(0, 0, 0, 0);
+      return date;
     }
 
-    // Ordenar el arreglo por fecha
+    function compararFechas(a, b) {
+      // Si el evento no tiene fecha de finalización, usar la fecha de inicio
+      const endDateA = a.field_end_date
+        ? a.field_end_date.length === 10
+          ? setMidnight(a.field_end_date)
+          : new Date(a.field_end_date)
+        : setMidnight(a.field_date);
+      const endDateB = b.field_end_date
+        ? b.field_end_date.length === 10
+          ? setMidnight(b.field_end_date)
+          : new Date(b.field_end_date)
+        : setMidnight(b.field_date);
+
+      return endDateA - endDateB;
+    }
+    // Ordenar el arreglo por fecha de finalización
     data.sort(compararFechas);
     if (data.length > 0) {
       for (var i = 0; i < data.length; i++) {
         let event = data[i];
         var thumbnail = data[i].field_cover_image;
-        const dateStart = new Date(event.field_date);
-        const optionsdateStart = {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-        };
-        const dateFormatteddateStart = dateStart.toLocaleDateString(
-          "es-ES",
-          optionsdateStart
-        );
-        const dateEnd = new Date(event.field_end_date);
-        const optionsdateEnd = {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-        };
-        const dateFormatteddateEnd = dateEnd.toLocaleDateString(
-          "es-ES",
-          optionsdateEnd
-        );
-
         if (thumbnail == "") {
           thumbnail =
             "https://via.placeholder.com/400x400.jpg?text=Bogotadc.travel";
         }
+
+        // Asegurarse de que las fechas se interpretan correctamente
+        const dateStart = setMidnight(event.field_date);
+
+        // Manejar la fecha de fin de manera diferente si no incluye una hora
+        let dateEnd;
+        if (event.field_end_date.length === 10) {
+          // Verificar si el formato es solo de fecha (YYYY-MM-DD)
+          dateEnd = setMidnight(event.field_end_date);
+          dateEnd.setDate(dateEnd.getDate() + 1); // Mover la fecha de fin al día siguiente
+        } else {
+          dateEnd = setMidnight(event.field_end_date);
+        }
+
+        const options = {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        };
+
+        // Obtener la fecha actual
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        let dateText = "";
+
+        if (actualLang === "es") {
+          const dateFormattedStart = dateStart.toLocaleDateString(
+            "es-ES",
+            options
+          );
+          const dateFormattedEnd = dateEnd.toLocaleDateString("es-ES", options);
+          const alText = "al";
+          const hastaElText = "Hasta el";
+
+          // Condicionales para construir el texto de fecha en español
+          if (!event.field_end_date) {
+            // 1. No tiene fecha final -> Tomar la fecha de inicio.
+            dateText = dateFormattedStart;
+          } else if (dateStart.getTime() === dateEnd.getTime()) {
+            // 2. Fecha de inicio es igual a la fecha final, solo mostrar la fecha final.
+            dateText = dateFormattedEnd;
+          } else if (dateStart < today) {
+            // 3. Si la fecha de inicio es menor a la fecha actual, quitar la fecha de inicio y colocar al principio "Hasta el".
+            dateText = `${hastaElText} ${dateFormattedEnd}`;
+          } else {
+            // 4. Si la fecha de inicio es superior a la fecha actual, colocar así Fecha 1 al Fecha 2
+            dateText = `${dateFormattedStart} ${alText} ${dateFormattedEnd}`;
+          }
+        } else if (actualLang === "en") {
+          const dateFormattedStart = dateStart.toLocaleDateString(
+            "en-US",
+            options
+          );
+          const dateFormattedEnd = dateEnd.toLocaleDateString("en-US", options);
+
+          // Condicionales para construir el texto de fecha en inglés
+          if (!event.field_end_date) {
+            // 1. No tiene fecha final -> Tomar la fecha de inicio.
+            dateText = dateFormattedStart;
+          } else if (dateStart.getTime() === dateEnd.getTime()) {
+            // 2. Fecha de inicio es igual a la fecha final, solo mostrar la fecha final.
+            dateText = dateFormattedEnd;
+          } else if (dateStart < today) {
+            // 3. Si la fecha de inicio es menor a la fecha actual, quitar la fecha de inicio y colocar al principio "Until".
+            dateText = `Until ${dateFormattedEnd}`;
+          } else if (dateStart.toDateString() === dateEnd.toDateString()) {
+            // 4. Si las fechas son el mismo día, mostrar solo una fecha.
+            dateText = dateFormattedStart;
+          } else if (dateStart.getFullYear() === dateEnd.getFullYear()) {
+            // 5. Si las fechas están en el mismo año
+            if (dateStart.getMonth() === dateEnd.getMonth()) {
+              // 5.1 Si están en el mismo mes
+              dateText = `${dateFormattedStart.split(" ")[1]}-${
+                dateFormattedEnd.split(" ")[1]
+              } ${dateFormattedStart.split(" ")[0]} ${dateStart.getFullYear()}`;
+            } else {
+              // 5.2 Si están en meses diferentes
+              dateText = `${dateFormattedStart.split(" ")[0]} ${
+                dateFormattedStart.split(" ")[1]
+              } to ${dateFormattedEnd.split(" ")[0]} ${
+                dateFormattedEnd.split(" ")[1]
+              } ${dateStart.getFullYear()}`;
+            }
+          } else {
+            // 6. Fechas en años diferentes
+            dateText = `${dateFormattedStart} to ${dateFormattedEnd}`;
+          }
+        }
+
         var strtemplate = `
           <li class="events_list_grid_item">
                 <a href="/${actualLang}/evento/${get_alias(event.title)}-${
@@ -2462,20 +2634,20 @@ function useFilters(cattype) {
                     <div class="single_event_img">
                         <img loading="lazy" data-src="https://files.visitbogota.co${thumbnail}" src="https://picsum.photos/20/20"
                             alt="evento" class="lazyload">
-                            <h5 class="single_event_title ms700 uppercase">${
+                            <h5 class="single_event_title ms700 ">${
                               event.title
                             }</h5>
                     </div>
                     <div class="info">
                         <div class="single_event_date">
                         <img src="images/eventosIcono.svg" alt="tag">
-                        ${dateFormatteddateStart}  ${`- ${dateFormatteddateEnd}`}
+                        ${dateText}
                         </div>
                         <div class="txt">
                                 <h6 class="single_event_place ms700"><svg width="23" height="33" viewBox="0 0 23 33" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_35_2)"><path d="M22.61 8.62C20.94 2.29 14.48 -1.36 8.19999 0.48C3.45999 1.87 0.0799887 6.3 -1.13287e-05 11.24C-0.0300113 13 0.339989 14.68 0.919989 16.32C1.84999 18.95 3.19999 21.37 4.75999 23.67C6.63999 26.45 8.57999 29.19 10.5 31.94C10.69 32.22 10.98 32.42 11.23 32.66H11.74C11.99 32.42 12.26 32.21 12.47 31.94C12.82 31.5 13.12 31.02 13.44 30.55C15.2 28 17 25.47 18.71 22.88C20.18 20.65 21.42 18.29 22.24 15.73C22.99 13.39 23.24 11.02 22.6 8.61L22.61 8.62ZM20.39 15.26C19.57 17.76 18.32 20.06 16.86 22.23C15.14 24.8 13.35 27.32 11.58 29.86C11.56 29.89 11.53 29.92 11.47 29.99C10.38 28.45 9.30999 26.95 8.23999 25.43C6.55999 23.03 4.92999 20.59 3.65999 17.93C2.88999 16.32 2.28999 14.67 2.00999 12.89C1.35999 8.75 3.63999 4.5 7.44999 2.79C13.09 0.25 19.45 3.41 20.83 9.44C21.28 11.42 21.01 13.35 20.38 15.25L20.39 15.26Z" fill="#35498F"/><path d="M11.51 5.74C8.34002 5.73 5.75002 8.3 5.74002 11.45C5.73002 14.62 8.30002 17.21 11.45 17.22C14.62 17.23 17.21 14.66 17.22 11.51C17.23 8.34 14.67 5.75 11.51 5.74ZM11.47 15.31C9.38002 15.31 7.66002 13.58 7.66002 11.49C7.66002 9.38 9.38002 7.65 11.49 7.66C13.6 7.66 15.32 9.39 15.32 11.5C15.32 13.61 13.59 15.33 11.48 15.32L11.47 15.31Z" fill="#35498F"/></g><defs><clipPath id="clip0_35_2"><rect width="22.97" height="32.66" fill="white"/></clipPath></defs></svg>${
                                   event.field_place
                                 }</h6>
-                                    <div class="btn event-view uppercase ms900">${
+                                    <div class="btn event-view  ms900">${
                                       actualLang == "es"
                                         ? "Ver evento"
                                         : "View EVENT"
@@ -2614,7 +2786,7 @@ async function getOfertasRel(atractivo, localidad, zona, alojamiento) {
                 </div>
                 <strong class="ms900">${plan.title}</strong>
                 <p class="ms100">${plan.field_pb_oferta_desc_corta}</p>
-                <small class="link ms900 uppercase">Ver oferta</small>
+                <small class="link ms900 ">Ver oferta</small>
               </div>
             </a>`;
           ofertasRelgrid.innerHTML += template;
@@ -2676,3 +2848,9 @@ if (document.querySelector("#toggleFiltersEvents")) {
     document.querySelector(".filters").classList.toggle("active");
   });
 }
+
+document.querySelector("#formBtn").addEventListener("click", () => {
+  document.querySelectorAll(".search_form").forEach(el =>{
+    el.classList.toggle("active");
+  })
+});

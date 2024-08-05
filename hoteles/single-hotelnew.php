@@ -18,7 +18,7 @@ $venue = $venue[0];
   <div class="info-container">
     <?php if ($venue->field_hadress != '') { ?>
     <div class="address">
-      <img src="/../vacacional/images/descubre_icon.svg" alt="address" /><span>
+      <img src="/../vacacional/images/descubre.svg" alt="address" /><span>
         <?= $venue->field_hadress ?>
       </span>
     </div>

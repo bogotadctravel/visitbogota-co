@@ -13,7 +13,8 @@
     <?=$_GET['productID']?>" data-productname="
     <?=$_GET['productname']?>" data-placeid="
     <?=$placeID?>" data-placecoords="<?=$place->field_location?>" data-placezone="<?=$place->field_zone_rel?>">
-    <h1 class="uppercase"><img src="images/exp_tur.svg" alt="descubre"><?=$place->title?></h1>
+    <h1 class=""><img src="images/atractivo.svg" alt="descubre"><?=$place->title?></h1>
+    
     <?php 
         $galItems = explode(",", $place->field_galery);
         $galItemsAlt= explode(",", $place->field_galery_1);
@@ -29,17 +30,25 @@
                 $extraClass="only5";
             }
     ?>
-            <ul class="gallery-grid <?=$extraClass?>">
-                <?php for ($i = 0; $i < count($galItems); $i++) { $galItem = $galItems[$i]; ?>
-                    <li class="gallery-grid__item"><a data-fancybox="gallery"  data-caption="<?=trim($galItemsAlt[$i], " ")?>" data-src="https://files.visitbogota.co<?=trim($galItem," ")?>"><img src="https://files.visitbogota.co<?=trim($galItem," ")?>" alt="<?=trim($galItemsAlt[$i], " ")?>"></a></li>
-                <?php } ?>
-            </ul>
+    <?php if($place->field_slider_gal != "1"){ ?>
+        <ul class="gallery-grid <?=$extraClass?>">
+            <?php for ($i = 0; $i < count($galItems); $i++) { $galItem = $galItems[$i]; ?>
+                <li class="gallery-grid__item"><a data-fancybox="gallery"  data-caption="<?=trim($galItemsAlt[$i], " ")?>" data-src="https://files.visitbogota.co<?=trim($galItem," ")?>"><img src="https://files.visitbogota.co<?=trim($galItem," ")?>" alt="<?=trim($galItemsAlt[$i], " ")?>"></a></li>
+            <?php } ?>
+        </ul>
+    <?php }else{ ?>
+        <div class="gallery-grid-slick">
+        <?php for ($i = 0; $i < count($galItems); $i++) { $galItem = $galItems[$i]; ?>
+            <img src="https://files.visitbogota.co<?=trim($galItem," ")?>" alt="<?=trim($galItemsAlt[$i], " ")?>">
+        <?php } ?>
+        </div> 
+    <?php } ?>
     <div class="info">
     <section class="descripton">
         <h2><svg width="14" height="22" viewBox="0 0 14 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 18.94V2.84C0 0.310003 3.05 -0.949997 4.83 0.830003L12.88 8.88C13.99 9.99 13.99 11.78 12.88 12.88L4.83 20.93C3.05 22.71 0 21.45 0 18.93V18.94Z" fill="#35498e"/></svg><?=$pi_bogota[101]?></h2>
         <?=$place->body?>
         <?php if($place->field_howtogetthere){ ?>
-            <h3 class="llegar"><svg width="277" height="52" viewBox="0 0 277 52" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M273.41 51.35H0V0H273.41C275.68 0 276.99 2.58 275.65 4.41L262.53 22.32C261.07 24.32 261.07 27.03 262.53 29.02L275.65 46.93C276.99 48.76 275.68 51.34 273.41 51.34V51.35Z" fill="#35498e"/><path d="M50.89 9.94C51.48 10.04 52.08 10.11 52.67 10.25C57.08 11.28 60.44 15.01 61.05 19.49C61.34 21.62 60.97 23.67 60.27 25.67C59.38 28.19 58.08 30.51 56.59 32.72C54.82 35.35 52.98 37.94 51.17 40.54C51.07 40.68 50.98 40.83 50.87 40.97C50.45 41.54 49.73 41.54 49.32 40.97C48.93 40.42 48.55 39.86 48.17 39.3C46.49 36.86 44.76 34.44 43.13 31.97C41.72 29.83 40.53 27.57 39.74 25.12C38.95 22.68 38.71 20.2 39.54 17.73C40.98 13.48 43.95 10.93 48.36 10.08C48.67 10.02 48.98 9.99 49.3 9.95C49.83 9.95 50.36 9.95 50.9 9.95L50.89 9.94ZM50.09 38.82C50.14 38.76 50.17 38.73 50.19 38.7C51.74 36.48 53.32 34.27 54.84 32.03C56.3 29.87 57.6 27.63 58.49 25.17C59.12 23.44 59.49 21.67 59.23 19.81C58.52 14.63 53.8 11.12 48.64 11.91C43.56 12.69 40.06 17.66 41.03 22.71C41.37 24.47 42.01 26.12 42.81 27.72C44.1 30.29 45.72 32.65 47.37 34.99C48.27 36.26 49.17 37.52 50.09 38.82Z" fill="white"/><path d="M50.07 26.53C47.03 26.53 44.56 24.03 44.57 20.98C44.57 17.94 47.07 15.47 50.12 15.48C53.16 15.48 55.63 17.98 55.62 21.03C55.62 24.07 53.12 26.54 50.07 26.53ZM46.41 21C46.41 23.03 48.07 24.69 50.1 24.69C52.11 24.69 53.77 23.03 53.78 21.02C53.78 18.99 52.13 17.32 50.1 17.32C48.07 17.32 46.41 18.98 46.41 21.01V21Z" fill="white"/></svg><span><?=$pi_bogota[102]?>:</span></h2>
+            <h3 class="llegar"><svg width="277" height="52" viewBox="0 0 277 52" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M273.41 51.35H0V0H273.41C275.68 0 276.99 2.58 275.65 4.41L262.53 22.32C261.07 24.32 261.07 27.03 262.53 29.02L275.65 46.93C276.99 48.76 275.68 51.34 273.41 51.34V51.35Z" fill="#35498e"/><path d="M50.89 9.94C51.48 10.04 52.08 10.11 52.67 10.25C57.08 11.28 60.44 15.01 61.05 19.49C61.34 21.62 60.97 23.67 60.27 25.67C59.38 28.19 58.08 30.51 56.59 32.72C54.82 35.35 52.98 37.94 51.17 40.54C51.07 40.68 50.98 40.83 50.87 40.97C50.45 41.54 49.73 41.54 49.32 40.97C48.93 40.42 48.55 39.86 48.17 39.3C46.49 36.86 44.76 34.44 43.13 31.97C41.72 29.83 40.53 27.57 39.74 25.12C38.95 22.68 38.71 20.2 39.54 17.73C40.98 13.48 43.95 10.93 48.36 10.08C48.67 10.02 48.98 9.99 49.3 9.95C49.83 9.95 50.36 9.95 50.9 9.95L50.89 9.94ZM50.09 38.82C50.14 38.76 50.17 38.73 50.19 38.7C51.74 36.48 53.32 34.27 54.84 32.03C56.3 29.87 57.6 27.63 58.49 25.17C59.12 23.44 59.49 21.67 59.23 19.81C58.52 14.63 53.8 11.12 48.64 11.91C43.56 12.69 40.06 17.66 41.03 22.71C41.37 24.47 42.01 26.12 42.81 27.72C44.1 30.29 45.72 32.65 47.37 34.99C48.27 36.26 49.17 37.52 50.09 38.82Z" fill="white"/><path d="M50.07 26.53C47.03 26.53 44.56 24.03 44.57 20.98C44.57 17.94 47.07 15.47 50.12 15.48C53.16 15.48 55.63 17.98 55.62 21.03C55.62 24.07 53.12 26.54 50.07 26.53ZM46.41 21C46.41 23.03 48.07 24.69 50.1 24.69C52.11 24.69 53.77 23.03 53.78 21.02C53.78 18.99 52.13 17.32 50.1 17.32C48.07 17.32 46.41 18.98 46.41 21.01V21Z" fill="white"/></svg><span><?=$pi_bogota[102]?></span></h2>
             <?=$place->field_howtogetthere?>
         <?php } ?>
         </section>
@@ -213,3 +222,9 @@
 <div class="container grid-blogs"></div>
 </section>
 <? include 'includes/imports.php'?>
+<script>
+      $('.gallery-grid-slick').slick({
+        arrows: false,
+        dots: true,
+      });
+</script>

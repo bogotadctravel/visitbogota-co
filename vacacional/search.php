@@ -18,6 +18,10 @@ if ($b->searchContent($_GET['search'])) {
                     $ID_blog = $busqueda[$i]->nid;
                     $subID = explode(",", $busqueda[$i]->field_subp)[0];
                     switch ($busqueda[$i]->type) {
+                        case 'PB - Ofertas':
+                            $type = 'Experiencia turística';
+                            $link = "/".$lang . "/experiencias-turisticas/plan/".$value."-all-".$ID_blog;
+                            break;
                         case 'Atractivos':
                             $type = 'Atractivo';
                             $link = "/".$lang . "/atractivo/all/".$value."-all-".$ID_blog;
@@ -34,6 +38,10 @@ if ($b->searchContent($_GET['search'])) {
                             $type = 'Evento';
                             $link = "/".$lang . "/evento/".$b->get_alias($value)."-".$ID_blog;
                         break;
+                        case 'Rutas Turísticas':
+                            $type = 'Rutas Turísticas';
+                            $link = "/".$lang . "/rutas-turisticas/".$b->get_alias($value)."-".$ID_blog;
+                        break;
                     }
                 ?>
     
@@ -41,6 +49,8 @@ if ($b->searchContent($_GET['search'])) {
                         <?php
                         $field_image = $busqueda[$i]->field_image;
                         $field_cover = $busqueda[$i]->field_cover_image;
+                        $field_oferta = $busqueda[$i]->field_pb_oferta_img_listado;
+                        $field_ruta = $busqueda[$i]->field_thumbnail;
                         if ($field_image) {
                         ?>
                             <div class="img">
@@ -52,14 +62,26 @@ if ($b->searchContent($_GET['search'])) {
                             <div class="img">
                                 <img loading="lazy" class="lazyload" data-src="https://files.visitbogota.co<?= $field_cover ?>" src="https://picsum.photos/20/20" alt="Bogotá">
                             </div>
+                        <?php
+                        } else if ($field_oferta) {
+                        ?>
+                        <div class="img">
+                                <img loading="lazy" class="lazyload" data-src="https://files.visitbogota.co<?= $field_oferta ?>" src="https://picsum.photos/20/20" alt="Bogotá">
+                            </div>
+                            <?php
+                        } else if ($field_ruta) {
+                            ?>
+                            <div class="img">
+                                    <img loading="lazy" class="lazyload" data-src="https://files.visitbogota.co<?= $field_ruta ?>" src="https://picsum.photos/20/20" alt="Bogotá">
+                                </div>
                         <?php } else { ?>
                             <div class="img">
                                 <img loading="lazy" class="lazyload" data-src="../img/noimg.png" src="https://picsum.photos/20/20" alt="Bogotá">
                             </div>
                         <? } ?>
                         <div class="name">
-                            <h3 class="uppercase"><?= $busqueda[$i]->title ?></h3>
-                            <h4 class="uppercase"> <img src="images/mdi_tag.svg" alt="tag"><?= $type ?></h4>
+                            <h3 class=""><?= $busqueda[$i]->title ?></h3>
+                            <h4 class=""> <img src="images/mdi_tag.svg" alt="tag"><?= $type ?></h4>
                         </div>
                     </a>
                 <?php } ?>

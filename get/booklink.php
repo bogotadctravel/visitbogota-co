@@ -19,7 +19,7 @@
                 value: <?=$_GET['price']?>
             }
             };*/
-         gtag('event', 'form_start', {'event_category': 'bookings', 'event_label':'<?=$_GET['id']?>','value':<?=$_GET['price']?>});
+         gtag('event', 'form_start', {'event_category': 'bookings', 'event_label':'<?=$_GET['id']?>','value':"<?=$_GET['price']?>"});
          //dataLayer.push(myEvent);
         window.location = "<?=$_GET['url']?>";
         </script>

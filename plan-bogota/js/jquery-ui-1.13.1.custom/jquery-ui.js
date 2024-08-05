@@ -17222,7 +17222,7 @@ $.each(
 
 function camelCase( string ) {
 	return string.replace( /-([\da-z])/gi, function( all, letter ) {
-		return letter.toUpperCase();
+		return letter.to();
 	} );
 }
 

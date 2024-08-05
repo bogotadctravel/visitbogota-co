@@ -6,9 +6,9 @@
     background-repeat: no-repeat;
     background-size: cover;
     box-shadow: 0px 14px 17px -6px rgba(0, 0, 0, 0.75);
-    height: calc(252px + 115px);
     position: relative;
     z-index: 2;
+    padding-top: 70px;
     &::after {
       content: "";
       background-color: rgba($color: #000000, $alpha: 0.3);
@@ -38,7 +38,7 @@
           color: #fff;
           margin-bottom: 15px;
           text-shadow: 3px 5px 2px #474747;
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             margin-bottom: 10px;
           }
         }
@@ -63,7 +63,7 @@
           -webkit-box-shadow: 0px 14px 17px -6px rgba(0, 0, 0, 0.75);
           -moz-box-shadow: 0px 14px 17px -6px rgba(0, 0, 0, 0.75);
           box-shadow: 0px 14px 17px -6px rgba(0, 0, 0, 0.75);
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             flex-direction: column;
             box-shadow: none;
             gap: 20px;
@@ -73,7 +73,7 @@
           .left {
             flex: 1;
           }
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             .left {
               background-color: #fff;
               padding: 12px 30px;
@@ -119,7 +119,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            @media only screen and (max-width: 768px) {
+            @media only screen and (max-width: 1023px) {
               flex-direction: column;
             }
             .c-select {
@@ -151,13 +151,13 @@
   }
   .bg {
     background-image: url(https://res.cloudinary.com/instituto-turismo-bogota/image/upload/w_1200/v1676573583/Banco%20de%20images/PlazadeToros_30112022_RoyVega_16_ffuequ.jpg);
-    padding: 180px 20px 80px;
+    padding: 20px 80px;
     position: relative;
     min-height: 1080px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       padding: 1px;
     }
   }
@@ -183,7 +183,7 @@
       display: grid;
       gap: 30px;
       grid-template-columns: repeat(auto-fill, calc(33.333% - 20px));
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         grid-template-columns: repeat(
           auto-fill,
           minmax(calc(100% - 20px), 1fr)
@@ -397,7 +397,7 @@
       flex-direction: column;
       padding: 30px;
       max-width: 1280px;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         margin-top: 310px;
       }
       @media only screen and (max-width: 480px) {
@@ -416,7 +416,7 @@
         margin-bottom: 60px;
         align-items: flex-end;
         gap: 20px;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           align-items: center;
         }
         @media only screen and (max-width: 480px) {
@@ -430,8 +430,11 @@
           height: 2px;
           background-color: var(--Rojo, #35498e);
         }
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           font-size: 30px;
+        }
+        img {
+          width: 50px;
         }
       }
 
@@ -459,9 +462,9 @@
   .categoriessection {
     padding: 50px 20px;
     position: relative;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0px 0px 16.9px 0px rgba(0, 0, 0, 0.6);
+    background: rgba(255, 255, 255, 1);
     padding: 30px;
+    z-index: 1;
     &::before {
       background-repeat: no-repeat;
       background-position: center center;
@@ -478,7 +481,7 @@
       font-size: 42px;
       text-align: center;
       margin-bottom: 30px;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         font-size: 30px;
       }
     }
@@ -489,7 +492,7 @@
     flex-wrap: wrap;
     gap: 40px;
     align-items: center;
-    max-width: 1200px;
+    max-width: 768px;
     margin: 0 auto;
     justify-content: center;
     h3 {
@@ -506,19 +509,17 @@
       justify-content: center;
       gap: 10px;
       max-width: 120px;
+      width: 100%;
       .img {
-        border-radius: 50%;
-        background: var(--Rojo, #35498e);
-        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
         width: 60px;
         height: 60px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 15px;
+        margin: 0 auto;
         img {
-          width: 40px;
-          height: 40px;
+          width: 60px;
+          height: 60px;
           object-fit: contain;
           transition: none;
         }
@@ -526,7 +527,7 @@
       small {
         color: var(--gris-oscuro, #373737);
         text-align: center;
-        font-size: calc(27px - var(--fontSizeReal));
+        font-size: 14px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
@@ -553,7 +554,7 @@
       font-size: 42px;
       text-align: center;
       margin-bottom: 30px;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         font-size: 30px;
       }
     }
@@ -566,7 +567,7 @@
     gap: 40px;
     max-width: 1200px;
     margin: 0 auto;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       flex-direction: column;
     }
     h3 {

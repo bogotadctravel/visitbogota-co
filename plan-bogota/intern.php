@@ -12,7 +12,7 @@
         "service_rep": "<?=$plan->title ?>",
         "companyid_rep": <?=$plan->field_pb_oferta_empresa ?>,
         "company_rep": "<?=$company->field_pb_empresa_titulo ?>",
-        "price_rep": <?=$plan->field_pd ?>,
+        "price_rep": "<?=$plan->field_pd ?>",
         "catid_rep": <?=$plan->field_segment ?>,
         "cat_rep": "<?=$plan->field_segment_1 ?>",
         "fec_crea": new Date().toLocaleDateString('en-GB'),
@@ -34,7 +34,7 @@
             gtag('event', 'form_start', {
               'event_category': 'bookings', 
               'event_label': '<?= $plan->nid ?>',
-              'value': <?= $plan->field_pd ?>,
+              'value': "<?= $plan->field_pd ?>",
               'event_company':'<?=$company->field_pb_empresa_titulo?>',
               'event_exp':'<?=$plan->title?>'
             });
@@ -54,7 +54,7 @@
       "
     >
       <div class="content">
-        <a href="" class="ms900 uppercase btn-back btn"
+        <a href="" class="ms900  btn-back btn"
           ><img src="<?=$project_base?>images/arrow_back.svg" alt="arrow_back" />  <?=$pb->pb_experiencias[23]?>
         </a>
         <div class="info">
@@ -66,13 +66,13 @@
             <p class="prices-discount ms500">$<?=number_format($plan->field_pa,0,",",".")?></p>
             <p class="prices-total ms900">$<?=number_format($plan->field_pd,0,",",".")?></p>
           </div> -->
-          <a href="#moreInfo" class="ms900 uppercase">  <?=$pb->pb_experiencias[22]?> </a>
+          <a href="#moreInfo" class="ms900 ">  <?=$pb->pb_experiencias[22]?> </a>
         </div>
       </div>
     </div>
     }
     <div class="container">
-      <a href="/<?=$_GET['lang']?><?=$project_base?>encuentra-tu-plan" class="ms900 uppercase btn-back btn"
+      <a href="/<?=$_GET['lang']?><?=$project_base?>encuentra-tu-plan" class="ms900  btn-back btn"
         ><img src="<?=$project_base?>images/arrow_back_green.svg" alt="arrow_back" />  <?=$pb->pb_experiencias[23]?>
       </a>
       <div class="all-info" id="moreInfo">
@@ -101,7 +101,9 @@
           </ul>
         </div>
         <div class="description">
-          <h3 class="categorie ms700"><img src="../vacacional/images/mdi_tag.svg" alt="tag"><?=$plan->field_categoria_comercial_1?></h3>
+        <?php if($plan->field_nueva_categorizacion_1 != ""){?>
+          <h3 class="categorie ms700"><img src="../vacacional/images/mdi_tag.svg" alt="tag"><?=$plan->field_nueva_categorizacion_1?></h3>
+        <?php }?>
           <h2 class="ms900">
           <?=$plan->title?>
           </h2>
@@ -178,7 +180,7 @@
           </div>
           <a href="javascript:void(0);" 
             onclick="SendInfoHook()" 
-            class="btn btn-reserva ms900 uppercase"> 
+            class="btn btn-reserva ms900 "> 
             <?= $pb->pb_experiencias[27] ?>
           </a>
         </div>

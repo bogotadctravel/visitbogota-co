@@ -52,13 +52,8 @@ class planbogota extends bogota
     }
     
     function getInfoGnrl(){
-    if (isset($_SESSION['pbinfo'][$this->language])) {
-        $gnrl = $_SESSION['pbinfo'][$this->language];
-    } else {
         $result = $this->query("pb_infognrl");
         $gnrl = $result[0];
-        $_SESSION['pbinfo'][$this->language] = $gnrl;
-    }
     return $gnrl;
     }
     function getPlabrasInterfazPB(){

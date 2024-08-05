@@ -12,7 +12,7 @@ $descargables = $vacacional->getDescargables($_GET['prodId']);
         style="background-image:url(<?=$coverImage ?  $coverImage : 'img/noimg.png' ?> );">
         <div class="container">
         <div class="intro-txt">
-            <h2 class="uppercase"><?=$prodTax->name?></h2>
+            <h2 class=""><?=$prodTax->name?></h2>
             <?=$prodTax->field_intro_prod?>
         </div>
         </div>
@@ -37,7 +37,7 @@ $descargables = $vacacional->getDescargables($_GET['prodId']);
     <div class="descargables">
     <?php for ($i=0; $i < count($descargables); $i++) { $descar = $descargables[$i]; ?>
         <a href="<?=$descar->field_download_file?>" target="_blank" class="descargables-item">
-<div class="img"><img loading='lazy' data-src="<?=$descar->field_image ? $urlGlobal . $descar->field_image : 'img/noimg.png'?>" alt='bogota' class='zone_img lazyload' src='https://picsum.photos/20/20'></div><span class="name uppercase"><?=$descar->title?></span></a>
+<div class="img"><img loading='lazy' data-src="<?=$descar->field_image ? $urlGlobal . $descar->field_image : 'img/noimg.png'?>" alt='bogota' class='zone_img lazyload' src='https://picsum.photos/20/20'></div><span class="name "><?=$descar->title?></span></a>
     <?php } ?>
     </div>
     <section class="banco-imagenes-grid">

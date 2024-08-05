@@ -18,7 +18,7 @@
             <?php } ?>
         </div>
         <div class="banner_info">
-            <h2 class="uppercase"><?=$place->title?></h2>
+            <h2 class=""><?=$place->title?></h2>
             <div class="me"  style="display:none;"><img src="/img/cerca_icon.svg" alt="cerca"><span>A menos de 20 km.</span></div>
         </div>
     </section>

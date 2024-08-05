@@ -7,7 +7,7 @@
 ?>
 <main>
     <section class="banner" style="background-image:url(<?=$bannerAlrededor ? $urlGlobal . $bannerAlrededor : 'img/noimg.png' ?>);">
-        <h2 class="uppercase"><?=$b->generalInfo->field_titulo_mas_alla?></h2>
+        <h2 class=""><?=$b->generalInfo->field_titulo_mas_alla?></h2>
         <div class="intro-txt">
             <?= $b->generalInfo->field_desc_mas_alla_1 ?>
         </div>

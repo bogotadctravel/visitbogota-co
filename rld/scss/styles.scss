@@ -83,7 +83,7 @@ $yellow: #edbb06;
     z-index: 3;
     ul {
       display: block;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -123,7 +123,7 @@ $yellow: #edbb06;
           min-width: 300px;
           text-align: left;
           z-index: 10;
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             left: 50%;
             transform: translateX(-50%);
           }
@@ -157,7 +157,7 @@ $yellow: #edbb06;
     position: relative;
     z-index: 2;
     height: 70vh;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       height: 100vw;
     }
   }
@@ -202,7 +202,7 @@ $yellow: #edbb06;
   // width: 100%;
   transition: top 0.3s, padding 0.3s;
   margin: 20px 0 0;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1023px) {
     font-size: 1.2em;
   }
   &:hover {
@@ -225,7 +225,7 @@ $yellow: #edbb06;
   color: $yellow;
 }
 .fixedBtn {
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1023px) {
     bottom: 0;
     top: initial;
     left: 0;
@@ -292,7 +292,7 @@ $yellow: #edbb06;
   h1 {
     font-size: 5em;
     text-align: right;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       font-size: 2.5rem;
     }
   }
@@ -302,7 +302,7 @@ $yellow: #edbb06;
     align-items: center;
     justify-content: space-between;
     position: relative;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       flex-direction: column;
       justify-content: center;
       gap: 90px;
@@ -319,7 +319,7 @@ $yellow: #edbb06;
       background-size: 30px 1px;
       background-repeat: repeat-x;
       z-index: -1;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         content: none;
       }
     }
@@ -366,7 +366,7 @@ $yellow: #edbb06;
   position: relative;
   z-index: 1;
   padding: 80px 0;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1023px) {
     padding: 20vh 20px;
   }
 
@@ -377,7 +377,7 @@ $yellow: #edbb06;
     padding: 2vh 0;
     h1 {
       font-size: 8em;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         font-size: 4em;
       }
     }
@@ -390,7 +390,7 @@ $yellow: #edbb06;
       text-shadow: 2px 2px 2px #000;
       max-width: 600px;
       margin: 0 0 0 auto;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         font-size: 3em;
       }
     }
@@ -460,7 +460,7 @@ $yellow: #edbb06;
     max-width: 880px;
     font-family: "MuseoSans-900";
     margin: 0 auto 10px;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       font-size: 2.5rem;
     }
   }
@@ -470,19 +470,19 @@ $yellow: #edbb06;
     margin: 0 auto;
 
     max-width: 600px;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       font-size: 1.4rem;
     }
   }
   &.characters {
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       padding: 0 20px;
     }
     h3 {
       font-size: 6em;
       text-align: center;
       padding: 40px 0;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         font-size: 3.5em;
       }
     }
@@ -510,7 +510,7 @@ $yellow: #edbb06;
       .col2 {
         float: left;
         padding: 0 50px;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           padding: 0;
         }
       }
@@ -526,7 +526,7 @@ $yellow: #edbb06;
         margin: 0 auto;
         max-width: 100%;
         max-height: 400px;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           object-fit: cover;
         }
       }
@@ -538,7 +538,7 @@ $yellow: #edbb06;
       text-align: left;
       position: relative;
       max-width: 100%;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         font-size: 4.5em;
         display: flex;
         flex-direction: column;
@@ -551,7 +551,7 @@ $yellow: #edbb06;
         position: absolute;
         left: -120px;
         width: 100px;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           position: static;
           left: initial;
         }
@@ -577,7 +577,7 @@ $yellow: #edbb06;
     }
     .col1 {
       padding: 0 60px 0 200px;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         padding: 0 20px;
       }
     }
@@ -588,7 +588,7 @@ $yellow: #edbb06;
     h1 {
       font-size: 8em;
       text-shadow: 2px 2px 2px #000;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         font-size: 4em;
       }
     }
@@ -684,7 +684,7 @@ $yellow: #edbb06;
     margin: 0 auto 0 0;
     max-width: 570px;
     position: relative;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       bottom: initial;
       left: initial;
       max-width: 768px;
@@ -710,7 +710,7 @@ $yellow: #edbb06;
   right: 40px;
 
   text-transform: none;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1023px) {
     position: static;
   }
 }
@@ -721,7 +721,7 @@ $yellow: #edbb06;
     max-width: 490px;
     font-family: museosans-900;
     margin: 0 0 10px 40px;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       font-size: 5rem;
     }
   }
@@ -738,7 +738,7 @@ $yellow: #edbb06;
     h1 {
       font-size: 6rem;
       color: #fff;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         font-size: 3.5rem;
       }
     }
@@ -753,7 +753,7 @@ $yellow: #edbb06;
     height: 537px;
     object-fit: cover;
     display: block;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       width: 90%;
     }
   }
@@ -764,7 +764,7 @@ $yellow: #edbb06;
     color: #fff;
     line-height: 2.6rem;
     margin: 0 auto 30px;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       width: 90%;
       font-size: 1.4rem;
       max-width: 800px;
@@ -786,7 +786,7 @@ $yellow: #edbb06;
     h1 {
       font-size: 6rem;
       color: #fff;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         font-size: 4.5rem;
       }
     }
@@ -831,7 +831,7 @@ button.slick-next.slick-arrow {
   width: 100%;
   object-fit: cover;
   z-index: -10;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1023px) {
     position: static;
     display: block;
     width: 90vw;
@@ -841,7 +841,7 @@ button.slick-next.slick-arrow {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1023px) {
   .container.left.bottom.goldborder.basic_background {
     background-position: left center !important;
   }

@@ -149,8 +149,8 @@
   }
   .accordions {
     position: relative;
-    h3{
-      .ui-icon{
+    h3 {
+      .ui-icon {
         display: none;
       }
     }
@@ -164,6 +164,7 @@
       background: transparent;
       border: 0;
       text-transform: uppercase;
+      margin: 0;
       font-family: "MuseoSans-700";
       position: relative;
       &::after {

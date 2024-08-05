@@ -38,7 +38,7 @@
                   </div>
                 </div>
 
-                <button type="submit" id="search-btn" class="ms900 uppercase">
+                <button type="submit" id="search-btn" class="ms900 ">
                   <?=$pb->pb_experiencias[1]?>
                 </button>
               </div>
@@ -53,11 +53,9 @@
       <div class="bg">
         <div class="recommendation">
           <div class="container">
-            <h3 class="ms900"> <img src="../vacacional/images/exp_tur.svg" alt="descubre"><?=$pb->pb_experiencias[13]?></h3>
+            <h3 class="ms900"> <img src="../vacacional/images/atractivo.svg" alt="descubre"><?=$pb->pb_experiencias[13]?></h3>
             <ul class="recommendation-grid">
-              <?php for ($i=0; $i < count($plans); $i++) { $plan = $plans[$i]; 
-                if($plan->field_pa != 0){
-              ?>
+              <?php for ($i=0; $i < count($plans); $i++) { $plan = $plans[$i]; ?>
                 <li class="recommendation-grid__item">
                   <a href="/<?=$lang?>/experiencias-turisticas/plan/<?=$pb->get_alias($plan->title)?>-<?=$plan->nid?>" >
                     <!-- <div class="discount ms900">
@@ -85,13 +83,13 @@
                       <?= $plan->field_pb_oferta_desc_corta?>
                       
                       </p>
-                      <small class="ms900 uppercase link"> <?=$pb->pb_experiencias[14]?> </small>
+                      <small class="ms900  link"> <?=$pb->pb_experiencias[14]?> </small>
                     </div>
                   </a>
                 </li>
-                <?php } } ?>
+                <?php  } ?>
             </ul>
-            <a href="/<?=$lang?>/experiencias-turisticas/encuentra-tu-plan" class="btn alloffers uppercase ms900"
+            <a href="/<?=$lang?>/experiencias-turisticas/encuentra-tu-plan" class="btn alloffers  ms900"
               ><?=$pb->pb_experiencias[61]?></a
             >
           </div>

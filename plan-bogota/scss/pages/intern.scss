@@ -35,7 +35,7 @@
       min-height: 768px;
       position: relative;
       padding: 60px 20px;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         display: flex;
         align-items: center;
         min-height: 80vh;
@@ -143,7 +143,7 @@
         margin-bottom: 10px;
         text-align: right;
         padding-right: 20px;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           font-size: 20px;
           padding-right: 10px;
           margin-bottom: 10px;
@@ -170,7 +170,7 @@
         &:hover {
           opacity: 0.7;
         }
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           margin: 0 10px 0 0;
         }
       }
@@ -179,7 +179,7 @@
       margin: 114px auto 0 40px;
       background: transparent;
       display: none;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         margin: 114px auto 40px 40px;
       }
     }
@@ -208,7 +208,7 @@
         display: flex;
         gap: 50px;
         margin-top: 10px;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           flex-direction: column;
         }
         .gallery {
@@ -219,7 +219,7 @@
           position: sticky;
           top: 0;
           z-index: 2;
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             width: calc(100vw - 40px);
             height: calc(100vw - 40px);
           }
@@ -249,7 +249,7 @@
               margin: 0 15px;
               position: relative;
               width: 73px;
-              @media only screen and (max-width: 768px) {
+              @media only screen and (max-width: 1023px) {
                 height: 40px;
                 width: 40px;
               }
@@ -499,7 +499,7 @@
       align-items: center;
       gap: 15px;
       margin-bottom: 30px;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         flex-direction: column;
       }
       h3 {
@@ -519,7 +519,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 30px;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         grid-template-columns: 1fr;
       }
       &__item {

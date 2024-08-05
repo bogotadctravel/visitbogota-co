@@ -9,8 +9,8 @@ $b->products(0, $allBlogs[$blogi]->field_prod_rel)); } }
 
 ?>
 <main>
-  <h1 class="uppercase">
-    <img src="images/blog.svg" alt="blog">
+  <h1 class="">
+    <img src="images/blogic.svg" alt="blog">
     Blog
   </h1>
   <!-- <div class="container custom-select-container">
@@ -37,11 +37,13 @@ $b->products(0, $allBlogs[$blogi]->field_prod_rel)); } }
                 />
               </div>
               <div class="desc">
-                <!-- <small class="tag">
-                  <img src="images/mdi_tag.svg" alt="tag"/>
-                  <?=$allBlogs[$i]->field_prod_rel_1 ?>
-                </small> -->
-                <h2 class="uppercase"><?=$allBlogs[$i]->title?></h2>
+                <?php if($allBlogs[$i]->field_nueva_categorizacion1 != ""){ ?>
+                  <small class="tag">
+                    <img src="images/mdi_tag.svg" alt="tag"/>
+                    <?=$allBlogs[$i]->field_nueva_categorizacion1 ?>
+                  </small>
+                <?php } ?>
+                <h2 class=""><?=$allBlogs[$i]->title?></h2>
                 <small class="date"><?= $allBlogs[$i]->field_date ?></small>
               </div>
             </a>

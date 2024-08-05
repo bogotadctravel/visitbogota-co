@@ -111,7 +111,7 @@
     gap: 15px;
     justify-content: center;
     margin: 50px 0;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 15px;
@@ -125,7 +125,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        color: #007BFF;
+        color: #007bff;
         text-decoration: underline;
         img {
           width: 216px;
@@ -134,7 +134,7 @@
           overflow: hidden;
           object-fit: cover;
           margin-bottom: 10px;
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             width: calc(100vw / 2 - 40px);
             height: calc(100vw / 2 - 40px);
           }
@@ -304,7 +304,7 @@
             font-size: 2.3rem;
             margin-top: 10px;
             text-align: center;
-            @media only screen and (max-width: 768px) {
+            @media only screen and (max-width: 1023px) {
               font-size: 1.2rem;
             }
           }

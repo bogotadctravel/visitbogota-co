@@ -20,7 +20,7 @@
     box-shadow: 0px 8px 29px -2px rgba($color: #000, $alpha: 0.5);
     .container {
       display: flex;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         flex-direction: column;
       }
       .imagedata {
@@ -28,7 +28,7 @@
         position: relative;
         overflow: hidden;
 
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           height: 100vw;
           flex: auto;
           width: 100vw;
@@ -46,7 +46,7 @@
           font-size: 10px;
           font-family: "MuseoSans-700";
         }
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           margin-bottom: 30px;
         }
         &::after {
@@ -72,7 +72,7 @@
         max-width: 330px;
         padding: 30px;
         width: 100%;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           border-radius: 25px;
           max-width: 768px;
         }
@@ -121,7 +121,7 @@
       max-width: 1200px;
       margin: 0 auto;
       grid-template-columns: repeat(4, 1fr);
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         grid-template-columns: repeat(2, 1fr);
       }
       a {
@@ -131,7 +131,7 @@
           height: 190px;
           object-fit: cover;
           transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             height: calc(50vw - 52px);
           }
         }

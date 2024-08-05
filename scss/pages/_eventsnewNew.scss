@@ -74,7 +74,7 @@
       padding: 30px;
       width: 100%;
       z-index: 40;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         padding: 80px 20px;
       }
       h2 {
@@ -106,7 +106,7 @@
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            @media only screen and (max-width: 768px) {
+            @media only screen and (max-width: 1023px) {
               flex-wrap: nowrap;
               overflow: auto;
             }
@@ -190,7 +190,7 @@
   .agendaInfo {
     padding: 50px 20px;
     display: none;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       padding: 50px 20px 10px;
     }
     p {
@@ -201,7 +201,7 @@
       font-size: 18px;
       font-family: "MuseoSans-700";
       text-align: center;
-      @media only screen and (max-width: 768px) {
+      @media only screen and (max-width: 1023px) {
         font-size: 14px;
       }
     }
@@ -212,7 +212,7 @@
     gap: 15px;
     justify-content: center;
     margin: 50px 0;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 15px;
@@ -233,7 +233,7 @@
           overflow: hidden;
           object-fit: cover;
           margin-bottom: 10px;
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             width: calc(100vw / 2 - 40px);
             height: calc(100vw / 2 - 40px);
           }
@@ -243,7 +243,7 @@
           font-size: 15px;
           font-family: "MuseoSans-700";
           text-align: center;
-          @media only screen and (max-width: 768px) {
+          @media only screen and (max-width: 1023px) {
             font-size: 14px;
           }
         }
@@ -429,7 +429,7 @@
               line-height: normal;
               padding: 10px 20px;
               width: fit-content;
-              @media only screen and (max-width: 768px) {
+              @media only screen and (max-width: 1023px) {
                 margin: 0 auto;
               }
               &:hover {

@@ -155,7 +155,7 @@
     gap: 5px;
     grid-auto-rows: calc(100vw / 16 * 9 / 4);
     padding: 0 20px;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 1023px) {
       display: flex;
       flex-direction: column;
     }
@@ -172,18 +172,18 @@
         width: 100%;
         height: calc(100vw / 16 * 9 / 4);
         object-fit: cover;
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1023px) {
           height: calc(100vw / 16 * 9);
         }
-        &.video-icon{
+        &.video-icon {
           position: absolute;
-            z-index:1;
-            left: 50%;
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-            top: 50%;
-            transform: translate(-50%, -50%);
+          z-index: 1;
+          left: 50%;
+          width: 40px;
+          height: 40px;
+          object-fit: contain;
+          top: 50%;
+          transform: translate(-50%, -50%);
         }
       }
 

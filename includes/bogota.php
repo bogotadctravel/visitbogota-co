@@ -409,6 +409,10 @@ class bogota
         $result = $this->query("categorias_atractivos/$id", "", true);
         return $result;
     }
+    function getAgendaTax(){
+        $result = $this->query("agenda_tax", "", true);
+        return $result;
+    }
     function otherProducts($ID, $quantity = 5)
     {
         $partial = $this->products();
@@ -1109,7 +1113,7 @@ class bogota
             $metas['title'] = $seo->field_seo_title;
             $metas['desc'] = $seo->field_seo_desc;
             $metas['words'] = $seo->field_seo_keys;
-            $metas['img'] = "https://www.bogotadc.travel" . $seo->field_seo_img;
+            $metas['img'] = "https://files.visitbogota.co" . $seo->field_seo_img;
         }else if($type == 1){
             $seo = $this->query("agenda_taxseo/$seoId");
             $seo = $seo[0];
@@ -1117,7 +1121,7 @@ class bogota
             $metas['title'] = $seo->field_titulo_seo;
             $metas['desc'] = $seo->field_descripcion_seo;
             $metas['words'] = $seo->field_seo_keys;
-            $metas['img'] = "https://www.bogotadc.travel" . $seo->field_imagen_seo;
+            $metas['img'] = "https://files.visitbogota.co" . $seo->field_imagen_seo;
             
         }else if($type == 2){
             $seo = $this->query("categorias_atractivos/$seoId/","", true);
@@ -1126,7 +1130,7 @@ class bogota
             $metas['title'] = $seo->field_titulo_seo;
             $metas['desc'] = $seo->field_descripcion_seo;
             $metas['words'] = $seo->field_seo_keys;
-            $metas['img'] = "https://www.bogotadc.travel" . $seo->field_imagen_seo;
+            $metas['img'] = "https://files.visitbogota.co" . $seo->field_imagen_seo;
 
         }
        
@@ -1143,7 +1147,7 @@ class bogota
         $ret .= '<meta name="thumbnail" content="' . $metas['img'] . '">' . PHP_EOL;
         $ret .= '<meta name="language" content="spanish">' . PHP_EOL;
         $ret .= '<meta name="twitter:card" content="summary_large_image">' . PHP_EOL;
-        $ret .= '<meta name="twitter:site" content="@BogotaDCTravel">' . PHP_EOL;
+        $ret .= '<meta name="twitter:site" content="@visitbogotaco">' . PHP_EOL;
         $ret .= '<meta name="twitter:title" content="' . $metas['title'] . '">' . PHP_EOL;
         $ret .= '<meta name="twitter:description" content="' . $metas['desc'] . '">' . PHP_EOL;
         $ret .= '<meta name="twitter:image" content="' . $metas['img'] . '">' . PHP_EOL;

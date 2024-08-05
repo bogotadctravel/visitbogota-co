@@ -203,7 +203,7 @@ const filterPlans = (
             )}-${plan.nid}`;
             template = `
             <li><a href="${link}" class="find_plan-grid__item" 
-             data-persons="${plan.field_maxpeople}" data-cat="${plan.field_categoria_comercial}" data-zone="${plan.field_pb_oferta_zona}" data-field_destacar_en_categoria="${plan.field_destacar_en_categoria}">
+             data-persons="${plan.field_maxpeople}" data-cat="${plan.field_nueva_categorizacion}" data-zone="${plan.field_pb_oferta_zona}" data-field_destacar_en_categoria="${plan.field_destacar_en_categoria}">
              <div class="image">
              <img loading="lazy" class="lazyload" data-src="https://files.visitbogota.co${plan.field_pb_oferta_img_listado}" src="https://via.placeholder.com/330x240" alt="${plan.title}"/>
             
@@ -211,7 +211,7 @@ const filterPlans = (
             <div class="info">
               <strong class="ms900">${plan.title}</strong>
               <p class="ms100">${plan.field_pb_oferta_desc_corta}</p>
-              <small class="link ms900 uppercase"> ${pb_experiencias[14]} </small>
+              <small class="link ms900 "> ${pb_experiencias[14]} </small>
             </div>
           </a></li>`;
             grid.innerHTML += template;
@@ -275,7 +275,7 @@ lazyImages();
 const fetchFiltersData = () => {
   const urls = [
     `get/tax.php?taxName=test_zona&lang=${actualLang}`,
-    `get/tax.php?taxName=categorias_comerciales_pb&lang=${actualLang}`,
+    `get/tax.php?taxName=categorias_atractivos_2024&lang=${actualLang}`,
   ];
   const allRequests = urls.map(async (url) => {
     let plansResponse = await fetch(url);
@@ -290,7 +290,6 @@ function filtersAll() {
       //   ZONE ELEMENTS HOME
       const zones = arrayOfResponses[0];
       const pb_segments = arrayOfResponses[1];
-
       let listZones = document.querySelector("#zones ul");
       if (listZones) {
         listZones.innerHTML = "";
@@ -314,21 +313,24 @@ function filtersAll() {
       if (listCategories) {
         listCategories.innerHTML = "";
         pb_segments.map((segment) => {
-          listCategories.innerHTML += `<li><input type="checkbox" value="${
-            segment.tid
-          }" aria-label="cat-${segment.tid}" name="cat-${
-            segment.tid
-          }" id="cat-${segment.tid}" onChange="filterPlans(null, null, ${
-            segment.tid
-          },${parseInt(
-            $("#amount")
-              .val()
-              .replace(/\$|\.|,/g, "")
-          )},  ${searchValue != "null" ? `'${searchValue}'` : null},${
-            maxValue != "" ? maxValue : null
-          },this)" /><label class="filtercheck" for="cat-${
-            segment.tid
-          }" class="ms500">${segment.name}</label></li>`;
+          if(segment.field_exphomeshow == "1"){
+
+            listCategories.innerHTML += `<li><input type="checkbox" value="${
+              segment.tid
+            }" aria-label="cat-${segment.tid}" name="cat-${
+              segment.tid
+            }" id="cat-${segment.tid}" onChange="filterPlans(null, null, ${
+              segment.tid
+            },${parseInt(
+              $("#amount")
+                .val()
+                .replace(/\$|\.|,/g, "")
+            )},  ${searchValue != "null" ? `'${searchValue}'` : null},${
+              maxValue != "" ? maxValue : null
+            },this)" /><label class="filtercheck" for="cat-${
+              segment.tid
+            }" class="ms500">${segment.name}</label></li>`;
+          }
         });
       }
     })
@@ -827,19 +829,19 @@ if (document.querySelector(".categoriessection .categories")) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ filter: "categorias_comerciales_pb" }),
+    body: JSON.stringify({ filter: "categorias_atractivos_2024" }),
   })
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       data
-        .filter((el) => {
-          console.log({ name: el.name, field_home_view: el.field_home_view });
-          return el.field_home_view == "1";
-        })
-        .forEach(({ name, tid, field_format_icon }) => {
-          let template = `<a href="/${actualLang}/experiencias-turisticas/encuentra-tu-plan?categories=${tid}"><div class="img"><img src="https://files.visitbogota.co${field_format_icon}" alt="${name}"></div><small>${name}</small></a>`;
-          document.querySelector(".categoriessection .categories").innerHTML +=
-            template;
+        .forEach(({ name, tid, field_format_icon,field_exphomeshow }) => {
+          let template = `<a href="/${actualLang}/experiencias-turisticas/encuentra-tu-plan?categories=${tid}"><div class="img"><img src="https://files.visitbogota.co${field_format_icon ? field_format_icon : `/drpl/sites/default/files/2024-06/ticket_3.png`}" alt="${name}"></div><small>${name}</small></a>`;
+          if(field_exphomeshow == "1"){
+
+            document.querySelector(".categoriessection .categories").innerHTML +=
+              template;
+          }
         });
     })
     .catch((error) => {

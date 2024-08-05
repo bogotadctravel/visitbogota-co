@@ -2,7 +2,7 @@
 $bodyClass = 'home';
 include "includes/head.php";
 $sliders = $vacacional->getSlidersHome();
-
+$banners = $vacacional->getBannersHome();
 ?>
 
 <main>
@@ -11,9 +11,19 @@ $sliders = $vacacional->getSlidersHome();
       <source src="video/video.mp4" />
     </video>
   </div>
+  <div class="banners_home">
+    <a href="<?=$banners[0]->field_link?>">
+      <img src="https://bogotadc.travel<?=$banners[0]->field_image?>" alt="<?=$banners[0]->title?>">
+    </a>
+  </div>
+  <!-- <div class="banners_home">
+    <a target="_blank" href="<?=$os == "iOS" || $browser == "Safari" ? "https://apps.apple.com/app/visit-bogot%C3%A1/id1478036261" : "https://play.google.com/store/apps/details?id=com.servinf.test.bogotadctravel"?>">
+      <img src="images/appbanner.jpg" alt="app Banner">
+    </a>
+  </div> -->
   <div class="bg-dia" style="background-image: url(images/bogo_dia.png);">
     <section class="descubre container">
-      <h2><img src="images/descubre_icon.svg" alt="descubre"><?=$descubre_bogota?></h2>
+      <h2><img src="images/descubre_bogotaic.svg" alt="descubre"><?=$descubre_bogota?></h2>
       <section class="splide" id="bogota-natural" aria-label="Basic Structure Example">
         <div class="splide__arrows">
           <button class="splide__arrow splide__arrow--prev">
@@ -32,11 +42,11 @@ $sliders = $vacacional->getSlidersHome();
   </div>
   <div class="bg-noche" style="background-image: url(images/bog_noche.png);">
   <section class="rutas container">
-  <h2 ><img src="images/rutaicon.svg" alt="RT"><?=$pi_bogota[103]?><a href="/<?=$lang?>/rutas-turisticas" class="wait all"><?=$ver_rutas?></a></h2>
+  <h2 ><img src="images/rutas.svg" alt="RT"><?=$pi_bogota[103]?><a href="/<?=$lang?>/rutas-turisticas" class="wait all"><?=$ver_rutas?></a></h2>
     <div class="container grid-rutas"></div>
   </section>
   <section class="evento container">
-    <h2><img src="images/eventos.svg" alt="descubre"><?=$eventos?><a href="/<?=$lang?>/eventos/agenda-general-148" class="wait all"><?=$ver_eventos?></a></h2>
+    <h2><img src="images/eventos_icW.svg" alt="descubre"><?=$eventos?><a href="/<?=$lang?>/eventos/agenda-general-148" class="wait all"><?=$ver_eventos?></a></h2>
     <div class="container grid-eventos"></div>
   </section>
     <!-- <section class="exp-home container">
@@ -109,7 +119,7 @@ $sliders = $vacacional->getSlidersHome();
     </section> -->
   </div>
   <section class="blog container">
-    <h2><img src="images/blog.svg" alt="descubre"><?=$blog_y_multimedia?></h2>
+    <h2><img src="images/blogic.svg" alt="descubre"><?=$blog_y_multimedia?></h2>
     <h3><?=$publicaciones_recientes?> <a href="/<?=$lang?>/blog" class="wait all"><?=$ver_blog?></a></h3>
     <div class="container grid-blogs"></div>
   </section>

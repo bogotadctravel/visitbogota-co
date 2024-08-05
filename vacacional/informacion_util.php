@@ -20,11 +20,11 @@ function filter_callback($element) {
 ?>
 <main>
     <div class="container">
-        <h1><svg width="63" height="72" viewBox="0 0 63 72" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 4C0 1.79086 1.79086 0 4 0H59C61.2091 0 63 1.79086 63 4V67.3975C63 70.1428 60.2977 72.0722 57.7011 71.1807L32.7989 62.6311C31.9571 62.3421 31.0429 62.3421 30.2011 62.6311L5.29889 71.1807C2.70232 72.0722 0 70.1428 0 67.3975V4Z" fill="#35498e"/><path d="M31.22 56.9863C30.983 56.9314 30.7552 56.881 30.5043 56.8215C27.446 56.0757 25.5591 54.1722 24.755 51.1888C24.696 50.9823 24.5577 50.8067 24.3692 50.6992C23.5247 50.3639 22.8048 49.7821 22.3062 49.0319C21.8076 48.2818 21.5544 47.3993 21.5806 46.5032C21.5527 45.2311 21.6178 43.959 21.5062 42.6961C21.268 40.2318 20.2242 37.9101 18.5317 36.0795C16.6886 33.9965 15.3705 31.515 14.6844 28.8364C13.9983 26.1577 13.9636 23.3575 14.583 20.6632C15.2024 17.9689 16.4586 15.4564 18.2494 13.3297C20.0402 11.203 22.3153 9.52211 24.8898 8.42351C33.4137 4.94135 42.8347 8.01169 47.4871 15.8409C49.4646 19.1497 50.2383 23.023 49.6808 26.8227C49.2523 30.1845 47.832 33.3488 45.5955 35.924C44.4475 37.2692 43.4343 38.7015 42.9788 40.4128C42.7054 41.5301 42.522 42.6669 42.4304 43.8126C42.3467 44.7003 42.4304 45.6017 42.4304 46.4986C42.4579 47.395 42.2052 48.278 41.7065 49.0285C41.2077 49.7789 40.487 50.3604 39.6417 50.6946C39.5513 50.7425 39.4715 50.8077 39.4069 50.8862C39.3423 50.9648 39.2941 51.0552 39.2653 51.1522C38.3961 54.3827 36.3372 56.3411 32.9722 56.9268C32.9092 56.9444 32.8484 56.969 32.7909 57L31.22 56.9863ZM39.4837 42.2294C39.6696 41.4332 39.8137 40.6645 40.0182 39.9186C40.6642 37.5758 42.0121 35.6311 43.5458 33.7688C44.8854 32.1903 45.8602 30.3438 46.4027 28.3574C46.9452 26.3711 47.0425 24.2923 46.6877 22.2653C46.2418 19.21 44.7807 16.3862 42.5326 14.2348C39.1769 10.9997 35.0962 9.53543 30.4485 10.0342C24.834 10.6336 20.6882 13.5301 18.462 18.6001C15.9847 24.1917 16.8771 29.4721 20.837 34.1897C22.3023 35.8521 23.3894 37.8039 24.0253 39.914C24.2391 40.6736 24.3785 41.4515 24.5551 42.2294H39.4837ZM39.4465 45.2082H24.5737C24.5737 45.6658 24.5737 46.0502 24.5737 46.4528C24.5737 47.5236 25.1686 48.1001 26.2702 48.1001H31.1224C33.3719 48.1001 35.6168 48.1001 37.8616 48.1001C38.0571 48.1137 38.2533 48.0889 38.4388 48.027C38.6244 47.965 38.7955 47.8673 38.9422 47.7395C39.0889 47.6116 39.2083 47.4563 39.2933 47.2825C39.3783 47.1087 39.4272 46.92 39.4372 46.7274C39.4744 46.2423 39.4465 45.7207 39.4465 45.2082ZM27.8643 51.0378C28.169 51.9447 28.7659 52.729 29.5645 53.2716C30.363 53.8142 31.3196 54.0854 32.289 54.044C34.0737 53.8976 35.9468 52.4334 36.1234 51.0378H27.8643Z" fill="white"/><path d="M43.9026 24.2251C43.9436 25.294 43.4107 25.99 42.5362 26.0445C41.6618 26.0991 41.0469 25.4259 41.0059 24.3661C40.9512 22.1251 40.0327 19.9917 38.4417 18.4104C36.8508 16.8291 34.7102 15.922 32.4662 15.8782C31.1317 15.8372 30.5897 14.7183 30.8903 13.9359C30.987 13.6413 31.177 13.3861 31.4317 13.2088C31.6864 13.0316 31.992 12.9419 32.3022 12.9534C34.248 12.9488 36.1632 13.4365 37.8692 14.3712C39.5752 15.3058 41.0163 16.6568 42.058 18.2981C43.2139 20.0635 43.8528 22.1163 43.9026 24.2251Z" fill="white"/></svg><?= $b->generalInfo->field_info_txt ?></h1>
+        <h1><img src="images/puntos_infoBlue.svg?v=2" alt="<?= $b->generalInfo->field_info_txt ?>"><?= $b->generalInfo->field_info_txt ?></h1>
     </div>
     <div class="container  fade" >
         <?php
-        $icons = array("map_toilet","gis_map-route","recorridos_guiados","puntos_info");
+        $icons = array("map_toilet","gis_map-route","recorridos_guiados","puntos_infoBlue");
         $customOrder = array("2","3","1");
         function cmp($a, $b) {
             global $customOrder;
@@ -49,9 +49,9 @@ function filter_callback($element) {
                                 </div>";
 
                     if ($tripInfo[$a]->field_address) {
-                        echo "<span class='name uppercase'>" . $tripInfo[$a]->title . "<small class='dir uppercase'>" . $tripInfo[$a]->field_address . "</small></span>";
+                        echo "<span class='name '>" . $tripInfo[$a]->title . "<small class='dir '>" . $tripInfo[$a]->field_address . "</small></span>";
                     } else {
-                        echo "<span class='name uppercase'>" . $tripInfo[$a]->title . "</span>";
+                        echo "<span class='name '>" . $tripInfo[$a]->title . "</span>";
                     }
 
                     echo "</a></li>";
@@ -71,13 +71,13 @@ function filter_callback($element) {
                             <li>
                                 <a href='javascript:utilBoxes(\"" . $tripInfo[$a]->nid . "\");'>
                                     <div class='img'>
-                                        <img loading='lazy' data-src='images/" . $icons[$a] . ".svg' alt='bogota' class='zone_img lazyload' src='https://picsum.photos/20/20'>
+                                        <img loading='lazy' data-src='images/" . $icons[$a] . ".svg?v=2' alt='bogota' class='zone_img lazyload' src='https://picsum.photos/20/20'>
                                     </div>";
 
                         if ($tripInfo[$a]->field_address) {
-                            echo "<span class='name uppercase'>" . $tripInfo[$a]->title . "<small class='dir uppercase'>" . $tripInfo[$a]->field_address . "</small></span>";
+                            echo "<span class='name '>" . $tripInfo[$a]->title . "<small class='dir '>" . $tripInfo[$a]->field_address . "</small></span>";
                         } else {
-                            echo "<span class='name uppercase'>" . $tripInfo[$a]->title . "</span>";
+                            echo "<span class='name '>" . $tripInfo[$a]->title . "</span>";
                         }
 
                         echo "</a></li>";
@@ -98,7 +98,7 @@ function filter_callback($element) {
             for ($a = 0; $a < count($arr); $a++) {
                 if($arr[$a]->field_langfile){
                     echo "<li><a data-fancybox href='https://files.visitbogota.co".$arr[$a]->field_langfile."'><div class='img'><img loading='lazy' data-src='" . ($arr[$a]->field_imagen ? $urlGlobal . $arr[$a]->field_imagen : '/img/noimg.png') . "' alt='bogota' class='zone_img lazyload' src='https://picsum.photos/20/20'></div>";
-                    echo "<span class='name uppercase'>" . $arr[$a]->title . "</span></a></li>";
+                    echo "<span class='name '>" . $arr[$a]->title . "</span></a></li>";
                 }
             }
             ?>

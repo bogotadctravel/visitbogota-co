@@ -95,8 +95,8 @@ else{
         <a href="<?= $lang ?>/blog" class="wait">Blog</a>
         <a href="<?= $lang ?>/mice" class="wait">Turismo de reuniones - MICE</a>
         <a href="<?= $lang ?>/ruta-leyenda-el-dorado/inicio" class="wait">Ruta leyenda el dorado</a>
-        <a href="https://planbogota.bogotadc.travel/" target="_blank">Plan Bogotá</a>
-        <a href="https://files.visitbogota.co/banco-imagenes/" target="_blank">Banco de imágenes</a>
+        <a href="/<?=$lang?>/experiencias-turisticas" target="_blank">Plan Bogotá</a>
+        <a href="/<?=$lang?>/banco-imagenes/" target="_blank">Banco de imágenes</a>
         <!-- <h3><?= $b->generalInfo->field_titulo_mas_alla ?></h3> -->
         <!-- <div>
             <ul>
