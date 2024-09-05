@@ -409,6 +409,10 @@ class bogota
         $result = $this->query("categorias_atractivos/$id", "", true);
         return $result;
     }
+    function getTaxgastro($id="all"){
+        $result = $this->query("zonas_gastronomicas/$id", "", true);
+        return $result;
+    }
     function getAgendaTax(){
         $result = $this->query("agenda_tax", "", true);
         return $result;
@@ -1112,15 +1116,13 @@ class bogota
             $metas['words'] = $seo->field_seo_keys;
             $metas['title'] = $seo->field_seo_title;
             $metas['desc'] = $seo->field_seo_desc;
-            $metas['words'] = $seo->field_seo_keys;
             $metas['img'] = "https://files.visitbogota.co" . $seo->field_seo_img;
         }else if($type == 1){
             $seo = $this->query("agenda_taxseo/$seoId");
             $seo = $seo[0];
-            $metas['words'] = $seo->field_clave_seo;
+            $metas['words'] = $seo->field_seo_keys;
             $metas['title'] = $seo->field_titulo_seo;
             $metas['desc'] = $seo->field_descripcion_seo;
-            $metas['words'] = $seo->field_seo_keys;
             $metas['img'] = "https://files.visitbogota.co" . $seo->field_imagen_seo;
             
         }else if($type == 2){
@@ -1129,7 +1131,22 @@ class bogota
             $metas['words'] = $seo->field_clave_seo;
             $metas['title'] = $seo->field_titulo_seo;
             $metas['desc'] = $seo->field_descripcion_seo;
+            $metas['img'] = "https://files.visitbogota.co" . $seo->field_imagen_seo;
+
+        }else if($type == 3){
+            $seo = $this->query("restaurants/$seoId/all/all/all/all","", true);
+            $seo = $seo[0];
+            $metas['title'] = $seo->field_seo_title;
+            $metas['desc'] = $seo->field_seo_desc;
             $metas['words'] = $seo->field_seo_keys;
+            $metas['img'] = "https://files.visitbogota.co" . $seo->field_seo_img;
+
+        }else if($type == 4){
+            $seo = $this->query("zonas_gastronomicas/$seoId/","", true);
+            $seo = $seo[0];
+            $metas['words'] = $seo->field_clave_seo;
+            $metas['title'] = $seo->field_titulo_seo;
+            $metas['desc'] = $seo->field_descripcion_seo;
             $metas['img'] = "https://files.visitbogota.co" . $seo->field_imagen_seo;
 
         }

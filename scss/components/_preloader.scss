@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   z-index: 9999;
+
   .image {
     // 
     display: flex;
@@ -22,26 +23,31 @@
     height: 700px;
     padding: 50px;
     box-sizing: content-box;
-    background-image: radial-gradient(
-      #fff,
-      #fff,
-      transparent,
-      transparent,
-      transparent,
-      transparent
-    );
+    background-image: radial-gradient(#fff,
+        #fff,
+        transparent,
+        transparent,
+        transparent,
+        transparent);
     display: flex;
     align-items: center;
     justify-content: center;
-    h2{
+
+    h2 {
       color: #e51635;
       font-weight: bold;
       font-size: 35px;
-  }
+    }
+
+    img {
+      width: 120px;
+    }
+
     @media screen and (max-width: 1023px) {
       width: 80vw;
       height: 80vw;
       background-image: radial-gradient(#fff, #fff, transparent, transparent);
+
       img {
         width: 50%;
       }

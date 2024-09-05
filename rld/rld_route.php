@@ -1,4 +1,5 @@
 <?php
+$bodyClass="rld_home";
 include 'includes/head.php';
 
 $route = $b->get_rld_routes($_GET['row']);

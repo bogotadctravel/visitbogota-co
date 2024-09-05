@@ -2,7 +2,7 @@ var candidates = [
   {
     name: "Candelaria",
     source: "cha_CBoB2TwZi50OnRUpbWQMx",
-    avatar: "sticker/botbog.jpg"
+    avatar: "sticker/asisstant2.webp"
   }
 ];
 

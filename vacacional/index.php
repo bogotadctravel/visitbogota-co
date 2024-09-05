@@ -7,21 +7,15 @@ $banners = $vacacional->getBannersHome();
 
 <main>
   <div class="flexbanner">
-    <video autobuffer autoplay muted preload="auto" loop src="video/video.mp4">
-      <source src="video/video.mp4" />
-    </video>
+  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/_U2VqGbY4ZY?si=9uziJA1JX2QQmRJ3&amp;controls=0&amp;autoplay=1&amp;mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
   </div>
-  <div class="banners_home">
-    <a href="<?=$banners[0]->field_link?>">
-      <img src="https://bogotadc.travel<?=$banners[0]->field_image?>" alt="<?=$banners[0]->title?>">
-    </a>
-  </div>
+ 
   <!-- <div class="banners_home">
     <a target="_blank" href="<?=$os == "iOS" || $browser == "Safari" ? "https://apps.apple.com/app/visit-bogot%C3%A1/id1478036261" : "https://play.google.com/store/apps/details?id=com.servinf.test.bogotadctravel"?>">
       <img src="images/appbanner.jpg" alt="app Banner">
     </a>
   </div> -->
-  <div class="bg-dia" style="background-image: url(images/bogo_dia.png);">
     <section class="descubre container">
       <h2><img src="images/descubre_bogotaic.svg" alt="descubre"><?=$descubre_bogota?></h2>
       <section class="splide" id="bogota-natural" aria-label="Basic Structure Example">
@@ -39,6 +33,10 @@ $banners = $vacacional->getBannersHome();
         </div>
       </section>
     </section>
+  <div class="banners_home">
+    <a href="<?=$banners[0]->field_link?>">
+      <img src="https://bogotadc.travel<?=$banners[0]->field_image?>" alt="<?=$banners[0]->title?>">
+    </a>
   </div>
   <div class="bg-noche" style="background-image: url(images/bog_noche.png);">
   <section class="rutas container">

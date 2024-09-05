@@ -1,4 +1,5 @@
 <?php
+$bodyClass="rld_home";
 include 'includes/head.php';
 ?>
 <section class="rld_body">

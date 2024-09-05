@@ -117,7 +117,6 @@ if (!$planes) {
         <!-- <li><a href="/<?=$lang?>/experiencias-turisticas/"><?=$experiencia_turisticas?></a></li> -->
         <li><a href="/<?=$lang?>/eventos/agenda-empresarial-148"><?=$agenda_empresarial?></a></li>
         <li><a href="/<?=$lang?>/blog"><?=$blog?></a></li>
-        <li><a href="/<?=$lang?>/banco-imagenes/"><?=$exploraciones_visuales?></a></li>
           <li><a href="https://eldorado.aero"  target="_blank"><?=$aeropuerto?></a></li>
           <!-- <li><a href="/<?=$lang?>/mice" ><?=$turismoMICE?></a></li> -->
           <li><a href="/<?=$lang?>/banco-imagenes/" ><?=$bancoMultimedia?></a></li>

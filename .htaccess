@@ -72,6 +72,8 @@ RewriteRule ^([a-zA-Z0-9_-]+)/cerca-de-mi/([a-zA-Z0-9_-]+)/([0-9]+)$ vacacional/
 RewriteRule ^([a-zA-Z0-9_-]+)/vuelos$ vacacional/vuelos.php?lang=$1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/rutas-turisticas$ vacacional/rutas.php?lang=$1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/rutas-turisticas/([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)$ vacacional/ruta_intern.php?lang=$1&id=$3&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/zona-gastronomica/([a-zA-Z0-9_-]+)-([0-9]+)$ vacacional/portal_gastronomico.php?id=$3&lang=$1&seo=$3&seoType=4 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/restaurante/([a-zA-Z0-9_-]+)-([0-9]+)-([0-9]+)$ vacacional/restaurant.php?id=$4&catid=$3&lang=$1&seo=$4&seoType=3 [L,QSA]
 
 #RLD
 RewriteRule ^([a-zA-Z0-9_-]+)/ruta-leyenda-el-dorado/videos/([a-zA-Z0-9_-]+)$ downloads/rld-videos/$1.mp4 [L,QSA]

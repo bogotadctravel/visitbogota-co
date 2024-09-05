@@ -1,9 +1,11 @@
 <?php
 $dir = "/home/bogotas/public_html/cache";
+$dir2 = "/home/bogotas/public_html/dev2024/cache";
 $log  = "Caché eliminado ".date("F j, Y, g:i a").PHP_EOL.
         "-------------------------".PHP_EOL;
 file_put_contents('refresh.log', $log, FILE_APPEND);
 deleteDirectory($dir);
+deleteDirectory($dir2);
 function deleteDirectory($dir) {
     if (!file_exists($dir)) {
         return true;

@@ -2,6 +2,7 @@
   @media only screen and (max-width: 1023px) {
     padding: 0;
   }
+  
   h1 {
     font-size: clamp(32px, 3vw, 50px);
     color: var(--gris-oscuro, #373737);
@@ -88,9 +89,10 @@
   main {
     background: #fff;
     border-radius: 0 0 0 40px;
-    padding: 50px 0 0;
+    padding: 200px 0 0;
     z-index: 1;
     position: relative;
+    
     @media only screen and (max-width: 1023px) {
       padding: 20px 0;
     }

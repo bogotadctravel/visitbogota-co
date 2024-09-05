@@ -31,6 +31,21 @@ class vacacional extends bogota{
         $result = $this->query($querystr, "", true);        
         return $result;
     }
+    public function getEventsCat($cat){
+        $querystr = "eventscat/$cat";
+        $result = $this->query($querystr, "", true);        
+        return $this->unifyPlaces($result);
+    }
+    public function getBlogsCat($cat){
+        $querystr = "blogcat/$cat";
+        $result = $this->query($querystr, "", true);        
+        return $this->unifyPlaces($result);
+    }
+    public function getOfertasCat($cat){
+        $querystr = "ofertascat/$cat";
+        $result = $this->query($querystr, "", true);        
+        return $result;
+    }
     public function getZonas(){
         $querystr = "zonas_tax";
         $result = $this->query($querystr);        
@@ -42,6 +57,10 @@ class vacacional extends bogota{
     }
     public function getRutasTuristicas($id="all"){
         $result = $this->query("rt/$id", "", true);
+        return $result;
+    }
+    public function getRutasTuristicasByCategory($cat="all"){
+        $result = $this->query("rtcat/$cat", "", true);
         return $result;
     }
     public function getBannersHome(){
@@ -107,6 +126,13 @@ class vacacional extends bogota{
         function getbi_imagenes_home(){
             $res = $this->query("bi_imagenes_home"); 
             return $res;
+        }
+        function getRestaurants($categoria_restaurantes="all",$test_zona="all",$zonas_gastronomicas="all",$rangos_de_precio="all",$id="all") {
+        $querystr = "restaurants/".$id."/".$test_zona."/".$rangos_de_precio."/".$zonas_gastronomicas."/".$categoria_restaurantes;
+        // echo $querystr;
+        $result = $this->query($querystr, "",true);
+
+        return $result;
         }
 }
 

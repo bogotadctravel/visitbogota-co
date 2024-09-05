@@ -1,4 +1,5 @@
 <?php
+$bodyClass="rld_home";
 include 'includes/head.php';
 if($_GET['type']=="aprende")
 {

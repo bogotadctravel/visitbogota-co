@@ -3,6 +3,16 @@ header {
   width: 100%;
   z-index: 30;
   position: relative;
+  .headerLogo{
+    object-fit: contain;width: 170px;
+    @media only screen and (max-width: 1023px){
+        width: 110px;
+    }
+  }
+  @media only screen and (min-width: 1024px){
+    position: fixed;
+      
+  }
 
 
   &::after {

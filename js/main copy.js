@@ -60,103 +60,60 @@ window.onload = function () {
   bogotaApp.SetCookie("lang_redirect", ln);
 
   // if (ln.substring(0, 2) == "en") {
-  //   if (location.href === "https://files.visitbogota.co/") {
-  //     location.href = `https://files.visitbogota.co/${newLang}`;
+  //   if (location.href === "https://bogotadc.travel/") {
+  //     location.href = `https://bogotadc.travel/${newLang}`;
   //   } else {
   //     location.href = location.href.replace(`/${actualLang}`, `/${newLang}`);
   //   }
   // } else if (ln.substring(0, 2) == "es") {
-  //   if (location.href === "https://files.visitbogota.co/") {
-  //     location.href = `https://files.visitbogota.co/${newLang}`;
+  //   if (location.href === "https://bogotadc.travel/") {
+  //     location.href = `https://bogotadc.travel/${newLang}`;
   //   } else {
   //     location.href = location.href.replace(`/${actualLang}`, `/${newLang}`);
   //   }
   // } else if (ln.substring(0, 2) == "pt") {
-  //   if (location.href === "https://files.visitbogota.co/") {
-  //     location.href = `https://files.visitbogota.co/${newLang}`;
+  //   if (location.href === "https://bogotadc.travel/") {
+  //     location.href = `https://bogotadc.travel/${newLang}`;
   //   } else {
   //     location.href = location.href.replace(`/${actualLang}`, `/${newLang}`);
   //   }
   // } else {
-  //   if (location.href === "https://files.visitbogota.co/") {
-  //     location.href = `https://files.visitbogota.co/en`;
+  //   if (location.href === "https://bogotadc.travel/") {
+  //     location.href = `https://bogotadc.travel/en`;
   //   } else {
   //     location.href = location.href.replace(`/${actualLang}`, `/en`);
   //   }
   // }
 };
-const getBogotaData = async (containerId, data) => {
-  const bogotaContainer = document.querySelector(`#${containerId} ul`);
-  bogotaContainer.innerHTML = "";
-  const promises = data.map(async (item) => {
-    let urlImg = item.field_banner_prod
-      ? await getImageFromCacheOrFetch(
-          "https://files.visitbogota.co" + item.field_banner_prod
-        )
-      : "https://placehold.co/400x400.jpg?text=visitbogota";
-    let urlSite = `/${actualLang}/explora/${get_alias(item.name)}/${item.tid}`;
-    let template = `
-      <li class="splide__slide">
-        <a href="${urlSite}">
-          <img loading="lazy" data-src="${urlImg}" alt="${item.name}" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota">
-          <span>${item.name}</span>
-        </a>
-      </li>`;
-    if (item.field_categor == "1") {
-      bogotaContainer.innerHTML += template;
-    }
-  });
 
-  await Promise.all(promises);
-
-  new Splide(`#${containerId}`, {
-    perPage: 5,
-    gap: 0,
-    type: "loop",
-    pagination: false,
-    lazyLoad: "nearby",
-    breakpoints: {
-      768: {
-        perPage: 1,
-      },
-    },
-  }).mount();
-
-  lazyImages();
-};
 const getExploraBogota = async () => {
-  const bogotaContainerFooter = document.querySelector(`#footerDescubre ul`);
-  const bogotaContainerMenuMobile = document.querySelector(`.explora`);
-  const response = await fetch(`/g/getMenuCategories/?lang=${actualLang}`);
+  const response = await fetch(`/g/products/?lang=${actualLang}`);
   const data = await response.json();
   let productos = data.map((prod) => ({
-    id: prod.tid,
-    title: prod.name,
-    url: `/${actualLang}/explora/${get_alias(prod.name)}/${prod.tid}`,
-    field_categor: prod.field_categor,
+    id: prod.nid,
+    title: prod.title,
+    url: `/${actualLang}/explora/${get_alias(prod.title)}/${prod.nid}`,
   }));
-  bogotaContainerFooter.innerHTML = "";
-  bogotaContainerMenuMobile.innerHTML = "";
   document.querySelector("nav li.explora ul").innerHTML = "";
-
+  let bogotaNatural = "";
+  if (actualLang == "es") {
+    bogotaNatural = "Bogotá Natural";
+  } else {
+    bogotaNatural = "Natural Bogotá";
+  }
+  document.querySelector(
+    "nav li.explora ul"
+  ).innerHTML += `<li><a href="/${actualLang}/producto/naturaleza-8" class="wait ms700">${bogotaNatural}</a></li>`;
   productos.forEach((producto) => {
-    if (producto.field_categor == "1") {
+    document.querySelector(
+      "nav li.explora ul"
+    ).innerHTML += `<li><a href="${producto.url}" class="wait ms700">${producto.title}</a></li>`;
+    if (document.querySelector("#categorias_blog select")) {
       document.querySelector(
-        "nav li.explora ul"
-      ).innerHTML += `<li><a href="${producto.url}" class="wait ms700">${producto.title}</a></li>`;
-      bogotaContainerFooter.innerHTML += `<li><a href="${producto.url}" class="wait">${producto.title}</a></li>`;
-      bogotaContainerMenuMobile.innerHTML += `<li><a href="${producto.url}" class="wait">${producto.title}</a></li>`;
-      if (document.querySelector("#categorias_blog select")) {
-        document.querySelector(
-          "#categorias_blog select"
-        ).innerHTML += `<option value="${producto.id}">${producto.title}</option>`;
-      }
+        "#categorias_blog select"
+      ).innerHTML += `<option value="${producto.id}">${producto.title}</option>`;
     }
   });
-
-  if (document.querySelector("#bogota-natural")) {
-    await getBogotaData("bogota-natural", data);
-  }
   if (document.querySelectorAll("#categorias_blog").length > 0) {
     customSelect();
   }
@@ -180,7 +137,7 @@ const getExploraBogota = async () => {
               document.querySelector(".blog_list .repeater").innerHTML = "";
               data.forEach(async (blog) => {
                 let urlImg = await getImageFromCacheOrFetch(
-                  "https://files.visitbogota.co" + blog.field_image
+                  "https://bogotadc.travel" + blog.field_image
                 );
                 let template = `
                 <a href="/${actualLang}/blog/all/${get_alias(blog.title)}-all-${
@@ -194,7 +151,7 @@ const getExploraBogota = async () => {
                     <img src="images/mdi_tag.svg" alt="tag"/>
                     ${blog.field_prod_rel_1}
                     </small>
-                      <h2 class="">${blog.title}</h2>
+                      <h2 class="uppercase">${blog.title}</h2>
                       <small class="date">${blog.field_date}</small>
                     </div>
                   </a>
@@ -213,98 +170,11 @@ const getExploraBogota = async () => {
       });
   }
 };
-const getAgendaEventos = async () => {
-  const response = await fetch(`/g/getAgendaTax/?lang=${actualLang}`);
-  const data = await response.json();
-  let agendas = data.map((prod) => ({
-    id: prod.tid,
-    title: prod.name,
-    url: `/${actualLang}/eventos/${get_alias(prod.name)}-${prod.tid}`,
-  }));
-
-  const eventosListItem = document.querySelector("li.eventosList");
-  const subMenu = document.querySelector("nav li.eventosList ul");
-
-  // Limpiar el contenido actual
-  eventosListItem.innerHTML = "Eventos"; // Restaura el texto inicial
-  subMenu.innerHTML = "";
-
-  if (agendas.length === 1) {
-    // Si solo hay un elemento, hacer que el <li> principal sea un enlace
-    const singleAgenda = agendas[0];
-    eventosListItem.innerHTML = `<a href="${singleAgenda.url}" class="wait ms700">Eventos</a>`;
-  } else if (agendas.length > 1) {
-    // Si hay más de un elemento, crear un submenú
-    agendas.forEach((agenda) => {
-      subMenu.innerHTML += `<li><a href="${agenda.url}" class="wait ms700">${agenda.title}</a></li>`;
-    });
-  }
-
-  if (document.querySelectorAll("#categorias_blog").length > 0) {
-    customSelect();
-  }
-  if (
-    document.querySelectorAll("#categorias_blog .select-items div").length > 0
-  ) {
-    document
-      .querySelectorAll("#categorias_blog .select-items div")
-      .forEach((el) => {
-        el.addEventListener("click", async () => {
-          await fetch(
-            `/g/allBlogs/?productID=${
-              document.querySelector("#categorias_blog select").value
-            }`
-          )
-            .then((res) => res.json())
-            .then((data) => {
-              document
-                .querySelector(".blog_list .repeater")
-                .classList.add("loading");
-              document.querySelector(".blog_list .repeater").innerHTML = "";
-              data.forEach(async (blog) => {
-                let urlImg = await getImageFromCacheOrFetch(
-                  "https://files.visitbogota.co" + blog.field_image
-                );
-                let template = `
-                <a href="/${actualLang}/blog/all/${get_alias(blog.title)}-all-${
-                  blog.nid
-                }" data-aos="flip-left blog_item" data-productid="88">
-                    <div class="img">
-                      <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
-                    </div>
-                    <div class="desc">
-                    <small class="tag">
-                    <img src="images/mdi_tag.svg" alt="tag"/>
-                    ${blog.field_prod_rel_1}
-                    </small>
-                      <h2 class="">${blog.title}</h2>
-                      <small class="date">${blog.field_date}</small>
-                    </div>
-                  </a>
-                  `;
-                document.querySelector(".blog_list .repeater").innerHTML +=
-                  template;
-              });
-            })
-            .finally(() => {
-              lazyImages();
-              document
-                .querySelector(".blog_list .repeater")
-                .classList.remove("loading");
-            });
-        });
-      });
-  }
-};
-
 
 // Función para manejar el desplazamiento suave cuando se carga la página
 document.addEventListener("DOMContentLoaded", async function () {
   if (document.querySelector("nav li.explora")) {
     await getExploraBogota();
-  }
-  if (document.querySelector("nav li.eventosList")) {
-    await getAgendaEventos();
   }
   if (window.location.hash) {
     // Obtén el ID del fragmento de la URL (el valor después de '#')
@@ -353,7 +223,7 @@ function number_format(number, decimals, dec_point, thousands_point) {
 
   return number;
 }
-const urlGlobal = "https://files.visitbogota.co";
+const urlGlobal = "https://bogotadc.travel";
 const imageCache = {};
 const getImageFromCacheOrFetch = async (url) => {
   return url;
@@ -401,7 +271,7 @@ if (document.querySelector(".slide_explora_item")) {
           product.nid
         }" class="mini_item wait ${exploraCount}"><div class="icon"><img loading="lazy" class="lazyload" data-src="${icon}" src="https://picsum.photos/20/20" alt="${
           product.title
-        }"></div> <h3 class="">${
+        }"></div> <h3 class="uppercase">${
           product.title
         }</h3><img src="img/curve_mini.png" alt="curve_mini" class="curve_mini"></a>`;
         container.innerHTML += template;
@@ -1235,35 +1105,6 @@ function get_alias(str) {
   str = str.replace("“", "", str);
   str = str.replace("”", "", str);
   str = str.replace("+", "", str);
-  str = str.replace("&", "", str);
-  str = str.replace("amp;", "", str);
-
-  // Crear un objeto para mapeo de caracteres con tildes a sin tildes
-  const accentsMap = {
-    á: "a",
-    é: "e",
-    í: "i",
-    ó: "o",
-    ú: "u",
-    Á: "A",
-    É: "E",
-    Í: "I",
-    Ó: "O",
-    Ú: "U",
-    ñ: "n",
-    Ñ: "N",
-    ü: "u",
-    Ü: "U",
-  };
-
-  // Normalizar la cadena para combinar caracteres base y tildes
-  str = str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-  // Reemplazar caracteres con tildes por sus equivalentes sin tildes
-  str = str
-    .split("")
-    .map((char) => accentsMap[char] || char)
-    .join("");
 
   //Mayusculas
   str = str.toLowerCase();
@@ -1370,7 +1211,7 @@ function createNearbyHome(nearbyData) {
         get_alias(nearbyTitle) +
         "/" +
         nearbyPlace.nid +
-        '" class="content wait"><h3 class="">' +
+        '" class="content wait"><h3 class="uppercase">' +
         nearbyTitle +
         "</h3></a></div>";
       nearbyPlacesContainer.innerHTML += template;
@@ -1641,68 +1482,66 @@ function getBlogsRel(prodId, prodName) {
   fetch(url)
     .then((response) => response.json())
     .then((blogs) => {
-      if (blogs) {
-        shuffle(blogs);
-        var containerBlogs;
-        var sliderBlogs = document.querySelector("#slider_posts");
-        var articlesRelGrid = document.querySelector(
-          ".articles_rel_grid.container"
-        );
-        if (sliderBlogs) {
-          if (blogs.length < 1) {
-            $(".top-articles").hide();
-            $(".portal_list").addClass("noevents");
-            $(".rel").addClass("noevents");
+      shuffle(blogs);
+      var containerBlogs;
+      var sliderBlogs = document.querySelector("#slider_posts");
+      var articlesRelGrid = document.querySelector(
+        ".articles_rel_grid.container"
+      );
+      if (sliderBlogs) {
+        if (blogs.length < 1) {
+          $(".top-articles").hide();
+          $(".portal_list").addClass("noevents");
+          $(".rel").addClass("noevents");
+        }
+        for (let i = 0; i < blogs.length; i++) {
+          if (i % 2 == 0) {
+            containerBlogs = document.createElement("div");
+            containerBlogs.classList.add("slider_posts_item");
+            sliderBlogs.appendChild(containerBlogs);
           }
-          for (let i = 0; i < blogs.length; i++) {
-            if (i % 2 == 0) {
-              containerBlogs = document.createElement("div");
-              containerBlogs.classList.add("slider_posts_item");
-              sliderBlogs.appendChild(containerBlogs);
-            }
-            var templateBlog = `
-                  <a href="${actualLang}/blog/${
-              prodName ? get_alias(prodName) : "all"
-            }/${get_alias(blogs[i].title)}-${prodId ? prodId : "all"}-${
+          var templateBlog = `
+                <a href="${actualLang}/blog/${
+            prodName ? get_alias(prodName) : "all"
+          }/${get_alias(blogs[i].title)}-${prodId ? prodId : "all"}-${
+            blogs[i].nid
+          }" class="single_post wait">
+                    <div class="single_post_img"><img loading="lazy" src="https://picsum.photos/20/20" data-src="${
+                      blogs[i].field_image
+                        ? urlGlobal + blogs[i].field_image
+                        : "/img/noimg.png"
+                    }" alt="${blogs[i].title}" class="lazyload"></div>
+                    <h3 class="single_post_title">${blogs[i].title}</h3>
+                </a>
+                `;
+          containerBlogs.innerHTML += templateBlog;
+        }
+      } else if (articlesRelGrid) {
+        if (blogs.length < 1) {
+          $(".interna_atractivo .articles_rel").hide();
+        }
+        var blogURL;
+        articlesRelGrid.innerHTML = "";
+        for (let i = 0; i < blogs.length; i++) {
+          if (prodName) {
+            blogURL = `${actualLang}/blog/${get_alias(prodName)}/${get_alias(
+              blogs[i].title
+            )}-${prodId}-${blogs[i].nid}`;
+          } else {
+            blogURL = `blog/all/${get_alias(blogs[i].title)}-all-${
               blogs[i].nid
-            }" class="single_post wait">
-                      <div class="single_post_img"><img loading="lazy" src="https://picsum.photos/20/20" data-src="${
-                        blogs[i].field_image
-                          ? urlGlobal + blogs[i].field_image
-                          : "/img/noimg.png"
-                      }" alt="${blogs[i].title}" class="lazyload"></div>
-                      <h3 class="single_post_title">${blogs[i].title}</h3>
-                  </a>
-                  `;
-            containerBlogs.innerHTML += templateBlog;
+            }`;
           }
-        } else if (articlesRelGrid) {
-          if (blogs.length < 1) {
-            $(".interna_atractivo .articles_rel").hide();
-          }
-          var blogURL;
-          articlesRelGrid.innerHTML = "";
-          for (let i = 0; i < blogs.length; i++) {
-            if (prodName) {
-              blogURL = `${actualLang}/blog/${get_alias(prodName)}/${get_alias(
-                blogs[i].title
-              )}-${prodId}-${blogs[i].nid}`;
-            } else {
-              blogURL = `blog/all/${get_alias(blogs[i].title)}-all-${
-                blogs[i].nid
-              }`;
-            }
-            if (i < 4) {
-              var templateBlog = `
-                      <a href="${blogURL}" class="single_article wait">
-                          <img loading="lazy" src="https://picsum.photos/20/20" data-src="${urlGlobal}${
-                blogs[i].field_image ? blogs[i].field_image : "/img/noimg.png"
-              }" class="lazyload" alt="BogotaDC.travel">
-                          <h3>${blogs[i].title}</h3>
-                      </a>
-                      `;
-              articlesRelGrid.innerHTML += templateBlog;
-            }
+          if (i < 4) {
+            var templateBlog = `
+                    <a href="${blogURL}" class="single_article wait">
+                        <img loading="lazy" src="https://picsum.photos/20/20" data-src="${urlGlobal}${
+              blogs[i].field_image ? blogs[i].field_image : "/img/noimg.png"
+            }" class="lazyload" alt="BogotaDC.travel">
+                        <h3>${blogs[i].title}</h3>
+                    </a>
+                    `;
+            articlesRelGrid.innerHTML += templateBlog;
           }
         }
       }
@@ -1786,7 +1625,658 @@ function interestYou(prodId) {
     }
   }
 }
+if (document.querySelector("body.portal")) {
+  if (document.querySelector(".filterContainer")) {
+    if (
+      document.querySelector(".filterContainer").offsetHeight >=
+      window.innerHeight
+    ) {
+      document.querySelector(".filterContainer").style.position = "static";
+    }
+  }
+  $(".filterContainer").toggleClass("loading");
+  var firstTime = 0;
+  // Offset Top
+  var listOfSubs = [];
+  var listOfZones = [];
+  var initial_filters_zonas = [];
+  var initial_filters_especificos = [];
+  var initial_filters_plan = [];
+  // ARRAY FILTERS
+  var filters_zonas = [];
+  var filters_especificos = [];
+  var filters_plan = [];
+  var filters_sub = [];
+  // Container places
+  var containerGrid = document.querySelector(".grid-atractivos");
 
+  function applyFiltersFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.has("filters_zonas")) {
+      const filterSetZonas = urlParams.get("filters_zonas");
+      filters_zonas = filterSetZonas.split(",").map((id) => parseInt(id, 10));
+    } else {
+      filters_zonas = [];
+    }
+
+    if (urlParams.has("filters_especificos")) {
+      const filterSetEspecificos = urlParams.get("filters_especificos");
+      filters_especificos = filterSetEspecificos
+        .split(",")
+        .map((id) => parseInt(id, 10));
+    } else {
+      filters_especificos = [];
+    }
+
+    if (urlParams.has("filters_plan")) {
+      const filterSetPlan = urlParams.get("filters_plan");
+      filters_plan = filterSetPlan.split(",").map((id) => parseInt(id, 10));
+    } else {
+      filters_plan = [];
+    }
+
+    // Marcar los checkboxes de cada filtro según los arreglos correspondientes
+    const checkboxesZonas = document.querySelectorAll(
+      '.filters_zonas input[type="checkbox"]'
+    );
+    checkboxesZonas.forEach((checkbox) => {
+      const paramValue = parseInt(checkbox.getAttribute("id"), 10);
+      checkbox.checked = filters_zonas.includes(paramValue);
+    });
+
+    const checkboxesEspecificos = document.querySelectorAll(
+      '.filters_especificos input[type="checkbox"]'
+    );
+    checkboxesEspecificos.forEach((checkbox) => {
+      const paramValue = parseInt(checkbox.getAttribute("id"), 10);
+      checkbox.checked = filters_especificos.includes(paramValue);
+    });
+
+    const checkboxesPlan = document.querySelectorAll(
+      '.filters_plan input[type="checkbox"]'
+    );
+    checkboxesPlan.forEach((checkbox) => {
+      const paramValue = parseInt(checkbox.getAttribute("id"), 10);
+      checkbox.checked = filters_plan.includes(paramValue);
+    });
+  }
+  function filterPortal(para, subproduct, zone, closeto, page = 0, q = 16) {
+    $(".portal_list .right").toggleClass("loading");
+    // Clean Container places
+    containerGrid.innerHTML = "";
+    // Create URL to FETCH
+    var url = "/" + actualLang + "/g/filterPortal/?filter=1";
+    if (para) url += "&para=" + para.toString();
+    if (subproduct) url += "&subproduct=" + subproduct.toString();
+    if (zone) url += "&zone=" + zone.toString();
+    if (closeto) url += "&closeto=" + closeto;
+    if (page) url += "&page=" + page;
+    if (q) url += "&q=" + q;
+
+    // Fetch final URL
+    fetch(url)
+      .then((response) => response.json())
+      .then(async (places) => {
+        // GET FILTROS ESPECIFICOS
+        var result = places.map(({ field_subp }) => field_subp);
+        result.forEach((res) => {
+          res.split(",").forEach((newEl) => {
+            listOfSubs.push(newEl);
+          });
+        });
+        listOfSubs = listOfSubs.filter(onlyUnique);
+        // GET FILTROS ESPECIFICOS
+        // GET FILTROS ZONAS
+        var resultZones = places.map(({ field_zone_rel }) => field_zone_rel);
+        resultZones.forEach((res) => {
+          res.split(",").forEach((newEl) => {
+            if (newEl != "") {
+              listOfZones.push(newEl);
+            }
+          });
+        });
+        listOfZones = listOfZones.filter(onlyUnique);
+        // GET FILTROS ZONAS
+        if (
+          places.length > 0 &&
+          document.querySelectorAll("ul.filters_especificos li").length > 0
+        ) {
+          for (let index = 0; index < places.length; index++) {
+            const place = places[index];
+            let subproductRelInfo = subproductsArray.filter(
+              (sub) => sub.nid == place.field_subp.split(",")[0]
+            );
+
+            var productName = subproductRelInfo[0]
+              ? subproductRelInfo[0].field_prod_rel_1
+              : "all";
+            var placeUrl = `/${actualLang}/atractivo/${get_alias(
+              productName
+            )}/${get_alias(place.title)}-${
+              subproductRelInfo[0] ? subproductRelInfo[0].field_prod_rel : "all"
+            }-${place.nid}`;
+            let image = await getImageFromCacheOrFetch(
+              `${urlGlobal}${
+                place.field_cover_image
+                  ? place.field_cover_image
+                  : "/img/noimg.png"
+              }`
+            );
+            var template = `
+                    <a href="${placeUrl}" class="grid-atractivos-item wait" data-id="${place.nid}">
+                        <div class="site_img">
+                            <img loading="lazy" src="https://picsum.photos/20/20" data-src="${image}" alt="${place.title}" class="lazyload">
+                        </div>
+                        <span>${place.title}</span>
+                    </a>
+                    `;
+            containerGrid.innerHTML += template;
+          }
+          if (places.length >= 17) {
+            containerGrid.innerHTML += `<button type="button" class="moreItems"><img src="img/more_items.svg" alt="more"></button>`;
+          }
+          $(".grid-atractivos-item:hidden").slice(0, 16).show();
+          if (document.querySelector(".portal .moreItems")) {
+          }
+        } else {
+          let messages = {
+            es: `<p class="noResults">No se encontraron resultados para tu búsqueda.</p>`,
+            en: `<p class="noResults">No results for your search.</p>`,
+            pt: `<p class="noResults">Nenhum resultado para a sua pesquisa.</p>`,
+          };
+          let restart = {
+            es: `<p class="noResults">No se encontraron resultados para tu búsqueda.<a href="javascript:backFilters();">Reiniciar</a></p>`,
+            en: `<p class="noResults">There are no results for your search.<a href="javascript:backFilters();">Restart</a></p>`,
+            pt: `<p class="noResults">Não há resultados para a sua pesquisa.<a href="javascript:backFilters();">Reiniciar</a></p>`,
+          };
+          if (firstTime === 0) {
+            containerGrid.innerHTML = messages[actualLang];
+          } else {
+            containerGrid.innerHTML = restart[actualLang];
+            firstTime === 1;
+          }
+        }
+      })
+      .then(function () {
+        lazyImages();
+        $(".portal_list .right").toggleClass("loading");
+        if (document.querySelector(".portal .moreItems")) {
+          var offsetTopBtn = document.querySelector(
+            ".portal_list .right button.moreItems"
+          ).offsetTop;
+          $(".portal .moreItems").on("click", function (e) {
+            e.preventDefault();
+            $(".grid-atractivos-item:hidden").slice(0, 16).slideDown();
+            if ($(".grid-atractivos-item:hidden").length == 0) {
+              $(".portal .moreItems").fadeOut("slow");
+            }
+            document.querySelector("html, body").scrollTop = offsetTopBtn;
+            offsetTopBtn = document.querySelector(
+              ".portal_list .right button.moreItems"
+            ).offsetTop;
+          });
+        }
+        if (!data_product) {
+          document
+            .querySelectorAll("ul.filters_especificos li")
+            .forEach((input) => {
+              input.style.display = "none";
+            });
+          listOfSubs.forEach((listEl) => {
+            document.querySelector(
+              "ul.filters_especificos li input[id='" + listEl + "']"
+            ).parentElement.style.display = "block";
+          });
+        }
+        if (listOfSubs.length == 0) {
+          document.querySelector("ul.filters_especificos").style.display =
+            "none";
+          document.querySelector(
+            "ul.filters_especificos"
+          ).previousSibling.style.display = "none";
+        }
+        document.querySelectorAll("ul.filters_zonas li").forEach((input) => {
+          input.style.display = "none";
+        });
+        if (listOfZones && document.querySelector("ul.filters_zonas")) {
+          listOfZones.forEach((listEl) => {
+            document.querySelector(
+              "ul.filters_zonas li input[id='" + listEl + "']"
+            ).parentElement.style.display = "block";
+          });
+        }
+        if (listOfZones.length == 0) {
+          document.querySelector("ul.filters_zonas").style.display = "none";
+          document.querySelector(
+            "ul.filters_zonas"
+          ).previousSibling.style.display = "none";
+        }
+        const nodeList = document.querySelectorAll(
+          ".portal_list .right .grid-atractivos-item"
+        );
+        const arrayAtractivos = [...nodeList];
+      });
+  }
+  function addFilter(id, type) {
+    if (type == "filters_especificos") {
+      if (window.innerWidth > 1023) {
+        if (
+          document.querySelectorAll(
+            ".filters ul.filters_especificos li input:checked"
+          ).length > 0
+        ) {
+          filters_especificos = [];
+          document
+            .querySelectorAll(
+              ".filters ul.filters_especificos li input:checked"
+            )
+            .forEach((element) => {
+              filters_especificos.push(element.id);
+            });
+
+          filterPortal(filters_plan, filters_especificos, filters_zonas, false);
+        } else {
+          filterPortal(
+            filters_plan,
+            initial_filters_especificos,
+            filters_zonas,
+            false
+          );
+        }
+      } else {
+        if (
+          document.querySelectorAll(
+            ".filterMobile .list_filters ul.filters_especificos li input:checked"
+          ).length > 0
+        ) {
+          document
+            .querySelectorAll(
+              ".filterMobile .list_filters ul.filters_especificos li input:checked"
+            )
+            .forEach((element) => {
+              filters_especificos.push(element.id);
+            });
+
+          filterPortal(filters_plan, filters_especificos, filters_zonas, false);
+        } else {
+          filterPortal(
+            filters_plan,
+            initial_filters_especificos,
+            filters_zonas,
+            false
+          );
+        }
+      }
+    } else {
+      var getIndexOf = function (idPlace) {
+        for (var i = 0; i < window[type].length; i++) {
+          if (window[type][i] == idPlace) {
+            return i;
+          }
+        }
+        return -1;
+      };
+      if (window[type].length > 0) {
+        var index = getIndexOf(id);
+        if (index > -1) {
+          Array.prototype.splice.call(window[type], index, 1);
+        } else {
+          window[type].push(id);
+        }
+      } else {
+        window[type].push(id);
+      }
+      if (filters_especificos.length > 0) {
+        filterPortal(filters_plan, filters_especificos, filters_zonas, false);
+      } else {
+        filterPortal(
+          filters_plan,
+          initial_filters_especificos,
+          filters_zonas,
+          false
+        );
+      }
+    }
+    const checkboxes = document.querySelectorAll(
+      `.${type} input[type="checkbox"]`
+    );
+    const filters = [];
+
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        const paramValue = checkbox.getAttribute("id");
+        filters.push(paramValue);
+      }
+    });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set(type, filters.join(","));
+
+    const newURL = `${window.location.pathname}?${decodeURIComponent(
+      urlParams.toString()
+    )}`;
+
+    history.pushState(null, "", newURL);
+  }
+  function backFilters() {
+    // Llama a esta función cuando se cargue la página o cuando sea necesario aplicar los filtros desde la URL.
+    if (latitude && longitude) {
+      filterPortal(
+        initial_filters_plan,
+        initial_filters_especificos,
+        initial_filters_zonas,
+        [latitude, longitude]
+      );
+    } else {
+      filterPortal(
+        initial_filters_plan,
+        initial_filters_especificos,
+        initial_filters_zonas,
+        false
+      );
+    }
+    $(`.filters ul.filters_plan li input`).prop("checked", false);
+    initial_filters_especificos.forEach((filter) => {
+      $(`.filters ul.filters_especificos li input[id="${filter}"]`).prop(
+        "checked",
+        true
+      );
+    });
+    $(`.filters ul.filters_zonas li input`).prop("checked", false);
+  }
+  // Data con IDs de producto, plan o zona
+  var data_product = document.querySelector("#mainPortal").dataset.productid;
+  var data_plan = document.querySelector("#mainPortal").dataset.planid;
+  var data_zone = document.querySelector("#mainPortal").dataset.zoneid;
+
+  var filts = [];
+  var url;
+  var fetchID;
+  var productName = document.querySelector("#mainPortal").dataset.productname;
+  if (data_product) {
+    fetchID = data_product;
+    filts = [
+      {
+        es: { title: "Búsqueda específica", class: "filters_especificos" },
+        en: { title: "Specific search", class: "filters_especificos" },
+        pt: { title: "Pesquisa específica", class: "filters_especificos" },
+        fr: { title: "Recherche spécifique", class: "filters_especificos" },
+      },
+      {
+        es: { title: "Búsqueda por zona", class: "filters_zonas" },
+        en: { title: "Search by zone", class: "filters_zonas" },
+        pt: { title: "Pesquisa por zona", class: "filters_zonas" },
+        fr: { title: "Pesquisa por zona", class: "filters_zonas" },
+      },
+      {
+        es: { title: "Búsqueda por plan (para)", class: "filters_plan" },
+        en: { title: "Search by plan (for)", class: "filters_plan" },
+        pt: { title: "Procurar por plano (para)", class: "filters_plan" },
+        fr: { title: "Recherche par plan (pour)", class: "filters_plan" },
+      },
+    ];
+    url = `/${actualLang}/g/singleProduct/?productID=${fetchID}`;
+  } else if (data_plan) {
+    fetchID = data_plan;
+    filts = [
+      {
+        es: { title: "Búsqueda específica", class: "filters_especificos" },
+        en: { title: "Specific search", class: "filters_especificos" },
+        pt: { title: "Pesquisa específica", class: "filters_especificos" },
+        fr: { title: "Recherche spécifique", class: "filters_especificos" },
+      },
+      {
+        es: { title: "Búsqueda por zona", class: "filters_zonas" },
+        en: { title: "Search by zone", class: "filters_zonas" },
+        pt: { title: "Pesquisa por zona", class: "filters_zonas" },
+        fr: { title: "Pesquisa por zona", class: "filters_zonas" },
+      },
+    ];
+    url = `/${actualLang}/g/plans/?planID=${fetchID}`;
+  } else if (data_zone) {
+    fetchID = data_zone;
+    filts = [
+      {
+        es: { title: "Búsqueda por plan (para)", class: "filters_plan" },
+        en: { title: "Search by plan (for)", class: "filters_plan" },
+        pt: { title: "Procurar por plano (para)", class: "filters_plan" },
+        fr: { title: "Recherche par plan (pour)", class: "filters_plan" },
+      },
+      {
+        es: { title: "Búsqueda específica", class: "filters_especificos" },
+        en: { title: "Specific search", class: "filters_especificos" },
+        pt: { title: "Pesquisa específica", class: "filters_especificos" },
+        fr: { title: "Recherche spécifique", class: "filters_especificos" },
+      },
+    ];
+    url = `/${actualLang}/g/zonas/?zoneID=${fetchID}`;
+  }
+  getBlogsRel(data_product, productName);
+  interestYou(data_product);
+  var filtersContainer;
+  fetch(url)
+    .then((response) => response.json())
+    .then((singleProd) => {
+      singleProd.filters.droplist.forEach((option) => {
+        var optionTemplate = `<option value="${option.nid}" ${
+          option.nid == fetchID ? "selected" : ""
+        }>${option.title}</option>`;
+        document.querySelector(".custom-select select").innerHTML +=
+          optionTemplate;
+        document.querySelector(
+          ".filterMobile .custom-select select"
+        ).innerHTML += optionTemplate;
+      });
+      if (window.innerWidth > 1023) {
+        filtersContainer = document.querySelector(".filters");
+      } else {
+        filtersContainer = document.querySelector(
+          ".filterMobile .list_filters"
+        );
+      }
+      for (let index = 0; index < filts.length; index++) {
+        // Create list title
+        var listTitle = document.createElement("h4");
+        listTitle.innerText = filts[index][actualLang].title;
+        filtersContainer.appendChild(listTitle);
+        // Create list tags
+        var list = document.createElement("ul");
+        list.classList.add(filts[index][actualLang].class);
+        filtersContainer.appendChild(list);
+        // Create tags
+        singleProd.filters[`filter${index + 1}`].forEach((tag) => {
+          var tagTemplate;
+          if (window.innerWidth > 1023) {
+            tagTemplate = `<li><input type="checkbox" name="${tag.title}" id="${tag.nid}" hidden onchange="addFilter(${tag.nid},'${filts[index][actualLang].class}')"><label for="${tag.nid}">${tag.title}</label></li>`;
+          } else {
+            tagTemplate = `<li><input type="checkbox" name="${tag.title}" id="${tag.nid}" hidden><label for="${tag.nid}">${tag.title}</label></li>`;
+          }
+          list.innerHTML += tagTemplate;
+        });
+      }
+      if (window.innerWidth < 768) {
+        filtersContainer.innerHTML +=
+          '<button type="button" onclick="filterPortalMobile()">Aplicar</button>';
+      }
+    })
+
+    .then(() => applyFiltersFromURL())
+    .then(function () {
+      if (window.innerWidth > 1023) {
+        document
+          .querySelectorAll(".filters ul.filters_especificos li input")
+          .forEach((element) => {
+            filters_especificos.push(element.id);
+            initial_filters_especificos.push(element.id);
+          });
+      } else {
+        document
+          .querySelectorAll(
+            ".filterMobile .list_filters ul.filters_especificos li input"
+          )
+          .forEach((element) => {
+            filters_especificos.push(element.id);
+            initial_filters_especificos.push(element.id);
+          });
+      }
+      $(".filterContainer").toggleClass("loading");
+      customSelect();
+    })
+    .then(function () {
+      // Filtros especificos Producto
+      var specificFiltersUl;
+      var selected;
+      if (window.innerWidth > 1023) {
+        specificFiltersUl = document.querySelector(
+          ".filters ul.filters_especificos"
+        );
+        selected = document.querySelector(".custom-select select").value;
+      } else {
+        specificFiltersUl = document.querySelector(
+          ".filterMobile .list_filters ul.filters_especificos"
+        );
+        selected = document.querySelector(
+          ".filterMobile .custom-select select"
+        ).value;
+      }
+
+      if (data_product) {
+        if (!$(".portal .container-switch .switch").hasClass("active")) {
+          filterPortal(filters_plan, filters_especificos, filters_zonas, false);
+        } else {
+          filterPortal(filters_plan, filters_especificos, filters_zonas, [
+            latitude,
+            longitude,
+          ]);
+        }
+      } else if (data_plan) {
+        filters_plan = [];
+        filters_plan.push(data_plan);
+        initial_filters_plan.push(data_plan);
+        if (!$(".portal .container-switch .switch").hasClass("active")) {
+          filterPortal(data_plan, filters_especificos, filters_zonas, false);
+        } else {
+          filterPortal(data_plan, filters_especificos, filters_zonas, [
+            latitude,
+            longitude,
+          ]);
+        }
+      } else if (data_zone) {
+        filters_zonas = [];
+        filters_zonas.push(data_zone);
+        initial_filters_zonas.push(data_zone);
+        if (!$(".portal .container-switch .switch").hasClass("active")) {
+          filterPortal(filters_plan, filters_especificos, data_zone, false);
+        } else {
+          filterPortal(filters_plan, filters_especificos, data_zone, [
+            latitude,
+            longitude,
+          ]);
+        }
+      }
+      document
+        .querySelectorAll(".custom-select .select-items")
+        .forEach((select) => {
+          select.addEventListener("click", function () {
+            if (window.innerWidth > 1023) {
+              selected = document.querySelector(".custom-select select").value;
+            } else {
+              selected = document.querySelector(
+                ".filterMobile .custom-select select"
+              ).value;
+            }
+            // Eliminar todos los atractivos que se muestran actualmente
+            containerGrid.innerHTML = "";
+            // Guardar valor del select
+            if (data_product) {
+              // Si titene filtros especificos se eliminan
+              specificFiltersUl.innerHTML = "";
+              specificFiltersUl.classList.toggle("loading");
+              // Realizar la consulta de el producto seleccionado en el droplist
+              var filterProduct = fetch(
+                `/${actualLang}/g/productFilter/?productID=${selected}`
+              )
+                .then((response) => response.json())
+                .then((data) => {
+                  data.filter1.forEach((tag) => {
+                    var templateDroplistLi = `<li><input type="checkbox" name="${tag.nid}" id="${tag.nid}" onchange="addFilter(${tag.nid},'filters_especificos')" checked><label for="${tag.nid}">${tag.title}</label></li>`;
+                    specificFiltersUl.innerHTML += templateDroplistLi;
+                  });
+                });
+              filterProduct.then(function () {
+                filters_especificos = [];
+                if (window.innerWidth > 1023) {
+                  document
+                    .querySelectorAll(".filters ul li input:checked")
+                    .forEach((element) => {
+                      filters_especificos.push(element.id);
+                    });
+                } else {
+                  document
+                    .querySelectorAll(
+                      ".filterMobile .list_filters ul.filters_especificos li input:checked"
+                    )
+                    .forEach((element) => {
+                      filters_especificos.push(element.id);
+                    });
+                }
+                if (
+                  !$(".portal .container-switch .switch").hasClass("active")
+                ) {
+                  filterPortal(
+                    filters_plan,
+                    filters_especificos,
+                    filters_zonas,
+                    false
+                  );
+                } else {
+                  filterPortal(
+                    filters_plan,
+                    filters_especificos,
+                    filters_zonas,
+                    [latitude, longitude]
+                  );
+                }
+                specificFiltersUl.classList.toggle("loading");
+              });
+            } else if (data_plan) {
+              filters_plan = [];
+              filters_plan.push(selected);
+              if (!$(".portal .container-switch .switch").hasClass("active")) {
+                filterPortal(
+                  selected,
+                  filters_especificos,
+                  filters_zonas,
+                  false
+                );
+              } else {
+                filterPortal(selected, filters_especificos, filters_zonas, [
+                  latitude,
+                  longitude,
+                ]);
+              }
+            } else if (data_zone) {
+              filters_zonas = [];
+              filters_zonas.push(selected);
+              if (!$(".portal .container-switch .switch").hasClass("active")) {
+                filterPortal(
+                  filters_plan,
+                  filters_especificos,
+                  selected,
+                  false
+                );
+              } else {
+                filterPortal(filters_plan, filters_especificos, selected, [
+                  latitude,
+                  longitude,
+                ]);
+              }
+            }
+          });
+        });
+    });
+}
 if (document.querySelector("body.interna_atractivo")) {
   var data_product =
     document.querySelector("#mainInternPlace").dataset.productid;
@@ -1943,7 +2433,7 @@ if (document.querySelector("body.mas_alla")) {
           nearbyPlace.field_cover_image
             ? nearbyPlace.field_cover_image
             : "/img/noimg.png"
-        }" src="https://picsum.photos/20/20" alt="Bogotá"></div><h2 class="name ">${nearbyTitle}</h2></a></li>`;
+        }" src="https://picsum.photos/20/20" alt="Bogotá"></div><h2 class="name uppercase">${nearbyTitle}</h2></a></li>`;
         nearbyPlacesContainer.innerHTML += template;
       }
     })
@@ -1976,7 +2466,7 @@ if (document.querySelector("body.informacion_util")) {
               if (document.querySelector(".faqs-container .faq")) {
                 document.querySelector(
                   ".faqs-container .faq"
-                ).innerHTML += `<h3 class=" cat-${cat.tid}">${cat.name}</h3>`;
+                ).innerHTML += `<h3 class="uppercase cat-${cat.tid}">${cat.name}</h3>`;
                 var accorddion = document.createElement("div");
                 accorddion.classList.add("accordion");
                 accorddion.classList.add(classColor[i]);
@@ -1984,7 +2474,7 @@ if (document.querySelector("body.informacion_util")) {
                   document
                     .querySelector(".faqs-container .faq")
                     .appendChild(accorddion);
-                  var templateCat = `<h4 class="">${qa.title}</h4><div>${qa.body}</div>`;
+                  var templateCat = `<h4 class="uppercase">${qa.title}</h4><div>${qa.body}</div>`;
                   accorddion.innerHTML += templateCat;
                 });
               }
@@ -2090,7 +2580,7 @@ function getMoreReadBlogs() {
             } else {
               title = el.title;
             }
-            var template = `<li class=""><a href="${el.url}">${title}</a></li>`;
+            var template = `<li class="uppercase"><a href="${el.url}">${title}</a></li>`;
             document.querySelector(".lomasleido ol").innerHTML += template;
           }
         });
@@ -2293,7 +2783,7 @@ function count_duplicate(a) {
 }
 
 async function getSingleSign(id) {
-  const sign = await fetch("https://files.visitbogota.co/g/signlang/?id=" + id)
+  const sign = await fetch("https://bogotadc.travel/g/signlang/?id=" + id)
     .then((res) => res.json())
     .then((data) => ({
       title: data.title,
@@ -2509,158 +2999,69 @@ function useFilters(cattype) {
   } else {
     urlPost = `/g/${cattype}/?lang=${actualLang}`;
   }
-
   $.post(urlPost, { filters: completefilters }, function (data) {
-    function setMidnight(dateString) {
-      const date = new Date(dateString);
-      date.setHours(0, 0, 0, 0);
-      return date;
-    }
-
+    // Función de comparación para ordenar por fecha
     function compararFechas(a, b) {
-      // Si el evento no tiene fecha de finalización, usar la fecha de inicio
-      const endDateA = a.field_end_date
-        ? a.field_end_date.length === 10
-          ? setMidnight(a.field_end_date)
-          : new Date(a.field_end_date)
-        : setMidnight(a.field_date);
-      const endDateB = b.field_end_date
-        ? b.field_end_date.length === 10
-          ? setMidnight(b.field_end_date)
-          : new Date(b.field_end_date)
-        : setMidnight(b.field_date);
-
-      return endDateA - endDateB;
+      return new Date(a.field_date) - new Date(b.field_date);
     }
-    // Ordenar el arreglo por fecha de finalización
+
+    // Ordenar el arreglo por fecha
     data.sort(compararFechas);
     if (data.length > 0) {
       for (var i = 0; i < data.length; i++) {
         let event = data[i];
         var thumbnail = data[i].field_cover_image;
+        //Campo calificacion ->  data[i].field_calificacion
+        const dateStart = new Date(event.field_date);
+        const optionsdateStart = {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        };
+        const dateFormatteddateStart = dateStart.toLocaleDateString(
+          "en-US",
+          optionsdateStart
+        );
+
+        const monthStart = dateFormatteddateStart.substring(0, 3);
+        const dayStart = dateFormatteddateStart.substring(4, 6);
+        const yearStart = dateFormatteddateStart.substring(7);
+
         if (thumbnail == "") {
           thumbnail =
             "https://via.placeholder.com/400x400.jpg?text=Bogotadc.travel";
         }
 
-        // Asegurarse de que las fechas se interpretan correctamente
-        const dateStart = setMidnight(event.field_date);
-
-        // Manejar la fecha de fin de manera diferente si no incluye una hora
-        let dateEnd;
-        if (event.field_end_date.length === 10) {
-          // Verificar si el formato es solo de fecha (YYYY-MM-DD)
-          dateEnd = setMidnight(event.field_end_date);
-          dateEnd.setDate(dateEnd.getDate() + 1); // Mover la fecha de fin al día siguiente
-        } else {
-          dateEnd = setMidnight(event.field_end_date);
+        var strtemplate = ` <li class="events_list_grid_item">
+        <article class="single_event">
+            <div class="left">
+                <ul class="categoryTags">
+                    <li>${event.field_categoria_evento_1}</li>
+                </ul>
+                <div class="image">
+                    <img loading="lazy" class="lazyload" data-src="https://bogotadc.travel${
+                      event.field_imagen_listado_events
+                    }" src="https://via.placeholder.com/330x240" alt="${
+          event.title
+        }">
+                </div>
+                <span class="dates">
+                    <time datetime="${event.field_date}">28/02/2024</time> ${
+          event.field_end_date
+            ? `  – <time datetime="${event.field_end_date}">12/05/2024</time>`
+            : ""
         }
-
-        const options = {
-          month: "long",
-          day: "numeric",
-          year: "numeric",
-        };
-
-        // Obtener la fecha actual
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        let dateText = "";
-
-        if (actualLang === "es") {
-          const dateFormattedStart = dateStart.toLocaleDateString(
-            "es-ES",
-            options
-          );
-          const dateFormattedEnd = dateEnd.toLocaleDateString("es-ES", options);
-          const alText = "al";
-          const hastaElText = "Hasta el";
-
-          // Condicionales para construir el texto de fecha en español
-          if (!event.field_end_date) {
-            // 1. No tiene fecha final -> Tomar la fecha de inicio.
-            dateText = dateFormattedStart;
-          } else if (dateStart.getTime() === dateEnd.getTime()) {
-            // 2. Fecha de inicio es igual a la fecha final, solo mostrar la fecha final.
-            dateText = dateFormattedEnd;
-          } else if (dateStart < today) {
-            // 3. Si la fecha de inicio es menor a la fecha actual, quitar la fecha de inicio y colocar al principio "Hasta el".
-            dateText = `${hastaElText} ${dateFormattedEnd}`;
-          } else {
-            // 4. Si la fecha de inicio es superior a la fecha actual, colocar así Fecha 1 al Fecha 2
-            dateText = `${dateFormattedStart} ${alText} ${dateFormattedEnd}`;
-          }
-        } else if (actualLang === "en") {
-          const dateFormattedStart = dateStart.toLocaleDateString(
-            "en-US",
-            options
-          );
-          const dateFormattedEnd = dateEnd.toLocaleDateString("en-US", options);
-
-          // Condicionales para construir el texto de fecha en inglés
-          if (!event.field_end_date) {
-            // 1. No tiene fecha final -> Tomar la fecha de inicio.
-            dateText = dateFormattedStart;
-          } else if (dateStart.getTime() === dateEnd.getTime()) {
-            // 2. Fecha de inicio es igual a la fecha final, solo mostrar la fecha final.
-            dateText = dateFormattedEnd;
-          } else if (dateStart < today) {
-            // 3. Si la fecha de inicio es menor a la fecha actual, quitar la fecha de inicio y colocar al principio "Until".
-            dateText = `Until ${dateFormattedEnd}`;
-          } else if (dateStart.toDateString() === dateEnd.toDateString()) {
-            // 4. Si las fechas son el mismo día, mostrar solo una fecha.
-            dateText = dateFormattedStart;
-          } else if (dateStart.getFullYear() === dateEnd.getFullYear()) {
-            // 5. Si las fechas están en el mismo año
-            if (dateStart.getMonth() === dateEnd.getMonth()) {
-              // 5.1 Si están en el mismo mes
-              dateText = `${dateFormattedStart.split(" ")[1]}-${
-                dateFormattedEnd.split(" ")[1]
-              } ${dateFormattedStart.split(" ")[0]} ${dateStart.getFullYear()}`;
-            } else {
-              // 5.2 Si están en meses diferentes
-              dateText = `${dateFormattedStart.split(" ")[0]} ${
-                dateFormattedStart.split(" ")[1]
-              } to ${dateFormattedEnd.split(" ")[0]} ${
-                dateFormattedEnd.split(" ")[1]
-              } ${dateStart.getFullYear()}`;
-            }
-          } else {
-            // 6. Fechas en años diferentes
-            dateText = `${dateFormattedStart} to ${dateFormattedEnd}`;
-          }
-        }
-
-        var strtemplate = `
-          <li class="events_list_grid_item">
-                <a href="/${actualLang}/evento/${get_alias(event.title)}-${
-          event.nid
-        }" class="single_event">
-                    <div class="single_event_img">
-                        <img loading="lazy" data-src="https://files.visitbogota.co${thumbnail}" src="https://picsum.photos/20/20"
-                            alt="evento" class="lazyload">
-                            <h5 class="single_event_title ms700 ">${
-                              event.title
-                            }</h5>
-                    </div>
-                    <div class="info">
-                        <div class="single_event_date">
-                        ${dateText}
-                        </div>
-                        <div class="txt">
-                                <h6 class="single_event_place ms700"><svg width="23" height="33" viewBox="0 0 23 33" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_35_2)"><path d="M22.61 8.62C20.94 2.29 14.48 -1.36 8.19999 0.48C3.45999 1.87 0.0799887 6.3 -1.13287e-05 11.24C-0.0300113 13 0.339989 14.68 0.919989 16.32C1.84999 18.95 3.19999 21.37 4.75999 23.67C6.63999 26.45 8.57999 29.19 10.5 31.94C10.69 32.22 10.98 32.42 11.23 32.66H11.74C11.99 32.42 12.26 32.21 12.47 31.94C12.82 31.5 13.12 31.02 13.44 30.55C15.2 28 17 25.47 18.71 22.88C20.18 20.65 21.42 18.29 22.24 15.73C22.99 13.39 23.24 11.02 22.6 8.61L22.61 8.62ZM20.39 15.26C19.57 17.76 18.32 20.06 16.86 22.23C15.14 24.8 13.35 27.32 11.58 29.86C11.56 29.89 11.53 29.92 11.47 29.99C10.38 28.45 9.30999 26.95 8.23999 25.43C6.55999 23.03 4.92999 20.59 3.65999 17.93C2.88999 16.32 2.28999 14.67 2.00999 12.89C1.35999 8.75 3.63999 4.5 7.44999 2.79C13.09 0.25 19.45 3.41 20.83 9.44C21.28 11.42 21.01 13.35 20.38 15.25L20.39 15.26Z" fill="#35498F"/><path d="M11.51 5.74C8.34002 5.73 5.75002 8.3 5.74002 11.45C5.73002 14.62 8.30002 17.21 11.45 17.22C14.62 17.23 17.21 14.66 17.22 11.51C17.23 8.34 14.67 5.75 11.51 5.74ZM11.47 15.31C9.38002 15.31 7.66002 13.58 7.66002 11.49C7.66002 9.38 9.38002 7.65 11.49 7.66C13.6 7.66 15.32 9.39 15.32 11.5C15.32 13.61 13.59 15.33 11.48 15.32L11.47 15.31Z" fill="#35498F"/></g><defs><clipPath id="clip0_35_2"><rect width="22.97" height="32.66" fill="white"/></clipPath></defs></svg>${
-                                  event.field_place
-                                }</h6>
-                                    <div class="btn event-view  ms900">${
-                                      actualLang == "es"
-                                        ? "Ver evento"
-                                        : "View EVENT"
-                                    }</div>
-                        </div>
-                    </div>
-                </a>
-            </li>`;
+                </span>
+            </div>
+            <div class="right">
+                <h2>${event.title}</h2>
+                <p>${event.body_2}</p>
+                <div class="readmore">
+                    Ver Evento
+                </div>
+            </div>
+        </article>
+    </li>`;
         itscontent.append(strtemplate);
       }
     } else {
@@ -2740,9 +3141,9 @@ async function getOfertasRel(atractivo, localidad, zona, alojamiento) {
   await fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      if (data) {
-        const limite = data.length < 3 ? data.length : 3;
-        data = shuffleArray(data);
+      const limite = data.length < 3 ? data.length : 3;
+      data = shuffleArray(data);
+      if (data.length > 0) {
         for (let index = 0; index < limite; index++) {
           const plan = data[index];
           const template = `
@@ -2791,7 +3192,7 @@ async function getOfertasRel(atractivo, localidad, zona, alojamiento) {
                 </div>
                 <strong class="ms900">${plan.title}</strong>
                 <p class="ms100">${plan.field_pb_oferta_desc_corta}</p>
-                <small class="link ms900 ">Ver oferta</small>
+                <small class="link ms900 uppercase">Ver oferta</small>
               </div>
             </a>`;
           ofertasRelgrid.innerHTML += template;
@@ -2842,20 +3243,3 @@ function addExternalLinkIcon() {
 }
 
 document.addEventListener("DOMContentLoaded", addExternalLinkIcon);
-
-if (document.querySelector("#toggleFiltersEvents")) {
-  document
-    .querySelector("#toggleFiltersEvents")
-    .addEventListener("click", () => {
-      document.querySelector(".filters").classList.toggle("active");
-    });
-  document.querySelector("#closeFilters").addEventListener("click", () => {
-    document.querySelector(".filters").classList.toggle("active");
-  });
-}
-
-document.querySelector("#formBtn").addEventListener("click", () => {
-  document.querySelectorAll(".search_form").forEach(el =>{
-    el.classList.toggle("active");
-  })
-});

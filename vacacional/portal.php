@@ -48,28 +48,30 @@ if ($_GET['zoneID']) {
         </div>
     </div>
     </section>
+    <div class="portal-atractivos">
+        <h3>Lugares que puedes visitar</h3>
+        <section class="grid-atractivos"></section>
+    </div>
 
-    <section class="grid-atractivos">
-    </section>
-    <section class="descubre container">
-      <h2><img src="images/descubre_bogotaic.svg" alt="descubre"><?=$descubre_bogota?></h2>
-      <section class="splide" id="bogota-natural" aria-label="Basic Structure Example">
-        <div class="splide__arrows">
-          <button class="splide__arrow splide__arrow--prev">
-            <img src="images/ep_arrow-left-bold.svg" alt="left">
-          </button>
-          <button class="splide__arrow splide__arrow--next">
-            <img src="images/ep_arrow-right-bold.svg" alt="right">
-          </button>
-        </div>
-        <div class="splide__track">
-          <ul class="splide__list">
-          </ul>
-        </div>
-      </section>
-    </section>
+    <div class="portal-rutas">
+        <h3>Rutas turísticas de <?= $product->name ?></h3>
+        <section class="grid-rutas"></section>
+    </div>
+
+    <div class="portal-eventos">
+        <h3>Próximos eventos de <?= $product->name ?></h3>
+        <section class="grid-eventos"></section>
+
+    </div>
+
+    <div class="portal-experiencias">
+        <h3>Experiencias de <?= $product->name ?> que pueden interesarte</h3>
+        <section class="grid-experiencias"></section>
+    </div>
+
     <section class="blog container">
-      <h3><?=$lang == 'es' ? "Artículos que podrían interesarte": "Articles that might interest you"?></h3>
+    <h3><?=$lang == 'es' ? "Artículos que podrían interesarte": "Articles that might interest you"?></h3>
+
       <div class="container grid-blogs"></div>
     </section>
 

@@ -86,6 +86,8 @@ window.onload = function () {
   // }
 };
 const getBogotaData = async (containerId, data) => {
+  console.log(data);
+  console.log(containerId);
   const bogotaContainer = document.querySelector(`#${containerId} ul`);
   bogotaContainer.innerHTML = "";
   const promises = data.map(async (item) => {
@@ -214,6 +216,7 @@ const getExploraBogota = async () => {
   }
 };
 const getAgendaEventos = async () => {
+  const bogotaContainerMenuMobile = document.querySelector(`.explora`);
   const response = await fetch(`/g/getAgendaTax/?lang=${actualLang}`);
   const data = await response.json();
   let agendas = data.map((prod) => ({
@@ -221,24 +224,16 @@ const getAgendaEventos = async () => {
     title: prod.name,
     url: `/${actualLang}/eventos/${get_alias(prod.name)}-${prod.tid}`,
   }));
-
-  const eventosListItem = document.querySelector("li.eventosList");
-  const subMenu = document.querySelector("nav li.eventosList ul");
-
-  // Limpiar el contenido actual
-  eventosListItem.innerHTML = "Eventos"; // Restaura el texto inicial
-  subMenu.innerHTML = "";
-
-  if (agendas.length === 1) {
-    // Si solo hay un elemento, hacer que el <li> principal sea un enlace
-    const singleAgenda = agendas[0];
-    eventosListItem.innerHTML = `<a href="${singleAgenda.url}" class="wait ms700">Eventos</a>`;
-  } else if (agendas.length > 1) {
-    // Si hay más de un elemento, crear un submenú
-    agendas.forEach((agenda) => {
-      subMenu.innerHTML += `<li><a href="${agenda.url}" class="wait ms700">${agenda.title}</a></li>`;
-    });
-  }
+  document.querySelector("nav li.eventosList ul").innerHTML = "";
+  document.querySelector("ul.eventosList").innerHTML = "";
+  
+  agendas.forEach((agenda) => {
+    document.querySelector(
+      "nav li.eventosList ul"
+    ).innerHTML += `<li><a href="${agenda.url}" class="wait ms700">${agenda.title}</a></li>`;
+    document.querySelector("ul.eventosList").innerHTML += `<li><a href="${agenda.url}" class="wait ms700">${agenda.title}</a></li>`;
+    // agendaEventos.innerHTML += `<li><a href="${agenda.url}" class="wait">${agenda.title}</a></li>`;
+  });
 
   if (document.querySelectorAll("#categorias_blog").length > 0) {
     customSelect();
@@ -296,7 +291,6 @@ const getAgendaEventos = async () => {
       });
   }
 };
-
 
 // Función para manejar el desplazamiento suave cuando se carga la página
 document.addEventListener("DOMContentLoaded", async function () {
