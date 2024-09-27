@@ -4,11 +4,9 @@ include "includes/head.php";
 $sliders = $vacacional->getSlidersHome();
 $banners = $vacacional->getBannersHome();
 ?>
-
 <main>
   <div class="flexbanner">
-  <iframe width="100%" height="100%" src="https://www.youtube.com/embed/_U2VqGbY4ZY?si=9uziJA1JX2QQmRJ3&amp;controls=0&amp;autoplay=1&amp;mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+    <video src="video/video.mp4" autoplay loop muted></video>
   </div>
  
   <!-- <div class="banners_home">
@@ -33,11 +31,13 @@ $banners = $vacacional->getBannersHome();
         </div>
       </section>
     </section>
-  <div class="banners_home">
-    <a href="<?=$banners[0]->field_link?>">
-      <img src="https://bogotadc.travel<?=$banners[0]->field_image?>" alt="<?=$banners[0]->title?>">
-    </a>
-  </div>
+    <?php if($banners[0]->field_image != ""){ ?>
+      <div class="banners_home">
+        <a href="<?=$banners[0]->field_link?>">
+          <img src="https://bogotadc.travel<?=$banners[0]->field_image?>" alt="<?=$banners[0]->title?>">
+        </a>
+      </div>
+    <?php } ?>
   <div class="bg-noche" style="background-image: url(images/bog_noche.png);">
   <section class="rutas container">
   <h2 ><img src="images/rutas.svg" alt="RT"><?=$pi_bogota[103]?><a href="/<?=$lang?>/rutas-turisticas" class="wait all"><?=$ver_rutas?></a></h2>

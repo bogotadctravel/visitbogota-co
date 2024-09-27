@@ -294,7 +294,7 @@ class bogota
     function searchContent($search)
     {
         $result = $this->query("search/" . urlencode($search));
-        return $result;
+        return $this->unifyPlaces($result);
     }
     function searchVenues($search)
     {
@@ -625,7 +625,7 @@ class bogota
            return $result[0];
            
         }else{
-           $thequery = "events/all/". $zones. "/" . $cats . "/" .  $agenda;
+            $thequery = "events/all/". $zones. "/" . $cats . "/" .  $agenda;
            $result = $this->query($thequery);
            return $result;
 

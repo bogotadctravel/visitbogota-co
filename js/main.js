@@ -89,11 +89,20 @@ const getBogotaData = async (containerId, data) => {
   const bogotaContainer = document.querySelector(`#${containerId} ul`);
   bogotaContainer.innerHTML = "";
   const promises = data.map(async (item) => {
-    let urlImg = item.field_banner_prod
-      ? await getImageFromCacheOrFetch(
-          "https://files.visitbogota.co" + item.field_banner_prod
-        )
-      : "https://placehold.co/400x400.jpg?text=visitbogota";
+    let urlImg;
+
+    if (item.field_format_img) {
+      urlImg = await getImageFromCacheOrFetch(
+        "https://files.visitbogota.co" + item.field_format_img
+      );
+    } else if (item.field_banner_prod) {
+      urlImg = await getImageFromCacheOrFetch(
+        "https://files.visitbogota.co" + item.field_banner_prod
+      );
+    }
+
+    // Si ninguna imagen fue encontrada, usar una imagen por defecto.
+    urlImg = urlImg || "https://placehold.co/400x400.jpg?text=visitbogota";
     let urlSite = `/${actualLang}/explora/${get_alias(item.name)}/${item.tid}`;
     let template = `
       <li class="splide__slide">
@@ -296,7 +305,6 @@ const getAgendaEventos = async () => {
       });
   }
 };
-
 
 // Función para manejar el desplazamiento suave cuando se carga la página
 document.addEventListener("DOMContentLoaded", async function () {
@@ -2361,11 +2369,6 @@ if (document.querySelector(".intern_event")) {
 var filtersoptions = [];
 var sliderobjects = [];
 
-$(document).ready(function () {
-  if ($(".events_list_grid").length > 0) {
-    setCategory("events");
-  }
-});
 function setCategory(cattype) {
   if ($(window).width() <= 768) {
     $(".filtergroup").removeClass("open");
@@ -2453,7 +2456,26 @@ function setCategory(cattype) {
     );
   });
 }
+function setMidnight(dateString) {
+  const date = new Date(dateString);
+  date.setHours(0, 0, 0, 0);
+  return date;
+}
+function compararFechas(a, b) {
+  // Si el evento no tiene fecha de finalización, usar la fecha de inicio
+  const endDateA = a.field_end_date
+    ? a.field_end_date.length === 10
+      ? setMidnight(a.field_end_date)
+      : new Date(a.field_end_date)
+    : setMidnight(a.field_date);
+  const endDateB = b.field_end_date
+    ? b.field_end_date.length === 10
+      ? setMidnight(b.field_end_date)
+      : new Date(b.field_end_date)
+    : setMidnight(b.field_date);
 
+  return endDateA - endDateB;
+}
 function useFilters(cattype) {
   $(".filters").removeClass("open");
   var firstterm = true;
@@ -2501,37 +2523,9 @@ function useFilters(cattype) {
   $(".events_list_grid").addClass("loading");
   var itscontent = $(".events_list_grid");
   itscontent.html("");
-  let urlPost;
-  if (cattype == "events") {
-    urlPost = `/g/${cattype}/?agenda=${
-      document.querySelector("main").dataset.agenda
-    }&lang=${actualLang}`;
-  } else {
-    urlPost = `/g/${cattype}/?lang=${actualLang}`;
-  }
+  let urlPost = `/g/${cattype}/?lang=${actualLang}`;
 
   $.post(urlPost, { filters: completefilters }, function (data) {
-    function setMidnight(dateString) {
-      const date = new Date(dateString);
-      date.setHours(0, 0, 0, 0);
-      return date;
-    }
-
-    function compararFechas(a, b) {
-      // Si el evento no tiene fecha de finalización, usar la fecha de inicio
-      const endDateA = a.field_end_date
-        ? a.field_end_date.length === 10
-          ? setMidnight(a.field_end_date)
-          : new Date(a.field_end_date)
-        : setMidnight(a.field_date);
-      const endDateB = b.field_end_date
-        ? b.field_end_date.length === 10
-          ? setMidnight(b.field_end_date)
-          : new Date(b.field_end_date)
-        : setMidnight(b.field_date);
-
-      return endDateA - endDateB;
-    }
     // Ordenar el arreglo por fecha de finalización
     data.sort(compararFechas);
     if (data.length > 0) {
@@ -2843,19 +2837,389 @@ function addExternalLinkIcon() {
 
 document.addEventListener("DOMContentLoaded", addExternalLinkIcon);
 
-if (document.querySelector("#toggleFiltersEvents")) {
-  document
-    .querySelector("#toggleFiltersEvents")
-    .addEventListener("click", () => {
-      document.querySelector(".filters").classList.toggle("active");
+document.querySelector("#formBtn").addEventListener("click", () => {
+  document.querySelectorAll(".search_form").forEach((el) => {
+    el.classList.toggle("active");
+  });
+});
+
+function formatDates(event, dateStart, dateEnd, actualLang, options) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Establecemos la hora de la fecha actual a medianoche para comparaciones
+
+  let dateText = "";
+
+  if (actualLang === "es") {
+    const dateFormattedStart = dateStart.toLocaleDateString("es-ES", options);
+    const dateFormattedEnd = dateEnd.toLocaleDateString("es-ES", options);
+    const alText = "al";
+    const hastaElText = "Hasta el";
+
+    // Condicionales para construir el texto de fecha en español
+    if (!event.field_end_date) {
+      // 1. No tiene fecha final -> Tomar la fecha de inicio.
+      dateText = dateFormattedStart;
+    } else if (dateStart.getTime() === dateEnd.getTime()) {
+      // 2. Fecha de inicio es igual a la fecha final, solo mostrar la fecha final.
+      dateText = dateFormattedEnd;
+    } else if (dateStart < today) {
+      // 3. Si la fecha de inicio es menor a la fecha actual, quitar la fecha de inicio y colocar al principio "Hasta el".
+      dateText = `${hastaElText} ${dateFormattedEnd}`;
+    } else {
+      // 4. Si la fecha de inicio es superior a la fecha actual, colocar así Fecha 1 al Fecha 2
+      dateText = `${dateFormattedStart} ${alText} ${dateFormattedEnd}`;
+    }
+  } else if (actualLang === "en") {
+    const dateFormattedStart = dateStart.toLocaleDateString("en-US", options);
+    const dateFormattedEnd = dateEnd.toLocaleDateString("en-US", options);
+
+    // Condicionales para construir el texto de fecha en inglés
+    if (!event.field_end_date) {
+      // 1. No tiene fecha final -> Tomar la fecha de inicio.
+      dateText = dateFormattedStart;
+    } else if (dateStart.getTime() === dateEnd.getTime()) {
+      // 2. Fecha de inicio es igual a la fecha final, solo mostrar la fecha final.
+      dateText = dateFormattedEnd;
+    } else if (dateStart < today) {
+      // 3. Si la fecha de inicio es menor a la fecha actual, quitar la fecha de inicio y colocar al principio "Until".
+      dateText = `Until ${dateFormattedEnd}`;
+    } else if (dateStart.toDateString() === dateEnd.toDateString()) {
+      // 4. Si las fechas son el mismo día, mostrar solo una fecha.
+      dateText = dateFormattedStart;
+    } else if (dateStart.getFullYear() === dateEnd.getFullYear()) {
+      // 5. Si las fechas están en el mismo año
+      if (dateStart.getMonth() === dateEnd.getMonth()) {
+        // 5.1 Si están en el mismo mes
+        dateText = `${dateFormattedStart.split(" ")[1]}-${
+          dateFormattedEnd.split(" ")[1]
+        } ${dateFormattedStart.split(" ")[0]} ${dateStart.getFullYear()}`;
+      } else {
+        // 5.2 Si están en meses diferentes
+        dateText = `${dateFormattedStart.split(" ")[0]} ${
+          dateFormattedStart.split(" ")[1]
+        } to ${dateFormattedEnd.split(" ")[0]} ${
+          dateFormattedEnd.split(" ")[1]
+        } ${dateStart.getFullYear()}`;
+      }
+    } else {
+      // 6. Fechas en años diferentes
+      dateText = `${dateFormattedStart} to ${dateFormattedEnd}`;
+    }
+  }
+
+  return dateText;
+}
+
+function useFiltersNew(cattype) {
+  const completefilters = { selects: [] };
+
+  // Recorremos cada grupo de filtros con selects
+  document.querySelectorAll(".filtergroup.selects").forEach((group) => {
+    const filterid = group.dataset.filterid;
+    const values = [];
+    const select = group.querySelector("select");
+
+    // Si el valor seleccionado es diferente de "all", lo añadimos a los valores
+    if (select && select.value !== "all") {
+      values.push(select.value);
+    }
+
+    const filterGroup = {
+      filter: filterid,
+      value: values.length > 0 ? values : ["all"], // Si no hay valores, añadimos "all"
+    };
+
+    completefilters.selects.push(filterGroup);
+  });
+
+  const eventsListGrid = document.querySelector(".events_list_grid");
+  eventsListGrid.classList.add("loading");
+  eventsListGrid.innerHTML = "";
+
+  // Construcción del URL para la consulta
+  let urlPost = `/g/${cattype}/?agenda=${
+    document.querySelector("main").dataset.agenda
+  }&lang=${actualLang}`;
+
+  // Hacer la consulta con Fetch, enviando los filtros como JSON
+  fetch(urlPost, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ filters: completefilters }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Ordenar los resultados por la fecha de finalización
+      data.sort(compararFechas);
+
+      if (data.length > 0) {
+        data.forEach((event) => {
+          const thumbnail =
+            event.field_cover_image ||
+            "https://via.placeholder.com/400x400.jpg?text=Bogotadc.travel";
+          const dateStart = setMidnight(event.field_date);
+          const dateEnd = event.field_end_date
+            ? setMidnight(event.field_end_date)
+            : dateStart;
+
+          // Formatear las fechas según el idioma
+          const options = { month: "long", day: "numeric", year: "numeric" };
+          const dateText = formatDates(
+            event,
+            dateStart,
+            dateEnd,
+            actualLang,
+            options
+          );
+
+          // Crear un objeto Date
+          const date = new Date(dateStart);
+
+          // Obtener una fecha en formato legible (DD/MM/YYYY o como prefieras)
+          const day = date.getDate();
+          const month = date.getMonth() + 1; // Los meses empiezan en 0, así que sumamos 1
+          const year = date.getFullYear();
+
+          // Formatear la fecha a "DD/MM/YYYY"
+          const formattedDate = `${year}-${month}-${day}`;
+
+          // Crear un objeto Date
+          const dateEndN = new Date(dateEnd);
+
+          // Obtener una fecha en formato legible (DD/MM/YYYY o como prefieras)
+          const dayEnd = dateEndN.getDate();
+          const monthEnd = dateEndN.getMonth() + 1; // Los meses empiezan en 0, así que sumamos 1
+          const yearEnd = dateEndN.getFullYear();
+
+          // Formatear la fecha a "DD/MM/YYYY"
+          const formattedDateEnd = `${yearEnd}-${monthEnd}-${dayEnd}`;
+
+          const strtemplate = `
+            <li class="events_list_grid_item" data-date="${formattedDate}" data-dateEnd="${formattedDateEnd}" data-category="${
+            event.field_categoria_evento
+          }" data-zone="${event.field_zona_relacionada}">
+              <a href="/${actualLang}/evento/${get_alias(event.title)}-${
+            event.nid
+          }" class="single_event">
+                <div class="single_event_img">
+                  <img loading="lazy" data-src="https://files.visitbogota.co${thumbnail}" src="https://picsum.photos/20/20"
+                    alt="evento" class="lazyload">
+                  <h5 class="single_event_title ms700">${event.title}</h5>
+                </div>
+                <div class="info">
+                  <div class="single_event_date">${dateText}</div>
+                  <div class="txt">
+                    <h6 class="single_event_place ms700">
+                      <svg width="23" height="33" viewBox="0 0 23 33" fill="none">
+                        <g clip-path="url(#clip0_35_2)">
+                          <path d="M22.61 8.62C20.94 2.29 14.48 -1.36 8.19999 0.48C3.45999 1.87 0.0799887 6.3 -1.13287e-05 11.24C-0.0300113 13 0.339989 14.68 0.919989 16.32C1.84999 18.95 3.19999 21.37 4.75999 23.67C6.63999 26.45 8.57999 29.19 10.5 31.94C10.69 32.22 10.98 32.42 11.23 32.66H11.74C11.99 32.42 12.26 32.21 12.47 31.94C12.82 31.5 13.12 31.02 13.44 30.55C15.2 28 17 25.47 18.71 22.88C20.18 20.65 21.42 18.29 22.24 15.73C22.99 13.39 23.24 11.02 22.6 8.61L22.61 8.62ZM20.39 15.26C19.57 17.76 18.32 20.06 16.86 22.23C15.14 24.8 13.35 27.32 11.58 29.86C11.56 29.89 11.53 29.92 11.47 29.99C10.38 28.45 9.30999 26.95 8.23999 25.43C6.55999 23.03 4.92999 20.59 3.65999 17.93C2.88999 16.32 2.28999 14.67 2.00999 12.89C1.35999 8.75 3.63999 4.5 7.44999 2.79C13.09 0.25 19.45 3.41 20.83 9.44C21.28 11.42 21.01 13.35 20.38 15.25L20.39 15.26Z" fill="#35498F"/>
+                          <path d="M11.51 5.74C8.34002 5.73 5.75002 8.3 5.74002 11.45C5.73002 14.62 8.30002 17.21 11.45 17.22C14.62 17.23 17.21 14.66 17.22 11.51C17.23 8.34 14.67 5.75 11.51 5.74ZM11.47 15.31C9.38002 15.31 7.66002 13.58 7.66002 11.49C7.66002 9.38 9.38002 7.65 11.49 7.66C13.6 7.66 15.32 9.39 15.32 11.5C15.32 13.61 13.59 15.33 11.48 15.32L11.47 15.31Z" fill="#35498F"/>
+                        </g>
+                      </svg>${event.field_place}
+                    </h6>
+                    <div class="btn event-view ms900">${
+                      actualLang == "es" ? "Ver evento" : "View EVENT"
+                    }</div>
+                  </div>
+                </div>
+              </a>
+            </li>`;
+          eventsListGrid.insertAdjacentHTML("beforeend", strtemplate);
+        });
+      } else {
+        eventsListGrid.innerHTML =
+          '<p class="noresults">No hemos encontrado resultados</p>';
+      }
+
+      eventsListGrid.classList.remove("loading");
+
+      // Asigna eventos para lazy loading de imágenes, si es necesario
+      lazyImages();
     });
-  document.querySelector("#closeFilters").addEventListener("click", () => {
-    document.querySelector(".filters").classList.toggle("active");
+}
+
+function normalizeDate(dateString) {
+  let dateParts = dateString.split("-");
+  let year = dateParts[0];
+  let month = dateParts[1].padStart(2, "0");
+  let day = dateParts[2].padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+function updateSelectOptions(selectElement, validValues) {
+  let options = selectElement.querySelectorAll("option");
+  options.forEach((option) => {
+    if (option.value === "" || validValues.includes(option.value)) {
+      option.disabled = false; // Mostrar opción si es válida o es la opción por defecto
+    } else {
+      option.disabled = true; // Ocultar opción si no hay eventos visibles que coincidan
+    }
   });
 }
 
-document.querySelector("#formBtn").addEventListener("click", () => {
-  document.querySelectorAll(".search_form").forEach(el =>{
-    el.classList.toggle("active");
-  })
-});
+function filterEvents() {
+  let searchQuery = document.getElementById("searchEvents").value.toLowerCase();
+  let selectedDateStart = document.getElementById("dateStart").value;
+  let selectedDateEnd = document.getElementById("dateEnd").value; // Nueva fecha de finalización
+  let selectedCategory = document.querySelector(
+    'select[name="categorias_eventos"]'
+  ).value;
+  let selectedZone = document.querySelector('select[name="test_zona"]').value;
+
+  let events = document.querySelectorAll(".events_list_grid_item");
+  let visibleCategories = new Set();
+  let visibleZones = new Set();
+
+  events.forEach(function (eventItem) {
+    let eventTitle = eventItem
+      .querySelector(".single_event_title")
+      .textContent.toLowerCase();
+    let eventDate = normalizeDate(
+      eventItem.getAttribute("data-date").replace(/\//g, "-")
+    );
+    let eventDateEnd = normalizeDate(
+      eventItem.getAttribute("data-dateend").replace(/\//g, "-")
+    );
+
+    let eventCategory = eventItem.getAttribute("data-category");
+    let eventZone = eventItem.getAttribute("data-zone");
+
+    // Condición de visibilidad: título, fechas (rango), categoría y zona
+    let matchesTitle = eventTitle.includes(searchQuery);
+
+    let matchesDate =
+      (!selectedDateStart ||
+        new Date(eventDate) >= new Date(selectedDateStart)) &&
+      (!selectedDateEnd || new Date(eventDateEnd) <= new Date(selectedDateEnd));
+
+    let matchesCategory =
+      !selectedCategory || eventCategory === selectedCategory;
+    let matchesZone = !selectedZone || eventZone === selectedZone;
+
+    if (matchesTitle && matchesDate && matchesCategory && matchesZone) {
+      eventItem.style.display = ""; // Mostrar si cumple las condiciones
+      visibleCategories.add(eventCategory); // Añadir categoría visible
+      visibleZones.add(eventZone); // Añadir zona visible
+    } else {
+      eventItem.style.display = "none"; // Ocultar si no cumple las condiciones
+    }
+  });
+
+  // Actualizar opciones en los selects de categorías y zonas
+  updateSelectOptions(
+    document.querySelector('select[name="categorias_eventos"]'),
+    Array.from(visibleCategories)
+  );
+  updateSelectOptions(
+    document.querySelector('select[name="test_zona"]'),
+    Array.from(visibleZones)
+  );
+}
+
+if (document.querySelector(".eventsnew")) {
+  document.querySelectorAll(".filtergroup").forEach((group) => {
+    const itscontent = group.querySelector(".content");
+    const filterid = group.dataset.filterid;
+
+    // Hacer la consulta para obtener los valores del filtro
+    fetch(`/hoteles/g/filter/?lang=${actualLang}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ filter: filterid }),
+    })
+      .then((response) => response.json())
+      .then((filterData) => {
+        // Si no hay datos para este filtro, no continuar
+        if (!filterData || filterData.length === 0) {
+          console.log(
+            `El filtro con ID ${filterid} no tiene datos, no se mostrará.`
+          );
+          return; // Salir de la ejecución si no hay valores
+        }
+
+        // Hacer la consulta de eventos
+        fetch(`/g/events/?lang=${actualLang}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            filters: {
+              selects: [
+                { filter: filterid, value: filterData.map((item) => item.tid) },
+              ],
+            },
+          }),
+        })
+          .then((response) => response.json())
+          .then((eventsData) => {
+            // Crear los dos arreglos separados
+            const categorias = eventsData.map(
+              (event) => event.field_categoria_evento
+            );
+            const zonas = eventsData.map(
+              (event) => event.field_zona_relacionada
+            );
+
+            // Si quieres obtener los valores únicos en cada uno de los arreglos
+            const categoriasUnicas = [...new Set(categorias)];
+            const zonasUnicas = [...new Set(zonas)];
+
+            const selectElement = document.createElement("select");
+            selectElement.name = filterid;
+            selectElement.classList.add("filterselect", "fw500");
+
+            // Agregar opción vacía al principio
+            const emptyOption = document.createElement("option");
+            emptyOption.value = ""; // Valor vacío
+            emptyOption.innerHTML =
+              actualLang === "es"
+                ? "Selecciona una opción"
+                : "Select an option";
+            selectElement.appendChild(emptyOption);
+
+            filterData.forEach((item) => {
+              if (
+                categoriasUnicas.some((el) => el == item.tid) ||
+                zonasUnicas.some((el) => el == item.tid)
+              ) {
+                const optionElement = document.createElement("option");
+                optionElement.value = item.tid;
+                optionElement.innerHTML = item.name;
+                if (group.classList.contains("color")) {
+                  optionElement.style.backgroundColor = `#${item.field_color}`;
+                }
+
+                selectElement.appendChild(optionElement);
+              }
+            });
+
+            itscontent.appendChild(selectElement);
+            selectElement.addEventListener("change", filterEvents);
+            // Asignar los eventos de entrada y cambio a los filtros
+            document
+              .getElementById("searchEvents")
+              .addEventListener("input", filterEvents);
+            document
+              .getElementById("dateStart")
+              .addEventListener("change", filterEvents);
+            document
+              .getElementById("dateEnd")
+              .addEventListener("change", filterEvents);
+          })
+          .catch((error) =>
+            console.error("Error fetching events data:", error)
+          );
+      })
+      .catch((error) => console.error("Error fetching filter data:", error))
+      .finally(() => {
+        group.classList.remove("loading");
+      });
+  });
+  useFiltersNew("events");
+}
