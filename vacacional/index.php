@@ -4,6 +4,20 @@ include "includes/head.php";
 $sliders = $vacacional->getSlidersHome();
 $banners = $vacacional->getBannersHome();
 ?>
+<div id="parallax-container">
+  <div style="-webkit-animation: kenburns-top-left 1s ease-out .5s both;animation: kenburns-top-left 1s ease-out .5s both;">
+    <div class="parallax-layer" style="background-image: url(images/parallax/4.webp);" alt="4.png"></div>
+  </div>
+  <div style="-webkit-animation: slide-in-blurred-bottom 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) .5s both;animation: slide-in-blurred-bottom 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) .5s both;">
+    <div class="parallax-layer" style="background-image: url(images/parallax/3.webp);" alt="3.png"></div>
+  </div>
+  <div style="-webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;">
+    <div class="parallax-layer" style="background-image: url(images/parallax/2.webp);" alt="2.png"></div>
+  </div>
+  <div style="-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;">
+    <div class="parallax-layer" style="background-image: url(images/parallax/1.webp);" alt="1.png"></div>
+  </div>
+</div>
 <main>
   <div class="flexbanner">
     <video src="video/video.mp4" autoplay loop muted></video>
@@ -122,7 +136,11 @@ $banners = $vacacional->getBannersHome();
     <div class="container grid-blogs"></div>
   </section>
 </main>
-
+ <!-- GSAP -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- ScrollTrigger Plugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
 <? include 'includes/imports.php'?>
 
 </body>

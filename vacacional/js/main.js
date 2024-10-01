@@ -1,3 +1,70 @@
+// script.js
+if (document.querySelector(".parallax-layer")) {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Seleccionamos todas las capas del parallax
+  const layers = document.querySelectorAll(".parallax-layer");
+
+  // Aplicamos diferentes movimientos a cada capa
+  layers.forEach((layer, index) => {
+    let direction = index % 4; // Alternar entre diferentes direcciones
+
+    switch (direction) {
+      case 0: // Movimiento vertical (arriba a abajo)
+        gsap.to(layer, {
+          y: (index + 1) * 30,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#parallax-container",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+        break;
+
+      case 1: // Movimiento de izquierda a derecha
+        gsap.to(layer, {
+          x: (index + 1) * 30,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#parallax-container",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+        break;
+
+      case 2: // Movimiento de derecha a izquierda
+        gsap.to(layer, {
+          x: -(index + 1) * 30,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#parallax-container",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+        break;
+
+      case 3: // Movimiento de abajo hacia arriba
+        gsap.to(layer, {
+          y: -(index + 1) * 30,
+          ease: "none",
+          scrollTrigger: {
+            trigger: "#parallax-container",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+        break;
+    }
+  });
+}
+
 function runOnScroll() {
   if (window.scrollY >= 80) {
     document.querySelector("header").classList.add("scroll");
@@ -101,7 +168,7 @@ async function getCatBlogs(cat) {
     `/vacacional/g/blogsCat/?cat=${cat}&lang=${actualLang}`
   );
   const data = await response.json();
-  if(data.length > 0){
+  if (data.length > 0) {
     const promises = data.map(async (blog) => {
       let urlImg = await getImageFromCacheOrFetch(
         "https://files.visitbogota.co" + blog.field_image
@@ -121,11 +188,9 @@ async function getCatBlogs(cat) {
     });
     await Promise.all(promises);
     lazyImages();
-
-  }else{
-    document.querySelector('.portal .blog').style.display = 'none';
+  } else {
+    document.querySelector(".portal .blog").style.display = "none";
   }
-
 }
 async function getRelRestaurants(catID = "all") {
   restaContainer.innerHTML = "";
@@ -883,9 +948,10 @@ async function getExpPortal(cat) {
       } else {
         document.querySelector(`.portal-experiencias`).style.display = "none";
       }
-    }).then(()=>{
-      lazyImages()
     })
+    .then(() => {
+      lazyImages();
+    });
 }
 if (document.querySelector("body.portal")) {
   var containerGrid = document.querySelector(".grid-atractivos");
