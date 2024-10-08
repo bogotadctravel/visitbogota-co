@@ -4,12 +4,19 @@ include "includes/head.php";
 $sliders = $vacacional->getSlidersHome();
 $banners = $vacacional->getBannersHome();
 ?>
-<div id="parallax-container">
+<a href="<?=$lang?>/blog/all/-vienes-la-cop-16--bogota-tu-casa--te-recibe-con-un-tesoro-natural-inexplorado--all-4460" id="parallax-container">
+  <div class="logos">
+    <img src="https://bogotadc.travel/drpl/sites/default/files/2024-07/Logo%20Tu%20Casa_Mesa%20de%20trabajo%201.png" alt="Logo" class="parallaxLogo">
+    <img src="images/logocop.png?v=<?=time()?>" alt="Logo COP 16">
+  </div>
+  <div style="-webkit-animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;" class="titleParallax">
+    <h2 >¿Vienes a la COP 16? Bogotá, tu casa, te recibe con un tesoro natural inexplorado.</h2>
+  </div>
   <div style="-webkit-animation: kenburns-top-left 1s ease-out .5s both;animation: kenburns-top-left 1s ease-out .5s both;">
     <div class="parallax-layer" style="background-image: url(images/parallax/4.webp);" alt="4.png"></div>
   </div>
   <div style="-webkit-animation: slide-in-blurred-bottom 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) .5s both;animation: slide-in-blurred-bottom 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) .5s both;">
-    <div class="parallax-layer" style="background-image: url(images/parallax/3.webp);" alt="3.png"></div>
+    <div class="parallax-layer" style="background-image: url(images/parallax/3.webp?v=<?=time()?>);" alt="3.png"></div>
   </div>
   <div style="-webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;">
     <div class="parallax-layer" style="background-image: url(images/parallax/2.webp);" alt="2.png"></div>
@@ -17,10 +24,10 @@ $banners = $vacacional->getBannersHome();
   <div style="-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;">
     <div class="parallax-layer" style="background-image: url(images/parallax/1.webp);" alt="1.png"></div>
   </div>
-</div>
+</a>
 <main>
   <div class="flexbanner">
-    <video src="video/video.mp4" autoplay loop muted></video>
+    <video src="video/video.mp4" loop autoplay muted></video>
   </div>
  
   <!-- <div class="banners_home">
@@ -47,6 +54,7 @@ $banners = $vacacional->getBannersHome();
     </section>
     <?php if($banners[0]->field_image != ""){ ?>
       <div class="banners_home">
+      <video src="video/colibri.webm" muted autoplay class="img-naturaleza"></video>
         <a href="<?=$banners[0]->field_link?>">
           <img src="https://bogotadc.travel<?=$banners[0]->field_image?>" alt="<?=$banners[0]->title?>">
         </a>

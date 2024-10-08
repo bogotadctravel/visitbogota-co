@@ -32,8 +32,12 @@ RewriteRule ^planifica-tu-viaje/b/([^/]*)/$ disena-tu-viaje/boxes/$1.php [L,QSA]
 RewriteRule ^banco-imagenes/s/([^/]*)/$ banco-imagenes/set/$1.php [L,QSA]
 RewriteRule ^banco-imagenes/g/([^/]*)/$ banco-imagenes/get/$1.php [L,QSA]
 RewriteRule ^banco-imagenes/b/([^/]*)/$ banco-imagenes/boxes/$1.php [L,QSA]
+# Redirige cualquier URL que coincida con qrcodes/ a https://visitbogota.co/es y descarta los query params
+RewriteRule ^qrcodes/([^/]*)/$ https://visitbogota.co/es [R=301,L,QSD]
+RewriteRule ^qrcodes/$ https://visitbogota.co/es [R=301,L,QSD]
 
-RewriteRule ^qrcordes/([^/]*)/$ qrcodes/$1.php [L,QSA]
+# RewriteRule ^qrcodes/([^/]*)/$ qrcodes/$1.php [L,QSA]
+# RewriteRule ^qrcodes/$ qrcodes/index.php [L,QSA]
 RewriteRule ^evento-promo/$ evento-promo/index.html [L,QSA]
 RewriteRule ^banco-imagenes/$ banco-imagenes/bi_index.php [L,QSA]
 RewriteRule ^es/s/([^/]*)/$ set/$1.php?lang=es [L,QSA]
@@ -45,8 +49,6 @@ RewriteRule ^pt/g/([^/]*)/$ get/$1.php?lang=pt [L,QSA]
 RewriteRule ^b/([^/]*)/$ boxes/$1.php [L,QSA]
 
 # VACACIONAL
-RewriteRule ^([a-zA-Z0-9_-]+)$ vacacional/index.php?lang=$1&seo=4 [L,QSA]
-RewriteRule ^([a-zA-Z0-9_-]+)/$ vacacional/index.php?lang=$1&seo=4 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/eventos/([a-zA-Z0-9_-]+)-([0-9]+)$ vacacional/eventsnew.php?lang=$1&idAgenda=$3&seo=$3&seoType=1 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/evento/([a-zA-Z0-9_-]+)-([0-9]+)$ vacacional/intern_eventnew.php?lang=$1&id=$3&seo=$3 [L,QSA]
 RewriteRule ^([a-zA-Z0-9_-]+)/explora/([a-zA-Z0-9_-]+)/([0-9]+)$ vacacional/portal.php?productID=$3&lang=$1&seo=$3&seoType=2 [L,QSA]

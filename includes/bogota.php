@@ -1414,5 +1414,9 @@ function getPalabrazInterfaz($id){
     $result = $this->query("palabras_interfaz/".$id, "", true);
     return $result;
 }
+function getfichas_turisticas($id="all"){
+    $result = $this->query("fichas_turisticas/".$id, "", true);
+    return $result;
+}
 
 }

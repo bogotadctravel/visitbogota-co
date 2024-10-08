@@ -84,24 +84,24 @@
     <div class="events_list">
         <div class="filters-bar">
             <div>
-                <label for="searchEvents">Buscar</label>
+                <label for="searchEvents"><?=$pi_bogota[7]?></label>
                 <input type="text" name="searchEvents" id="searchEvents">
             </div>
           
             <div class="filtergroup selects checkboxes color open" data-filterid="categorias_eventos">
-                <span class="ms700"><span class="arrow"></span><?=$lang == "es" ? "Categoría de Evento":"Event Category"?></span>
+                <span class="ms700"><span class="arrow"></span><?=$pi_bogota[51]?></span>
                 <div class="content"></div>
             </div>
             <div class="filtergroup selects checkboxes color open" data-filterid="test_zona">
-                <span class="ms700"><span class="arrow"></span><?=$lang == "es" ? "Zona de la ciudad":"city area"?></span>
+                <span class="ms700"><span class="arrow"></span><?=$pi_bogota[58]?></span>
                 <div class="content"></div>
             </div>
             <div>
-                <label for="dateStart">Seleccione fecha desde</label>
+                <label for="dateStart"><?=$pi_bogota[109]?></label>
                 <input type="date" name="dateStart" id="dateStart">
             </div>
             <div>
-                <label for="dateStart">Seleccione fecha hasta</label>
+                <label for="dateStart"><?=$pi_bogota[110]?></label>
                 <input type="date" name="dateEnd" id="dateEnd">
             </div>
         </div>
