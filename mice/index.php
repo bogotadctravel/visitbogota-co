@@ -1,4 +1,9 @@
-<?php $bodyClass="mice-home"; include "includes/head.php";$data = $mice->getData(); ?>
+<?php 
+$bodyClass="mice-home"; 
+include "includes/head.php";
+include "includes/header.php";
+$data = $mice->getData(); 
+?>
     <div id="mobile"></div>
     <main class="graybg">
       <section class="banner">
@@ -30,22 +35,5 @@
               <?php } ?>
           </div>
       </section>
-      <!-- <section class="known loading">
-        <h2><?= $mice->miceinfo->field_mice_ui_11; ?></h2>
-        <div class="loader"></div>
-
-                <div class="container ">
-                        <div class="content flex"></div>
-                 </div>
-      </section> -->
-      <!-- <section class="success-stories loading">
-        <h2><?= $mice->miceinfo->field_mice_ui_16; ?></h2>
-        <div class="loader"></div>
-        <div class="container">
-        <div class="content flex"></div>
-
-            </div>
-        </div>                  
-      </section> -->
     </main>
-  <? include 'includes/imports.php'?>
+  <?php include 'includes/footer.php'?>

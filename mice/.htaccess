@@ -1,0 +1,25 @@
+RewriteOptions inherit
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^s/([^/]*)/$ set/$1.php?lang=es [L,QSA]
+RewriteRule ^g/([^/]*)/$ get/$1.php?lang=es [L,QSA]
+
+RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/locaciones$ category-venues.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/proveedores$ category-providers.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/locacion/([a-zA-Z0-9_-]+)-([0-9]+)$ single-venue.php?lang=$1&venueid=$3&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/proveedor/([a-zA-Z0-9_-]+)-([0-9]+)$ single-provider.php?lang=$1&providerid=$3&seo=$3 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/por-que-bogota$ data.php?lang=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/aeropuerto-([0-9]+)$ landing.php?lang=$1&id=$2 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/bioseguridad-([0-9]+)$ landing.php?lang=$1&id=$2 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/movilidad-([0-9]+)$ landing.php?lang=$1&id=$2 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/emergencias-([0-9]+)$ landing.php?lang=$1&id=$2 [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/seguridad-([0-9]+)$ landing.php?lang=$1&id=$2 [L,QSA]
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php73” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php73 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

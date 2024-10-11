@@ -69,18 +69,14 @@ $turista = "Tourist Assistance";
 
 }
 if (!$banners) {
-    $banners = $b->generalInfo->field_field_banners;
+    $banners = $bogota->generalInfo->field_field_banners;
     $arrayBanners = explode(",", $banners);
     // Imagen Banner Footer
     $bannerFooter = str_replace(' ', '', $arrayBanners[4]);
 }
-$productsFooter = $b->productmenu('footer');
-if (!$planes) {
-    $planes = $b->plans();
-}
 ?>
 <div id="preloader">
-    <div class="image"><img src="<?=$include_level?>img/preloader.gif" alt="preloader"></div>
+    <div class="image"><img src="/img/preloader.gif" alt="preloader"></div>
 </div>
 <footer>
 <div class="container">
@@ -142,13 +138,13 @@ if (!$planes) {
       <h6><?=$contact_us?></h6> 
       <ul>
       <li>
-        <?= $b->generalInfo->field_ciudadano_txt ?> <a href="tel:<?= $b->generalInfo->field_ciudadano ?>"> <?= $b->generalInfo->field_ciudadano ?></a>
+        <?= $bogota->generalInfo->field_ciudadano_txt ?> <a href="tel:<?= $bogota->generalInfo->field_ciudadano ?>"> <?= $bogota->generalInfo->field_ciudadano ?></a>
         </li>
         <li>
-        <?= $b->generalInfo->field_turista_txt ?> <a href="tel:<?= $b->generalInfo->field_turista ?>"> <?= $b->generalInfo->field_turista ?></a>
+        <?= $bogota->generalInfo->field_turista_txt ?> <a href="tel:<?= $bogota->generalInfo->field_turista ?>"> <?= $bogota->generalInfo->field_turista ?></a>
         </li>
         <li>
-        <a href="https://wa.me/<?= $b->generalInfo->field_whatsapp ?>" class="whatsapp" target="_blank" rel="noopener"><?=$turista?></a>
+        <a href="https://wa.me/<?= $bogota->generalInfo->field_whatsapp ?>" class="whatsapp" target="_blank" rel="noopener"><?=$turista?></a>
         </li>
       </ul>
     </nav>
@@ -159,7 +155,7 @@ if (!$planes) {
 <small><?=date("Y") ?> <?=$all_rights_reserved?></small>
 <div class="links">
   <a href="/<?= $lang ?>/politica-tratamiento-datos-personales"><?=$privacy_and_terms?></a>
-  <a target="_blank" href="<?=$urlGlobal?><?= $b->generalInfo->field_resolucion_239?>"><?=$resolution_239?></a>
+  <a target="_blank" href="<?=$urlGlobal?><?= $bogota->generalInfo->field_resolucion_239?>"><?=$resolution_239?></a>
   <a target="_blank" href="https://www.idt.gov.co/es/marca-ciudad"><?=$city_brand?></a>
 </div>
 </footer>
@@ -212,50 +208,20 @@ if (!$planes) {
         </label>
 <!-- SCRIPTS -->
 
-<script src="<?=$include_level?>js/jquery-1.12.4.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
-<script src="<?=$include_level?>js/jquery.validate.min.js"></script>
-<script src="<?=$include_level?>js/jquery.form.js"></script>
-<script src="<?=$include_level?>js/additional-methods.min.js"></script>
-<script src="<?=$include_level?>js/jquery.fancybox.min.js"></script>
-<script src="<?=$include_level?>js/slick.min.js"></script>
-<script src="<?=$include_level?>js/iphone-inline-video.min.js"></script>
-<!-- <script src="<?=$include_level?>js/aos.js"></script> -->
-<script src="<?=$include_level?>js/jquery.mCustomScrollbar.js"></script>
-<script src="<?=$include_level?>js/custom_select.js"></script>
-<script src="<?=$include_level?>js/cookie.js"></script>
-<script src="<?=$include_level?>js/traffic.js?v=<?=time();?>"></script>
-<script src="<?=$include_level?>js/main.js?v=<?=time();?>"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/chatbot/googleAnalytics.js?v=<?=time()?>"></script>
-<script src="/chatbot/script.js?v=<?=time();?>"></script>
-
-<script>
-    function openSubForm(){
-        $.fancybox.open({
-              src: "/b/sub/",
-              type: "ajax",
-              opts: {
-                afterShow: function (instance, current) {
-                  console.info("done!");
-                    // FORMS VALIDATE
-  validateSubscribe();
-                },
-              },
-            });
-    }
-</script>
-<script>
-  if(!document.querySelector(".informacion_util")){
-    window.addEventListener(
-    "contextmenu",
-    function (e) {
-      e.preventDefault();
-    },
-    false
-  );
-  }
-</script>
+<script src="/js/jquery-1.12.4.min.js?v=<?=time();?>"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js?v=<?=time();?>" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+<script src="/js/jquery.validate.min.js?v=<?=time();?>"></script>
+<script src="/js/jquery.form.js?v=<?=time();?>"></script>
+<script src="/js/additional-methods.min.js?v=<?=time();?>"></script>
+<script src="/js/jquery.fancybox.min.js?v=<?=time();?>"></script>
+<script src="/js/slick.min.js?v=<?=time();?>"></script>
+<script src="/js/iphone-inline-video.min.js?v=<?=time();?>"></script>
+<!-- <script src="/js/aos.js?v=<?=time();?>"></script> -->
+<script src="/js/jquery.mCustomScrollbar.js?v=<?=time();?>"></script>
+<script src="/js/custom_select.js?v=<?=time();?>"></script>
+<script src="/js/cookie.js?v=<?=time();?>"></script>
+<script src="/js/traffic.js?v=<?=time();?>"></script>
+<script src="/js/main.js?v=<?=time();?>"></script>
 </body>
 
 </html>

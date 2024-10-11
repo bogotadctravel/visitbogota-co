@@ -1,4 +1,7 @@
-<?php include "includes/head.php"; ?>
+<?php 
+include "includes/head.php";
+include "includes/header.php";
+ ?>
 
 <div id="mobile"></div>
 <div id="disabler"></div>
@@ -39,4 +42,4 @@
             </div>
 
 
-<? include 'includes/imports.php'?>
+<? include 'includes/footer.php'?>
