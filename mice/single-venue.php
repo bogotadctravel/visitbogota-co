@@ -1,6 +1,7 @@
 <?php
 $bodyClass="internVenue-body graybg font1";
 include 'includes/head.php';
+include "includes/header.php";
 $venueid = $_GET['venueid'];
 $venue = $mice->get_mice_single_venues($venueid);
 ?>
@@ -130,4 +131,4 @@ $venue = $mice->get_mice_single_venues($venueid);
     <ul class="grid-venues"></ul>
   </div>
 </main>
-<? include 'includes/imports.php'?>
+<? include 'includes/footer.php'?>

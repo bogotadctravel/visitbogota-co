@@ -1,7 +1,33 @@
 <div id="menu_mobile">
-    <button id="close_menu"><img src="<?=$include_level?>img/close_menu_mobile.svg" alt="close Menu" width="25"
-            height="25"></button>
-    <img src="<?=$include_level?>img/logo.svg" alt="menuMobile" class="logo_menu_mobile" width="80" height="40">
+ 
+            <div class="header_mobile">
+            <?php 
+            if (isset($project_folder) && file_exists("menu.json")) {
+                $json = file_get_contents("menu.json");
+                $json_data = json_decode($json, true);
+              } else {
+                $json = file_get_contents("../menu.json");
+                $json_data = json_decode($json, true);
+              }
+  if($json_data["enableTranslates"]){ ?>
+<ul class="languages">
+                    <li class="uppercase">
+                     <?= $lang ?>
+                      <ul>
+                        <?php 
+                          for ($i=0; $i < count($json_data["enableTranslates"]); $i++) {
+                        ?>
+                          <li><a href="javascript:changeLang('<?=$json_data["enableTranslates"][$i]?>');" class="uppercase"><?=$json_data["enableTranslates"][$i]?></a></li>
+                        <?php } ?>
+                          <!-- <li><a href="/<?= $lang ?>/informacion-al-viajero#lsc">LSC</a></li> -->
+                      </ul>
+                    </li>
+                  </ul>
+                <?php } ?>
+                <img src="<?=$include_level?>img/logo.svg" alt="menuMobile" class="logo_menu_mobile" width="80" height="40">
+                <button id="close_menu"><img src="<?=$include_level?>img/close_menu_mobile.svg" alt="close Menu" width="25"
+                height="25"></button>
+            </div>
 
     <a href="/<?= $lang ?>" class="homeLink wait"><img src="<?=$include_level?>img/home_menu_ico.svg" alt="home"
             width="20" height="20"></a>

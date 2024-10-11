@@ -74,6 +74,7 @@ function setHome() {
   });
 }
 function setCategory(cattype) {
+  console.log("🚀 ~ setCategory ~ cattype:", cattype);
   if ($(window).width() <= 768) {
     $(".filtergroup").removeClass("open");
     $(".filtergroup").addClass("mobile");
@@ -332,7 +333,7 @@ function useFilters(cattype) {
                 "https://via.placeholder.com/400x400.jpg?text=Bogotadc.travel";
             }
             var strtemplate =
-              `<article class="card-item graybg totalclick"><a class="fw500 uppercase" href="/${actualLang}/mice/locacion/${get_alias(
+              `<article class="card-item graybg totalclick"><a class="fw500 uppercase" href="/${actualLang}/locacion/${get_alias(
                 data[i].title
               )}-${data[i].nid}"><div class="flex">
                 <figure class="column w_30 basic_bg" style="background-image:url(` +
@@ -380,7 +381,7 @@ function useFilters(cattype) {
             }
 
             var strtemplate =
-              `<article class="card-item graybg totalclick"><a class="fw500 uppercase" href="/${actualLang}/mice/proveedor/${get_alias(
+              `<article class="card-item graybg totalclick"><a class="fw500 uppercase" href="/${actualLang}/proveedor/${get_alias(
                 data[i].title
               )}-${data[i].nid}"><div class="flex"> 
                                   <figure class="column w_30 basic_bg" style="background-image:url(` +
@@ -1080,9 +1081,9 @@ function relVenues(type, zone, aforo) {
         for (let index = 0; index < 4 && index < venues.length; index++) {
           const venue = venues[index];
           if (venue.nid != idSingleVenue) {
-            var venueUrl = `/${actualLang}/mice/locacion/${get_alias(
-              venue.title
-            )}-${venue.nid}`;
+            var venueUrl = `/${actualLang}/locacion/${get_alias(venue.title)}-${
+              venue.nid
+            }`;
             var template = `
             <li>
             <a href="${venueUrl}">
@@ -1195,7 +1196,7 @@ function relproviders(type) {
       if (providers.length > 0) {
         for (let index = 0; index < 4; index++) {
           const provider = providers[index];
-          var providerUrl = `/${actualLang}/mice/proveedor/${get_alias(
+          var providerUrl = `/${actualLang}/proveedor/${get_alias(
             provider.title
           )}-${provider.nid}`;
           var template = `

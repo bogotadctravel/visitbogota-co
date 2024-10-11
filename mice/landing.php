@@ -1,8 +1,9 @@
 <?php 
 $bodyClass="fullpage";
-include "includes/head.php"; 
+include "includes/head.php";
+include "includes/header.php";
 $landing = $mice->getLanding($_GET['id']);
-?>
+ ?>
   <div id="mobile"></div>
     <main
       style="
@@ -17,4 +18,4 @@ $landing = $mice->getLanding($_GET['id']);
       </div>
     </main>
 
-    <? include 'includes/imports.php'?>
+    <? include 'includes/footer.php'?>

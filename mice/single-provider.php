@@ -1,6 +1,7 @@
 <?php
 $bodyClass="graybg font1 internprovider-body";
 include "includes/head.php"; 
+include "includes/header.php";
 $providerid = $_GET['providerid'];
 $provider = $mice->get_mice_single_provider($providerid);
 
@@ -68,4 +69,4 @@ $provider = $mice->get_mice_single_provider($providerid);
   </div>
 </main>
 
-<? include 'includes/imports.php'?>
+<? include 'includes/footer.php'?>

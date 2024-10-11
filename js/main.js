@@ -2577,6 +2577,7 @@ function useFilters(cattype) {
             options
           );
           const dateFormattedEnd = dateEnd.toLocaleDateString("es-ES", options);
+          console.log("🚀 ~ dateFormattedEnd:", dateFormattedEnd);
           const alText = "al";
           const hastaElText = "Hasta el";
 
@@ -2600,6 +2601,7 @@ function useFilters(cattype) {
             options
           );
           const dateFormattedEnd = dateEnd.toLocaleDateString("en-US", options);
+          console.log(dateEnd);
 
           // Condicionales para construir el texto de fecha en inglés
           if (!event.field_end_date) {
@@ -2969,10 +2971,11 @@ function useFiltersNew(cattype) {
             event.field_cover_image ||
             "https://via.placeholder.com/400x400.jpg?text=Bogotadc.travel";
           const dateStart = setMidnight(event.field_date);
-          const dateEnd = event.field_end_date
-            ? setMidnight(event.field_end_date)
-            : dateStart;
 
+          const dateEnd = event.field_end_date
+            ? setMidnight(`${event.field_end_date}T20:00:02`)
+            : dateStart;
+          console.log(`${event.field_end_date}T20:00:02`);
           // Formatear las fechas según el idioma
           const options = { month: "long", day: "numeric", year: "numeric" };
           const dateText = formatDates(
@@ -2996,7 +2999,6 @@ function useFiltersNew(cattype) {
 
           // Crear un objeto Date
           const dateEndN = new Date(dateEnd);
-
           // Obtener una fecha en formato legible (DD/MM/YYYY o como prefieras)
           const dayEnd = dateEndN.getDate();
           const monthEnd = dateEndN.getMonth() + 1; // Los meses empiezan en 0, así que sumamos 1

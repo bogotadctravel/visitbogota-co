@@ -1,5 +1,7 @@
-<?php include "includes/head.php"; ?>
-
+<?php 
+include "includes/head.php";
+include "includes/header.php";
+ ?>
 <div id="mobile"></div>
 <div id="disabler"></div>
 <div class="card-list venues graybg font1" data-type="venues">
@@ -78,4 +80,4 @@
 <?php } ?>
             </div>
 
-<? include 'includes/imports.php'?>
+<?php include 'includes/footer.php'?>

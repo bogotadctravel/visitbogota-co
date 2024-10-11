@@ -1,8 +1,9 @@
 <?php 
 $bodyClass="data graybg font1";
-include "includes/head.php"; 
+include "includes/head.php";
+include "includes/header.php";
 $data = $mice->getData();
-?>
+ ?>
 
 <div id="mobile"></div>
     <h1 class="fw900 uppercase center title"><img src="img/btalogo.svg" width="200" alt="bta logo"/><span>¿Por qué bogotá?</span></h1>
@@ -18,4 +19,4 @@ $data = $mice->getData();
             </div>
         </section>
 
-<? include 'includes/imports.php'?>
+<? include 'includes/footer.php'?>
