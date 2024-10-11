@@ -144,9 +144,18 @@ const getExploraBogota = async () => {
     url: `/${actualLang}/explora/${get_alias(prod.name)}/${prod.tid}`,
     field_categor: prod.field_categor,
   }));
+
   bogotaContainerFooter.innerHTML = "";
   bogotaContainerMenuMobile.innerHTML = "";
   document.querySelector("nav li.explora ul").innerHTML = "";
+
+  // Encuentra el producto con ID 216
+  const index = productos.findIndex((producto) => producto.id == 216);
+  if (index > -1) {
+    // Extrae el producto con ID 216 y lo coloca al inicio
+    const [productoEspecial] = productos.splice(index, 1);
+    productos.unshift(productoEspecial);
+  }
 
   productos.forEach((producto) => {
     if (producto.field_categor == "1") {
