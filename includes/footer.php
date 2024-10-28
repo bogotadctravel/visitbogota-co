@@ -164,7 +164,6 @@ if (!$planes) {
 </div>
 </footer>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/chatbot/edicion.css?v=<?=time()?>">
   <!-- CHATBOT -->
   <div class="chateaCon">Chatea con Candelaria</div>
@@ -226,7 +225,6 @@ if (!$planes) {
 <script src="<?=$include_level?>js/cookie.js"></script>
 <script src="<?=$include_level?>js/traffic.js?v=<?=time();?>"></script>
 <script src="<?=$include_level?>js/main.js?v=<?=time();?>"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/chatbot/googleAnalytics.js?v=<?=time()?>"></script>
 <script src="/chatbot/script.js?v=<?=time();?>"></script>
 

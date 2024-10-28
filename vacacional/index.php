@@ -4,7 +4,7 @@ include "includes/head.php";
 $sliders = $vacacional->getSlidersHome();
 $banners = $vacacional->getBannersHome();
 ?>
-<a href="<?=$lang?>/blog/all/-vienes-la-cop-16--bogota-tu-casa--te-recibe-con-un-tesoro-natural-inexplorado--all-4460" id="parallax-container">
+<a href="/<?=$lang?>/blog/all/-vienes-la-cop-16--bogota-tu-casa--te-recibe-con-un-tesoro-natural-inexplorado--all-4460" id="parallax-container">
   <div class="logos">
     <img src="https://bogotadc.travel/drpl/sites/default/files/2024-07/Logo%20Tu%20Casa_Mesa%20de%20trabajo%201.png" alt="Logo" class="parallaxLogo">
   
@@ -13,16 +13,16 @@ $banners = $vacacional->getBannersHome();
     <h2 >¿Vienes a la COP 16? Bogotá, tu casa, te recibe con un tesoro natural inexplorado.</h2>
     <img src="images/logocop.png?v=<?=time()?>" alt="Logo COP 16">
   </div>
-  <div style="-webkit-animation: kenburns-top-left 1s ease-out .5s both;animation: kenburns-top-left 1s ease-out .5s both;">
+  <div class="parallax-layer__container_1" style="-webkit-animation: kenburns-top-left 1s ease-out .5s both;animation: kenburns-top-left 1s ease-out .5s both;">
     <div class="parallax-layer" style="background-image: url(images/parallax/4.webp);" alt="4.png"></div>
   </div>
-  <div style="-webkit-animation: slide-in-blurred-bottom 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) .5s both;animation: slide-in-blurred-bottom 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) .5s both;">
+  <div class="parallax-layer__container_2" style="-webkit-animation: slide-in-blurred-bottom 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) .5s both;animation: slide-in-blurred-bottom 0.6s cubic-bezier(0.230, 1.000, 0.320, 1.000) .5s both;">
     <div class="parallax-layer" style="background-image: url(images/parallax/3.webp?v=<?=time()?>);" alt="3.png"></div>
   </div>
-  <div style="-webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;">
+  <div class="parallax-layer__container_3" style="-webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;">
     <div class="parallax-layer" style="background-image: url(images/parallax/2.webp);" alt="2.png"></div>
   </div>
-  <div style="-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;">
+  <div class="parallax-layer__container_4" style="-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) .5s both;">
     <div class="parallax-layer" style="background-image: url(images/parallax/1.webp);" alt="1.png"></div>
   </div>
   <div class="arrow"><svg width="278" height="486" viewBox="0 0 278 486" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M267.14 217.43L60.01 10.3C46.28 -3.43 24.02 -3.43 10.3 10.3C-3.42 24.03 -3.43 46.28 10.3 60.01L193.29 243L10.3 425.99C-3.43 439.72 -3.43 461.97 10.3 475.7C24.03 489.43 46.28 489.43 60.01 475.7L267.14 268.57C274.19 261.52 277.59 252.23 277.4 243C277.59 233.77 274.18 224.47 267.14 217.43Z" fill="white"/></svg></div>
@@ -57,7 +57,6 @@ $banners = $vacacional->getBannersHome();
     </section>
     <?php if($banners[0]->field_image != ""){ ?>
       <div class="banners_home">
-      <video src="video/colibri.webm" muted autoplay class="img-naturaleza"></video>
         <a href="<?=$banners[0]->field_link?>">
           <img src="https://bogotadc.travel<?=$banners[0]->field_image?>" alt="<?=$banners[0]->title?>">
         </a>
@@ -144,12 +143,17 @@ $banners = $vacacional->getBannersHome();
   <section class="blog container">
     <h2><img src="images/blogic.svg" alt="descubre"><?=$blog_y_multimedia?></h2>
     <h3><?=$publicaciones_recientes?> <a href="/<?=$lang?>/blog" class="wait all"><?=$ver_blog?></a></h3>
+    <video muted autoplay class="img-naturaleza">
+  <source src="video/colibri.mov" type="video/quicktime">
+  <source src="video/colibri.webm" type="video/webm">
+  Tu navegador no soporta la reproducción de video.
+</video>
     <div class="container grid-blogs"></div>
   </section>
 </main>
  <!-- GSAP -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <!-- ScrollTrigger Plugin -->
+  <script src=" https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   
 <? include 'includes/imports.php'?>

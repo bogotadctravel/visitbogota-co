@@ -1,6 +1,21 @@
 // script.js
 if (document.querySelector(".parallax-layer")) {
-  gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+  // Configuramos la animación para el scroll de la ventana
+
+  ScrollTrigger.create({
+    trigger: "#parallax-container", // El contenedor que desencadenará el scroll
+    start: "top top", // Inicia cuando el contenedor llega al inicio de la ventana
+    end: "+=200", // Ajusta según cuánto scroll quieras hacer antes de desplazar
+    onEnter: () => {
+      gsap.to(window, {
+        scrollTo: { y: window.innerHeight, autoKill: false }, // Desplazar la ventana 100vh hacia abajo
+        duration: 1, // Duración del desplazamiento
+        ease: "power2.inOut",
+      });
+    },
+  });
 
   // Seleccionamos todas las capas del parallax
   const layers = document.querySelectorAll(".parallax-layer");
@@ -18,7 +33,7 @@ if (document.querySelector(".parallax-layer")) {
             trigger: "#parallax-container",
             start: "top top",
             end: "bottom top",
-            scrub: true,
+            scrub: 1,
           },
         });
         break;
@@ -31,7 +46,7 @@ if (document.querySelector(".parallax-layer")) {
             trigger: "#parallax-container",
             start: "top top",
             end: "bottom top",
-            scrub: true,
+            scrub: 1,
           },
         });
         break;
@@ -44,7 +59,7 @@ if (document.querySelector(".parallax-layer")) {
             trigger: "#parallax-container",
             start: "top top",
             end: "bottom top",
-            scrub: true,
+            scrub: 1,
           },
         });
         break;
@@ -57,7 +72,7 @@ if (document.querySelector(".parallax-layer")) {
             trigger: "#parallax-container",
             start: "top top",
             end: "bottom top",
-            scrub: true,
+            scrub: 1,
           },
         });
         break;
@@ -1061,4 +1076,24 @@ if (document.querySelector(".blog_content")) {
     // Reemplaza la imagen original con el nuevo contenedor .image
     img.parentNode.replaceChild(imageContainer, img);
   });
+}
+
+const video = document.querySelector(".img-naturaleza");
+if (video) {
+  // Configuración del IntersectionObserver
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // Si el video está en el viewport, le damos play
+        video.play();
+      } else {
+        // Si el video sale del viewport, lo pausamos y lo reiniciamos
+        video.pause();
+        video.currentTime = 0; // Reiniciar el video al inicio
+      }
+    });
+  });
+
+  // Observamos el video
+  observer.observe(video);
 }

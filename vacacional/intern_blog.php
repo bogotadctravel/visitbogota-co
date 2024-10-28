@@ -5,7 +5,6 @@ $blog = $b->blogs($_GET['blogID'], $_GET['productID']);
 $blog = $blog[0];
 $prodRel = $b->products(0, $blog->field_prod_rel)->title;
 $blogsRel = $b->blogs("all", ($_GET['productID'] ? $_GET['productID'] : 'all'), 4, 0, 1);
-
 ?>
 <main>
 	<div class="banner" style="background-image:url(<?= ($blog->field_cover_image ? $urlGlobal . $blog->field_cover_image : '/img/noimg.png') ?>)">
@@ -29,7 +28,7 @@ $blogsRel = $b->blogs("all", ($_GET['productID'] ? $_GET['productID'] : 'all'), 
 	</div>
 	<?php if (count($blogsRel) > 0) { ?>
 		<div class="container_interest container">
-			<h2>También te puede interesar</h2>
+			<h2><?=$pi_bogota[111]?></h2>
 			<ul class="blog_rel">
 				<?php
 				for ($countBlogs = 0; $countBlogs < count($blogsRel); $countBlogs++) {

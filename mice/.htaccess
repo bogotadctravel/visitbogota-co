@@ -1,6 +1,8 @@
 RewriteOptions inherit
 RewriteEngine On
 RewriteBase /
+RewriteRule ^$ /es [R=301,L]
+
 
 RewriteRule ^s/([^/]*)/$ set/$1.php?lang=es [L,QSA]
 RewriteRule ^g/([^/]*)/$ get/$1.php?lang=es [L,QSA]

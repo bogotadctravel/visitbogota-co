@@ -70,6 +70,7 @@ a.thelink.whatsapp {
 }
 
 .chat-emergente {
+  background-color: #fff;
   position: fixed;
   bottom: 100px;
   right: 30px;
@@ -280,6 +281,12 @@ h5 {
 
 .chat .chat-message {
   padding: 20px;
+}
+.chat .chat-message input {
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 8px;
+  font-size: 12px;
 }
 
 .online,

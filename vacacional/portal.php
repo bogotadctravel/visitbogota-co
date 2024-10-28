@@ -21,9 +21,6 @@ if ($_GET['zoneID']) {
 </script>
 <main data-productid="<?= $_GET['productID'] ?>" id="mainPortal" data-planid="<?= $_GET['planID'] ?>" data-zoneid="<?= $_GET['zoneID'] ?>" data-productname="<?= $product->name ?>">
     <section class="banner" style="background-image:url(<?= $coverImage ? $urlGlobal . $coverImage : '/img/noimg.png' ?> );">
-        <?php if($_GET['productID'] == '216'){ ?>
-            <img src="images/collage/ave.webp" alt="" class="img-naturaleza">
-        <?php } ?>
     <div class="container">
         <div class="intro-txt">
             <?php
@@ -54,8 +51,11 @@ if ($_GET['zoneID']) {
     <div class="portal-atractivos">
         <h3>Lugares que puedes visitar</h3>
         <?php if($_GET['productID'] == '216'){ ?>
-     
-     <video src="video/venado.webm" autoplay muted class="img-naturaleza"></video>
+            <video muted autoplay class="img-naturaleza">
+  <source src="video/venado.mov" type="video/quicktime">
+  <source src="video/venado.webm" type="video/webm">
+  Tu navegador no soporta la reproducción de video.
+</video>
  <?php } ?>
         <section class="grid-atractivos"></section>
     </div>
