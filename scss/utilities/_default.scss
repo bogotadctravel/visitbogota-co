@@ -1,36 +1,49 @@
+@use 'sass:color';
+
 .thin {
   font-weight: 100;
 }
+
 .light {
   font-weight: 300;
 }
+
 .medium {
   font-weight: 500;
 }
+
 .semibold {
   font-weight: 600;
 }
+
 .bold {
   font-weight: 700;
 }
+
 .black {
   font-weight: 900;
 }
+
 .hide {
   display: none !important;
 }
+
 .uppercase {
   text-transform: uppercase;
 }
+
 .underline {
   text-decoration: underline;
 }
+
 .italic {
   font-style: italic;
 }
+
 a {
   color: inherit;
 }
+
 body {
   font-family: "MuseoSans-500", sans-serif;
   font-weight: normal;
@@ -96,14 +109,12 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: linear-gradient(
-    to right,
-    #2060af,
-    #2172bc,
-    #2983c8,
-    #3695d4,
-    #46a6de
-  );
+  background-image: linear-gradient(to right,
+      #2060af,
+      #2172bc,
+      #2983c8,
+      #3695d4,
+      #46a6de);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -121,14 +132,12 @@ body {
 }
 
 .switch.active .slider {
-  background-image: linear-gradient(
-    to right,
-    #5bc490,
-    #65c495,
-    #6fc49a,
-    #78c49e,
-    #81c4a3
-  );
+  background-image: linear-gradient(to right,
+      #5bc490,
+      #65c495,
+      #6fc49a,
+      #78c49e,
+      #81c4a3);
 }
 
 .switch.active .slider:before {
@@ -168,9 +177,11 @@ a.btn.miceBtn {
   padding: 0 80px;
   position: relative;
   z-index: 2;
+
   &:hover {
-    background-color: lighten($color: #dd4d22, $amount: 5);
+    background-color: color.adjust($color: #dd4d22, $lightness: 5%);
   }
+
   @media screen and (max-width: 1023px) {
     background-color: #fff;
     color: #333;
@@ -184,135 +195,178 @@ a.btn.miceBtn {
   box-sizing: border-box;
   float: left;
 }
+
 .w_5 {
   width: 5%;
 }
+
 .w_10 {
   width: 10%;
 }
+
 .w_15 {
   width: 15%;
 }
+
 .w_20 {
   width: 20%;
 }
+
 .w_25 {
   width: 25%;
 }
+
 .w_30 {
   width: 30%;
 }
+
 .w_33 {
   width: 33.333%;
 }
+
 .w_35 {
   width: 35%;
 }
+
 .w_40 {
   width: 40%;
 }
+
 .w_45 {
   width: 45%;
 }
+
 .w_50 {
   width: 50%;
 }
+
 .w_55 {
   width: 55%;
 }
+
 .w_60 {
   width: 60%;
 }
+
 .w_65 {
   width: 65%;
 }
+
 .w_70 {
   width: 70%;
 }
+
 .w_75 {
   width: 75%;
 }
+
 .w_80 {
   width: 80%;
 }
+
 .w_85 {
   width: 85%;
 }
+
 .w_90 {
   width: 90%;
 }
+
 .w_95 {
   width: 95%;
 }
+
 @media screen and (max-width: 1023px) {
   .m_outter {
     width: 100% !important;
   }
+
   .m_5 {
     width: 5% !important;
   }
+
   .m_10 {
     width: 10% !important;
   }
+
   .m_15 {
     width: 15% !important;
   }
+
   .m_20 {
     width: 20% !important;
   }
+
   .m_25 {
     width: 25% !important;
   }
+
   .m_30 {
     width: 30% !important;
   }
+
   .m_33 {
     width: 33.333% !important;
   }
+
   .m_35 {
     width: 35% !important;
   }
+
   .m_40 {
     width: 40% !important;
   }
+
   .m_45 {
     width: 45% !important;
   }
+
   .m_50 {
     width: 50% !important;
   }
+
   .m_55 {
     width: 55% !important;
   }
+
   .m_60 {
     width: 60% !important;
   }
+
   .m_65 {
     width: 65% !important;
   }
+
   .m_70 {
     width: 70% !important;
   }
+
   .m_75 {
     width: 75% !important;
   }
+
   .m_80 {
     width: 80% !important;
   }
+
   .m_85 {
     width: 85% !important;
   }
+
   .m_90 {
     width: 90% !important;
   }
+
   .m_95 {
     width: 95% !important;
   }
 }
+
 .outter {
   box-sizing: border-box;
   width: 100%;
 }
+
 .basic_background {
   background-repeat: no-repeat;
   background-position: center center;
@@ -322,18 +376,22 @@ a.btn.miceBtn {
 .ms100 {
   font-family: "MuseoSans-100";
 }
+
 .ms500 {
   font-family: "MuseoSans-500";
 }
+
 .ms700 {
   font-family: "MuseoSans-700";
 }
+
 .ms900 {
   font-family: "MuseoSans-900";
 }
 
 .ofertasRel {
   margin: 50px 0;
+
   .title {
     font-size: 4rem;
     color: #35498e;
@@ -341,6 +399,7 @@ a.btn.miceBtn {
     margin: 0 auto 30px;
     line-height: 4rem;
   }
+
   &-grid {
     display: grid;
     margin-bottom: 50px;
@@ -352,6 +411,7 @@ a.btn.miceBtn {
     max-width: 1200px;
     margin: 0 auto;
     justify-content: center;
+
     @media only screen and (max-width: 1360px) {
       grid-template-columns: repeat(auto-fill, minmax(calc(100% - 20px), 1fr));
       padding: 60px 20px;
@@ -373,6 +433,7 @@ a.btn.miceBtn {
       background: var(--blanco, #fff);
       box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.5);
       position: relative;
+
       .discount {
         top: 20px;
         position: absolute;
@@ -382,6 +443,7 @@ a.btn.miceBtn {
         font-weight: 800;
         line-height: normal;
         z-index: 2;
+
         span {
           border-left: 1px solid var(--blanco, #fff);
           color: var(--blanco, #fff);
@@ -396,16 +458,19 @@ a.btn.miceBtn {
           transform: translateY(-50%);
         }
       }
+
       .image {
         position: relative;
         overflow: hidden;
         height: 400px;
+
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
           transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         .prices {
           position: absolute;
           bottom: 0;
@@ -417,6 +482,7 @@ a.btn.miceBtn {
           padding: 20px;
           justify-content: center;
           align-items: center;
+
           p {
             color: rgba(255, 255, 255, 0.8);
             text-align: center;
@@ -425,18 +491,21 @@ a.btn.miceBtn {
             font-weight: 400;
             line-height: normal;
           }
+
           &-discount {
             text-decoration-line: line-through;
           }
         }
       }
+
       .info {
         flex: 1;
         display: flex;
         justify-content: space-between;
         flex-direction: column;
         padding: 30px;
-        & > strong {
+
+        &>strong {
           color: var(--gris-oscuro, #373737);
           text-align: center;
           font-size: 24px;
@@ -446,7 +515,8 @@ a.btn.miceBtn {
           display: block;
           margin-bottom: 15px;
         }
-        & > p {
+
+        &>p {
           margin-bottom: 30px;
           color: var(--gris-oscuro, #373737);
           text-align: center;
@@ -454,11 +524,13 @@ a.btn.miceBtn {
           font-style: normal;
           font-weight: 400;
           line-height: normal;
+
           @media only screen and (max-width: 480px) {
             display: none;
           }
         }
-        & > small {
+
+        &>small {
           align-items: center;
           background: var(--Rojo, #35498e);
           border-radius: 50px;
@@ -475,6 +547,7 @@ a.btn.miceBtn {
         }
       }
     }
+
     &__promo {
       -webkit-box-shadow: 10px 10px 32px -8px rgba(0, 0, 0, 0.75);
       -moz-box-shadow: 10px 10px 32px -8px rgba(0, 0, 0, 0.75);
@@ -490,6 +563,7 @@ a.btn.miceBtn {
         height: 100%;
         position: relative;
       }
+
       .info {
         position: absolute;
         bottom: 0;
@@ -498,12 +572,14 @@ a.btn.miceBtn {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+
         .txt {
           padding: 0 25px 0 50px;
           display: flex;
           flex-direction: column;
           align-items: flex-end;
         }
+
         strong {
           color: #fff;
           font-size: 44px;
@@ -514,6 +590,7 @@ a.btn.miceBtn {
           font-weight: 900;
           text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
         }
+
         small {
           color: #fff;
           font-size: 25px;
@@ -522,6 +599,7 @@ a.btn.miceBtn {
           margin-bottom: 10px;
           text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
         }
+
         .logo {
           padding: 0 25px;
           clip-path: polygon(0 0, 74% 0, 90% 100%, 0% 100%);
@@ -531,6 +609,7 @@ a.btn.miceBtn {
           justify-content: flex-start;
           width: 100%;
           height: 70px;
+
           img {
             height: 50px;
             width: initial;
@@ -539,6 +618,7 @@ a.btn.miceBtn {
         }
       }
     }
+
     &__big_promo {
       -webkit-box-shadow: 10px 10px 32px -8px rgba(0, 0, 0, 0.75);
       -moz-box-shadow: 10px 10px 32px -8px rgba(0, 0, 0, 0.75);
@@ -552,12 +632,14 @@ a.btn.miceBtn {
       @media only screen and (max-width: 1023px) {
         grid-column: span 1;
       }
+
       img {
         object-fit: cover;
         width: 100%;
         height: 100%;
         position: relative;
       }
+
       .info {
         position: absolute;
         bottom: 0;
@@ -568,6 +650,7 @@ a.btn.miceBtn {
         flex-direction: column;
         align-items: flex-start;
         justify-content: space-between;
+
         .txt {
           padding: 50px 50px 0;
         }
@@ -582,6 +665,7 @@ a.btn.miceBtn {
           font-weight: 900;
           text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
         }
+
         small {
           color: #fff;
           font-size: 25px;
@@ -590,6 +674,7 @@ a.btn.miceBtn {
           margin-bottom: 10px;
           text-shadow: 2px 2px 3px rgba(0, 0, 0, 1);
         }
+
         .logo {
           padding: 0 50px;
           clip-path: polygon(0 0, 74% 0, 90% 100%, 0% 100%);
@@ -599,6 +684,7 @@ a.btn.miceBtn {
           justify-content: flex-start;
           width: 100%;
           height: 70px;
+
           img {
             height: 50px;
             width: initial;
@@ -612,6 +698,7 @@ a.btn.miceBtn {
 
 a[target="_blank"] {
   position: relative;
+
   span {
     svg {
       position: absolute;

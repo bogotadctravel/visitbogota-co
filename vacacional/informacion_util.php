@@ -25,7 +25,7 @@ function filter_callback($element) {
     <div class="container  fade" >
         <?php
         $icons = array("map_toilet","gis_map-route","recorridos_guiados","puntos_infoBlue");
-        $customOrder = array("2","3","1");
+        $customOrder = array("1", "2","3","251");
         function cmp($a, $b) {
             global $customOrder;
             $posA = array_search($a->tid, $customOrder);
@@ -35,7 +35,6 @@ function filter_callback($element) {
         usort($catInfo, "cmp");
         for ($i = 0; $i < count($catInfo); $i++) {
             $tripInfo = $b->tripinfo($catInfo[$i]->tid);
-            if($catInfo[$i]->tid != "2"){
                 echo "<h2>" . $catInfo[$i]->name . "</h2>";
                 echo "
                 <section class='utilSlideContainer' id='".$b->get_alias($catInfo[$i]->name)."'>
@@ -60,34 +59,7 @@ function filter_callback($element) {
                 echo "</ul>
                 </section>";
 
-            }else{
-                if (count($tripInfo) > 0) {
-                    echo "<h2>" . $catInfo[$i]->name . "</h2>";
-                    echo "
-                    <section class='utilSlideContainer' id='".$b->get_alias($catInfo[$i]->name)."'>
-                        <ul class='utilSlide'>";
-                    for ($a = 0; $a < count($tripInfo); $a++) {
-                        echo "
-                            <li>
-                                <a href='javascript:utilBoxes(\"" . $tripInfo[$a]->nid . "\");'>
-                                    <div class='img'>
-                                        <img loading='lazy' data-src='images/" . $icons[$a] . ".svg?v=2' alt='bogota' class='zone_img lazyload' src='https://picsum.photos/20/20'>
-                                    </div>";
-
-                        if ($tripInfo[$a]->field_address) {
-                            echo "<span class='name '>" . $tripInfo[$a]->title . "<small class='dir '>" . $tripInfo[$a]->field_address . "</small></span>";
-                        } else {
-                            echo "<span class='name '>" . $tripInfo[$a]->title . "</span>";
-                        }
-
-                        echo "</a></li>";
-                    }
-
-                    echo "</ul>
-                    </section>";
-
-                }
-            }
+        
         }
         ?>
         <?php if(count($arr) > 0){ ?>

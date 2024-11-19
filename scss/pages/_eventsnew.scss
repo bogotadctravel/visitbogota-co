@@ -1,4 +1,8 @@
+@use 'sass:color';
+
 .eventsnew {
+  background-color: #fff;
+
   :root {
     --marginelements: 20px;
     --arrowsize: 6px;
@@ -12,7 +16,7 @@
     }
   }
 
-  background-color: #fff;
+
 
   main {
     padding: 200px 0;
@@ -997,7 +1001,8 @@
 
           .desc {
             .btn {
-              background-color: darken($color: #ff7c47, $amount: 10);
+
+              background-color: color.adjust($color: #ff7c47, $lightness: -10%);
             }
           }
         }

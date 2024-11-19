@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 .rutas {
   main {
     padding-top: 200px;
@@ -15,6 +17,7 @@
         margin: 30px auto;
         align-items: flex-end;
         gap: 20px;
+
         &::after {
           flex: 1;
           content: "";
@@ -22,15 +25,18 @@
           width: 100%;
           height: 2px;
           background-color: var(--Rojo, #35498e);
+
           @media only screen and (max-width: 1023px) {
             content: none;
           }
         }
+
         img {
           width: 50px;
           height: 50px;
           object-fit: contain;
         }
+
         &::after {
           flex: 1;
           content: "";
@@ -40,36 +46,44 @@
           background-color: var(--Rojo, #35498e);
         }
       }
+
       h3 {
         grid-column: span 3;
         color: #35498e;
         margin-bottom: 8px;
+
         &::after {
           content: none;
         }
+
         @media only screen and (max-width: 1023px) {
           grid-column: span 1;
         }
       }
+
       .listRT {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 30px;
         padding: 30px 20px;
+
         @media only screen and (max-width: 1024px) {
           grid-template-columns: repeat(1, 1fr);
           padding: 0 0 180px;
         }
+
         article {
           overflow: hidden;
           width: 100%;
           background-color: #fff;
           box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
           border-radius: 15px;
+
           .image {
             aspect-ratio: 16 / 9;
             overflow: hidden;
             width: 100%;
+
             img {
               width: 100%;
               object-fit: cover;
@@ -77,21 +91,25 @@
               aspect-ratio: 16 / 9;
             }
           }
+
           .desc {
             padding: 20px;
           }
+
           p {
             font-size: 14px;
             line-height: 16px;
             margin-bottom: 20px;
             text-align: justify;
           }
+
           h3 {
             color: #35498e;
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 15px;
           }
+
           span.btn {
             background-color: #35498e;
             color: #fff;
@@ -105,14 +123,16 @@
             border-radius: 30px;
             width: fit-content;
           }
+
           &:hover {
             .image {
               img {
                 transform: scale(1.1);
               }
             }
+
             span.btn {
-              background-color: darken($color: #35498e, $amount: 10);
+              background-color: color.adjust($color: #35498e, $lightness: 10%);
             }
           }
         }

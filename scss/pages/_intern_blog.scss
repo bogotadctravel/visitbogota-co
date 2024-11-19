@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 .intern_blog {
   .banner {
     background-attachment: fixed;
@@ -9,9 +11,11 @@
     justify-content: flex-end;
     position: relative;
     padding: 300px 20px 30px;
+
     @media only screen and (max-width: 1023px) {
       padding: 50px 20px 10px;
     }
+
     &::after {
       content: "";
       background-color: rgba($color: #000000, $alpha: 0.5);
@@ -21,6 +25,7 @@
       width: 100%;
       height: 100%;
     }
+
     .txt {
       color: #fff;
       margin: 0 auto;
@@ -28,6 +33,7 @@
       width: 100%;
       position: relative;
       z-index: 10;
+
       .tag {
         align-items: center;
         background: var(--Rojo, #35498e);
@@ -44,6 +50,7 @@
         text-align: center;
         margin-bottom: 15px;
       }
+
       h2 {
         font-family: "MuseoSans-900";
         font-size: 2.6rem;
@@ -51,29 +58,34 @@
         max-width: 1200px;
         margin: 0 auto;
         text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.75);
+
         @media only screen and (max-width: 1023px) {
           display: flex;
           flex-direction: column;
           align-items: center;
         }
+
         small,
         time {
           font-family: "MuseoSans-500";
           font-size: 1.5rem;
         }
       }
+
       h1 {
         text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.75);
         font-family: "MuseoSans-900";
         font-size: 3.8rem;
         text-align: left;
         max-width: 1200px;
+
         @media screen and (max-width: 1023px) {
           text-align: center;
           font-size: 2.5rem;
           margin-bottom: 10px;
         }
       }
+
       .intro {
         p {
           color: #fff;
@@ -81,6 +93,7 @@
           font-size: 1.8rem;
           text-shadow: 4px 4px 7px rgba(0, 0, 0, 0.75);
           line-height: 2.7rem;
+
           @media only screen and (max-width: 1023px) {
             font-size: 1.4rem;
             line-height: 2rem;
@@ -89,6 +102,7 @@
       }
     }
   }
+
   .initial-txt {
     background-color: #fff;
     border-radius: 25px 0 0 0;
@@ -97,17 +111,20 @@
     padding: 0 40px;
     position: relative;
     width: 100%;
+
     h3 {
       color: #777777;
       font-family: "MuseoSans-700";
       font-size: 1.3rem;
       margin-bottom: 5px;
+
       small {
         color: #777777;
         font-family: "MuseoSans-500";
         font-size: 1rem;
       }
     }
+
     h1 {
       color: #7f7f7f;
       font-family: "MuseoSans-700";
@@ -115,12 +132,15 @@
       line-height: 2.8rem;
       text-align: center;
     }
+
     .intro {
       background-color: #fff;
       margin: 15px 0;
+
       @media screen and (max-width: 1023px) {
         margin: 15px 0 30px;
       }
+
       p {
         color: #777777;
         font-family: "MuseoSans-700";
@@ -129,15 +149,18 @@
       }
     }
   }
+
   .content {
     background-color: #fff;
     border-radius: 0 0 65px 0;
     padding: 50px 20px;
     position: relative;
     z-index: 3;
+
     @media screen and (max-width: 1023px) {
       background-color: transparent;
     }
+
     h3 {
       color: #777777;
       font-family: "MuseoSans-900";
@@ -146,6 +169,7 @@
       max-width: 768px;
       margin: 0 auto 30px;
     }
+
     .blog_content {
       background-color: #fff;
       color: #777777;
@@ -157,6 +181,7 @@
       position: relative;
       width: 100%;
       z-index: 2;
+
       @media screen and (max-width: 1023px) {
         text-align: left;
         font-size: 1.4rem;
@@ -165,15 +190,19 @@
         padding: 0 0 80px;
         border-radius: 0 0 25px 0;
       }
+
       .image {
         position: relative;
         margin: 15px 0;
+
         @media screen and (max-width: 1023px) {
           margin: 30px 0;
         }
+
         img {
           width: 100%;
         }
+
         span {
           position: absolute;
           font-size: 12px;
@@ -184,6 +213,7 @@
           padding: 5px;
         }
       }
+
       a {
         color: #46a4dc;
         text-decoration: underline;
@@ -193,14 +223,17 @@
       ul {
         margin-bottom: 15px;
       }
+
       iframe {
         width: 100% !important;
       }
     }
   }
+
   .container_interest {
     position: relative;
     z-index: 2;
+
     h2 {
       color: var(--gris, #626262);
       font-size: clamp(24px, 4vw, 50px);
@@ -213,31 +246,38 @@
       align-items: flex-end;
       gap: 20px;
     }
+
     .blog_rel {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 50px;
       margin-bottom: 50px;
+
       @media only screen and (max-width: 1023px) {
         gap: 15px;
         grid-template-columns: repeat(1, calc(100vw - 45px));
       }
+
       a {
         display: block;
         width: 100%;
         overflow: hidden;
+
         @media screen and (max-width: 1024px) {
           max-width: 100%;
         }
+
         .img {
           height: 300px;
           overflow: hidden;
           margin-bottom: 15px;
           border-radius: 15px 15px 15px 0;
+
           @media screen and (max-width: 1023px) {
             height: 300px;
             width: 100%;
           }
+
           img {
             object-fit: cover;
             transition: all 0.6s cubic-bezier(0, 0.55, 0.45, 1);
@@ -245,6 +285,7 @@
             height: 100%;
           }
         }
+
         .desc {
           small {
             align-items: center;
@@ -256,16 +297,19 @@
             font-size: calc(20px - var(--fontSizeReal));
             font-style: normal;
             font-weight: 500;
-            line-height: 18px; /* 90% */
+            line-height: 18px;
+            /* 90% */
             padding: 5px 10px;
             gap: 5px;
             text-align: center;
             margin-bottom: 15px;
+
             img {
               width: 18px;
               height: 18px;
             }
           }
+
           h2 {
             color: var(--gris-oscuro, #373737);
             font-size: calc(25px - var(--fontSizeReal));
@@ -277,20 +321,24 @@
 
         &:hover {
           opacity: 0.8;
+
           .img {
             img {
               transform: scale(1.1);
             }
           }
+
           .desc {
             .btn {
-              background-color: darken($color: #ff7c47, $amount: 10);
+
+              background-color: color.adjust($color: #ff7c47, $lightness: -10%);
             }
           }
         }
       }
     }
   }
+
   .container_descubre {
     padding: 150px 0 100px;
     margin-top: -90px;
@@ -298,11 +346,13 @@
     z-index: 1;
     position: relative;
     background-color: #fff;
+
     @media screen and (max-width: 1023px) {
       margin-top: -70px;
       border-radius: 0 0 40px 0;
       position: relative;
       padding: 90px 0 20px;
+
       &::after,
       &::before {
         content: "";
@@ -314,11 +364,13 @@
         height: 55px;
         left: -1px;
       }
+
       &::after {
         bottom: -55px;
         background-image: url(../img/curve_down_filters.svg);
       }
     }
+
     &::after {
       content: "";
       background-size: contain;
@@ -329,10 +381,12 @@
       height: 55px;
       left: -1px;
     }
+
     &::after {
       bottom: -55px;
       background-image: url(../img/curve_down_filters.svg);
       transform: none;
+
       @media screen and (max-width: 1023px) {
         bottom: -54px;
         transform: none;
@@ -345,6 +399,7 @@ body.dark.intern_blog {
   main {
     background-color: #090e11;
   }
+
   .banner {
     @media screen and (max-width: 1023px) {
       &::before {
@@ -352,39 +407,50 @@ body.dark.intern_blog {
       }
     }
   }
+
   .initial-txt {
     border-radius: 0;
     background-color: #090e11;
+
     h3 {
       color: #fff;
+
       small {
         color: #fff;
       }
     }
+
     h1 {
       color: #fff;
     }
+
     .intro {
       background-color: #090e11;
+
       p {
         color: #fff;
       }
     }
   }
+
   .content {
     background-color: #090e11;
+
     &::after {
       background-image: url(../img/curve_down_filters_dark.svg);
     }
+
     .blog_content {
       background-color: #090e11;
       color: #fff;
     }
   }
+
   .container_interest {
     h2 {
       color: #fff;
     }
+
     .blog_rel {
       .desc {
         h2 {

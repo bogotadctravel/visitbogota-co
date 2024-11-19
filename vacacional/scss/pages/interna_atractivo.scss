@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 .interna_atractivo {
   main {
     max-width: 1600px;
@@ -627,7 +629,7 @@
 
           .desc {
             .btn {
-              background-color: darken($color: #ff7c47, $amount: 10);
+              background-color: color.adjust($color: #ff7c47, $lightness: 10%);
             }
           }
         }

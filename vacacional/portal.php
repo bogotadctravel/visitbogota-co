@@ -50,13 +50,7 @@ if ($_GET['zoneID']) {
     </section>
     <div class="portal-atractivos">
         <h3>Lugares que puedes visitar</h3>
-        <?php if($_GET['productID'] == '216'){ ?>
-            <video muted autoplay class="img-naturaleza">
-  <source src="video/venado.mov" type="video/quicktime">
-  <source src="video/venado.webm" type="video/webm">
-  Tu navegador no soporta la reproducción de video.
-</video>
- <?php } ?>
+
         <section class="grid-atractivos"></section>
     </div>
 

@@ -1096,6 +1096,8 @@ class bogota
         $String = str_replace("’", "", $String);
         $String = str_replace("‘", "", $String);
         $String = str_replace("'", "", $String);
+        $String = str_replace("?", "", $String);
+        $String = str_replace("¿", "", $String);
 
         //Mayusculas
         $String = strtolower($String);

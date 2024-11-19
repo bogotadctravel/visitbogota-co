@@ -57,7 +57,9 @@
           <div class="container">
             <h3 class="ms900"> <img src="../vacacional/images/atractivo.svg" alt="descubre"><?=$pb->pb_experiencias[13]?></h3>
             <ul class="recommendation-grid">
-              <?php for ($i=0; $i < count($plans); $i++) { $plan = $plans[$i]; ?>
+              <?php 
+              shuffle($plans); // Reordena el array de forma aleatoria
+               for ($i=0; $i < count($plans); $i++) { $plan = $plans[$i]; ?>
                 <li class="recommendation-grid__item">
                   <a href="/<?=$lang?>/experiencias-turisticas/plan/<?=$pb->get_alias($plan->title)?>-<?=$plan->nid?>" >
                     <!-- <div class="discount ms900">

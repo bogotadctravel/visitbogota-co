@@ -1,11 +1,30 @@
 //==========================================//
 // sass --watch scss/style.scss:css/style.css --style compressed //
 //==========================================//
-@import "variables";
-@import "mixins";
+@use 'sass:color';
+@forward "utilities";
+@forward "components";
+@forward "pages";
+@forward "variables";
+@forward "mixins";
 
-@include font-face(
-  "MuseoSans Condensed",
+@mixin font-face($name, $file, $weight, $style) {
+  @font-face {
+    font-family: "#{$name}";
+    font-style: "#{$style}";
+    font-weight: "#{$weight}";
+    src: url("../fonts/#{$file}.eot");
+    src: url("../fonts/#{$file}.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/#{$file}.woff") format("woff"),
+    url("../fonts/#{$file}.ttf") format("truetype"),
+    url("../fonts/#{$file}.svg?#webfont") format("svg"),
+    url("../fonts/#{$file}.otf") format("opentype");
+    font-display: swap;
+  }
+}
+
+
+@include font-face("MuseoSans Condensed",
   museo-sans-condensed-700-webfont,
   "normal",
   "normal"
@@ -20,39 +39,45 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-@-moz-keyframes GradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-@keyframes GradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+
   100% {
     background-position: 0% 50%;
   }
 }
 
-@import "utilities";
-@import "components";
-@import "pages";
+@-moz-keyframes GradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes GradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
 
 .home {
   overflow-x: hidden;
@@ -67,6 +92,7 @@
   margin-bottom: 60px;
   text-align: center;
   width: 100%;
+
   @media screen and (max-width: 1023px) {
     font-size: 2.3rem;
   }
@@ -85,6 +111,7 @@ label.error {
   padding: 95px 0 0 0;
   max-width: 1200px;
   margin: 0 auto;
+
   h2 {
     color: #35498e;
     display: block;
@@ -94,17 +121,20 @@ label.error {
     margin-bottom: 60px;
     text-align: center;
     width: 100%;
+
     @media screen and (max-width: 1023px) {
       font-family: "MuseoSans-900";
       font-size: 2.6rem;
     }
   }
+
   ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0 auto;
     width: 100%;
+
     li {
       border-bottom: 2px solid gray;
       border-left: 2px solid gray;
@@ -113,9 +143,11 @@ label.error {
       padding: 15px 0 15px 15px;
       width: calc(876px / 5);
       min-height: 320px;
+
       &:last-child {
         margin: 0;
       }
+
       a {
         display: flex;
         height: 100%;
@@ -123,6 +155,7 @@ label.error {
         justify-content: space-between;
         color: #b54acb;
         text-decoration: underline;
+
         .number {
           transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
           align-items: center;
@@ -135,18 +168,23 @@ label.error {
           justify-content: center;
           margin-bottom: 40px;
           width: 60px;
+
           &.number_1 {
             color: #2060af;
           }
+
           &.number_2 {
             color: #46a6de;
           }
+
           &.number_3 {
             color: #5bc490;
           }
+
           &.number_4 {
             color: #edb000;
           }
+
           &.number_5 {
             color: #ec582f;
           }
@@ -157,11 +195,13 @@ label.error {
           font-size: 2.3rem;
           margin-bottom: 23px;
         }
+
         .img_container {
           border-radius: 21px;
           height: 103px;
           overflow: hidden;
           width: 140px;
+
           img {
             width: 100%;
             height: 100%;
@@ -169,30 +209,37 @@ label.error {
             object-fit: cover;
           }
         }
+
         &:hover {
           .img_container {
             img {
               transform: scale(1.1);
             }
           }
+
           .number {
             margin-left: 30px;
+
             &.number_1 {
               background-color: #2060af;
               color: #fff;
             }
+
             &.number_2 {
               background-color: #46a6de;
               color: #fff;
             }
+
             &.number_3 {
               background-color: #5bc490;
               color: #fff;
             }
+
             &.number_4 {
               background-color: #edb000;
               color: #fff;
             }
+
             &.number_5 {
               background-color: #ec582f;
               color: #fff;
@@ -206,27 +253,33 @@ label.error {
 
 #slider_interest_you {
   padding: 0 50px;
+
   @media screen and (max-width: 1023px) {
     max-width: 480px;
     padding: 0 50px;
     max-width: 480px;
     margin: 0 auto;
   }
+
   h3 {
     color: #4d4d4d;
     font-size: 1.5rem;
     margin-top: 10px;
     text-align: center;
   }
+
   .bx-wrapper .bx-pager.bx-default-pager a {
     background-color: #35498e;
   }
+
   .slick-prev.slick-arrow {
     left: 10px;
   }
+
   .slick-next.slick-arrow {
     right: 10px;
   }
+
   .slick-prev.slick-arrow,
   .slick-next.slick-arrow {
     background: transparent;
@@ -236,14 +289,17 @@ label.error {
     z-index: 2;
     overflow: hidden;
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
     img {
       height: 20px;
       width: 20px;
     }
+
     &:hover {
       opacity: 0.5;
     }
   }
+
   .slick-dots {
     align-items: center;
     bottom: -20px;
@@ -253,6 +309,7 @@ label.error {
     left: 50%;
     position: absolute;
     transform: translateX(-50%);
+
     li {
       border-radius: 50%;
       border: 2px solid #35498e;
@@ -262,18 +319,22 @@ label.error {
       position: relative;
       width: 15px;
       z-index: 2;
+
       &.slick-active,
       &:hover {
         background-color: #35498e;
       }
+
       button {
         opacity: 0;
       }
     }
   }
+
   .slider_interest_you_item {
     display: block;
     overflow: hidden;
+
     img {
       border-radius: 50%;
       object-fit: cover;
@@ -284,6 +345,7 @@ label.error {
 
 .loading {
   position: relative;
+
   &::after {
     background-image: url(../img/single_preload.gif);
     background-position: center center;
@@ -317,8 +379,10 @@ main {
   background: #fff;
   width: 100%;
 }
+
 .bannerinformation {
   position: relative;
+
   .slick-dots {
     align-items: center;
     bottom: 30px;
@@ -328,6 +392,7 @@ main {
     left: 50%;
     position: absolute;
     transform: translateX(-50%);
+
     li {
       border-radius: 50%;
       border: 2px solid #ff7c47;
@@ -338,15 +403,18 @@ main {
       box-shadow: 3px 3px 5px rgb(0 0 0 / 75%);
       width: 18px;
       z-index: 2;
+
       button {
         opacity: 0;
       }
+
       &:hover,
       &.slick-active {
         background-color: #ff7c47;
       }
     }
   }
+
   button.slick-prev.slick-arrow {
     width: 35px;
     background: transparent;
@@ -355,6 +423,7 @@ main {
     top: 40%;
     transform: translateY(-50%);
   }
+
   button.slick-next.slick-arrow {
     width: 35px;
     background: transparent;

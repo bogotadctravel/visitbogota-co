@@ -1254,6 +1254,8 @@ function get_alias(str) {
   str = str.replace("+", "", str);
   str = str.replace("&", "", str);
   str = str.replace("amp;", "", str);
+  str = str.replace("?", "", str);
+  str = str.replace("¿", "", str);
 
   // Crear un objeto para mapeo de caracteres con tildes a sin tildes
   const accentsMap = {

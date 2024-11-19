@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 .home {
   video.img-naturaleza {
     right: 0;
@@ -1134,7 +1136,7 @@
               }
 
               span.btn {
-                background-color: darken($color: #35498e, $amount: 10);
+                background-color: color.adjust($color: #35498e, $lightness: 10%);
               }
             }
           }
@@ -1276,7 +1278,7 @@
 
               .desc {
                 .btn {
-                  background-color: darken($color: #ff7c47, $amount: 10);
+                  background-color: color.adjust($color: #ff7c47, $lightness: 10%);
                 }
               }
             }
@@ -1404,7 +1406,7 @@
 
               .desc {
                 .btn {
-                  background-color: darken($color: #ff7c47, $amount: 10);
+                  background-color: color.adjust($color: #ff7c47, $lightness: 10%);
                 }
               }
             }
@@ -1471,7 +1473,7 @@ h3 {
     }
 
     &:hover {
-      background-color: darken($color: #35498e, $amount: 10);
+      background-color: color.adjust($color: #35498e, $lightness: 10%);
     }
   }
 }

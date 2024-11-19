@@ -1,4 +1,4 @@
-@import "utilities/fonts";
-@import "utilities/reset";
-@import "utilities/default";
-@import "utilities/custom_select";
+@forward "utilities/fonts";
+@forward "utilities/reset";
+@forward "utilities/default";
+@forward "utilities/custom_select";
