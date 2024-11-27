@@ -175,61 +175,6 @@ const getExploraBogota = async () => {
   if (document.querySelector("#bogota-natural")) {
     await getBogotaData("bogota-natural", data);
   }
-  if (document.querySelectorAll("#categorias_blog").length > 0) {
-    customSelect();
-  }
-  if (
-    document.querySelectorAll("#categorias_blog .select-items div").length > 0
-  ) {
-    document
-      .querySelectorAll("#categorias_blog .select-items div")
-      .forEach((el) => {
-        el.addEventListener("click", async () => {
-          await fetch(
-            `/g/allBlogs/?productID=${
-              document.querySelector("#categorias_blog select").value
-            }`
-          )
-            .then((res) => res.json())
-            .then((data) => {
-              document
-                .querySelector(".blog_list .repeater")
-                .classList.add("loading");
-              document.querySelector(".blog_list .repeater").innerHTML = "";
-              data.forEach(async (blog) => {
-                let urlImg = await getImageFromCacheOrFetch(
-                  "https://files.visitbogota.co" + blog.field_image
-                );
-                let template = `
-                <a href="/${actualLang}/blog/all/${get_alias(blog.title)}-all-${
-                  blog.nid
-                }" data-aos="flip-left blog_item" data-productid="88">
-                    <div class="img">
-                      <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
-                    </div>
-                    <div class="desc">
-                    <small class="tag">
-                    <img src="images/mdi_tag.svg" alt="tag"/>
-                    ${blog.field_prod_rel_1}
-                    </small>
-                      <h2 class="">${blog.title}</h2>
-                      <small class="date">${blog.field_date}</small>
-                    </div>
-                  </a>
-                  `;
-                document.querySelector(".blog_list .repeater").innerHTML +=
-                  template;
-              });
-            })
-            .finally(() => {
-              lazyImages();
-              document
-                .querySelector(".blog_list .repeater")
-                .classList.remove("loading");
-            });
-        });
-      });
-  }
 };
 const getAgendaEventos = async () => {
   const response = await fetch(`/g/getAgendaTax/?lang=${actualLang}`);
@@ -256,62 +201,6 @@ const getAgendaEventos = async () => {
     agendas.forEach((agenda) => {
       subMenu.innerHTML += `<li><a href="${agenda.url}" class="wait ms700">${agenda.title}</a></li>`;
     });
-  }
-
-  if (document.querySelectorAll("#categorias_blog").length > 0) {
-    customSelect();
-  }
-  if (
-    document.querySelectorAll("#categorias_blog .select-items div").length > 0
-  ) {
-    document
-      .querySelectorAll("#categorias_blog .select-items div")
-      .forEach((el) => {
-        el.addEventListener("click", async () => {
-          await fetch(
-            `/g/allBlogs/?productID=${
-              document.querySelector("#categorias_blog select").value
-            }`
-          )
-            .then((res) => res.json())
-            .then((data) => {
-              document
-                .querySelector(".blog_list .repeater")
-                .classList.add("loading");
-              document.querySelector(".blog_list .repeater").innerHTML = "";
-              data.forEach(async (blog) => {
-                let urlImg = await getImageFromCacheOrFetch(
-                  "https://files.visitbogota.co" + blog.field_image
-                );
-                let template = `
-                <a href="/${actualLang}/blog/all/${get_alias(blog.title)}-all-${
-                  blog.nid
-                }" data-aos="flip-left blog_item" data-productid="88">
-                    <div class="img">
-                      <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
-                    </div>
-                    <div class="desc">
-                    <small class="tag">
-                    <img src="images/mdi_tag.svg" alt="tag"/>
-                    ${blog.field_prod_rel_1}
-                    </small>
-                      <h2 class="">${blog.title}</h2>
-                      <small class="date">${blog.field_date}</small>
-                    </div>
-                  </a>
-                  `;
-                document.querySelector(".blog_list .repeater").innerHTML +=
-                  template;
-              });
-            })
-            .finally(() => {
-              lazyImages();
-              document
-                .querySelector(".blog_list .repeater")
-                .classList.remove("loading");
-            });
-        });
-      });
   }
 };
 
@@ -1256,6 +1145,10 @@ function get_alias(str) {
   str = str.replace("amp;", "", str);
   str = str.replace("?", "", str);
   str = str.replace("¿", "", str);
+  str = str.replace("'", "", str);
+  str = str.replace("`", "", str);
+  str = str.replace("`", "", str);
+  str = str.replace("`", "", str);
 
   // Crear un objeto para mapeo de caracteres con tildes a sin tildes
   const accentsMap = {
@@ -3086,19 +2979,19 @@ function filterEvents() {
   let visibleCategories = new Set();
   let visibleZones = new Set();
 
-  events.forEach(function (eventItem) {
-    let eventTitle = eventItem
+  events.forEach(function (blogItem) {
+    let eventTitle = blogItem
       .querySelector(".single_event_title")
       .textContent.toLowerCase();
     let eventDate = normalizeDate(
-      eventItem.getAttribute("data-date").replace(/\//g, "-")
+      blogItem.getAttribute("data-date").replace(/\//g, "-")
     );
     let eventDateEnd = normalizeDate(
-      eventItem.getAttribute("data-dateend").replace(/\//g, "-")
+      blogItem.getAttribute("data-dateend").replace(/\//g, "-")
     );
 
-    let eventCategory = eventItem.getAttribute("data-category");
-    let eventZone = eventItem.getAttribute("data-zone");
+    let eventCategory = blogItem.getAttribute("data-category");
+    let eventZone = blogItem.getAttribute("data-zone");
 
     // Condición de visibilidad: título, fechas (rango), categoría y zona
     let matchesTitle = eventTitle.includes(searchQuery);
@@ -3113,11 +3006,13 @@ function filterEvents() {
     let matchesZone = !selectedZone || eventZone === selectedZone;
 
     if (matchesTitle && matchesDate && matchesCategory && matchesZone) {
-      eventItem.style.display = ""; // Mostrar si cumple las condiciones
+      console.log(blogItem);
+
+      blogItem.style.display = ""; // Mostrar si cumple las condiciones
       visibleCategories.add(eventCategory); // Añadir categoría visible
       visibleZones.add(eventZone); // Añadir zona visible
     } else {
-      eventItem.style.display = "none"; // Ocultar si no cumple las condiciones
+      blogItem.style.display = "none"; // Ocultar si no cumple las condiciones
     }
   });
 
@@ -3136,6 +3031,8 @@ if (document.querySelector(".eventsnew")) {
   document.querySelectorAll(".filtergroup").forEach((group) => {
     const itscontent = group.querySelector(".content");
     const filterid = group.dataset.filterid;
+
+    console.log(filterid);
 
     // Hacer la consulta para obtener los valores del filtro
     fetch(`/hoteles/g/filter/?lang=${actualLang}`, {
@@ -3235,4 +3132,72 @@ if (document.querySelector(".eventsnew")) {
       });
   });
   useFiltersNew("events");
+}
+function filterBlogs() {
+  let searchQuery = document.getElementById("searchEvents").value.toLowerCase();
+  let selectedDateStart = document.getElementById("dateStart").value;
+  let selectedDateEnd = document.getElementById("dateEnd").value; // Nueva fecha de finalización
+  let selectedCategory = document.querySelector("select").value;
+
+  let blogs = document.querySelectorAll(".blog_list .repeater .blog_item");
+  let visibleCategories = new Set();
+
+  blogs.forEach(function (eventItem) {
+    let blogtitle = eventItem
+      .querySelector(".desc h2")
+      .textContent.toLowerCase();
+    let blogDate = normalizeDate(
+      eventItem.getAttribute("data-date").replace(/\//g, "-")
+    );
+    let blogDateEnd = normalizeDate(
+      eventItem.getAttribute("data-date").replace(/\//g, "-")
+    );
+    const soloFecha = blogDate.split("T")[0];
+
+    let blogCategory = eventItem.getAttribute("data-productid");
+
+    // Condición de visibilidad: título, fechas (rango), categoría y zona
+    let matchesTitle = blogtitle.includes(searchQuery);
+
+    let matchesDate =
+      (!selectedDateStart && !selectedDateEnd) || // Sin rango de fechas
+      (selectedDateStart &&
+        !selectedDateEnd &&
+        new Date(soloFecha) >= new Date(selectedDateStart)) || // Solo fecha inicial
+      (!selectedDateStart &&
+        selectedDateEnd &&
+        new Date(soloFecha) <= new Date(selectedDateEnd)) || // Solo fecha final
+      (selectedDateStart &&
+        selectedDateEnd && // Ambas fechas
+        new Date(soloFecha) >= new Date(selectedDateStart) &&
+        new Date(soloFecha) <= new Date(selectedDateEnd));
+
+    let matchesCategory =
+      !selectedCategory || blogCategory === selectedCategory;
+
+    if (matchesTitle && matchesDate && matchesCategory) {
+      eventItem.style.display = ""; // Mostrar si cumple las condiciones
+      visibleCategories.add(blogCategory); // Añadir categoría visible
+    } else {
+      eventItem.style.display = "none"; // Ocultar si no cumple las condiciones
+    }
+  });
+
+  // // Actualizar opciones en los selects de categorías y zonas
+  updateSelectOptions(
+    document.querySelector('select[name="categorias_blog"]'),
+    Array.from(visibleCategories)
+  );
+}
+
+if (document.querySelector(".blog")) {
+  // Asignar los eventos de entrada y cambio a los filtros
+  document
+    .getElementById("searchEvents")
+    .addEventListener("input", filterBlogs);
+  document.getElementById("dateStart").addEventListener("change", filterBlogs);
+  document.getElementById("dateEnd").addEventListener("change", filterBlogs);
+  document
+    .querySelector(`select[name="categorias_blog"]`)
+    .addEventListener("change", filterBlogs);
 }

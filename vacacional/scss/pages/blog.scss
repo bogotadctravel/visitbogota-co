@@ -5,10 +5,6 @@
     padding: 200px 20px 30px;
   }
 
-  #categorias_blog {
-    max-width: 250px;
-    border: 1px solid #000;
-  }
 
   .custom-select-container {
     margin: 30px auto;
@@ -69,6 +65,12 @@
     &::after {
       bottom: -113px;
       background-image: url(../img/desk_curve.svg);
+    }
+
+    .filters-bar {
+
+      max-width: 1600px;
+      margin: 0 auto 30px;
     }
 
     .repeater {

@@ -7,16 +7,41 @@ $blogi < count($allBlogs); $blogi++) { if (!in_array($b->products(0,
 $allBlogs[$blogi]->field_prod_rel), $categories)) { array_push($categories,
 $b->products(0, $allBlogs[$blogi]->field_prod_rel)); } }
 
+
+$filteredCategories = array_map(function ($category) {
+  return [
+      'ID' => $category->nid,
+      'name' => $category->title,
+  ];
+}, $categories);
 ?>
 <main>
   <h1 class="">
     <img src="images/blogic.svg" alt="blog">
     Blog
   </h1>
-  <!-- <div class="container custom-select-container">
-    <div class="custom-select" id="categorias_blog"><select ><option value="">CATEGORÍA</option></select></div>
-  </div> -->
   <section class="blog_list container">
+    <div class="filters-bar">
+        <div>
+            <label for="searchEvents"><?=$pi_bogota[7]?></label>
+            <input type="text" name="searchEvents" id="searchEvents">
+          </div>
+          
+          <div>
+          <label for="searchEvents"><?=$pi_bogota[63]?></label>
+        <div id="categorias_blog">
+          <select name="categorias_blog"><option value="">CATEGORÍA</option></select>
+        </div>
+        </div>
+        <div>
+            <label for="dateStart"><?=$pi_bogota[112]?></label>
+            <input type="date" name="dateStart" id="dateStart">
+        </div>
+        <div>
+            <label for="dateStart"><?=$pi_bogota[113]?></label>
+            <input type="date" name="dateEnd" id="dateEnd">
+        </div>
+    </div>
     <?php if (count($allBlogs) >
     0) { ?>
     <div class="repeater">
@@ -24,8 +49,9 @@ $b->products(0, $allBlogs[$blogi]->field_prod_rel)); } }
         <a
               href="/<?= $lang ?>/blog/all/<?= $b->get_alias($allBlogs[$i]->title) ?>-all-<?= $allBlogs[$i]->nid ?>"
               data-aos="flip-left"
+              data-date="<?= $allBlogs[$i]->field_date_1 ?>"
               class="big blog_item"
-              data-productid="<?= $b->products(0, $allBlogs[$i]->field_prod_rel)->nid ?>"
+              data-productid="<?= $allBlogs[$i]->field_nueva_categorizacion1_1 ?>"
             >
               <div class="img">
                 <img
