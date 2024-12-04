@@ -21,6 +21,7 @@ function filter_callback($element) {
 <main>
     <div class="container">
         <h1><img src="images/puntos_infoBlue.svg?v=2" alt="<?= $b->generalInfo->field_info_txt ?>"><?= $b->generalInfo->field_info_txt ?></h1>
+        <p>Bogotá, tu casa, no solo es la capital de Colombia. Es tu casa y la casa de todos; una ciudad de casi 8 millones de habitantes que recibe y abraza a todos sus visitantes y les ofrece una variada y robusta oferta turística: desde historia, cultura y arquitectura, pasando por la gastronomía, la naturaleza, el entretenimiento y una animada vida nocturna. Nos consolidamos cada vez más como un destino de talla internacional y aquí te compartimos toda la información que necesitas para tu estadía en nuestra ciudad.</p>
     </div>
     <div class="container  fade" >
         <?php

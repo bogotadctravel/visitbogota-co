@@ -53,6 +53,13 @@
         <?php } ?>
         </section>
         <section>
+        <?php if(isset($place->field_audio_resena) && $place->field_audio_resena != ""){?>
+            <h3>Escuchar reseña en audio</h3>
+            <audio controls>
+  <source src="https://files.visitbogota.co<?=$place->field_audio_resena?>" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+        <?php }?>
             <a href="<?=$place->field_mapslink ? $place->field_mapslink : "http://maps.google.com/maps?q=".$place->field_location?>" class="map" target="_blank"
                 rel="noopener"><img src="images/map.jpg" alt="map"></a>
             <ul class="details">

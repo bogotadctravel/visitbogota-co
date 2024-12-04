@@ -9,6 +9,7 @@
     position: relative;
     z-index: 2;
     padding-top: 200px;
+
     &::after {
       content: "";
       background-color: rgba($color: #000000, $alpha: 0.3);
@@ -18,6 +19,7 @@
       width: 100%;
       height: 100%;
     }
+
     .container {
       display: flex;
       align-items: flex-end;
@@ -27,28 +29,32 @@
       z-index: 2;
       max-width: 780px;
       padding: 40px 20px;
+
       form {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+
         h2 {
           font-size: 25px;
           color: #fff;
           margin-bottom: 15px;
           text-shadow: 3px 5px 2px #474747;
+
           @media only screen and (max-width: 1023px) {
             margin-bottom: 10px;
           }
         }
 
-        & > img {
+        &>img {
           width: 100%;
           max-width: 125px;
           display: block;
           margin-bottom: 10px;
         }
+
         span {
           background-color: #fff;
           border-radius: 15px;
@@ -63,6 +69,7 @@
           -webkit-box-shadow: 0px 14px 17px -6px rgba(0, 0, 0, 0.75);
           -moz-box-shadow: 0px 14px 17px -6px rgba(0, 0, 0, 0.75);
           box-shadow: 0px 14px 17px -6px rgba(0, 0, 0, 0.75);
+
           @media only screen and (max-width: 1023px) {
             flex-direction: column;
             box-shadow: none;
@@ -73,6 +80,7 @@
           .left {
             flex: 1;
           }
+
           @media only screen and (max-width: 1023px) {
             .left {
               background-color: #fff;
@@ -83,12 +91,14 @@
               box-shadow: 0px 14px 17px -6px rgba(0, 0, 0, 0.75);
             }
           }
+
           .input {
             width: 100%;
             display: flex;
             align-items: center;
             position: relative;
             flex: 1;
+
             small {
               opacity: 0;
               display: block;
@@ -99,32 +109,39 @@
               bottom: -10px;
               left: 14px;
             }
+
             img {
               width: 20px;
               height: 20px;
               display: block;
               margin-right: 10px;
             }
+
             input {
               font-size: 16px;
               color: var(--gris-oscuro, #373737);
               width: 100%;
+
               &::placeholder {
                 font-size: 16px;
                 color: var(--gris-oscuro, #373737);
               }
             }
           }
+
           .right {
             display: flex;
             align-items: center;
             gap: 8px;
+
             @media only screen and (max-width: 1023px) {
               flex-direction: column;
             }
+
             .c-select {
               select {
                 color: (--gris-oscuro, #373737);
+
                 option {
                   color: (--gris-oscuro, #373737);
                   font-size: 14px;
@@ -132,6 +149,7 @@
               }
             }
           }
+
           button {
             background-color: #35498e;
             color: #fff;
@@ -141,6 +159,7 @@
             justify-content: center;
             border-radius: 8px;
             padding: 10px 30px;
+
             &:hover {
               opacity: 0.7;
             }
@@ -149,18 +168,17 @@
       }
     }
   }
+
   .bg {
-    background-image: url(https://res.cloudinary.com/instituto-turismo-bogota/image/upload/w_1200/v1676573583/Banco%20de%20images/PlazadeToros_30112022_RoyVega_16_ffuequ.jpg);
-    padding: 20px 80px;
-    position: relative;
-    min-height: 1080px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+
     @media only screen and (max-width: 1023px) {
       padding: 1px;
     }
   }
+
   .recommendation {
     max-width: 1400px !important;
     width: 100%;
@@ -168,6 +186,7 @@
     padding: 0 20px;
     display: block;
     margin: 50px auto !important;
+
     &::before {
       background-repeat: no-repeat;
       background-position: center center;
@@ -179,19 +198,21 @@
       left: 0px;
       opacity: 0.04;
     }
+
     &-grid {
       display: grid;
       gap: 30px;
       grid-template-columns: repeat(auto-fill, calc(25% - 25px));
+
       @media only screen and (max-width: 1023px) {
-        grid-template-columns: repeat(
-          auto-fill,
-          minmax(calc(100% - 20px), 1fr)
-        );
+        grid-template-columns: repeat(auto-fill,
+            minmax(calc(100% - 20px), 1fr));
       }
+
       &__item {
         width: 100%;
         height: 100%;
+
         a {
           height: 100%;
           display: flex;
@@ -202,6 +223,7 @@
           box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.5);
           position: relative;
         }
+
         .discount {
           top: 20px;
           position: absolute;
@@ -211,6 +233,7 @@
           font-weight: 800;
           line-height: normal;
           z-index: 2;
+
           // &::after,
           // &::before {
           //   content: "";
@@ -243,6 +266,7 @@
             transform: translateY(-50%);
           }
         }
+
         .info {
           flex: 1;
           display: flex;
@@ -297,7 +321,7 @@
           //   }
           // }
 
-          & > strong {
+          &>strong {
             color: var(--gris-oscuro, #373737);
             text-align: center;
             font-size: 20px;
@@ -307,7 +331,8 @@
             display: block;
             margin-bottom: 15px;
           }
-          & > p {
+
+          &>p {
             margin-bottom: 30px;
             color: var(--gris-oscuro, #373737);
             text-align: center;
@@ -315,10 +340,12 @@
             font-style: normal;
             font-weight: 400;
             line-height: normal;
+
             @media only screen and (max-width: 480px) {
               display: none;
             }
           }
+
           small.link {
             align-items: center;
             background: var(--Rojo, #35498e);
@@ -333,21 +360,25 @@
             margin: 0 auto;
             padding: 10px 20px;
             width: fit-content;
+
             &:hover {
               opacity: 0.7;
             }
           }
         }
+
         .image {
           position: relative;
           overflow: hidden;
           height: 140px;
+
           img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
           }
+
           .prices {
             position: absolute;
             bottom: 0;
@@ -359,6 +390,7 @@
             padding: 20px;
             justify-content: center;
             align-items: center;
+
             p {
               color: rgba(255, 255, 255, 0.8);
               text-align: center;
@@ -367,9 +399,11 @@
               font-weight: 400;
               line-height: normal;
             }
+
             &-discount {
               text-decoration-line: line-through;
             }
+
             &-total {
               color: rgba(255, 255, 255, 0.8);
               text-align: center;
@@ -380,6 +414,7 @@
             }
           }
         }
+
         &:hover {
           .image {
             img {
@@ -389,6 +424,7 @@
         }
       }
     }
+
     .container {
       border-radius: 30px;
       background: rgba(255, 255, 255, 0.8);
@@ -397,14 +433,17 @@
       flex-direction: column;
       padding: 30px;
       max-width: 1280px;
+
       @media only screen and (max-width: 1023px) {
         margin-top: 310px;
       }
+
       @media only screen and (max-width: 480px) {
         box-shadow: none !important;
         padding: 0 !important;
         background: none !important;
       }
+
       h3 {
         color: var(--gris, #626262);
         font-size: 35px;
@@ -416,12 +455,15 @@
         margin-bottom: 60px;
         align-items: flex-end;
         gap: 20px;
+
         @media only screen and (max-width: 1023px) {
           align-items: center;
         }
+
         @media only screen and (max-width: 480px) {
           display: none;
         }
+
         &::after {
           flex: 1;
           content: "";
@@ -430,9 +472,11 @@
           height: 2px;
           background-color: var(--Rojo, #35498e);
         }
+
         @media only screen and (max-width: 1023px) {
           font-size: 30px;
         }
+
         img {
           width: 50px;
         }
@@ -453,18 +497,21 @@
         padding: 10px 20px;
         width: fit-content;
         margin-top: 15px;
+
         &:hover {
           opacity: 0.7;
         }
       }
     }
   }
+
   .categoriessection {
     padding: 50px 20px;
     position: relative;
     background: rgba(255, 255, 255, 1);
     padding: 30px;
     z-index: 1;
+
     &::before {
       background-repeat: no-repeat;
       background-position: center center;
@@ -476,16 +523,19 @@
       left: 0px;
       opacity: 0.04;
     }
+
     h3 {
       color: #fff;
       font-size: 42px;
       text-align: center;
       margin-bottom: 30px;
+
       @media only screen and (max-width: 1023px) {
         font-size: 30px;
       }
     }
   }
+
   .categories {
     position: relative;
     display: flex;
@@ -495,6 +545,7 @@
     max-width: 768px;
     margin: 0 auto;
     justify-content: center;
+
     h3 {
       color: #fff;
       font-size: 22px;
@@ -502,6 +553,7 @@
       margin-bottom: 30px;
       text-align: center;
     }
+
     a {
       display: flex;
       flex-direction: column;
@@ -510,6 +562,7 @@
       gap: 10px;
       max-width: 120px;
       width: 100%;
+
       .img {
         width: 60px;
         height: 60px;
@@ -517,6 +570,7 @@
         align-items: center;
         justify-content: center;
         margin: 0 auto;
+
         img {
           width: 60px;
           height: 60px;
@@ -524,6 +578,7 @@
           transition: none;
         }
       }
+
       small {
         color: var(--gris-oscuro, #373737);
         text-align: center;
@@ -534,10 +589,12 @@
       }
     }
   }
+
   .stepssection {
     padding: 50px 20px;
     background-color: var(--gris, #626262);
     position: relative;
+
     &::before {
       background-repeat: no-repeat;
       background-position: center center;
@@ -549,16 +606,19 @@
       left: 0px;
       opacity: 0.04;
     }
+
     h3 {
       color: #fff;
       font-size: 42px;
       text-align: center;
       margin-bottom: 30px;
+
       @media only screen and (max-width: 1023px) {
         font-size: 30px;
       }
     }
   }
+
   .steps {
     position: relative;
     display: flex;
@@ -567,9 +627,11 @@
     gap: 40px;
     max-width: 1200px;
     margin: 0 auto;
+
     @media only screen and (max-width: 1023px) {
       flex-direction: column;
     }
+
     h3 {
       color: #fff;
       font-size: 22px;
@@ -577,6 +639,7 @@
       margin-bottom: 30px;
       text-align: center;
     }
+
     p {
       color: #fff;
       font-size: 14px;
