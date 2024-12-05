@@ -50,9 +50,7 @@
           </div>
         </section>
       </div>
-      <div class="bg"  style="
-          background-image: url(<?=$pb->absoluteURL($pb->generalInfo->field_home_img)?>);
-        ">
+      <div class="bg">
         <div class="recommendation">
           <div class="container">
             <h3 class="ms900"> <img src="../vacacional/images/atractivo.svg" alt="descubre"><?=$pb->pb_experiencias[13]?></h3>

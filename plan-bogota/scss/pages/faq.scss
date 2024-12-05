@@ -1,5 +1,8 @@
+@use 'sass:color';
+
 .faq {
   padding-top: 180px;
+
   .accordion {
     display: flex;
     flex-direction: column;
@@ -7,10 +10,12 @@
     margin: 20px auto;
     border-radius: 0;
   }
+
   .accordion-item {
     border: 0;
     margin-bottom: 5px;
   }
+
   .accordion-header {
     background-color: #23533A;
     padding: 10px;
@@ -23,19 +28,23 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+
     &:hover {
-      background-color: darken($color: #23533A, $amount: 10);
+      background-color: color.adjust($color: #23533A, $lightness: -10%);
     }
   }
+
   .accordion-content {
     display: none;
     padding: 10px;
     font-size: 14px;
     color: #4d4d4d;
     line-height: 22px;
+
     &.active {
       display: block;
     }
+
     ul {
       list-style: disc;
       padding-left: 20px;
@@ -48,8 +57,8 @@
   justify-content: center;
 }
 
-.politics{
-  main{
+.politics {
+  main {
     @media only screen and (max-width: 480px) {
       padding-top: 40px;
     }
