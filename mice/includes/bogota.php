@@ -781,7 +781,7 @@ class bogota
         return $result;
     }
 
-    function query($url, $body = "", $nv=false, $cache=true)
+    function query($url, $body = "", $nv=false, $cache=false)
     {
         $cacheAbsoluteRoute = "/home/bogotas/public_html/dev2024/cache/";
         if($nv){

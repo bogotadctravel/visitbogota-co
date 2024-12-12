@@ -3,8 +3,12 @@ RewriteOptions inherit
 RewriteEngine On
 RewriteBase /
 
-RewriteRule ^$ /es [R=301,L]
+RewriteRule ^es$ /es/ [L,QSA]
+RewriteRule ^$ /es/ [R=301,L]
 
+RewriteRule ^en$ /en/ [L,QSA]
+RewriteRule ^es/$ vacacional/index.php?lang=es [L,QSA]
+RewriteRule ^en/$ vacacional/index.php?lang=en [L,QSA]
 # Redirección para rldvideos
 RewriteRule ^rldvideos/([^/]*)/$ rldvideos/$1.mp4 [L,QSA]
 # Redirección desde bogotadc.travel a visitbogota.co para rutas específicas

@@ -5,6 +5,7 @@ include "includes/header.php";
 $venueid = $_GET['venueid'];
 $venue = $mice->get_mice_single_venues($venueid);
 ?>
+SV
 <div class="banner-internVenue" style="
     background-image: url(<?= $venue->field_mainimg != "" ? $mice->absoluteURL($venue->field_mainimg) : "../img/noimg.png" ?>);
   ">

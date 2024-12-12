@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 header {
   position: fixed;
   top: 0;
@@ -127,7 +129,7 @@ header {
             align-items: center;
 
             &:hover {
-              background-color: darken($color: #23533a, $amount: 15);
+              background-color: color.adjust($color: #23533a, $lightness: -15%);
             }
           }
         }
