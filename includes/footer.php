@@ -206,8 +206,7 @@ if (!$planes) {
         </div>
 
         <label for="btn-chat" class="btn-chat" id="btn-rebeca" onclick="encender()">
-            <!-- <img src="sticker/Rebeca.png" alt="avatar" > -->
-            <!-- <i class="fa-solid fa-question"></i> -->
+           
         </label>
 <!-- SCRIPTS -->
 
