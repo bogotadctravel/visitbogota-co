@@ -1,8 +1,5 @@
 <?php
 
-$assistantId = 'asst_Gu0SC0SQsRpJ6x7lPRygrfFd';  // Tu Assistant ID
-$apiKey = 'sk-PGCBa6QyrhfaQZt74C3gRjuNaP0Y97G-jWS35jAoBTT3BlbkFJNKQWDInTvif1GEkYza33oU2CgEydCrrXuFAGZR69gA';
-
 // process_chat.php
 header('Content-Type: application/json');
 include "mysql.php";
