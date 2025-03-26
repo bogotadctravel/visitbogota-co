@@ -813,3 +813,37 @@ document.addEventListener("DOMContentLoaded", async () => {
   getRTRel(document.querySelector("main").dataset.cat);
   getRelContentAgenda();
 });
+// GET RESTAURANTES PORTALGASTRONOMICOS
+async function filterPortalGastronomico(zonaID = "all") {
+  const response = await fetch(
+    `${actualLang}/g/getRestaurants/?termID=${zonaID}`
+  );
+  const atractivos = await response.json();
+
+  for (let index = 0; index < atractivos.length; index++) {
+    const place = atractivos[index];
+    var placeUrl = `/${actualLang}/restaurante/${get_alias(
+      place.title
+    )}-${zonaID}-${place.nid}`;
+    let image = await getImageFromCacheOrFetch(
+      `${urlGlobal}${place.field_img ? place.field_img : "/img/noimg.png"}`
+    );
+    var template = `
+            <a href="${placeUrl}" class="grid-atractivos-item wait" data-id="${place.nid}">
+                <div class="site_img">
+                    <img loading="lazy" src="https://picsum.photos/20/20" data-src="${image}" alt="${place.title}" class="lazyload">
+                </div>
+                <span>${place.title}</span>
+            </a>
+            `;
+    containerGrid.innerHTML += template;
+  }
+  lazyImages();
+}
+if (document.querySelector("body.portalgastronomico ")) {
+  var containerGrid = document.querySelector(".grid-atractivos");
+  var dataCatId = document.querySelector("#mainPortal").dataset.zoneid;
+  if (dataCatId) {
+    filterPortalGastronomico(dataCatId);
+  }
+}
