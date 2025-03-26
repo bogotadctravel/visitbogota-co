@@ -67,6 +67,11 @@ class vacacional extends bogota{
         $result = $this->query("banners_home", "", true);
         return $result;
     }
+    public function getRelContentAgenda($agenda){
+        $querystr = "agenda_rels/$agenda";
+        $result = $this->query($querystr, "", true);        
+        return $result;
+    }
     public function getSlidersHome(){
         $result = $this->query("slider_home", "", true);
         return $result;

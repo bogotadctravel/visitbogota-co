@@ -476,6 +476,10 @@ class bogota
 
         return $result;
     }
+    public function getLocations(){
+        $result = $this->query("locations", "", true);
+        return $result;
+    }
     function nearbyPlaces($page, $id = 0)
     {
         $page = $page - 1;

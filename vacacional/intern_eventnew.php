@@ -26,7 +26,7 @@ function formatDate($date, $lang = 'es') {
     $de = $lang == 'es' ? "de" : " ";
 
     $month = $months[$lang][intval($date->format('n'))];
-    return $date->format('j') . $de . $month . $de . $date->format('Y');
+    return $date->format('j') . " " . $de . " " . $month ." ". $de ." ". $date->format('Y');
 }
 
 function formatEventDate($evento, $actualLang) {
@@ -35,9 +35,9 @@ function formatEventDate($evento, $actualLang) {
 
     $dateFormattedStart = formatDate($dateStart, $actualLang);
     $dateFormattedEnd = $dateEnd ? formatDate($dateEnd, $actualLang) : '';
-
-    $alText = $actualLang === 'es' ? 'al' : 'to';
-    $hastaElText = $actualLang === 'es' ? 'Hasta el' : 'Until';
+ 
+    $alText = $actualLang === 'es' ? ' al ' : ' to ';
+    $hastaElText = $actualLang === 'es' ? ' Hasta el ' : ' Until ';
 
     $today = new DateTime();
     $today->setTime(0, 0, 0);

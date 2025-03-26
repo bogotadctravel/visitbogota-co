@@ -204,6 +204,8 @@
       }
 
       .map {
+
+        iframe,
         img {
           height: 180px;
           object-fit: cover;
@@ -741,11 +743,12 @@
           align-content: flex-start;
         }
 
-        a.map {
+        .map {
           display: block;
           flex: 1;
           height: 280px;
 
+          iframe,
           img {
             margin: 0;
             width: 100%;

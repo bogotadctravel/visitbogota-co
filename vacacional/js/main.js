@@ -1,85 +1,3 @@
-// script.js
-if (document.querySelector(".parallax-layer")) {
-  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
-  // Configuramos la animación para el scroll de la ventana
-
-  ScrollTrigger.create({
-    trigger: "#parallax-container", // El contenedor que desencadenará el scroll
-    start: "top top", // Inicia cuando el contenedor llega al inicio de la ventana
-    end: "+=200", // Ajusta según cuánto scroll quieras hacer antes de desplazar
-    onEnter: () => {
-      gsap.to(window, {
-        scrollTo: { y: window.innerHeight, autoKill: false }, // Desplazar la ventana 100vh hacia abajo
-        duration: 1, // Duración del desplazamiento
-        ease: "power2.inOut",
-      });
-    },
-  });
-
-  // Seleccionamos todas las capas del parallax
-  const layers = document.querySelectorAll(".parallax-layer");
-
-  // Aplicamos diferentes movimientos a cada capa
-  layers.forEach((layer, index) => {
-    let direction = index % 4; // Alternar entre diferentes direcciones
-
-    switch (direction) {
-      case 0: // Movimiento vertical (arriba a abajo)
-        gsap.to(layer, {
-          y: (index + 1) * 30,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#parallax-container",
-            start: "top top",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
-        break;
-
-      case 1: // Movimiento de izquierda a derecha
-        gsap.to(layer, {
-          x: (index + 1) * 30,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#parallax-container",
-            start: "top top",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
-        break;
-
-      case 2: // Movimiento de derecha a izquierda
-        gsap.to(layer, {
-          x: -(index + 1) * 30,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#parallax-container",
-            start: "top top",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
-        break;
-
-      case 3: // Movimiento de abajo hacia arriba
-        gsap.to(layer, {
-          y: -(index + 1) * 30,
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#parallax-container",
-            start: "top top",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
-        break;
-    }
-  });
-}
-
 function runOnScroll() {
   if (window.scrollY >= 80) {
     document.querySelector("header").classList.add("scroll");
@@ -116,8 +34,7 @@ async function seleccionarImagenAlAzar(imagenes, element) {
   }
 }
 let blogContainer = document.querySelector(".grid-blogs");
-let restaContainer = document.querySelector(".grid-restaurants");
-let eventosContainer = document.querySelector(".home .grid-eventos");
+let eventosContainer = document.querySelector(".grid-eventos");
 
 // Llamar a la función para cada arreglo de imágenes
 window.addEventListener("load", function () {
@@ -135,11 +52,11 @@ window.addEventListener("load", function () {
       document.querySelector(".banner-add img")
     );
   }
-  if (blogContainer && !document.querySelector(".portal")) {
+  if (
+    blogContainer &&
+    !document.querySelector("body").classList.contains("eventsnew")
+  ) {
     getRecentBlogs();
-  }
-  if (restaContainer) {
-    getRelRestaurants(document.querySelector("main").dataset.catid);
   }
   if (eventosContainer) {
     getRecentEventos();
@@ -163,8 +80,10 @@ async function getRecentBlogs() {
           <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
         </div>
         <div class="desc">
-       
-       
+        <small class="tag">
+        <img src="images/mdi_tag.svg" alt="tag"/>
+        ${blog.field_prod_rel_1}
+        </small>
           <h2>${blog.title}</h2>
         </div>
       </a>`;
@@ -175,175 +94,45 @@ async function getRecentBlogs() {
 
   lazyImages();
 }
-async function getCatBlogs(cat) {
-  let blogCont = document.querySelector(".grid-blogs");
-  blogCont.innerHTML = "";
-
-  const response = await fetch(
-    `/vacacional/g/blogsCat/?cat=${cat}&lang=${actualLang}`
-  );
-  const data = await response.json();
-  if (data.length > 0) {
-    const promises = data.map(async (blog) => {
-      let urlImg = await getImageFromCacheOrFetch(
-        "https://files.visitbogota.co" + blog.field_image
-      );
-      let template = `<a href="/${actualLang}/blog/all/${get_alias(
-        blog.title
-      )}-all-${blog.nid}" data-aos="flip-left blog_item" data-productid="88">
-          <div class="img">
-            <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
-          </div>
-          <div class="desc">
-         
-            <h2>${blog.title}</h2>
-          </div>
-        </a>`;
-      blogCont.innerHTML += template;
-    });
-    await Promise.all(promises);
-    lazyImages();
-  } else {
-    document.querySelector(".portal .blog").style.display = "none";
-  }
-}
-async function getRelRestaurants(catID = "all") {
-  restaContainer.innerHTML = "";
-  const response = await fetch(
-    `${actualLang}/g/getRestaurants/?termID=${catID}`
-  );
-  const data = await response.json();
-  // Función para obtener un número aleatorio dentro de un rango
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
-
-  // Función para obtener n elementos aleatorios de un arreglo
-  function getRandomElements(arr, n) {
-    let result = new Array(n);
-    let len = arr.length;
-    let taken = new Array(len);
-
-    if (n > len) {
-      throw new RangeError(
-        "getRandomElements: más elementos de los que hay en el arreglo"
-      );
-    }
-
-    while (n--) {
-      let x = getRandomInt(len);
-      result[n] = arr[x in taken ? taken[x] : x];
-      taken[x] = --len in taken ? taken[len] : len;
-    }
-
-    return result;
-  }
-  if (data.length >= 6) {
-    // Obtiene 5 restaurantes aleatorios
-    const randomRestaurants = getRandomElements(data, 6);
-
-    const promises = randomRestaurants.map(async (blog) => {
-      let urlImg = await getImageFromCacheOrFetch(
-        "https://files.visitbogota.co" + blog.field_img
-      );
-      let template = `<a href="/${actualLang}/restaurante/${get_alias(
-        blog.title
-      )}-${catID}-${
-        blog.nid
-      }" data-aos="flip-left blog_item" data-productid="88">
-            <div class="img">
-              <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
-            </div>
-            <div class="desc">
-              <h2>${blog.title}</h2>
-            </div>
-          </a>`;
-      restaContainer.innerHTML += template;
-    });
-
-    await Promise.all(promises);
-
-    lazyImages();
-  } else {
-    document.querySelector(".rel_rest").style.display = "none";
-  }
-}
 async function getRecentEventos() {
   eventosContainer.innerHTML = "";
 
   const response = await fetch(`/vacacional/g/lastEvents/?lang=${actualLang}`);
   const data = await response.json();
-  function setMidnight(dateString) {
-    const date = new Date(dateString);
-    date.setHours(0, 0, 0, 0);
-    return date;
+  // Función para comparar fechas
+  function compareDates(a, b) {
+    const dateA = new Date(a.field_date);
+    const dateB = new Date(b.field_date);
+    return dateA - dateB;
   }
 
-  function compararFechas(a, b) {
-    // Si el evento no tiene fecha de finalización, usar la fecha de inicio
-    const endDateA = a.field_end_date
-      ? a.field_end_date.length === 10
-        ? setMidnight(a.field_end_date)
-        : new Date(a.field_end_date)
-      : setMidnight(a.field_date);
-    const endDateB = b.field_end_date
-      ? b.field_end_date.length === 10
-        ? setMidnight(b.field_end_date)
-        : new Date(b.field_end_date)
-      : setMidnight(b.field_date);
-
-    return endDateA - endDateB;
-  }
-  // Ordenar el arreglo por fecha de finalización
-  data.sort(compararFechas);
+  // Ordenar el arreglo por la fecha inicial
+  data.sort(compareDates);
 
   const promises = data.map(async (evento) => {
-    let urlImg = await getImageFromCacheOrFetch(
-      "https://files.visitbogota.co" + evento.field_cover_image
-    ); // Asegurarse de que las fechas se interpretan correctamente
-    const dateStart = setMidnight(evento.field_date);
-
-    // Manejar la fecha de fin de manera diferente si no incluye una hora
-    let dateEnd;
-    if (evento.field_end_date.length === 10) {
-      // Verificar si el formato es solo de fecha (YYYY-MM-DD)
-      dateEnd = setMidnight(evento.field_end_date);
-      dateEnd.setDate(dateEnd.getDate() + 1); // Mover la fecha de fin al día siguiente
-    } else {
-      dateEnd = setMidnight(evento.field_end_date);
-    }
-
-    const options = {
-      month: "long",
+    const dateStart = new Date(evento.field_date);
+    const optionsdateStart = {
+      month: "short",
       day: "numeric",
       year: "numeric",
     };
-
-    const dateFormattedStart = dateStart.toLocaleDateString("es-ES", options);
-    const dateFormattedEnd = dateEnd.toLocaleDateString("es-ES", options);
-    const alText = actualLang === "es" ? "al" : "to";
-    const hastaElText = actualLang === "es" ? "Hasta el" : "Until";
-
-    // Obtener la fecha actual
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    let dateText = "";
-
-    // Condicionales
-    if (!evento.field_end_date) {
-      // 1. No tiene fecha final -> Tomar la fecha de inicio.
-      dateText = dateFormattedStart;
-    } else if (dateStart.getTime() === dateEnd.getTime()) {
-      // 2. Fecha de inicio es igual a la fecha final, solo mostrar la fecha final.
-      dateText = dateFormattedEnd;
-    } else if (dateStart < today) {
-      // 3. Si la fecha de inicio es menor a la fecha actual, quitar la fecha de inicio y colocar al principio "Hasta el".
-      dateText = `${hastaElText} ${dateFormattedEnd}`;
-    } else {
-      // 4. Si la fecha de inicio es superior a la fecha actual, colocar así Fecha 1 al Fecha 2
-      dateText = `${dateFormattedStart} ${alText} ${dateFormattedEnd}`;
-    }
+    const dateFormatteddateStart = dateStart.toLocaleDateString(
+      "es-ES",
+      optionsdateStart
+    );
+    const dateEnd = new Date(evento.field_end_date);
+    const optionsdateEnd = {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    };
+    const dateFormatteddateEnd = dateEnd.toLocaleDateString(
+      "es-ES",
+      optionsdateEnd
+    );
+    let urlImg = await getImageFromCacheOrFetch(
+      "https://files.visitbogota.co" + evento.field_cover_image
+    );
     let template = `<a href="/${actualLang}/evento/${get_alias(evento.title)}-${
       evento.nid
     }" data-aos="flip-left blog_item" data-productid="88">
@@ -353,7 +142,8 @@ async function getRecentEventos() {
         <div class="desc">
         <h2>${evento.title}</h2>
         <small class="tag">
-        ${dateText}
+        <img src="images/eventosIcono.svg" alt="tag"/>
+        ${dateFormatteddateStart} -  ${dateFormatteddateEnd}
         </small>
         </div>
       </a>`;
@@ -364,6 +154,7 @@ async function getRecentEventos() {
 
   lazyImages();
 }
+
 async function getZonesHome() {
   await fetch("g/zonas/")
     .then((res) => res.json())
@@ -376,8 +167,8 @@ async function getZonesHome() {
           <div class="zone-card">
             <img src="https://files.visitbogota.co${zona.field_imagen_zona}" alt="zona"${zona.name} />
             <div class="info">
-              <h1 class=" ms900">${zona.name}</h1>
-              <a href="/${actualLang}/alrededores-de-bogota" class=" ms900 btn wait">VISITAR</a>
+              <h1 class="uppercase ms900">${zona.name}</h1>
+              <a href="/${actualLang}/alrededores-de-bogota" class="uppercase ms900 btn wait">VISITAR</a>
             </div>
           </div>
         </li>`;
@@ -389,7 +180,7 @@ async function getZonesHome() {
           <div class="zone-card">
             <img src="https://files.visitbogota.co${zona.field_imagen_zona}" alt="zona"${zona.name} />
             <div class="info">
-              <h2 class=" ms900">${zona.name}</h2>
+              <h2 class="uppercase ms900">${zona.name}</h2>
               <ul class="localidades">
                 ${localidadesText}
               </ul>
@@ -472,7 +263,7 @@ async function getBannersCuadrados() {
         let urlImg = await getImageFromCacheOrFetch(
           `https://files.visitbogota.co${banner.field_image}`
         );
-        let template = `<a href="${banner.field_link}" target="_blank" class="city-card"><img src="${urlImg}" alt="${banner.title}" /><span class=" ms700">${banner.title}</span></a>`;
+        let template = `<a href="${banner.field_link}" target="_blank" class="city-card"><img src="${urlImg}" alt="${banner.title}" /><span class="uppercase ms700">${banner.title}</span></a>`;
         document.querySelector(".cards").innerHTML += template;
       }
     });
@@ -572,7 +363,7 @@ const getFiltersExperienciasTuristicas = async (container, category) => {
         ? "https://files.visitbogota.co" + images.field_imagen_zona
         : "https://placehold.co/755x755.jpg?text=visitbogota"
     );
-    console.log(category);
+
     let linkUrl = `/${actualLang}/experiencias-turisticas/encuentra-tu-plan?${
       category == "categorias_comerciales_pb"
         ? `categories=${images.tid}`
@@ -727,11 +518,10 @@ async function getRTRel(field_category) {
 }
 
 async function getHomeRT() {
-  if (document.querySelector(".home .grid-rutas")) {
+  if (document.querySelector(".grid-rutas")) {
     const resp = await fetch(`${actualLang}/g/getRT/`);
     const rutas = await resp.json();
-    for (let index = 0; index < 3; index++) {
-      const ruta = rutas[index];
+    rutas.forEach((ruta) => {
       let {
         nid,
         title,
@@ -751,22 +541,9 @@ async function getHomeRT() {
         pi_bogota[44]
       }</span></div></a></article>`;
       document.querySelector(".grid-rutas").innerHTML += template;
-    }
+    });
   }
 }
-document.addEventListener("DOMContentLoaded", async () => {
-  // Llamadas a la función unificada con los valores específicos
-  if (document.querySelector("#porcategoria")) {
-    await getFiltersExperienciasTuristicas(
-      "porcategoria",
-      "categorias_comerciales_pb"
-    );
-    await getFiltersExperienciasTuristicas("porzona", "test_zona");
-  }
-  getRT();
-  getHomeRT();
-  getRTRel(document.querySelector("main").dataset.cat);
-});
 
 // GET ATRACTIVOS PORTAL
 async function filterPortal(termID = "all", termName = "") {
@@ -796,260 +573,49 @@ async function filterPortal(termID = "all", termName = "") {
   }
   lazyImages();
 }
-async function getPortalRT(cat) {
-  if (document.querySelector(".portal .grid-rutas")) {
-    const resp = await fetch(
-      `${actualLang}/g/getRutasTuristicasByCategory/?cat=${cat}`
-    );
-    const rutas = await resp.json();
-    if (rutas.length > 0) {
-      for (let index = 0; index < rutas.length; index++) {
-        const ruta = rutas[index];
-        let {
-          nid,
-          title,
-          field_descripcion_corta,
-          field_thumbnail,
-          field_categor,
-          field_categor_1,
-        } = ruta;
-        let urlRuta = `/${actualLang}/rutas-turisticas/${get_alias(
-          title
-        )}-${nid}`;
-        let template = `<article title="${title}"><a href="${urlRuta}">
-        <div class="image">
-        <img src="${absoluteURL(field_thumbnail)}" alt="${title}">
-        </div>
-        <div class="desc"><h3>${title}</h3><div class="shortdesc">${field_descripcion_corta}</div><span class="btn">${
-          pi_bogota[44]
-        }</span></div></a></article>`;
-        document.querySelector(".portal .grid-rutas").innerHTML += template;
-      }
-    } else {
-      document.querySelector(`.portal-rutas`).style.display = "none";
-    }
-  }
-}
-async function getEventosPortal(cat) {
-  let eventosPortal = document.querySelector(".portal .grid-eventos");
-  eventosPortal.innerHTML = "";
-
-  const response = await fetch(
-    `${actualLang}/g/eventsCat/?cat=${cat}&lang=${actualLang}`
-  );
-  const data = await response.json();
-  function setMidnight(dateString) {
-    const date = new Date(dateString);
-    date.setHours(0, 0, 0, 0);
-    return date;
-  }
-
-  function compararFechas(a, b) {
-    // Si el evento no tiene fecha de finalización, usar la fecha de inicio
-    const endDateA = a.field_end_date
-      ? a.field_end_date.length === 10
-        ? setMidnight(a.field_end_date)
-        : new Date(a.field_end_date)
-      : setMidnight(a.field_date);
-    const endDateB = b.field_end_date
-      ? b.field_end_date.length === 10
-        ? setMidnight(b.field_end_date)
-        : new Date(b.field_end_date)
-      : setMidnight(b.field_date);
-
-    return endDateA - endDateB;
-  }
-  if (data.length > 0) {
-    // Ordenar el arreglo por fecha de finalización
-    data.sort(compararFechas);
-
-    const promises = data.map(async (evento) => {
-      let urlImg = await getImageFromCacheOrFetch(
-        "https://files.visitbogota.co" + evento.field_cover_image
-      ); // Asegurarse de que las fechas se interpretan correctamente
-      const dateStart = setMidnight(evento.field_date);
-
-      // Manejar la fecha de fin de manera diferente si no incluye una hora
-      let dateEnd;
-      if (evento.field_end_date.length === 10) {
-        // Verificar si el formato es solo de fecha (YYYY-MM-DD)
-        dateEnd = setMidnight(evento.field_end_date);
-        dateEnd.setDate(dateEnd.getDate() + 1); // Mover la fecha de fin al día siguiente
-      } else {
-        dateEnd = setMidnight(evento.field_end_date);
-      }
-
-      const options = {
-        month: "long",
-        day: "numeric",
-        year: "numeric",
-      };
-
-      const dateFormattedStart = dateStart.toLocaleDateString("es-ES", options);
-      const dateFormattedEnd = dateEnd.toLocaleDateString("es-ES", options);
-      const alText = actualLang === "es" ? "al" : "to";
-      const hastaElText = actualLang === "es" ? "Hasta el" : "Until";
-
-      // Obtener la fecha actual
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-
-      let dateText = "";
-
-      // Condicionales
-      if (!evento.field_end_date) {
-        // 1. No tiene fecha final -> Tomar la fecha de inicio.
-        dateText = dateFormattedStart;
-      } else if (dateStart.getTime() === dateEnd.getTime()) {
-        // 2. Fecha de inicio es igual a la fecha final, solo mostrar la fecha final.
-        dateText = dateFormattedEnd;
-      } else if (dateStart < today) {
-        // 3. Si la fecha de inicio es menor a la fecha actual, quitar la fecha de inicio y colocar al principio "Hasta el".
-        dateText = `${hastaElText} ${dateFormattedEnd}`;
-      } else {
-        // 4. Si la fecha de inicio es superior a la fecha actual, colocar así Fecha 1 al Fecha 2
-        dateText = `${dateFormattedStart} ${alText} ${dateFormattedEnd}`;
-      }
-      let template = `<a href="/${actualLang}/evento/${get_alias(
-        evento.title
-      )}-${evento.nid}" data-aos="flip-left blog_item" data-productid="88">
-        <div class="img">
-          <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
-        </div>
-        <div class="desc">
-        <h2>${evento.title}</h2>
-        <small class="tag">
-        ${dateText}
-        </small>
-        </div>
-      </a>`;
-      eventosPortal.innerHTML += template;
-    });
-
-    await Promise.all(promises);
-
-    lazyImages();
-  } else {
-    document.querySelector(`.portal-eventos`).style.display = "none";
-  }
-}
-async function getExpPortal(cat) {
-  const grid = document.querySelector(".grid-experiencias");
-  grid.innerHTML = ``;
-  fetch(`${actualLang}/g/expCat/?cat=${cat}&lang=${actualLang}`)
-    .then((res) => res.json())
-    .then((data) => {
-      let template;
-      if (data.length > 0) {
-        data.forEach((plan) => {
-          let link = `/${actualLang}/experiencias-turisticas/plan/${get_alias(
-            plan.title
-          )}-${plan.nid}`;
-          template = `
-              <a href="${link}" class="grid-experiencias__item" 
-               data-persons="${plan.field_maxpeople}" data-cat="${plan.field_nueva_categorizacion}" data-zone="${plan.field_pb_oferta_zona}" data-field_destacar_en_categoria="${plan.field_destacar_en_categoria}">
-               <div class="image">
-               <img loading="lazy" class="lazyload" data-src="https://files.visitbogota.co${plan.field_pb_oferta_img_listado}" src="https://via.placeholder.com/330x240" alt="${plan.title}"/>
-              
-               </div>
-              <div class="info">
-                <strong class="ms900">${plan.title}</strong>
-                <p class="ms100">${plan.field_pb_oferta_desc_corta}</p>
-                <small class="link ms900 "> Ver experiencia </small>
-              </div>
-            </a>`;
-          grid.innerHTML += template;
-        });
-      } else {
-        document.querySelector(`.portal-experiencias`).style.display = "none";
-      }
-    })
-    .then(() => {
-      lazyImages();
-    });
-}
 if (document.querySelector("body.portal")) {
   var containerGrid = document.querySelector(".grid-atractivos");
   var dataCatId = document.querySelector("#mainPortal").dataset.productid;
   var catName = document.querySelector("#mainPortal").dataset.productname;
   if (dataCatId) {
     filterPortal(dataCatId, catName);
-    getPortalRT(dataCatId);
-    getEventosPortal(dataCatId);
-    getExpPortal(dataCatId);
-    getCatBlogs(dataCatId);
   }
 }
-// GET RESTAURANTES PORTALGASTRONOMICOS
-async function filterPortalGastronomico(zonaID = "all") {
-  const response = await fetch(
-    `${actualLang}/g/getRestaurants/?termID=${zonaID}`
+
+if (
+  document.querySelectorAll(".interna_atractivo .gallery-grid li img").length >
+  0
+) {
+  // Get all images
+  const images = document.querySelectorAll(
+    ".interna_atractivo .gallery-grid li img"
   );
-  const atractivos = await response.json();
-  console.log(atractivos);
-
-  for (let index = 0; index < atractivos.length; index++) {
-    const place = atractivos[index];
-    var placeUrl = `/${actualLang}/restaurante/${get_alias(
-      place.title
-    )}-${zonaID}-${place.nid}`;
-    let image = await getImageFromCacheOrFetch(
-      `${urlGlobal}${place.field_img ? place.field_img : "/img/noimg.png"}`
-    );
-    var template = `
-            <a href="${placeUrl}" class="grid-atractivos-item wait" data-id="${place.nid}">
-                <div class="site_img">
-                    <img loading="lazy" src="https://picsum.photos/20/20" data-src="${image}" alt="${place.title}" class="lazyload">
-                </div>
-                <span>${place.title}</span>
-            </a>
-            `;
-    containerGrid.innerHTML += template;
-  }
-  lazyImages();
-}
-if (document.querySelector("body.portalgastronomico ")) {
-  var containerGrid = document.querySelector(".grid-atractivos");
-  var dataCatId = document.querySelector("#mainPortal").dataset.zoneid;
-  if (dataCatId) {
-    filterPortalGastronomico(dataCatId);
-  }
+  // Loop through each image
+  images.forEach((image) => {
+    // Create a new element for displaying alt text
+    const altElement = document.createElement("span");
+    altElement.classList.add("alt-text");
+    // Set the text content of the alt element to the alt attribute of the image
+    altElement.textContent = image.alt;
+    // Insert the new element after the image
+    image.parentNode.insertBefore(altElement, image.nextSibling);
+  });
 }
 
-// if (
-//   document.querySelectorAll(".interna_atractivo .gallery-grid li img").length >
-//   0
-// ) {
-//   // Get all images
-//   const images = document.querySelectorAll(
-//     ".interna_atractivo .gallery-grid li img"
-//   );
-//   // Loop through each image
-//   images.forEach((image) => {
-//     // Create a new element for displaying alt text
-//     const altElement = document.createElement("span");
-//     altElement.classList.add("alt-text");
-//     // Set the text content of the alt element to the alt attribute of the image
-//     altElement.textContent = image.alt;
-//     // Insert the new element after the image
-//     image.parentNode.insertBefore(altElement, image.nextSibling);
-//   });
-// }
-
-// if (document.querySelectorAll(".ruta_intern .gallery-grid li img").length > 0) {
-//   // Get all images
-//   const images = document.querySelectorAll(".ruta_intern .gallery-grid li img");
-//   // Loop through each image
-//   images.forEach((image) => {
-//     // Create a new element for displaying alt text
-//     const altElement = document.createElement("span");
-//     altElement.classList.add("alt-text");
-//     // Set the text content of the alt element to the alt attribute of the image
-//     altElement.textContent = image.alt;
-//     // Insert the new element after the image
-//     image.parentNode.insertBefore(altElement, image.nextSibling);
-//   });
-// }
+if (document.querySelectorAll(".ruta_intern .gallery-grid li img").length > 0) {
+  // Get all images
+  const images = document.querySelectorAll(".ruta_intern .gallery-grid li img");
+  // Loop through each image
+  images.forEach((image) => {
+    // Create a new element for displaying alt text
+    const altElement = document.createElement("span");
+    altElement.classList.add("alt-text");
+    // Set the text content of the alt element to the alt attribute of the image
+    altElement.textContent = image.alt;
+    // Insert the new element after the image
+    image.parentNode.insertBefore(altElement, image.nextSibling);
+  });
+}
 if (document.querySelector(".blog_content")) {
   // Obtén todas las imágenes dentro del contenedor .blog_content
   var images = document.querySelectorAll(".blog_content img");
@@ -1078,22 +644,172 @@ if (document.querySelector(".blog_content")) {
   });
 }
 
-const video = document.querySelector(".img-naturaleza");
-if (video) {
-  // Configuración del IntersectionObserver
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        // Si el video está en el viewport, le damos play
-        video.play();
-      } else {
-        // Si el video sale del viewport, lo pausamos y lo reiniciamos
-        video.pause();
-        video.currentTime = 0; // Reiniciar el video al inicio
+const getRelContentAgenda = async () => {
+  if (document.querySelector(".eventsnew")) {
+    let agendaID = document.querySelector("main").dataset.agenda;
+    const response = await fetch(
+      `${actualLang}/g/getRelContentAgenda/?agenda=${agendaID}`
+    );
+    const data = await response.json();
+    const groupedData = data.reduce((acc, item) => {
+      if (!acc[item.type]) {
+        acc[item.type] = [];
       }
-    });
-  });
+      acc[item.type].push(item);
+      return acc;
+    }, {});
+    // pb_ofertas
+    // rutas_turisticas
+    // tourist_attractions
+    // article
 
-  // Observamos el video
-  observer.observe(video);
-}
+    let rel_ofertas_container = document.querySelector("#rel_ofertas");
+    let rel_atractivos_container = document.querySelector("#rel_atractivos");
+    let rel_rutas_container = document.querySelector(
+      ".relRutasSplide .splide__list"
+    );
+    let rel_article_container = document.querySelector("#rel_article");
+
+    if (groupedData.pb_ofertas) {
+      groupedData.pb_ofertas.forEach(async (plan) => {
+        let link = `/${actualLang}/experiencias-turisticas/plan/${get_alias(
+          plan.title
+        )}-${plan.nid}`;
+        template = `
+        <li><a href="${link}" class="find_plan-grid__item" 
+         data-persons="${plan.field_maxpeople}" data-cat="${plan.field_nueva_categorizacion}" data-zone="${plan.field_pb_oferta_zona}" data-field_destacar_en_categoria="${plan.field_destacar_en_categoria}">
+         <div class="image">
+         <img loading="lazy" class="lazyload" data-src="https://files.visitbogota.co${plan.field_pb_oferta_img_listado}" src="https://via.placeholder.com/330x240" alt="${plan.title}"/>
+        
+         </div>
+        <div class="info">
+          <strong class="ms900">${plan.title}</strong>
+          <p class="ms100">${plan.field_pb_oferta_desc_corta}</p>
+          <small class="link ms900 "> Ver Oferta </small>
+        </div>
+      </a></li>`;
+        rel_ofertas_container.innerHTML += template;
+      });
+    }
+    if (!groupedData.pb_ofertas) {
+      document.querySelector(".rel_ofertas").style.display = "none";
+    }
+    if (groupedData.tourist_attractions) {
+      groupedData.tourist_attractions.forEach(async (atractivo) => {
+        const place = atractivo;
+        var placeUrl = `/${actualLang}/atractivo/all/${get_alias(
+          place.title
+        )}-all-${place.nid}`;
+        let image = `${urlGlobal}${
+          place.field_cover_image ? place.field_cover_image : "/img/noimg.png"
+        }`;
+        var template = `
+            <a href="${placeUrl}" class="grid-atractivos-item wait" data-id="${place.nid}">
+                <div class="site_img">
+                    <img loading="lazy" src="https://picsum.photos/20/20" data-src="${image}" alt="${place.title}" class="lazyload">
+                </div>
+                <span>${place.title}</span>
+            </a>
+            `;
+        rel_atractivos_container.innerHTML += template;
+      });
+    }
+    if (!groupedData.tourist_attractions) {
+      document.querySelector(".rel_atractivos").style.display = "none";
+    }
+    if (groupedData.rutas_turisticas) {
+      groupedData.rutas_turisticas.forEach(async (ruta, index) => {
+        let {
+          nid,
+          title,
+          field_descripcion_corta,
+          field_thumbnail,
+          field_categor,
+          field_categor_1,
+        } = ruta;
+        let urlImg = await getImageFromCacheOrFetch(ruta.field_thumbnail);
+
+        let urlRuta = `/${actualLang}/rutas-turisticas/${get_alias(
+          title
+        )}-${nid}`;
+
+        // Crear el template para la ruta
+        let template = `<li class="splide__slide"><article title="${title}">
+          <a href="${urlRuta}">
+              <div class="image">
+                  <img src="${absoluteURL(field_thumbnail)}" alt="${title}">
+              </div>
+              <div class="desc">
+                  <h3>${title}</h3>
+                  <div class="shortdesc">${field_descripcion_corta}</div>
+                  <span class="btn">${pi_bogota[44]}</span>
+              </div>
+          </a>
+      </article></li>`;
+        rel_rutas_container.innerHTML += template;
+        if (index == groupedData.rutas_turisticas.length - 1) {
+          new Splide(".relRutasSplide", {
+            type: "loop",
+            perPage: 3,
+            breakpoints: {
+              768: {
+                perPage: 1,
+              },
+            },
+          }).mount();
+        }
+      });
+    }
+    if (!groupedData.rutas_turisticas) {
+      document.querySelector(".rel_rutas").style.display = "none";
+    }
+    if (groupedData.article) {
+      groupedData.article.forEach(async (blog) => {
+        let { title, nid, field_image } = blog;
+
+        var template = `
+                  <a href="${actualLang}/blog/all/${get_alias(
+          title
+        )}-all-${nid}" class="single_post wait">
+                      <div class="single_post_img"><img loading="lazy" src="https://picsum.photos/20/20" data-src="${
+                        field_image ? urlGlobal + field_image : "/img/noimg.png"
+                      }" alt="${title}" class="lazyload"></div>
+                      <h3 class="single_post_title">${title}</h3>
+                  </a>
+                  `;
+
+        var template = `<a href="/${actualLang}/blog/all/${get_alias(
+          title
+        )}-all-${nid}" data-aos="flip-left blog_item" >
+        <div class="img">
+          <img loading="lazy" data-src="${
+            field_image ? urlGlobal + field_image : "/img/noimg.png"
+          }" alt="${title}" class="zone_img lazyload" src="https://files.visitbogota.co/drpl/sites/default/files/2025-01/Portada_BogotaTuCasa%20%281%29%20%281%29%20%281%29.jpg">
+        </div>
+        <div class="desc">
+          <h2>${title}</h2>
+        </div>
+      </a>`;
+        rel_article_container.innerHTML += template;
+      });
+    }
+    if (!groupedData.article) {
+      document.querySelector(".rel_rutas").style.display = "none";
+    }
+  }
+  lazyImages();
+};
+document.addEventListener("DOMContentLoaded", async () => {
+  // Llamadas a la función unificada con los valores específicos
+  if (document.querySelector("#porcategoria")) {
+    await getFiltersExperienciasTuristicas(
+      "porcategoria",
+      "categorias_comerciales_pb"
+    );
+    await getFiltersExperienciasTuristicas("porzona", "test_zona");
+  }
+  getRT();
+  getHomeRT();
+  getRTRel(document.querySelector("main").dataset.cat);
+  getRelContentAgenda();
+});
