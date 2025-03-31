@@ -45,8 +45,18 @@
     </div>
     <div class="info">
         <section>
-            <a href="<?=$place->field_mapslink ? $place->field_mapslink : "http://maps.google.com/maps?q=".$place->field_location?>" class="map" target="_blank"
-                rel="noopener"><img src="images/map.jpg" alt="map"></a>
+            <div class="map">
+            <iframe
+                width="600"
+                height="450"
+                style="border:0"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=<?=$place->field_location?>&z=15&output=embed">
+                </iframe>
+            </div>
+            
             <ul class="details">
                 <?php if($place->field_hadress) { ?>
                 <li>

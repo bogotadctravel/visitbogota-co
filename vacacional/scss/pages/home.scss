@@ -624,7 +624,6 @@
     width: 100%;
     aspect-ratio: 16 / 9;
     position: relative;
-    height: 768px;
 
     @media only screen and (max-width: 1024px) {
       height: calc(100vw / 16 * 9);

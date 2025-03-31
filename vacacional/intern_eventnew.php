@@ -127,11 +127,18 @@ function formatEventDate($evento, $actualLang) {
                 </section>
             </div>
         <?php } ?>
-        <a href="http://maps.google.com/maps?q=<?=$event->field_location?>" class="map">
-            <div class="map_lupa"><img src="/img/lupa_gray.svg"
-                    alt="lupa"><small><?=$b->generalInfo->field_texto_como_llegar?></small></div>
-            <img src="/img/map.jpg" alt="map">
-        </a>
+      
+        <div class="map">
+        <iframe
+                width="600"
+                height="450"
+                style="border:0"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=<?=$event->field_location?>&z=15&output=embed">
+                </iframe>
+        </div>
     </div>
     <section class="container">
     <div class="disclaimer">

@@ -259,3 +259,34 @@ window.interdeal = {
                 --linkcolor: <?=$b->generalInfo->field_coverdesktopweb == "" && $b->generalInfo->field_headercolor == "" ? "#fff":$b->generalInfo->field_headercolor?>
             }
         </style>
+
+<script>
+    (function () {
+        let queryParamKey = "ref";
+        let url = new URL(window.location);
+        let queryParamValue = url.searchParams.get(queryParamKey);
+
+        // Si el parámetro existe en la URL, guardarlo en sessionStorage
+        if (queryParamValue) {
+            sessionStorage.setItem(queryParamKey, queryParamValue);
+        } else {
+            // Si no está en la URL pero existe en sessionStorage, usarlo
+            queryParamValue = sessionStorage.getItem(queryParamKey);
+        }
+
+        // Si tenemos el parámetro, asegurarnos de que siempre esté en la URL
+        if (queryParamValue) {
+                 // Agregar o modificar un parámetro de consulta
+                 function addOrUpdateQueryParam(key, value) {
+                // Actualizar el parámetro si ya existe o agregarlo si no
+                url.searchParams.set(key, value);
+
+                // Actualizar la URL sin recargar la página
+                window.history.pushState({}, '', url);
+            }
+            // Ejemplo de uso para agregar parámetros dinámicamente
+            addOrUpdateQueryParam('ref', queryParamValue); 
+        }
+    })();
+</script>
+

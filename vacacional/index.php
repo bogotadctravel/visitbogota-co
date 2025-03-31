@@ -6,7 +6,7 @@ $banners = $vacacional->getBannersHome();
 ?>
 <main>
   <div class="flexbanner">
-    <video src="video/video.mp4?v=1.1.1" loop autoplay muted></video>
+    <video src="video/video.mp4?v=1.1.2" loop autoplay muted></video>
   </div>
  
   <!-- <div class="banners_home">
