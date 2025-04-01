@@ -21,7 +21,8 @@ RewriteRule ^([a-zA-Z0-9_-]+)/hoteles$ /$1/donde-dormir [R=301,L]
 #ESPAÑOL
 RewriteRule ^s/([^/]*)/$ set/$1.php?lang=es [L,QSA]
 RewriteRule ^g/([^/]*)/$ get/$1.php?lang=es [L,QSA]
-RewriteRule ^ce/([^/]*)/$ customendpoints/$1.php?lang=es [L,QSA]
+RewriteRule ^ce/([^/]*)/$ custom-endpoints/$1.php?lang=es [L,QSA]
+RewriteRule ^([a-zA-Z0-9_-]+)/ce/([^/]*)/$ custom-endpoints/$2.php?lang=$1 [L,QSA]
 RewriteRule ^vacacional/s/([^/]*)/$ vacacional/set/$1.php?lang=es [L,QSA]
 RewriteRule ^vacacional/g/([^/]*)/$ vacacional/get/$1.php?lang=es [L,QSA]
 RewriteRule ^experiencias-turisticas/s/([^/]*)/$ plan-bogota/set/$1.php?lang=es [L,QSA]
@@ -153,6 +154,9 @@ RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/s/([^/]+)/?$ vacacional/set/$2.php?lang
 RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/g/([^/]+)/?$ vacacional/get/$2.php?lang=$1 [L,QSA]
 RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/b/([^/]+)/?$ vacacional/boxes/$2.php?lang=$1 [L,QSA]
 RewriteRule ^chatbot$ chatbot/index.html?lang=$1 [L,QSA]
+
+
+RewriteRule ^libroqr/([^/]*)$ libroqr/index.php?lang=es&page=$1 [L,QSA]
 
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the “ea-php73” package as the default “PHP” programming language.

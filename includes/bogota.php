@@ -787,7 +787,7 @@ class bogota
 
     function query($url, $body = "", $nv=false, $cache=true)
     {
-        $cacheAbsoluteRoute = "/home/bogotas/public_html/dev2024/cache/";
+        $cacheAbsoluteRoute = "/home/bogotas/public_html/visitbogota.co/cache/";
         if($nv){
             if( strpos( $url, "?" ) !== false) {
                 
