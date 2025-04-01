@@ -24,6 +24,67 @@ let imagenes3 = [
   "images/pauta/xl_1.jpg",
   "images/pauta/xl_2.jpg",
 ];
+async function getRelRestaurants(catID = "all") {
+  restaContainer.innerHTML = "";
+  const response = await fetch(
+    `${actualLang}/g/getRestaurants/?termID=${catID}`
+  );
+  const data = await response.json();
+  // Función para obtener un número aleatorio dentro de un rango
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
+  // Función para obtener n elementos aleatorios de un arreglo
+  function getRandomElements(arr, n) {
+    let result = new Array(n);
+    let len = arr.length;
+    let taken = new Array(len);
+
+    if (n > len) {
+      throw new RangeError(
+        "getRandomElements: más elementos de los que hay en el arreglo"
+      );
+    }
+
+    while (n--) {
+      let x = getRandomInt(len);
+      result[n] = arr[x in taken ? taken[x] : x];
+      taken[x] = --len in taken ? taken[len] : len;
+    }
+
+    return result;
+  }
+  if (data.length >= 6) {
+    // Obtiene 5 restaurantes aleatorios
+    const randomRestaurants = getRandomElements(data, 6);
+
+    const promises = randomRestaurants.map(async (blog) => {
+      let urlImg = await getImageFromCacheOrFetch(
+        "https://files.visitbogota.co" + blog.field_img
+      );
+      let template = `<a href="/${actualLang}/restaurante/${get_alias(
+        blog.title
+      )}-${catID}-${
+        blog.nid
+      }" data-aos="flip-left blog_item" data-productid="88">
+            <div class="img">
+              <img loading="lazy" data-src="${urlImg}" alt="Diversidad, cultura y música en Colombia al Parque" class="zone_img lazyload" src="https://placehold.co/400x400.jpg?text=visitbogota" />
+            </div>
+            <div class="desc">
+              <h2>${blog.title}</h2>
+            </div>
+          </a>`;
+      restaContainer.innerHTML += template;
+    });
+
+    await Promise.all(promises);
+
+    lazyImages();
+  } else {
+    document.querySelector(".rel_rest").style.display = "none";
+  }
+}
 // Función para seleccionar una imagen al azar de un arreglo
 async function seleccionarImagenAlAzar(imagenes, element) {
   if (element) {
@@ -799,6 +860,7 @@ const getRelContentAgenda = async () => {
   }
   lazyImages();
 };
+let restaContainer = document.querySelector(".grid-restaurants");
 document.addEventListener("DOMContentLoaded", async () => {
   // Llamadas a la función unificada con los valores específicos
   if (document.querySelector("#porcategoria")) {
@@ -812,6 +874,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   getHomeRT();
   getRTRel(document.querySelector("main").dataset.cat);
   getRelContentAgenda();
+  if (restaContainer) {
+    getRelRestaurants(document.querySelector("main").dataset.catid);
+  }
 });
 // GET RESTAURANTES PORTALGASTRONOMICOS
 async function filterPortalGastronomico(zonaID = "all") {
