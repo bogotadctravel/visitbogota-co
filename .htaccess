@@ -155,7 +155,8 @@ RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/g/([^/]+)/?$ vacacional/get/$2.php?lang
 RewriteRule ^vacacional/([a-zA-Z0-9_-]+)/b/([^/]+)/?$ vacacional/boxes/$2.php?lang=$1 [L,QSA]
 RewriteRule ^chatbot$ chatbot/index.html?lang=$1 [L,QSA]
 
-
+RewriteRule ^realidad-aumentada/([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)$ vacacional/realidad_aumentada.php?lang=es&id=$2 [L,QSA]
+RewriteRule ^realidad-aumentada-app/([a-zA-Z0-9_-]+)-([a-zA-Z0-9_-]+)$ vacacional/realidad_aumentada_app.php?lang=es&id=$2 [L,QSA]
 RewriteRule ^libroqr/([^/]*)$ libroqr/index.php?lang=es&page=$1 [L,QSA]
 
 # php -- BEGIN cPanel-generated handler, do not edit
