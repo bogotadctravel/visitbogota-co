@@ -87,6 +87,12 @@
     <?php if($agenda->field_video_youtube != ''){ ?>
         <iframe width="560" height="315" src="<?=$agenda->field_video_youtube?>&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     <?php }?>
+    <?php if($_GET['idAgenda'] == 253){ ?>
+        <div class="mapembed">
+            <iframe width="100%" height="720" src="https://idecabogota.maps.arcgis.com/apps/dashboards/ea31e83e3b1949169d528221d6bed054" title="Consulta las rutas turísticas de Semana Santa" frameborder="0" ></iframe>
+            <small>Experiencia geográfica desarrollada en equipo con <img src="images/Ideca_logo.png" alt="ideca"></small>
+        </div>
+    <?php }?>
      <section class="rel_ofertas container">
         <h3><?=$titles[2]?></h3>
         <ul id="rel_ofertas"></ul>

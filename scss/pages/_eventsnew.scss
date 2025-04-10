@@ -1,4 +1,4 @@
-@use 'sass:color';
+@use "sass:color";
 
 .eventsnew {
   background-color: #fff;
@@ -12,7 +12,6 @@
     width: 90%;
     display: block;
     margin: 0 auto;
-
   }
 
   .rel_atractivos,
@@ -35,8 +34,6 @@
     }
   }
 
-
-
   main {
     padding: 200px 0;
     background-color: #fff;
@@ -44,8 +41,6 @@
     @media only screen and (max-width: 1023px) {
       padding: 20px 0;
     }
-
-
   }
 
   .banner {
@@ -120,7 +115,7 @@
     }
   }
 
-  & main>.intro-txt {
+  & main > .intro-txt {
     position: relative;
     width: 100%;
     z-index: 1;
@@ -1020,7 +1015,6 @@
 
           .desc {
             .btn {
-
               background-color: color.adjust($color: #ff7c47, $lightness: -10%);
             }
           }
@@ -1108,7 +1102,7 @@
     align-items: initial;
   }
 
-  &>div {
+  & > div {
     flex: 1;
   }
 
@@ -1135,13 +1129,9 @@
       }
     }
   }
-
 }
 
-
-
 #rel_atractivos {
-
   display: grid;
   gap: 30px;
   grid-template-columns: repeat(auto-fill, 266px);
@@ -1235,7 +1225,6 @@
       }
     }
   }
-
 }
 
 #rel_rutas {
@@ -1272,9 +1261,12 @@
       position: absolute;
       bottom: 0;
       left: 0;
-      background: linear-gradient(0deg, rgba(0, 0, 0, .6) 0%, rgba(255, 252, 252, 0) 100%);
+      background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(255, 252, 252, 0) 100%
+      );
       width: 100%;
-
     }
 
     p {
@@ -1282,11 +1274,11 @@
       line-height: 16px;
       margin-bottom: 20px;
       text-align: justify;
-      color: #FFF;
+      color: #fff;
     }
 
     h3 {
-      color: #FFF;
+      color: #fff;
       font-size: 20px;
       font-weight: bold;
       margin-bottom: 15px;
@@ -1321,7 +1313,6 @@
       }
     }
   }
-
 }
 
 #rel_ofertas {
@@ -1330,8 +1321,7 @@
   grid-template-columns: repeat(auto-fill, calc(33.333% - 20px));
 
   @media only screen and (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill,
-        minmax(calc(100% - 20px), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(calc(100% - 20px), 1fr));
   }
 
   li {
@@ -1446,7 +1436,7 @@
       //   }
       // }
 
-      &>strong {
+      & > strong {
         color: var(--gris-oscuro, #373737);
         text-align: center;
         font-size: 20px;
@@ -1457,7 +1447,7 @@
         margin-bottom: 15px;
       }
 
-      &>p {
+      & > p {
         margin-bottom: 30px;
         color: var(--gris-oscuro, #373737);
         text-align: center;
@@ -1641,6 +1631,24 @@
           background-color: color.adjust($color: #ff7c47, $lightness: 10%);
         }
       }
+    }
+  }
+}
+.mapembed {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  small {
+    text-align: right;
+    font-size: 12px;
+    color: var(--gris-oscuro, #373737);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    width: 100%;
+    img {
+      width: 80px;
     }
   }
 }

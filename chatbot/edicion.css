@@ -81,7 +81,15 @@ a.thelink.whatsapp {
   opacity: 0;
   visibility: hidden;
   max-width: 480px;
+  /* width: 85%; */
   /* height: 420px; */
+  
+}
+@media screen and (max-width: 768px){
+  .chat-emergente {
+    width: 85%;
+    right: 0;
+  }
 }
 #btn-chat:checked ~ .chat-emergente {
   opacity: 1;
